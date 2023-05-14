@@ -1,3 +1,4 @@
+/* eslint-disable react/no-danger */
 import Image from 'next/image';
 
 import Container from '@/components/Container/Container';

@@ -1,6 +1,8 @@
+/* eslint-disable react/no-danger */
 import Image from 'next/image';
 import Link from 'next/link';
 
+// eslint-disable-next-line css-modules/no-unused-class
 import styles from './Post.module.scss';
 
 const Post = ({ post, aspect = 'video' }) => (
