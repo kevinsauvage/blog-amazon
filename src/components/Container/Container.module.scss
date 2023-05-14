@@ -1,0 +1,13 @@
+.container {
+  max-width: 1440px;
+  padding: 0 10rem;
+  margin: 0 auto;
+
+  @include respond(tablet) {
+    padding: 0 4rem;
+  }
+
+  @include respond(mobile_l) {
+    padding: 0 1rem;
+  }
+}

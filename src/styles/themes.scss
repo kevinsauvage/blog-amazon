@@ -1,0 +1,70 @@
+$surface: #1a2d6b;
+$surface-light: #c0c0c0;
+
+$colors-dark: (
+  primary: #00f895,
+  secondary: #3bfbf5,
+  surface-100: lighten($surface, 16%),
+  surface-200: lighten($surface, 12%),
+  surface-300: lighten($surface, 8%),
+  surface-400: lighten($surface, 4%),
+  surface-500: $surface,
+  surface-600: darken($surface, 4%),
+  surface-700: darken($surface, 8%),
+  surface-800: darken($surface, 12%),
+  surface-900: darken($surface, 16%),
+  on-surface-100: lighten($surface, 60%),
+  on-surface-200: lighten($surface, 50%),
+  on-surface-300: lighten($surface, 40%),
+  on-surface-400: lighten($surface, 30%),
+  on-surface-500: lighten($surface, 20%),
+);
+
+$colors-light: (
+  primary: #ff1f0b,
+  secondary: #42378f,
+  surface-100: darken($surface-light, 20%),
+  surface-200: darken($surface-light, 15%),
+  surface-300: darken($surface-light, 10%),
+  surface-400: darken($surface-light, 5%),
+  surface-500: $surface-light,
+  surface-600: lighten($surface-light, 5%),
+  surface-700: lighten($surface-light, 10%),
+  surface-800: lighten($surface-light, 15%),
+  surface-900: lighten($surface-light, 20%),
+  on-surface-100: darken($surface-light, 60%),
+  on-surface-200: darken($surface-light, 50%),
+  on-surface-300: darken($surface-light, 40%),
+  on-surface-400: darken($surface-light, 30%),
+  on-surface-500: darken($surface-light, 20%),
+);
+
+@function hex-to-rgb($hex) {
+  @return red($hex), green($hex), blue($hex);
+}
+
+@mixin generate-colors($colors) {
+  @each $color, $value in $colors {
+    @if str-slice(#{$value}, 1, 1) == '#' {
+      --#{$color}: #{$value};
+    } @else {
+      --#{$color}: var(--#{$value});
+    }
+  }
+
+  @each $color, $value in $colors {
+    @if str-slice(#{$value}, 1, 1) == '#' {
+      --rgb-#{$color}: #{hex-to-rgb($value)};
+    } @else {
+      --rgb-#{$color}: var(--RGB_#{$value});
+    }
+  }
+}
+
+.theme-dark {
+  @include generate-colors($colors-dark);
+}
+
+.theme-light {
+  @include generate-colors($colors-light);
+}

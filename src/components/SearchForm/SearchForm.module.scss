@@ -1,0 +1,14 @@
+.form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+
+  input {
+    width: 100%;
+    max-width: 400px;
+    height: 2rem;
+    padding-left: 1rem;
+  }
+}
