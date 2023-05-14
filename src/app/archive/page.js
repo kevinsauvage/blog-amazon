@@ -12,7 +12,7 @@ const getAllPosts = async ({ searchParams }) => {
   const { page = 1 } = searchParams || {};
 
   const response = await fetch(`${config.apiBaseUrl}/posts/?number=${PAGE_SIZE}&page=${page}`, {
-    revalidate: 10,
+    next: { revalidate: 60 },
   });
 
   const data = await response.json();

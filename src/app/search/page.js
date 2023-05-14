@@ -14,7 +14,7 @@ const getSearch = async ({ searchParams }) => {
 
   const response = await fetch(
     `${config.apiBaseUrl}/posts?search=${q}&number=${PER_PAGE}&page=${page}`,
-    { revalidate: 10 }
+    { next: { revalidate: 60 } }
   );
 
   const data = await response.json();

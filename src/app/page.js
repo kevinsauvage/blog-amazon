@@ -8,7 +8,7 @@ import styles from './page.module.scss';
 
 const getPosts = async () => {
   const response = await fetch(`${config.apiBaseUrl}/posts/?category=home&number=16`, {
-    revalidate: 10,
+    next: { revalidate: 60 },
   });
 
   const data = await response.json();

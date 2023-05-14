@@ -10,7 +10,7 @@ const getPostBySlug = async (context) => {
   const { slug } = context.params;
 
   const response = await fetch(`${config.apiBaseUrl}/posts/slug:${slug}`, {
-    revalidate: 60,
+    next: { revalidate: 60 },
   });
 
   const post = await response.json();
