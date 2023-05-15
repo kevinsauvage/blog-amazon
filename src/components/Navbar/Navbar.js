@@ -32,7 +32,7 @@ const Navbar = () => {
       </ul>
       <div className={styles.middle}>
         <Link href="/">
-          <h1>My Blog</h1>
+          <strong>Bloglytics</strong>
         </Link>
       </div>
       <ul className={styles.right}>

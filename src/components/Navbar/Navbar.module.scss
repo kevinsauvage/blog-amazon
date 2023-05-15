@@ -23,7 +23,7 @@
   .middle {
     margin: 0 4rem;
 
-    h1 {
+    strong {
       @include font-size(1.2rem, 2rem);
     }
   }
