@@ -1,27 +1,19 @@
 import Link from 'next/link';
 
 import Container from '@/components/Container/Container';
+import Grid from '@/components/Grid/Grid';
 import Post from '@/components/Post/Post';
 import config from '@/config';
+import { formatPosts } from '@/utils/posts';
 
 import styles from './page.module.scss';
 
 const getPosts = async () => {
-  const response = await fetch(`${config.apiBaseUrl}/posts/?category=home&number=16`, {
+  const response = await fetch(`${config.apiBaseUrl}/posts/?sticky=true`, {
     next: { revalidate: 60 },
   });
-
   const data = await response.json();
-  return data.posts.map((post) => ({
-    ID: post.ID,
-    author: post.author,
-    date: post.date,
-    excerpt: post.excerpt,
-    featured_image: post.featured_image,
-    slug: post.slug,
-    thumbnail: post.post_thumbnail,
-    title: post.title,
-  }));
+  return formatPosts(data.posts);
 };
 
 const Home = async () => {
@@ -38,14 +30,14 @@ const Home = async () => {
               </li>
             ))}
         </ul>
-        <ul className={styles.grid2}>
+        <Grid>
           {Array.isArray(posts) &&
             posts.slice(2).map((post) => (
               <li key={post.ID}>
                 <Post post={post} aspect="square" />
               </li>
             ))}
-        </ul>
+        </Grid>
         <div className={styles['see-all']}>
           <Link href="/archive">View all posts</Link>
         </div>

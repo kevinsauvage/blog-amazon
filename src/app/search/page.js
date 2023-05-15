@@ -1,9 +1,10 @@
-import Link from 'next/link';
-
 import Container from '@/components/Container/Container';
+import Grid from '@/components/Grid/Grid';
+import Pagination from '@/components/Pagination/Pagination';
 import Post from '@/components/Post/Post';
 import SearchForm from '@/components/SearchForm/SearchForm';
 import config from '@/config';
+import { formatPosts } from '@/utils/posts';
 
 import styles from './page.module.scss';
 
@@ -19,55 +20,34 @@ const getSearch = async ({ searchParams }) => {
 
   const data = await response.json();
 
-  const posts = data.posts.map((post) => ({
-    ID: post.ID,
-    author: post.author,
-    date: post.date,
-    excerpt: post.excerpt,
-    featured_image: post.featured_image,
-    slug: post.slug,
-    thumbnail: post.post_thumbnail,
-    title: post.title,
-  }));
-
-  const total = data.found;
-
   return {
-    page: Number.parseInt(page, 10),
-    posts,
+    currentPage: Number.parseInt(page, 10),
+    posts: formatPosts(data.posts),
     query: q,
-    total: Number.parseInt(total, 10),
+    total: Number.parseInt(data.found, 10),
   };
 };
 
 const search = async (context) => {
-  const { page, posts, total, query } = await getSearch(context);
+  const { currentPage, posts, total, query } = await getSearch(context);
 
   const totalPages = Math.ceil(total / PER_PAGE);
-  const isFirstPage = page === 1;
-  const isLastPage = page === totalPages;
-
-  const previousPage =
-    page - 1 === 1 ? `/search?q=${query}` : `/search?page=${page - 1}&q=${query}`;
-  const nextPage = `/search?page=${page + 1}&q=${query}`;
 
   return (
     <Container>
       <main className={styles.main}>
-        <h2 className={styles.title}>Search Results for &rdquo;{query}&rdquo;</h2>
+        <h1 className={styles.title}>Search Results for &rdquo;{query}&rdquo;</h1>
+        <span>{total} posts found</span>
         <SearchForm query={query} />
-        <ul className={styles.grid}>
+        <Grid>
           {Array.isArray(posts) &&
             posts.map((post) => (
               <li key={post.ID}>
                 <Post post={post} aspect="square" />
               </li>
             ))}
-        </ul>
-        <div className={styles.pagination}>
-          {!isFirstPage && <Link href={previousPage}>← Prev</Link>}
-          {!isLastPage && <Link href={nextPage}>Next →</Link>}
-        </div>
+        </Grid>
+        <Pagination totalPages={totalPages} currentPage={currentPage} />
       </main>
     </Container>
   );

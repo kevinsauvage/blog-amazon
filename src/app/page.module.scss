@@ -6,18 +6,11 @@
   justify-content: space-between;
 }
 
-.grid2,
 .grid1 {
   display: grid;
   margin-top: 2rem;
   gap: 2rem;
-}
-.grid1 {
   grid-template-columns: repeat(2, minmax(0, 1fr));
-}
-
-.grid2 {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
 .see-all {
