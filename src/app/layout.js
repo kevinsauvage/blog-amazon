@@ -1,11 +1,11 @@
-import { Poppins } from 'next/font/google';
+import { Lora } from 'next/font/google';
 
 import Footer from '@/components/Footer/Footer';
 import Header from '@/components/Header/Header';
 
 import '../styles/globals.scss';
 
-const poppins = Poppins({
+const lora = Lora({
   display: 'swap',
   subsets: ['latin'],
   weight: ['400', '500', '600', '700'],
@@ -18,7 +18,7 @@ export const metadata = {
 
 const RootLayout = ({ children }) => (
   <html lang="en" className="theme-light">
-    <body className={poppins.className}>
+    <body className={lora.className}>
       <Header />
       {children}
       <Footer />
