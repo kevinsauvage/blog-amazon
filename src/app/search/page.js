@@ -8,7 +8,7 @@ import { formatPosts } from '@/utils/posts';
 
 import styles from './page.module.scss';
 
-const PER_PAGE = 10;
+const PER_PAGE = 9;
 
 const getSearch = async ({ searchParams }) => {
   const { q = '', page = 1 } = searchParams || {};
@@ -19,25 +19,25 @@ const getSearch = async ({ searchParams }) => {
   );
 
   const data = await response.json();
+  const totalPosts = Number(data.found);
 
   return {
-    currentPage: Number.parseInt(page, 10),
+    currentPage: Number(page),
     posts: formatPosts(data.posts),
     query: q,
-    total: Number.parseInt(data.found, 10),
+    totalPages: Math.ceil(totalPosts / PER_PAGE),
+    totalPosts,
   };
 };
 
 const search = async (context) => {
-  const { currentPage, posts, total, query } = await getSearch(context);
-
-  const totalPages = Math.ceil(total / PER_PAGE);
+  const { currentPage, posts, totalPosts, query, totalPages } = await getSearch(context);
 
   return (
     <Container>
       <main className={styles.main}>
         <h1 className={styles.title}>Search Results for &rdquo;{query}&rdquo;</h1>
-        <span>{total} posts found</span>
+        <span>{totalPosts} posts found</span>
         <SearchForm query={query} />
         <Grid>
           {Array.isArray(posts) &&

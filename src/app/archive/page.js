@@ -7,7 +7,7 @@ import { formatPosts } from '@/utils/posts';
 
 import styles from './page.module.scss';
 
-const PAGE_SIZE = 10;
+const PAGE_SIZE = 9;
 
 const getAllPosts = async ({ searchParams }) => {
   const { page = 1 } = searchParams || {};
@@ -17,20 +17,23 @@ const getAllPosts = async ({ searchParams }) => {
   });
 
   const data = await response.json();
+
   return {
     currentPage: page,
     posts: formatPosts(data.posts),
-    totalPages: data.pages,
+    totalPages: Math.ceil(Number(data.found) / PAGE_SIZE),
+    totalPosts: data.found,
   };
 };
 
 const archive = async (context) => {
-  const { posts, totalPages, currentPage } = await getAllPosts(context);
+  const { posts, totalPages, currentPage, totalPosts } = await getAllPosts(context);
 
   return (
     <Container>
       <main className={styles.main}>
         <h1 className={styles.title}>All Posts</h1>
+        <span>Total: {totalPosts}</span>
         <Grid>
           {Array.isArray(posts) &&
             posts.map((post) => (
