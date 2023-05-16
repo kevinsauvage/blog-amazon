@@ -23,7 +23,11 @@ const Post = ({ post, aspect = 'video' }) => (
           Object.keys(post.categories)
             .slice(0, 2)
             .map((category) => (
-              <Link href={`/category/${category}`} className={styles.category} key={category}>
+              <Link
+                href={`/category/${post?.categories[category].slug}`}
+                className={styles.category}
+                key={category}
+              >
                 {category}
               </Link>
             ))}
