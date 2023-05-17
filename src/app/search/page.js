@@ -3,6 +3,7 @@ import Grid from '@/components/Grid/Grid';
 import Pagination from '@/components/Pagination/Pagination';
 import Post from '@/components/Post/Post';
 import SearchForm from '@/components/SearchForm/SearchForm';
+import TotalFound from '@/components/TotalFound/TotalFound';
 import config from '@/config';
 import { formatPosts } from '@/utils/posts';
 
@@ -36,9 +37,11 @@ const search = async (context) => {
   return (
     <Container>
       <main className={styles.main}>
-        <h1 className={styles.title}>Search Results for &rdquo;{query}&rdquo;</h1>
-        <span>{totalPosts} posts found</span>
-        <SearchForm query={query} />
+        <header>
+          <h1 className={styles.title}>Search Results {query && `for ${query}`}</h1>
+          <TotalFound total={totalPosts} />
+          <SearchForm query={query} />
+        </header>
         <Grid>
           {Array.isArray(posts) &&
             posts.map((post) => (

@@ -2,6 +2,7 @@ import Container from '@/components/Container/Container';
 import Grid from '@/components/Grid/Grid';
 import Pagination from '@/components/Pagination/Pagination';
 import Post from '@/components/Post/Post';
+import TotalFound from '@/components/TotalFound/TotalFound';
 import config from '@/config';
 import { formatPosts } from '@/utils/posts';
 import { formatString } from '@/utils/strings';
@@ -40,8 +41,10 @@ const archive = async (context) => {
   return (
     <Container>
       <main className={styles.main}>
-        <h1 className={styles.title}>{formatString(slug)}</h1>
-        <span>{totalPosts} posts found</span>
+        <header>
+          <h1 className={styles.title}>{formatString(slug)}</h1>
+          <TotalFound total={totalPosts} />
+        </header>
         <Grid>
           {Array.isArray(posts) &&
             posts.map((post) => (

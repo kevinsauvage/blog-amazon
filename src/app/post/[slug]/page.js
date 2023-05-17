@@ -17,10 +17,8 @@ const getPostBySlug = async (context) => {
 
   return {
     ID: post.ID,
-    author: post.author,
     categories: post.categories,
     content: post.content,
-    date: post.date,
     featured_image: post.featured_image,
     slug: post.slug,
     thumbnail: post.post_thumbnail,
@@ -34,13 +32,9 @@ const PostId = async (context) => {
   return (
     <Container>
       <main className={styles.main}>
-        <div className={styles.header}>
+        <header>
           <h1>{post.title}</h1>
-          <div>
-            <span>By {post.author.name}</span> |{' '}
-            <span>{new Date(post.date).toLocaleDateString()}</span>
-          </div>
-        </div>
+        </header>
         <Image
           className={styles.image}
           src={post.thumbnail.URL}

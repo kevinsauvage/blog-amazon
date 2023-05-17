@@ -5,14 +5,15 @@
   align-items: center;
   justify-content: space-between;
   padding: 4rem 0;
-}
 
-.header {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
+  header {
+    margin-bottom: 2rem;
+
+    h1 {
+      max-width: 500px;
+      text-align: center;
+    }
+  }
 }
 
 .image {
