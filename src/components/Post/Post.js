@@ -36,9 +36,6 @@ const Post = ({ post, aspect = 'video' }) => (
         <h2 className={styles.title}>{post.title}</h2>
       </Link>
       <div className={styles.excerpt} dangerouslySetInnerHTML={{ __html: post.excerpt }} />
-      <div className={styles.footer}>
-        <span>By {post.author.name}</span> | <span>{new Date(post.date).toLocaleDateString()}</span>
-      </div>
     </div>
   </div>
 );
