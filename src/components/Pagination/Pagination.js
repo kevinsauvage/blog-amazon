@@ -22,10 +22,12 @@ const Pagination = ({ currentPage, totalPages }) => {
 
   return (
     <nav className={styles.pagination}>
-      {currentPage > 1 && (
+      {currentPage > 1 ? (
         <Link href={`${pathname}?${createQueryString('page', Number(currentPage) - 1)}`} passHref>
           ← Prev
         </Link>
+      ) : (
+        <span>← Prev</span>
       )}
       {[...new Array(totalPages).keys()].map((page) => (
         <Link
@@ -37,10 +39,12 @@ const Pagination = ({ currentPage, totalPages }) => {
           {page + 1}
         </Link>
       ))}
-      {currentPage < totalPages && (
+      {currentPage < totalPages ? (
         <Link href={`${pathname}?${createQueryString('page', Number(currentPage) + 1)}`} passHref>
           Next →
         </Link>
+      ) : (
+        <span>Next →</span>
       )}
     </nav>
   );
