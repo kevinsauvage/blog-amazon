@@ -1,5 +1,5 @@
 $surface: #1a2d6b;
-$surface-light: #c0c0c0;
+$surface-light: #d9d9d9;
 
 $colors-dark: (
   primary: #00f895,
@@ -28,10 +28,10 @@ $colors-light: (
   surface-300: darken($surface-light, 10%),
   surface-400: darken($surface-light, 5%),
   surface-500: $surface-light,
-  surface-600: lighten($surface-light, 5%),
-  surface-700: lighten($surface-light, 10%),
-  surface-800: lighten($surface-light, 15%),
-  surface-900: lighten($surface-light, 20%),
+  surface-600: lighten($surface-light, 3%),
+  surface-700: lighten($surface-light, 6%),
+  surface-800: lighten($surface-light, 9%),
+  surface-900: lighten($surface-light, 12%),
   on-surface-100: darken($surface-light, 60%),
   on-surface-200: darken($surface-light, 50%),
   on-surface-300: darken($surface-light, 40%),
