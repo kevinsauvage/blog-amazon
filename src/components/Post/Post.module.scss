@@ -1,12 +1,17 @@
 .post {
+  display: flex;
   width: 100%;
+  height: inherit;
+  flex-direction: column;
+  align-items: stretch;
+  border-radius: var(--radius-1);
   margin-bottom: 2rem;
+  background-color: var(--surface-900);
 
   .image {
     width: 100%;
     height: 100%;
     border-radius: var(--radius-1);
-    margin-bottom: 0.5rem;
     object-fit: cover;
 
     &.video {
@@ -16,6 +21,11 @@
     &.square {
       aspect-ratio: 4/3;
     }
+  }
+
+  .content {
+    flex-grow: 1;
+    padding: 1rem;
   }
 
   .categories {

@@ -5,39 +5,37 @@ import Link from 'next/link';
 // eslint-disable-next-line css-modules/no-unused-class
 import styles from './Post.module.scss';
 
-const Post = ({ post, aspect = 'video' }) => (
-  <div className={styles.post}>
-    <Link href={`/post/${post.slug}`}>
-      <Image
-        className={`${styles.image} ${styles[aspect]}`}
-        src={post.thumbnail.URL}
-        width={post.thumbnail.width}
-        height={post.thumbnail.height}
-        alt={post.title}
-      />
-    </Link>
-    <div>
-      <div className={styles.categories}>
-        {post?.categories &&
-          Object.keys(post?.categories).length > 0 &&
-          Object.keys(post.categories)
-            .slice(0, 2)
-            .map((category) => (
-              <Link
-                href={`/category/${post?.categories[category].slug}`}
-                className={styles.category}
-                key={category}
-              >
-                {category}
+const Post = ({ post, aspect = 'video', image }) => {
+  const { slug, categories, excerpt, title } = post;
+
+  return (
+    <li className={styles.post}>
+      <Link href={`/post/${slug}`}>
+        <Image
+          className={`${styles.image} ${styles[aspect]}`}
+          src={image.source_url}
+          width={image.width}
+          height={image.height}
+          alt={image.imageAlt}
+        />
+      </Link>
+
+      <div className={styles.content}>
+        <div className={styles.categories}>
+          {categories.length > 0 &&
+            categories.slice(0, 2).map((category) => (
+              <Link href={`/category/${category.slug}`} className={styles.category} key={category}>
+                {category.name}
               </Link>
             ))}
+        </div>
+        <Link href={`/post/${slug}`}>
+          <h2 className={styles.title}>{title}</h2>
+        </Link>
+        <div className={styles.excerpt} dangerouslySetInnerHTML={{ __html: excerpt }} />
       </div>
-      <Link href={`/post/${post.slug}`}>
-        <h2 className={styles.title}>{post.title}</h2>
-      </Link>
-      <div className={styles.excerpt} dangerouslySetInnerHTML={{ __html: post.excerpt }} />
-    </div>
-  </div>
-);
+    </li>
+  );
+};
 
 export default Post;
