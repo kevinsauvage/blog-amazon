@@ -1,10 +1,13 @@
+import Container from '../Container/Container';
 import Navbar from '../Navbar/Navbar';
 
 import styles from './Header.module.scss';
 
 const Header = () => (
   <header className={styles.header}>
-    <Navbar />
+    <Container>
+      <Navbar />
+    </Container>
   </header>
 );
 
