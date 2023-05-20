@@ -1,48 +1,52 @@
 /* eslint-disable react/no-danger */
 import Image from 'next/image';
+import Link from 'next/link';
 
 import Container from '@/components/Container/Container';
-import config from '@/config';
+import { formatPost } from '@/utils/posts';
 
 import styles from './page.module.scss';
 
 const getPostBySlug = async (context) => {
   const { slug } = context.params;
-
-  const response = await fetch(`${config.apiBaseUrl}/posts/slug:${slug}`, {
-    next: { revalidate: 60 },
-  });
-
+  const { WORDPRESS_API_URL } = process.env;
+  const URL = `${WORDPRESS_API_URL}/posts?slug=${slug}&_embed`;
+  const response = await fetch(URL, { next: { revalidate: 60 } });
   const post = await response.json();
-
-  return {
-    ID: post.ID,
-    categories: post.categories,
-    content: post.content,
-    featured_image: post.featured_image,
-    slug: post.slug,
-    thumbnail: post.post_thumbnail,
-    title: post.title,
-  };
+  return formatPost(post[0]);
 };
 
 const PostId = async (context) => {
-  const post = await getPostBySlug(context);
+  const { categories, title, images, content } = await getPostBySlug(context);
+
+  const image = images?.['1536x1536'];
 
   return (
     <Container>
       <main className={styles.main}>
         <header>
-          <h1>{post.title}</h1>
+          <h1>{title}</h1>
+          <div className={styles.categories}>
+            {categories.length > 0 &&
+              categories.slice(0, 2).map((category) => (
+                <Link
+                  href={`/category/${category.slug}`}
+                  className={styles.category}
+                  key={category}
+                >
+                  {category.name}
+                </Link>
+              ))}
+          </div>
         </header>
         <Image
           className={styles.image}
-          src={post.thumbnail.URL}
-          width={post.thumbnail.width}
-          height={post.thumbnail.height}
-          alt={post.title}
+          src={image?.source_url}
+          width={image?.width}
+          height={image?.height}
+          alt={image?.imageAlt}
         />
-        <div className={styles.content} dangerouslySetInnerHTML={{ __html: post.content }} />
+        <div className={styles.content} dangerouslySetInnerHTML={{ __html: content }} />
       </main>
     </Container>
   );
