@@ -4,7 +4,7 @@
 const path = require('node:path');
 
 const nextConfig = {
-  images: { domains: ['healthwellnessguide9.files.wordpress.com'] },
+  images: { domains: ['healthwellnessguide9.files.wordpress.com', 'localhost'] },
   sassOptions: {
     includePaths: [path.join(__dirname, './src/styles/')],
     prependData: `
