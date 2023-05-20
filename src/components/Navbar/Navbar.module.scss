@@ -2,10 +2,8 @@
   display: flex;
   width: 100%;
   align-items: center;
-  justify-content: center;
 
-  .left,
-  .right {
+  .list {
     display: flex;
     align-items: center;
     gap: 2rem;
@@ -20,8 +18,8 @@
     }
   }
 
-  .middle {
-    margin: 0 4rem;
+  .logo {
+    margin-right: 3rem;
 
     strong {
       @include font-size(1.2rem, 2rem);

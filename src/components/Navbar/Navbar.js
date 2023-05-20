@@ -18,25 +18,13 @@ const Navbar = () => {
 
   return (
     <nav className={styles.navbar}>
-      <ul className={styles.left}>
-        {navItems.slice(0, 2).map((item) => (
-          <li
-            key={item.id}
-            className={`${styles.item} ${
-              activeSegment === item.targetSegment ? styles.active : ''
-            }`}
-          >
-            <Link href={item.href}>{item.label}</Link>
-          </li>
-        ))}
-      </ul>
-      <div className={styles.middle}>
+      <div className={styles.logo}>
         <Link href="/">
           <strong>Bloglytics</strong>
         </Link>
       </div>
-      <ul className={styles.right}>
-        {navItems.slice(2, 4).map((item) => (
+      <ul className={styles.list}>
+        {navItems.map((item) => (
           <li
             key={item.id}
             className={`${styles.item} ${
