@@ -10,6 +10,8 @@ const Pagination = ({ currentPage, totalPages }) => {
   const pathname = usePathname();
   const searchParameters = useSearchParams();
 
+  const pageArray = [...new Array(totalPages).keys()];
+
   const createQueryString = useCallback(
     (name, value) => {
       const parameters = new URLSearchParams(searchParameters);
@@ -20,6 +22,8 @@ const Pagination = ({ currentPage, totalPages }) => {
     [searchParameters]
   );
 
+  if (pageArray.length < 2) return;
+
   return (
     <nav className={styles.pagination}>
       {currentPage > 1 ? (
@@ -29,16 +33,22 @@ const Pagination = ({ currentPage, totalPages }) => {
       ) : (
         <span>← Prev</span>
       )}
-      {[...new Array(totalPages).keys()].map((page) => (
-        <Link
-          className={Number(currentPage) === Number(page) + 1 ? styles.active : ''}
-          href={`${pathname}?${createQueryString('page', page + 1)}`}
-          passHref
-          key={page}
-        >
-          {page + 1}
-        </Link>
-      ))}
+      {pageArray.map((page) =>
+        Number(currentPage) === Number(page) + 1 ? (
+          <span key={page} className={`${styles.item} ${styles.active}`}>
+            {page + 1}
+          </span>
+        ) : (
+          <Link
+            className={styles.item}
+            href={`${pathname}?${createQueryString('page', page + 1)}`}
+            passHref
+            key={page}
+          >
+            {page + 1}
+          </Link>
+        )
+      )}
       {currentPage < totalPages ? (
         <Link href={`${pathname}?${createQueryString('page', Number(currentPage) + 1)}`} passHref>
           Next →

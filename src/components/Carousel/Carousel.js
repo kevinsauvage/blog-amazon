@@ -6,23 +6,34 @@ import useCarousel from '@/hooks/useCarousel';
 
 import styles from './Carousel.module.scss';
 
-const Carousel = ({ children }) => {
+const Carousel = ({ children, slideClass }) => {
   const carouselReference = useRef(null);
+  const slidesReference = useRef(null);
   const slideReference = useRef(null);
 
   const { handleNext, handlePrevious, maxTranslate, translate } = useCarousel(
     carouselReference,
+    slidesReference,
     slideReference
   );
+  console.log('🚀 ~  file: Carousel.js:16 ~  Carousel ~  translate:', translate);
+
+  console.log('🚀 ~  file: Carousel.js:16 ~  Carousel ~  maxTranslate:', maxTranslate);
 
   return (
     <div className={styles.carousel} ref={carouselReference}>
       <ul
         className={styles.slides}
-        ref={slideReference}
+        ref={slidesReference}
         style={{ transform: `translateX(-${translate}px)` }}
       >
-        {Children.toArray(children.map((child) => <li className={styles.slide}>{child}</li>))}
+        {Children.toArray(
+          children.map((child) => (
+            <li ref={slideReference} className={`${styles.slide} ${slideClass}`}>
+              {child}
+            </li>
+          ))
+        )}
       </ul>
       <button
         type="button"
@@ -34,7 +45,7 @@ const Carousel = ({ children }) => {
       </button>
       <button
         type="button"
-        disabled={translate === maxTranslate}
+        disabled={translate >= maxTranslate}
         className={styles['next-button']}
         onClick={handleNext}
       >

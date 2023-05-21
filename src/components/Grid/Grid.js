@@ -1,8 +1,10 @@
+import { Children } from 'react';
+
 import styles from './Grid.module.scss';
 
 const Grid = ({ children, ...rest }) => (
   <ul className={styles.grid} {...rest}>
-    {children}
+    {Children.toArray(children.map((child) => <li>{child}</li>))}
   </ul>
 );
 

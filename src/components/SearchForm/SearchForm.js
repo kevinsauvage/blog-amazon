@@ -21,7 +21,7 @@ const SearchForm = ({ query }) => {
 
   return (
     <form onSubmit={handleSubmit} className={styles.form}>
-      <input placeholder="Search..." type="search" value={input} onChange={handleChange} />
+      <input placeholder="Search..." type="text" value={input} onChange={handleChange} />
     </form>
   );
 };

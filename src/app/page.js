@@ -32,18 +32,18 @@ const Home = async () => {
         <NavCategories categories={categories} />
         <ul className={styles.grid1}>
           {Array.isArray(posts) &&
-            posts
-              .slice(0, 2)
-              .map((post) => (
-                <Post key={post.ID} post={post} image={post.images.large} aspect="video" />
-              ))}
+            posts.slice(0, 2).map((post) => (
+              <li key={post.ID}>
+                <Post post={post} image={post.images.large} aspect="video" />
+              </li>
+            ))}
         </ul>
         <Grid>
           {Array.isArray(posts) &&
             posts
               .slice(2)
               .map((post) => (
-                <Post key={post.ID} post={post} image={post.images.medium_large} aspect="square" />
+                <Post key={post.ID} post={post} image={post.images.medium_large} aspect="video" />
               ))}
         </Grid>
         <div className={styles['see-all']}>

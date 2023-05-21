@@ -9,7 +9,7 @@ const Post = ({ post, aspect = 'video', image }) => {
   const { slug, categories, excerpt, title } = post;
 
   return (
-    <li className={styles.post}>
+    <div className={styles.post}>
       <Link href={`/post/${slug}`}>
         <Image
           className={`${styles.image} ${styles[aspect]}`}
@@ -24,7 +24,12 @@ const Post = ({ post, aspect = 'video', image }) => {
         <div className={styles.categories}>
           {categories.length > 0 &&
             categories.slice(0, 2).map((category) => (
-              <Link href={`/category/${category.slug}`} className={styles.category} key={category}>
+              <Link
+                href={`/category/${category.slug}_${category.id}`}
+                className={styles.category}
+                key={category}
+                style={{ backgroundColor: category.acf?.background_color }}
+              >
                 {category.name}
               </Link>
             ))}
@@ -34,7 +39,7 @@ const Post = ({ post, aspect = 'video', image }) => {
         </Link>
         <div className={styles.excerpt} dangerouslySetInnerHTML={{ __html: excerpt }} />
       </div>
-    </li>
+    </div>
   );
 };
 

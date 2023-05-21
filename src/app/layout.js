@@ -1,14 +1,15 @@
-import { Lora } from 'next/font/google';
+import { Roboto } from 'next/font/google';
 
 import Footer from '@/components/Footer/Footer';
 import Header from '@/components/Header/Header';
 
 import '../styles/globals.scss';
+import styles from './layout.module.scss';
 
-const lora = Lora({
+const roboto = Roboto({
   display: 'swap',
   subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
+  weight: ['300', '400', '500', '700'],
 });
 
 export const metadata = {
@@ -18,9 +19,9 @@ export const metadata = {
 
 const RootLayout = ({ children }) => (
   <html lang="en" className="theme-light">
-    <body className={lora.className}>
+    <body className={roboto.className}>
       <Header />
-      {children}
+      <div className={styles.children}>{children}</div>
       <Footer />
     </body>
   </html>

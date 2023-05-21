@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import Container from '@/components/Container/Container';
+import RelatedPosts from '@/components/RelatedPosts/RelatedPosts';
 import { formatPost } from '@/utils/posts';
 
 import styles from './page.module.scss';
@@ -17,7 +18,7 @@ const getPostBySlug = async (context) => {
 };
 
 const PostId = async (context) => {
-  const { categories, title, images, content } = await getPostBySlug(context);
+  const { categories, title, images, content, ID } = await getPostBySlug(context);
 
   const image = images?.['1536x1536'];
 
@@ -30,9 +31,10 @@ const PostId = async (context) => {
             {categories.length > 0 &&
               categories.slice(0, 2).map((category) => (
                 <Link
-                  href={`/category/${category.slug}`}
+                  href={`/category/${category.slug}_${category.id}`}
                   className={styles.category}
                   key={category}
+                  style={{ backgroundColor: category.acf.background_color }}
                 >
                   {category.name}
                 </Link>
@@ -47,6 +49,7 @@ const PostId = async (context) => {
           alt={image?.imageAlt}
         />
         <div className={styles.content} dangerouslySetInnerHTML={{ __html: content }} />
+        <RelatedPosts id={ID} />
       </main>
     </Container>
   );

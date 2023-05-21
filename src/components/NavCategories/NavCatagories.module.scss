@@ -14,7 +14,6 @@
     background-color: rgb(0, 0, 0);
     color: white;
     font-size: 0.8rem;
-    font-weight: 600;
 
     &:last-child {
       margin-right: 0;
@@ -23,7 +22,7 @@
     &::after {
       position: absolute;
       border-radius: var(--radius-1);
-      background-color: rgba(var(--rgb-surface-100), 0.4);
+      background-color: rgba(var(--rgb-surface-100), 0.3);
       content: '';
       inset: 0;
     }

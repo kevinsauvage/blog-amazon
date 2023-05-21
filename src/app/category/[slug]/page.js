@@ -13,31 +13,33 @@ const { WORDPRESS_API_URL } = process.env;
 
 const getAllPosts = async ({ searchParams, params }) => {
   const { slug } = params;
+  const id = slug.split('_')[1];
+  const name = slug.split('_')[0];
   const { page = 1 } = searchParams || {};
-  const url = `${WORDPRESS_API_URL}/posts/?number=${PAGE_SIZE}&page=${page}&category=${slug}&_embed`;
+  const url = `${WORDPRESS_API_URL}/posts/?per_page=${PAGE_SIZE}&page=${page}&categories=${id}&_embed`;
   const response = await fetch(url, { next: { revalidate: 60 } });
   const totalPosts = response.headers.get('X-WP-Total');
+
   const data = await response.json();
   const totalPages = Math.ceil(totalPosts / PAGE_SIZE);
 
   return {
     currentPage: page,
-    posts: formatPosts(data),
+    name,
+    posts: Array.isArray(data) ? formatPosts(data) : [],
     totalPages,
     totalPosts,
   };
 };
 
 const archive = async (context) => {
-  const { posts, totalPages, currentPage, totalPosts } = await getAllPosts(context);
-
-  const { slug } = context.params;
+  const { posts, totalPages, currentPage, totalPosts, name } = await getAllPosts(context);
 
   return (
     <Container>
       <main className={styles.main}>
         <header>
-          <h1>{formatString(slug)}</h1>
+          <h1>{formatString(name)}</h1>
           <TotalFound total={totalPosts} />
         </header>
         <Grid>
