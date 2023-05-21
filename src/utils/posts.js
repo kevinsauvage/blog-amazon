@@ -1,5 +1,3 @@
-// eslint-disable-next-line import/prefer-default-export
-
 export const formatPost = (post) => ({
   ID: post.id,
   author: post.author,
