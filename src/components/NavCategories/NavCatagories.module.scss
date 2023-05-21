@@ -19,14 +19,6 @@
       margin-right: 0;
     }
 
-    &::after {
-      position: absolute;
-      border-radius: var(--radius-1);
-      background-color: rgba(var(--rgb-surface-100), 0.3);
-      content: '';
-      inset: 0;
-    }
-
     a {
       position: relative;
       z-index: 1;
