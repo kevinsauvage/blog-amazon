@@ -8,23 +8,10 @@ const useCarousel = (carouselReference, slidesReference, slideReference) => {
   useEffect(() => {
     const handleResize = () => {
       const initialSlidesWidth = slidesReference.current.offsetWidth;
-
-      console.log(
-        '🚀 ~  file: useCarousel.js:12 ~  handleResize ~  initialSlidesWidth:',
-        initialSlidesWidth
-      );
-
       const initialSlideWidth = slideReference.current.offsetWidth;
       const initialContainerWidth = carouselReference.current.offsetWidth;
-
-      console.log(
-        '🚀 ~  file: useCarousel.js:17 ~  handleResize ~  initialContainerWidth:',
-        initialContainerWidth
-      );
-
-      const visibleItems = Math.floor(initialContainerWidth / initialSlideWidth);
-
-      setTranslateStep(visibleItems * initialSlideWidth);
+      const totalVisibleItems = Math.floor(initialContainerWidth / initialSlideWidth);
+      setTranslateStep(totalVisibleItems * initialSlideWidth);
 
       if (initialSlidesWidth > initialContainerWidth) {
         setMaxTranslate(initialSlidesWidth - initialContainerWidth);
@@ -47,6 +34,7 @@ const useCarousel = (carouselReference, slidesReference, slideReference) => {
     if (translateX < 0) setTranslate(0);
     else setTranslate(translateX);
   };
+
   return { handleNext, handlePrevious, maxTranslate, translate };
 };
 
