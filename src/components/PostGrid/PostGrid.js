@@ -5,7 +5,7 @@ import Link from 'next/link';
 // eslint-disable-next-line css-modules/no-unused-class
 import styles from './PostGrid.module.scss';
 
-const PostGrid = ({ post, image }) => {
+const PostGrid = ({ post, image, showExcerpt = true }) => {
   const { slug, categories, excerpt, title, imageAlt } = post;
 
   return (
@@ -18,24 +18,26 @@ const PostGrid = ({ post, image }) => {
         alt={imageAlt}
       />
 
+      <div className={styles.categories}>
+        {categories.length > 0 &&
+          categories.slice(0, 2).map((category) => (
+            <Link
+              href={`/category/${category.slug}_${category.id}`}
+              className={styles.category}
+              key={category}
+              style={{ backgroundColor: category.acf?.background_color }}
+            >
+              {category.name}
+            </Link>
+          ))}
+      </div>
       <div className={styles.content}>
-        <div className={styles.categories}>
-          {categories.length > 0 &&
-            categories.slice(0, 2).map((category) => (
-              <Link
-                href={`/category/${category.slug}_${category.id}`}
-                className={styles.category}
-                key={category}
-                style={{ color: category.acf?.background_color }}
-              >
-                {category.name}
-              </Link>
-            ))}
-        </div>
         <Link href={`/posts/${slug}`}>
           <h2 className={styles.title}>{title}</h2>
         </Link>
-        <div className={styles.excerpt} dangerouslySetInnerHTML={{ __html: excerpt }} />
+        {showExcerpt && (
+          <div className={styles.excerpt} dangerouslySetInnerHTML={{ __html: excerpt }} />
+        )}
       </div>
     </div>
   );

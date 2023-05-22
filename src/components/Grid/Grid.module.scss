@@ -1,7 +1,7 @@
 .grid {
   display: grid;
   margin-bottom: 3rem;
-  gap: 1.5rem;
+  gap: $gap;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   row-gap: 2rem;
 }

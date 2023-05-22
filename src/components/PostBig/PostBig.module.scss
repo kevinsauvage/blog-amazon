@@ -54,7 +54,7 @@
     .category {
       width: fit-content;
       border-radius: 0 var(--radius-1) var(--radius-1) 0;
-      font-size: 0.9rem;
+      font-size: 1rem;
     }
   }
 
@@ -69,6 +69,6 @@
   .excerpt {
     @include text-shorten(3);
     color: var(--on-surface-dark-200);
-    font-size: 0.9rem;
+    font-size: 1rem;
   }
 }
