@@ -9,7 +9,7 @@ const navItems = [
   // eslint-disable-next-line unicorn/no-null
   { href: '/', id: 1, label: 'Home', targetSegment: null },
   { href: '/contact', id: 2, label: 'Contact', targetSegment: 'contact' },
-  { href: '/archive', id: 3, label: 'Archive', targetSegment: 'archive' },
+  { href: '/posts', id: 3, label: 'Posts', targetSegment: 'posts' },
   { href: '/search', id: 4, label: 'Search', targetSegment: 'search' },
 ];
 

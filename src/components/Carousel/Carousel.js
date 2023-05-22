@@ -16,9 +16,6 @@ const Carousel = ({ children, slideClass }) => {
     slidesReference,
     slideReference
   );
-  console.log('🚀 ~  file: Carousel.js:16 ~  Carousel ~  translate:', translate);
-
-  console.log('🚀 ~  file: Carousel.js:16 ~  Carousel ~  maxTranslate:', maxTranslate);
 
   return (
     <div className={styles.carousel} ref={carouselReference}>

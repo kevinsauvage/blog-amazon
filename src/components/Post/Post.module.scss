@@ -1,12 +1,11 @@
 .post {
   position: relative;
   display: flex;
+  overflow: hidden;
   width: 100%;
   height: 100%;
   flex-direction: column;
   align-items: stretch;
-  border-radius: var(--radius-1);
-  background-color: var(--surface-900);
 
   .image {
     position: relative;
@@ -16,18 +15,22 @@
     border-radius: var(--radius-1);
     object-fit: cover;
 
-    &.video {
+    &.ratio-16-9 {
       aspect-ratio: 16/9;
     }
 
-    &.square {
+    &.ratio-4-3 {
       aspect-ratio: 4/3;
+    }
+
+    &.ratio-5-3 {
+      aspect-ratio: 5/3;
     }
   }
 
   .content {
     flex-grow: 1;
-    padding: 0.5rem 1rem 1rem 1rem;
+    padding-top: 1rem;
   }
 
   .categories {
@@ -49,15 +52,15 @@
   }
 
   .title {
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.2rem;
     color: var(--on-surface-100);
-    font-size: 0.95rem;
+    font-size: 1rem;
     font-weight: 500;
-    @include text-shorten(2);
+    @include text-shorten(1);
   }
 
   .excerpt {
-    @include text-shorten(2);
+    @include text-shorten(4);
     color: var(--on-surface-200);
     font-size: 0.88rem;
   }

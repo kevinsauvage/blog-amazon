@@ -18,6 +18,7 @@ $colors-dark: (
   on-surface-300: lighten($surface, 40%),
   on-surface-400: lighten($surface, 30%),
   on-surface-500: lighten($surface, 20%),
+  light: white,
 );
 
 $colors-light: (
@@ -37,6 +38,12 @@ $colors-light: (
   on-surface-300: darken($surface-light, 40%),
   on-surface-400: darken($surface-light, 30%),
   on-surface-500: darken($surface-light, 20%),
+  on-surface-dark-100: #ffffff,
+  on-surface-dark-200: #f7f7f7,
+  on-surface-hight: #111111,
+  on-surface-medium: #373737,
+  on-surface-light: #747474,
+  on-surface-disabled: #6c6c6c,
 );
 
 @function hex-to-rgb($hex) {

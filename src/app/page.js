@@ -2,8 +2,10 @@ import Link from 'next/link';
 
 import Container from '@/components/Container/Container';
 import Grid from '@/components/Grid/Grid';
+import GridPhoto from '@/components/GridPhoto/GridPhoto';
 import NavCategories from '@/components/NavCategories/NavCategories';
-import Post from '@/components/Post/Post';
+import HomeBanner from '@/components/scopes/home/HomeBanner';
+import Section from '@/components/Section/Section';
 import { formatPosts } from '@/utils/posts';
 
 import styles from './page.module.scss';
@@ -29,23 +31,28 @@ const Home = async () => {
   return (
     <main className={styles.main}>
       <Container>
-        <NavCategories categories={categories} />
-        <ul className={styles.grid1}>
-          {Array.isArray(posts) &&
-            posts.slice(0, 2).map((post) => (
-              <li key={post.ID}>
-                <Post post={post} image={post.images.large} aspect="video" />
-              </li>
-            ))}
-        </ul>
-        <Grid>
-          {Array.isArray(posts) &&
-            posts
-              .slice(2)
-              .map((post) => (
-                <Post key={post.ID} post={post} image={post.images.medium_large} aspect="video" />
-              ))}
-        </Grid>
+        <HomeBanner posts={posts} />
+
+        <Section title="Posts by category">
+          <NavCategories categories={categories} />
+        </Section>
+
+        <Section title="Beauty and fashion">
+          <Grid posts={posts.slice(2, 8)} />
+        </Section>
+
+        <Section title="Lifestyle">
+          <Grid posts={posts.slice(0, 2)} />
+        </Section>
+
+        <Section title="Lifestyle">
+          <GridPhoto posts={posts.slice(0, 4)} />
+        </Section>
+
+        <Section title="Lifestyle">
+          <Grid posts={posts.slice(0, 2)} />
+        </Section>
+
         <div className={styles['see-all']}>
           <Link href="/archive">View all posts</Link>
         </div>

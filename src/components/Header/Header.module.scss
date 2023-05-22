@@ -1,6 +1,8 @@
 .header {
   display: flex;
-  height: 100px;
+  height: $headerHeight;
   align-items: center;
   justify-content: space-between;
+  border-bottom: 1px solid var(--on-surface-500);
+  margin-bottom: 3rem;
 }

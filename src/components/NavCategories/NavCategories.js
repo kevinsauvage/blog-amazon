@@ -16,7 +16,6 @@ const NavCategories = ({ categories }) => (
           style={{ backgroundColor: category.acf.background_color }}
         >
           <Link href={`/category/${category.slug}_${category.id}`}>{category.name}</Link>
-          {console.log(category.name)}
         </div>
       ))}
     </Carousel>

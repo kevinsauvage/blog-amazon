@@ -18,6 +18,7 @@ const getAllPosts = async ({ searchParams, params }) => {
   const { page = 1 } = searchParams || {};
   const url = `${WORDPRESS_API_URL}/posts/?per_page=${PAGE_SIZE}&page=${page}&categories=${id}&_embed`;
   const response = await fetch(url, { next: { revalidate: 60 } });
+
   const totalPosts = response.headers.get('X-WP-Total');
 
   const data = await response.json();

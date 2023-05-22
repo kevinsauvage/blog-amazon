@@ -11,6 +11,7 @@ const nextConfig = {
         @import "mixins.scss";
         @import "responsive.scss";
         @import "themes.scss";
+        @import "variables.scss";
         `,
   },
 };

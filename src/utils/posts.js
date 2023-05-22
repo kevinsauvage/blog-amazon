@@ -5,7 +5,7 @@ export const formatPost = (post) => ({
   content: post.content?.rendered,
   date: post.date,
   excerpt: post.excerpt?.rendered,
-  imageAlt: post._embedded?.['wp:featuredmedia']?.alt_text,
+  imageAlt: post._embedded?.['wp:featuredmedia'][0]?.alt_text,
   images: post._embedded?.['wp:featuredmedia'][0]?.media_details.sizes,
   slug: post.slug,
   title: post.title?.rendered,

@@ -8,17 +8,50 @@ import { formatPost } from '@/utils/posts';
 
 import styles from './page.module.scss';
 
+export async function generateMetadata({ params }) {
+  const { slug } = params;
+  const { WORDPRESS_API_URL } = process.env;
+  const URL = `${WORDPRESS_API_URL}/posts?slug=${slug}&_embed`;
+  const product = await fetch(URL).then((response) => response.json());
+
+  const seo = product[0].yoast_head_json;
+
+  return {
+    description: seo.og_description,
+    openGraph: {
+      description: seo.og_description,
+      images: seo.og_image,
+      locale: seo.og_locale,
+      publishedTime: seo.article_published_time,
+      siteName: seo.og_site_name,
+      title: seo.og_title,
+      type: seo.og_type,
+      url: seo.og_url,
+    },
+    robots: seo.robots,
+    title: seo.title,
+    twitter: {
+      card: seo.twitter_card,
+      description: seo.og_description,
+      images: seo.og_image,
+      title: seo.title,
+    },
+  };
+}
+
 const getPostBySlug = async (context) => {
   const { slug } = context.params;
   const { WORDPRESS_API_URL } = process.env;
   const URL = `${WORDPRESS_API_URL}/posts?slug=${slug}&_embed`;
   const response = await fetch(URL, { next: { revalidate: 60 } });
+
   const post = await response.json();
+
   return formatPost(post[0]);
 };
 
 const PostId = async (context) => {
-  const { categories, title, images, content, ID } = await getPostBySlug(context);
+  const { categories, title, images, content, ID, imageAlt } = await getPostBySlug(context);
 
   const image = images?.['1536x1536'];
 
@@ -33,7 +66,7 @@ const PostId = async (context) => {
                 <Link
                   href={`/category/${category.slug}_${category.id}`}
                   className={styles.category}
-                  key={category}
+                  key={category.id}
                   style={{ backgroundColor: category.acf.background_color }}
                 >
                   {category.name}
@@ -46,7 +79,7 @@ const PostId = async (context) => {
           src={image?.source_url}
           width={image?.width}
           height={image?.height}
-          alt={image?.imageAlt}
+          alt={imageAlt}
         />
         <div className={styles.content} dangerouslySetInnerHTML={{ __html: content }} />
         <RelatedPosts id={ID} />

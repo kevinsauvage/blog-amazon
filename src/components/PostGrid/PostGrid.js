@@ -3,22 +3,20 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 // eslint-disable-next-line css-modules/no-unused-class
-import styles from './Post.module.scss';
+import styles from './PostGrid.module.scss';
 
-const Post = ({ post, aspect = 'ratio-5-3', image }) => {
+const PostGrid = ({ post, image }) => {
   const { slug, categories, excerpt, title, imageAlt } = post;
 
   return (
     <div className={styles.post}>
-      <Link href={`/posts/${slug}`}>
-        <Image
-          className={`${styles.image} ${styles[aspect]}`}
-          src={image.source_url}
-          width={image.width}
-          height={image.height}
-          alt={imageAlt}
-        />
-      </Link>
+      <Image
+        className={`${styles.image}`}
+        src={image.source_url}
+        width={image.width}
+        height={image.height}
+        alt={imageAlt}
+      />
 
       <div className={styles.content}>
         <div className={styles.categories}>
@@ -28,7 +26,7 @@ const Post = ({ post, aspect = 'ratio-5-3', image }) => {
                 href={`/category/${category.slug}_${category.id}`}
                 className={styles.category}
                 key={category}
-                style={{ backgroundColor: category.acf?.background_color }}
+                style={{ color: category.acf?.background_color }}
               >
                 {category.name}
               </Link>
@@ -43,4 +41,4 @@ const Post = ({ post, aspect = 'ratio-5-3', image }) => {
   );
 };
 
-export default Post;
+export default PostGrid;
