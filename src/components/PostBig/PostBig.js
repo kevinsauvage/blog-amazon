@@ -27,7 +27,7 @@ const PostBig = ({ post, image }) => {
               <Link
                 href={`/category/${category.slug}_${category.id}`}
                 className={styles.category}
-                key={category}
+                key={category.id}
                 style={{ color: category.acf?.background_color }}
               >
                 {category.name}

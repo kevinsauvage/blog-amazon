@@ -27,7 +27,7 @@ const Post = ({ post, aspect = 'ratio-5-3', image }) => {
               <Link
                 href={`/category/${category.slug}_${category.id}`}
                 className={styles.category}
-                key={category}
+                key={category.id}
                 style={{ backgroundColor: category.acf?.background_color }}
               >
                 {category.name}

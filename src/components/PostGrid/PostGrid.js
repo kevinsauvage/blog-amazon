@@ -24,7 +24,7 @@ const PostGrid = ({ post, image, showExcerpt = true }) => {
             <Link
               href={`/category/${category.slug}_${category.id}`}
               className={styles.category}
-              key={category}
+              key={category.id}
               style={{ backgroundColor: category.acf?.background_color }}
             >
               {category.name}
