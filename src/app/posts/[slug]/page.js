@@ -53,35 +53,37 @@ const getPostBySlug = async (context) => {
 const PostId = async (context) => {
   const { categories, title, images, content, ID, imageAlt } = await getPostBySlug(context);
 
-  const image = images?.['1536x1536'];
+  const image = images?.large;
 
   return (
     <Container>
       <main className={styles.main}>
-        <header>
-          <h1>{title}</h1>
-          <div className={styles.categories}>
-            {categories.length > 0 &&
-              categories.slice(0, 2).map((category) => (
-                <Link
-                  href={`/category/${category.slug}_${category.id}`}
-                  className={styles.category}
-                  key={category.id}
-                  style={{ backgroundColor: category.acf.background_color }}
-                >
-                  {category.name}
-                </Link>
-              ))}
-          </div>
-        </header>
-        <Image
-          className={styles.image}
-          src={image?.source_url}
-          width={image?.width}
-          height={image?.height}
-          alt={imageAlt}
-        />
-        <div className={styles.content} dangerouslySetInnerHTML={{ __html: content }} />
+        <article className={styles.article}>
+          <header>
+            <h1>{title}</h1>
+            <div className={styles.categories}>
+              {categories.length > 0 &&
+                categories.slice(0, 2).map((category) => (
+                  <Link
+                    href={`/category/${category.slug}_${category.id}`}
+                    className={styles.category}
+                    key={category.id}
+                    style={{ backgroundColor: category.acf.background_color }}
+                  >
+                    {category.name}
+                  </Link>
+                ))}
+            </div>
+          </header>
+          <Image
+            className={styles.image}
+            src={image?.source_url}
+            width={image?.width}
+            height={image?.height}
+            alt={imageAlt}
+          />
+          <div className={styles.content} dangerouslySetInnerHTML={{ __html: content }} />
+        </article>
         <RelatedPosts id={ID} />
       </main>
     </Container>

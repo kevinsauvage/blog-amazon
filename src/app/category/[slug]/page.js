@@ -1,7 +1,6 @@
 import Container from '@/components/Container/Container';
 import Grid from '@/components/Grid/Grid';
 import Pagination from '@/components/Pagination/Pagination';
-import Post from '@/components/Post/Post';
 import TotalFound from '@/components/TotalFound/TotalFound';
 import { formatPosts } from '@/utils/posts';
 import { formatString } from '@/utils/strings';
@@ -18,9 +17,7 @@ const getAllPosts = async ({ searchParams, params }) => {
   const { page = 1 } = searchParams || {};
   const url = `${WORDPRESS_API_URL}/posts/?per_page=${PAGE_SIZE}&page=${page}&categories=${id}&_embed`;
   const response = await fetch(url, { next: { revalidate: 60 } });
-
   const totalPosts = response.headers.get('X-WP-Total');
-
   const data = await response.json();
   const totalPages = Math.ceil(totalPosts / PAGE_SIZE);
 
@@ -43,12 +40,7 @@ const archive = async (context) => {
           <h1>{formatString(name)}</h1>
           <TotalFound total={totalPosts} />
         </header>
-        <Grid>
-          {Array.isArray(posts) &&
-            posts.map((post) => (
-              <Post key={post.ID} post={post} image={post.images.medium_large} aspect="square" />
-            ))}
-        </Grid>
+        <Grid posts={posts} fill />
         <Pagination totalPages={totalPages} currentPage={currentPage} />
       </main>
     </Container>

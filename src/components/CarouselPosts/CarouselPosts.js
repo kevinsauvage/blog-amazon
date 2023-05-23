@@ -5,7 +5,7 @@ import Post from '../Post/Post';
 
 import styles from './CarouselPosts.module.scss';
 
-const CarouselPosts = ({ posts, title, slideClass, aspect = 'square' }) => {
+const CarouselPosts = ({ posts, title, slideClass }) => {
   if (!Array.isArray(posts) || !posts?.length) return;
 
   return (
@@ -14,7 +14,7 @@ const CarouselPosts = ({ posts, title, slideClass, aspect = 'square' }) => {
       <Carousel slideClass={slideClass}>
         {Array.isArray(posts) &&
           posts.map((post) => (
-            <Post key={post.ID} post={post} image={post?.images?.medium_large} aspect={aspect} />
+            <Post key={post.ID} post={post} image={post?.images?.medium_large} />
           ))}
       </Carousel>
     </section>

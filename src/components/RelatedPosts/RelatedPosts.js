@@ -24,7 +24,12 @@ const RelatedPosts = ({ id }) => {
 
   return (
     <div className={styles.container}>
-      <CarouselPosts title="Related posts" posts={posts} slideClass={styles.item} aspect="video" />
+      <CarouselPosts
+        title="Related posts"
+        posts={posts}
+        slideClass={styles.item}
+        aspect="ratio-16-9"
+      />
     </div>
   );
 };

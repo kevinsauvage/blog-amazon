@@ -1,7 +1,6 @@
 import Container from '@/components/Container/Container';
 import Grid from '@/components/Grid/Grid';
 import Pagination from '@/components/Pagination/Pagination';
-import Post from '@/components/Post/Post';
 import SearchForm from '@/components/SearchForm/SearchForm';
 import TotalFound from '@/components/TotalFound/TotalFound';
 import { formatPosts } from '@/utils/posts';
@@ -13,7 +12,7 @@ const { WORDPRESS_API_URL } = process.env;
 
 const getSearch = async ({ searchParams }) => {
   const { q = '', page = 1 } = searchParams || {};
-  const URL = `${WORDPRESS_API_URL}/posts?search=${q}&number=${PER_PAGE}&page=${page}&_embed`;
+  const URL = `${WORDPRESS_API_URL}/posts?search=${q}&per_page=${PER_PAGE}&page=${page}&_embed`;
   const response = await fetch(URL, { next: { revalidate: 60 } });
   const totalPosts = response.headers.get('X-WP-Total');
   const data = await response.json();
@@ -38,12 +37,7 @@ const search = async (context) => {
           <TotalFound total={totalPosts} />
           <SearchForm query={query} />
         </header>
-        <Grid>
-          {Array.isArray(posts) &&
-            posts.map((post) => (
-              <Post key={post.ID} post={post} image={post.images.medium_large} aspect="square" />
-            ))}
-        </Grid>
+        <Grid posts={posts} fill />
         <Pagination totalPages={totalPages} currentPage={currentPage} />
       </main>
     </Container>

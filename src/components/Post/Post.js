@@ -9,7 +9,7 @@ const Post = ({ post, aspect = 'ratio-5-3', image }) => {
   const { slug, categories, excerpt, title, imageAlt } = post;
 
   return (
-    <div className={styles.post}>
+    <article className={styles.post}>
       <Link href={`/posts/${slug}`}>
         <Image
           className={`${styles.image} ${styles[aspect]}`}
@@ -39,7 +39,7 @@ const Post = ({ post, aspect = 'ratio-5-3', image }) => {
         </Link>
         <div className={styles.excerpt} dangerouslySetInnerHTML={{ __html: excerpt }} />
       </div>
-    </div>
+    </article>
   );
 };
 

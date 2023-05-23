@@ -21,6 +21,7 @@ const getPosts = async () => {
 
 const CAT_BEAUTY_FASHION = 2;
 const CAT_FOOD_COOKING = 3;
+const CAT_HEALTH_WELLNESS = 4;
 
 const getPostsByCategory = async (category, perPage, page = 1) => {
   const url = `${WORDPRESS_API_URL}/posts/?per_page=${perPage}&page=${page}&categories=${category}&_embed`;
@@ -36,12 +37,14 @@ const getCategories = async () => {
 };
 
 const Home = async () => {
-  const [posts, beautyAndFashion, foodAndCooking, categories] = await Promise.all([
-    getPosts(),
-    getPostsByCategory(CAT_BEAUTY_FASHION, 6),
-    getPostsByCategory(CAT_FOOD_COOKING, 6),
-    getCategories(),
-  ]);
+  const [posts, beautyAndFashion, foodAndCooking, healthAndWellness, categories] =
+    await Promise.all([
+      getPosts(),
+      getPostsByCategory(CAT_BEAUTY_FASHION, 6),
+      getPostsByCategory(CAT_FOOD_COOKING, 2),
+      getPostsByCategory(CAT_HEALTH_WELLNESS, 6),
+      getCategories(),
+    ]);
 
   return (
     <main className={styles.main}>
@@ -52,16 +55,16 @@ const Home = async () => {
           <NavCategories categories={categories} />
         </Section>
 
-        <Section title="Beauty and fashion">
+        <Section title="Beauty and Fashion">
           <Grid posts={beautyAndFashion} />
         </Section>
 
-        <Section title="Lifestyle">
-          <Grid posts={posts.slice(0, 2)} />
+        <Section title="Food and Cooking">
+          <Grid posts={foodAndCooking} />
         </Section>
 
-        <Section title="Food And Cooking">
-          <GridPhoto posts={foodAndCooking} />
+        <Section title="Health and Wellness">
+          <GridPhoto posts={healthAndWellness} />
         </Section>
 
         <Section title="Health and Wellness">
