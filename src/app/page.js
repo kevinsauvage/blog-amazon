@@ -30,30 +30,18 @@ const getPostsByCategory = async (category, perPage, page = 1) => {
   return formatPosts(data);
 };
 
-const getCategories = async () => {
-  const URL = `${WORDPRESS_API_URL}/categories?acf_format=standard`;
-  const response = await fetch(URL, { next: { revalidate: 60 * 60 * 24 } });
-  return response.json();
-};
-
 const Home = async () => {
-  const [posts, beautyAndFashion, foodAndCooking, healthAndWellness, categories] =
-    await Promise.all([
-      getPosts(),
-      getPostsByCategory(CAT_BEAUTY_FASHION, 6),
-      getPostsByCategory(CAT_FOOD_COOKING, 2),
-      getPostsByCategory(CAT_HEALTH_WELLNESS, 6),
-      getCategories(),
-    ]);
+  const [posts, beautyAndFashion, foodAndCooking, healthAndWellness] = await Promise.all([
+    getPosts(),
+    getPostsByCategory(CAT_BEAUTY_FASHION, 6),
+    getPostsByCategory(CAT_FOOD_COOKING, 2),
+    getPostsByCategory(CAT_HEALTH_WELLNESS, 6),
+  ]);
 
   return (
     <main className={styles.main}>
       <Container>
         <HomeBanner posts={posts} />
-
-        <Section title="Posts by category">
-          <NavCategories categories={categories} />
-        </Section>
 
         <Section title="Beauty and Fashion">
           <Grid posts={beautyAndFashion} />

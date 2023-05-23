@@ -4,4 +4,16 @@
   align-items: center;
   justify-content: space-between;
   border-bottom: 1px solid var(--on-surface-500);
+
+  .wrapper {
+    display: flex;
+  }
+
+  .logo {
+    margin-right: 2rem;
+
+    strong {
+      @include font-size(1.2rem, 2rem);
+    }
+  }
 }

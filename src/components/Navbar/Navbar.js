@@ -5,33 +5,21 @@ import { useSelectedLayoutSegment } from 'next/navigation';
 
 import styles from './Navbar.module.scss';
 
-const navItems = [
-  // eslint-disable-next-line unicorn/no-null
-  { href: '/', id: 1, label: 'Home', targetSegment: null },
-  { href: '/contact', id: 2, label: 'Contact', targetSegment: 'contact' },
-  { href: '/posts', id: 3, label: 'Posts', targetSegment: 'posts' },
-  { href: '/search', id: 4, label: 'Search', targetSegment: 'search' },
-];
-
-const Navbar = () => {
+const Navbar = ({ categories }) => {
   const activeSegment = useSelectedLayoutSegment();
 
   return (
     <nav className={styles.navbar}>
-      <div className={styles.logo}>
-        <Link href="/">
-          <strong>Bloglytics</strong>
-        </Link>
-      </div>
       <ul className={styles.list}>
-        {navItems.map((item) => (
+        <li className={`${styles.item} ${activeSegment === null ? styles.active : ''}`}>
+          <Link href="/">Home</Link>
+        </li>
+        {categories.map((category) => (
           <li
-            key={item.id}
-            className={`${styles.item} ${
-              activeSegment === item.targetSegment ? styles.active : ''
-            }`}
+            key={category.id}
+            className={`${styles.item} ${activeSegment === category.name ? styles.active : ''}`}
           >
-            <Link href={item.href}>{item.label}</Link>
+            <Link href={`/category/${category.slug}_${category.id}`}>{category.name}</Link>
           </li>
         ))}
       </ul>

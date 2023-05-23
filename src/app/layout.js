@@ -6,6 +6,8 @@ import Header from '@/components/Header/Header';
 import '../styles/globals.scss';
 import styles from './layout.module.scss';
 
+const { WORDPRESS_API_URL } = process.env;
+
 const roboto = Roboto({
   display: 'swap',
   subsets: ['latin'],
@@ -17,14 +19,24 @@ export const metadata = {
   title: 'Create Next App',
 };
 
-const RootLayout = ({ children }) => (
-  <html lang="en" className="theme-light">
-    <body className={roboto.className}>
-      <Header />
-      <div className={styles.children}>{children}</div>
-      <Footer />
-    </body>
-  </html>
-);
+const getCategories = async () => {
+  const URL = `${WORDPRESS_API_URL}/categories?acf_format=standard`;
+  const response = await fetch(URL, { next: { revalidate: 60 * 60 * 24 } });
+  return response.json();
+};
+
+const RootLayout = async ({ children }) => {
+  const categories = await getCategories();
+
+  return (
+    <html lang="en" className="theme-light">
+      <body className={roboto.className}>
+        <Header categories={categories} />
+        <div className={styles.children}>{children}</div>
+        <Footer />
+      </body>
+    </html>
+  );
+};
 
 export default RootLayout;

@@ -9,20 +9,13 @@
     gap: 2rem;
 
     .item {
-      font-size: 0.9rem;
+      font-size: 0.95rem;
+      font-weight: 500;
     }
 
     .active {
       color: red;
       text-decoration: underline;
-    }
-  }
-
-  .logo {
-    margin-right: 3rem;
-
-    strong {
-      @include font-size(1.2rem, 2rem);
     }
   }
 }
