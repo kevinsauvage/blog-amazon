@@ -17,8 +17,8 @@ export const getPostsByCategory = async (category, perPage, page = 1) => {
   return formatPosts(data);
 };
 
-export const getPopularPosts = async (count = 10) => {
-  const URL = `${WORDPRESS_API_CUSTOM_URL}/popular-posts/?count=${count}&_embed`;
+export const getPopularPosts = async (count = 10, category = '') => {
+  const URL = `${WORDPRESS_API_CUSTOM_URL}/popular-posts/?count=${count}&_embed&category=${category}`;
   const response = await fetch(URL);
   const data = await response.json();
   return formatPosts(data);
@@ -58,11 +58,7 @@ export const getPostBySlug = async (context) => {
   return formatPost(post);
 };
 
-export const getAllPosts = async ({ searchParams, params }) => {
-  const { slug } = params;
-  const id = slug.split('_')[1];
-  const name = slug.split('_')[0];
-  const { page = 1 } = searchParams || {};
+export const getPostsFromCategory = async (page, id) => {
   const url = `${WORDPRESS_API_URL}/posts/?per_page=${PER_PAGE}&page=${page}&categories=${id}&_embed`;
   const response = await fetch(url, { next: { revalidate: 60 } });
   const totalPosts = response.headers.get('X-WP-Total');
@@ -70,20 +66,16 @@ export const getAllPosts = async ({ searchParams, params }) => {
   const totalPages = Math.ceil(totalPosts / PER_PAGE);
 
   return {
-    currentPage: page,
-    name,
-    posts: Array.isArray(data) ? formatPosts(data) : [],
+    posts: formatPosts(data),
     totalPages,
     totalPosts,
   };
 };
 
-export const getBannerPost = async ({ params }) => {
-  const { slug } = params;
-  const name = slug.split('_')[0];
+export const getBannerPost = async (name) => {
   const url = `${WORDPRESS_API_CUSTOM_URL}/banner-post/${name}?_embed`;
   const response = await fetch(url, { next: { revalidate: 60 } });
-  if (!response.ok) return {}; // Return an empty object if the response is not successful
+  if (!response.ok) return {};
   const data = await response.json();
   return formatPost(data);
 };
