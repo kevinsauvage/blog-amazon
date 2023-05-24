@@ -1,47 +1,16 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
+import Category from '@/components/Category/Category';
 import Container from '@/components/Container/Container';
+import Date from '@/components/Date/Date';
 import Grid from '@/components/Grid/Grid';
 import Pagination from '@/components/Pagination/Pagination';
 import TotalFound from '@/components/TotalFound/TotalFound';
-import { formatPost, formatPosts } from '@/utils/posts';
+import { getAllPosts, getBannerPost } from '@/lib/wordpress';
 import { formatString } from '@/utils/strings';
 
 import styles from './page.module.scss';
-
-const PAGE_SIZE = 10;
-const { WORDPRESS_API_URL, WORDPRESS_API_CUSTOM_URL } = process.env;
-
-const getAllPosts = async ({ searchParams, params }) => {
-  const { slug } = params;
-  const id = slug.split('_')[1];
-  const name = slug.split('_')[0];
-  const { page = 1 } = searchParams || {};
-  const url = `${WORDPRESS_API_URL}/posts/?per_page=${PAGE_SIZE}&page=${page}&categories=${id}&_embed`;
-  const response = await fetch(url, { next: { revalidate: 60 } });
-  const totalPosts = response.headers.get('X-WP-Total');
-  const data = await response.json();
-  const totalPages = Math.ceil(totalPosts / PAGE_SIZE);
-
-  return {
-    currentPage: page,
-    name,
-    posts: Array.isArray(data) ? formatPosts(data) : [],
-    totalPages,
-    totalPosts,
-  };
-};
-
-const getBannerPost = async ({ params }) => {
-  const { slug } = params;
-  const name = slug.split('_')[0];
-  const url = `${WORDPRESS_API_CUSTOM_URL}/banner-post/${name}?_embed`;
-  const response = await fetch(url, { next: { revalidate: 60 } });
-  if (!response.ok) return {}; // Return an empty object if the response is not successful
-  const data = await response.json();
-  return formatPost(data);
-};
 
 const archive = async (context) => {
   const [postsResponse, bannerPost] = await Promise.all([
@@ -52,7 +21,7 @@ const archive = async (context) => {
   const { posts, totalPages, currentPage, totalPosts, name } = postsResponse;
   const { slug, title, imageAlt, images, categories, date } = bannerPost;
 
-  const image = images?.large;
+  const image = images?.full;
   const category = categories?.[0];
 
   return (
@@ -68,16 +37,11 @@ const archive = async (context) => {
               alt={imageAlt}
             />
             <div className={styles.content}>
-              <div
-                className={styles.category}
-                style={{ backgroundColor: category.acf?.background_color }}
-              >
-                {category.name}
-              </div>
+              <Category category={category} />
               <Link href={`/posts/${slug}`}>
                 <h2 className={styles.title}>{title}</h2>
               </Link>
-              <p>{date}</p>
+              <Date date={date} />
             </div>
           </div>
         )}

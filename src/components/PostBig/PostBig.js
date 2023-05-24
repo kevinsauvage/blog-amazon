@@ -2,6 +2,8 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
+import Category from '../Category/Category';
+
 // eslint-disable-next-line css-modules/no-unused-class
 import styles from './PostBig.module.scss';
 
@@ -24,13 +26,8 @@ const PostBig = ({ post, image }) => {
         <div className={styles.categories}>
           {categories.length > 0 &&
             categories.slice(0, 2).map((category) => (
-              <Link
-                href={`/category/${category.slug}_${category.id}`}
-                className={styles.category}
-                key={category.id}
-                style={{ color: category.acf?.background_color }}
-              >
-                {category.name}
+              <Link href={`/category/${category.slug}_${category.id}`} key={category.id}>
+                <Category category={category} />
               </Link>
             ))}
         </div>

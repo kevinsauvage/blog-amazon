@@ -2,11 +2,14 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
+import Category from '../Category/Category';
+import Date from '../Date/Date';
+
 // eslint-disable-next-line css-modules/no-unused-class
 import styles from './Post.module.scss';
 
 const Post = ({ post, aspect = 'ratio-5-3', image }) => {
-  const { slug, categories, excerpt, title, imageAlt } = post;
+  const { slug, categories, excerpt, title, imageAlt, date } = post;
 
   return (
     <article className={styles.post}>
@@ -24,13 +27,8 @@ const Post = ({ post, aspect = 'ratio-5-3', image }) => {
         <div className={styles.categories}>
           {categories.length > 0 &&
             categories.slice(0, 2).map((category) => (
-              <Link
-                href={`/category/${category.slug}_${category.id}`}
-                className={styles.category}
-                key={category.id}
-                style={{ backgroundColor: category.acf?.background_color }}
-              >
-                {category.name}
+              <Link href={`/category/${category.slug}_${category.id}`} key={category.id}>
+                <Category category={category} />
               </Link>
             ))}
         </div>
@@ -38,6 +36,9 @@ const Post = ({ post, aspect = 'ratio-5-3', image }) => {
           <h2 className={styles.title}>{title}</h2>
         </Link>
         <div className={styles.excerpt} dangerouslySetInnerHTML={{ __html: excerpt }} />
+        <footer className={styles.footer}>
+          <Date date={date} />
+        </footer>
       </div>
     </article>
   );

@@ -1,30 +1,20 @@
-'use client';
-
-import Link from 'next/link';
-import { useSelectedLayoutSegment } from 'next/navigation';
+import NavItem from './NavItem';
 
 import styles from './Navbar.module.scss';
 
-const Navbar = ({ categories }) => {
-  const activeSegment = useSelectedLayoutSegment();
-
-  return (
-    <nav className={styles.navbar}>
-      <ul className={styles.list}>
-        <li className={`${styles.item} ${activeSegment === null ? styles.active : ''}`}>
-          <Link href="/">Home</Link>
-        </li>
-        {categories.map((category) => (
-          <li
-            key={category.id}
-            className={`${styles.item} ${activeSegment === category.name ? styles.active : ''}`}
-          >
-            <Link href={`/category/${category.slug}_${category.id}`}>{category.name}</Link>
-          </li>
-        ))}
-      </ul>
-    </nav>
-  );
-};
+const Navbar = ({ categories }) => (
+  <nav className={styles.navbar}>
+    <ul className={styles.list}>
+      <NavItem href="/" label="Home" />
+      {categories.map((category) => (
+        <NavItem
+          key={category.id}
+          href={`/category/${category.slug}_${category.id}`}
+          label={category.name}
+        />
+      ))}
+    </ul>
+  </nav>
+);
 
 export default Navbar;

@@ -4,16 +4,16 @@ import Link from 'next/link';
 
 import Container from '@/components/Container/Container';
 import RelatedPosts from '@/components/RelatedPosts/RelatedPosts';
-import { formatPost } from '@/utils/posts';
+import { getPostBySlug } from '@/lib/wordpress';
 
 import styles from './page.module.scss';
 
+const { WORDPRESS_API_URL } = process.env;
+
 export async function generateMetadata({ params }) {
   const { slug } = params;
-  const { WORDPRESS_API_URL } = process.env;
   const URL = `${WORDPRESS_API_URL}/posts?slug=${slug}&_embed`;
   const product = await fetch(URL).then((response) => response.json());
-
   const seo = product[0].yoast_head_json;
 
   return {
@@ -39,19 +39,10 @@ export async function generateMetadata({ params }) {
   };
 }
 
-const getPostBySlug = async (context) => {
-  const { slug } = context.params;
-  const { WORDPRESS_API_URL } = process.env;
-  const URL = `${WORDPRESS_API_URL}/posts?slug=${slug}&_embed`;
-  const response = await fetch(URL, { next: { revalidate: 60 } });
-
-  const post = await response.json();
-
-  return formatPost(post[0]);
-};
-
 const PostId = async (context) => {
-  const { categories, title, images, content, ID, imageAlt } = await getPostBySlug(context);
+  const { categories, title, images, content, ID, imageAlt, viewCount } = await getPostBySlug(
+    context
+  );
 
   const image = images?.large;
 
@@ -74,6 +65,7 @@ const PostId = async (context) => {
                   </Link>
                 ))}
             </div>
+            <span>{viewCount} total view</span>
           </header>
           <Image
             className={styles.image}

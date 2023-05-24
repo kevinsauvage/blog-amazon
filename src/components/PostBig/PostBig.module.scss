@@ -48,14 +48,6 @@
 
   .categories {
     display: flex;
-    margin-bottom: 0.5rem;
-    gap: 1rem;
-
-    .category {
-      width: fit-content;
-      border-radius: 0 var(--radius-1) var(--radius-1) 0;
-      font-size: 1rem;
-    }
   }
 
   .title {

@@ -3,64 +3,48 @@ import Link from 'next/link';
 import Container from '@/components/Container/Container';
 import Grid from '@/components/Grid/Grid';
 import GridPhoto from '@/components/GridPhoto/GridPhoto';
-import NavCategories from '@/components/NavCategories/NavCategories';
 import HomeBanner from '@/components/scopes/home/HomeBanner';
 import Section from '@/components/Section/Section';
-import { formatPosts } from '@/utils/posts';
+import { getPopularPosts, getPosts, getPostsByCategory } from '@/lib/wordpress';
 
 import styles from './page.module.scss';
 
-const { WORDPRESS_API_URL } = process.env;
-
-const getPosts = async () => {
-  const URL = `${WORDPRESS_API_URL}/posts/?sticky=true&_embed`;
-  const response = await fetch(URL, { next: { revalidate: 60 } });
-  const data = await response.json();
-  return formatPosts(data);
-};
-
-const CAT_BEAUTY_FASHION = 2;
-const CAT_FOOD_COOKING = 3;
-const CAT_HEALTH_WELLNESS = 4;
-
-const getPostsByCategory = async (category, perPage, page = 1) => {
-  const url = `${WORDPRESS_API_URL}/posts/?per_page=${perPage}&page=${page}&categories=${category}&_embed`;
-  const response = await fetch(url, { next: { revalidate: 60 } });
-  const data = await response.json();
-  return formatPosts(data);
-};
+const CAT_BEAUTY = 2;
+const CAT_FOOD = 3;
+const CAT_HEALTH = 4;
 
 const Home = async () => {
-  const [posts, beautyAndFashion, foodAndCooking, healthAndWellness] = await Promise.all([
+  const [posts, beauty, food, health, popular] = await Promise.all([
     getPosts(),
-    getPostsByCategory(CAT_BEAUTY_FASHION, 6),
-    getPostsByCategory(CAT_FOOD_COOKING, 2),
-    getPostsByCategory(CAT_HEALTH_WELLNESS, 6),
+    getPostsByCategory(CAT_BEAUTY, 6),
+    getPostsByCategory(CAT_FOOD, 2),
+    getPostsByCategory(CAT_HEALTH, 6),
+    getPopularPosts(4),
   ]);
 
   return (
     <main className={styles.main}>
       <Container>
-        <HomeBanner posts={posts} />
+        <HomeBanner posts={popular} grid />
 
-        <Section title="Beauty and Fashion">
-          <Grid posts={beautyAndFashion} />
+        <Section title="Beauty">
+          <Grid posts={beauty} />
         </Section>
 
-        <Section title="Food and Cooking">
-          <Grid posts={foodAndCooking} />
+        <Section title="Food">
+          <Grid posts={food} />
         </Section>
 
-        <Section title="Health and Wellness">
-          <GridPhoto posts={healthAndWellness} />
+        <Section title="Health">
+          <GridPhoto posts={health} />
         </Section>
 
-        <Section title="Health and Wellness">
+        <Section title="Health">
           <Grid posts={posts.slice(0, 2)} />
         </Section>
 
-        <Section title="Beauty and fashion">
-          <Grid posts={beautyAndFashion} />
+        <Section title="Beauty">
+          <Grid posts={beauty} />
         </Section>
 
         <div className={styles['see-all']}>

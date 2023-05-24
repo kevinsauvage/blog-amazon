@@ -9,6 +9,7 @@ export const formatPost = (post) => ({
   images: post._embedded?.['wp:featuredmedia'][0]?.media_details.sizes,
   slug: post.slug,
   title: post.title?.rendered,
+  viewCount: post?.acf?.view_count || 0,
 });
 
 export const formatPosts = (posts) => posts.map((post) => formatPost(post));
