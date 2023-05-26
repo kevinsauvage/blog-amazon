@@ -1,0 +1,20 @@
+.list {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  .item {
+    color: var(--on-surface-500);
+    font-size: 0.8rem;
+
+    a {
+      display: flex;
+      align-items: center;
+      color: var(--on-surface-200);
+
+      svg {
+        margin-left: 0.5rem;
+      }
+    }
+  }
+}

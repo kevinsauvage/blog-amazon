@@ -7,11 +7,7 @@ const Navbar = ({ categories }) => (
     <ul className={styles.list}>
       <NavItem href="/" label="Home" />
       {categories.map((category) => (
-        <NavItem
-          key={category.id}
-          href={`/category/${category.slug}_${category.id}`}
-          label={category.name}
-        />
+        <NavItem key={category.id} href={`/category/${category.slug}`} label={category.name} />
       ))}
     </ul>
   </nav>

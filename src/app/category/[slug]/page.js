@@ -1,73 +1,81 @@
-import Image from 'next/image';
-import Link from 'next/link';
-
-import Category from '@/components/Category/Category';
+import Breadcrumb from '@/components/Breadcrumb/Breadcrumb';
 import Container from '@/components/Container/Container';
-import Date from '@/components/Date/Date';
 import Grid from '@/components/Grid/Grid';
 import Pagination from '@/components/Pagination/Pagination';
+import PostBanner from '@/components/PostBanner/PostBanner';
 import TotalFound from '@/components/TotalFound/TotalFound';
-import { getBannerPost, getPopularPosts, getPostsFromCategory } from '@/lib/wordpress';
+import { getCategoryBannerPost, getPopularPosts, getPostsFromCategorySlug } from '@/lib/wordpress';
 import { formatString } from '@/utils/strings';
 
 import styles from './page.module.scss';
 
-const archive = async (context) => {
+const { WORDPRESS_API_URL } = process.env;
+
+export async function generateMetadata({ params }) {
+  const { slug } = params;
+  const URL = `${WORDPRESS_API_URL}/categories?slug=${slug}&_embed`;
+  const category = await fetch(URL).then((response) => response.json());
+  const seo = category[0].yoast_head_json;
+
+  return {
+    alternates: {
+      canonical: `/category/${slug}`,
+    },
+    description: seo.og_description,
+    openGraph: {
+      description: seo.og_description,
+      images: seo.og_image,
+      locale: seo.og_locale,
+      publishedTime: seo.article_published_time,
+      siteName: seo.og_site_name,
+      title: seo.og_title,
+      type: seo.og_type,
+      url: seo.og_url,
+    },
+    robots: seo.robots,
+    title: seo.title,
+    twitter: {
+      card: seo.twitter_card,
+      description: seo.og_description,
+      images: seo.og_image,
+      title: seo.title,
+    },
+  };
+}
+
+const categorySlug = async (context) => {
   const { params, searchParams } = context;
   const { page = 1 } = searchParams || {};
   const { slug } = params;
-  const id = slug.split('_')[1];
-  const name = slug.split('_')[0];
 
   const [postsResponse, bannerPost, popular] = await Promise.all([
-    getPostsFromCategory(page, id),
-    getBannerPost(name),
-    getPopularPosts(4, id),
+    getPostsFromCategorySlug(slug, page, 8),
+    getCategoryBannerPost(slug),
+    getPopularPosts(4, slug),
   ]);
 
   const { posts, totalPages, totalPosts } = postsResponse;
 
-  const { title, imageAlt, images, categories, date } = bannerPost;
-
-  const image = images?.full;
-  const category = categories?.[0];
-
   return (
     <Container>
-      {bannerPost && (
-        <div className={styles.banner}>
-          <Image
-            className={`${styles.image}`}
-            src={image.source_url}
-            width={image.width}
-            height={image.height}
-            alt={imageAlt}
-          />
-          <div className={styles.content}>
-            <Category category={category} />
-            <Link href={`/posts/${slug}`}>
-              <h2 className={styles.title}>{title}</h2>
-            </Link>
-            <Date date={date} />
-          </div>
-        </div>
-      )}
+      <PostBanner post={bannerPost} />
+      <Breadcrumb />
       <div className={styles.wrapper}>
         <main className={styles.main}>
           <header>
-            <h1>{formatString(name)}</h1>
+            <h1>{formatString(slug)}</h1>
             <TotalFound total={totalPosts} />
           </header>
-          <Grid posts={posts} fill />
+          <Grid posts={posts} fill showCategories={false} />
           <Pagination totalPages={totalPages} currentPage={page} />
         </main>
         <aside className={styles.aside}>
-          <h3>Popular</h3>
-          <Grid posts={popular} />
+          <h3>Recommended</h3>
+          <Grid posts={popular} showCategories={false} />
         </aside>
       </div>
     </Container>
   );
 };
 
-export default archive;
+export default categorySlug;

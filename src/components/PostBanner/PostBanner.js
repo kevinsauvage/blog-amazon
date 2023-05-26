@@ -1,4 +1,4 @@
-/* eslint-disable react/no-danger */
+import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -6,14 +6,17 @@ import Category from '../Category/Category';
 import Date from '../Date/Date';
 import Views from '../Views/Views';
 
-// eslint-disable-next-line css-modules/no-unused-class
-import styles from './PostGrid.module.scss';
+import styles from './PostBanner.module.scss';
 
-const PostGrid = ({ post, image }) => {
-  const { slug, categories, title, imageAlt, date, viewCount } = post;
+const PostBanner = ({ post }) => {
+  if (!post) return;
+  const { title, imageAlt, images, categories, date, viewCount, slug } = post;
+
+  const image = images?.full;
+  const category = categories?.[0];
 
   return (
-    <div className={styles.post}>
+    <div className={styles.banner}>
       <Image
         className={`${styles.image}`}
         src={image.source_url}
@@ -21,21 +24,18 @@ const PostGrid = ({ post, image }) => {
         height={image.height}
         alt={imageAlt}
       />
-
-      <div className={styles.categories}>
-        <Category category={categories[0]} />
-      </div>
       <div className={styles.content}>
+        <Category category={{ ...category, name: 'Featured' }} />
         <Link href={`/posts/${slug}`}>
           <h2 className={styles.title}>{title}</h2>
         </Link>
         <div className={styles.info}>
-          <Date date={date} />
-          <Views views={viewCount} />
+          <Date className={styles.date} date={date} />
+          <Views className={styles.views} views={viewCount} />
         </div>
       </div>
     </div>
   );
 };
 
-export default PostGrid;
+export default PostBanner;

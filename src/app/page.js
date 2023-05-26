@@ -5,20 +5,16 @@ import Grid from '@/components/Grid/Grid';
 import GridPhoto from '@/components/GridPhoto/GridPhoto';
 import HomeBanner from '@/components/scopes/home/HomeBanner';
 import Section from '@/components/Section/Section';
-import { getPopularPosts, getPosts, getPostsByCategory } from '@/lib/wordpress';
+import { getPopularPosts, getPostsFromCategorySlug } from '@/lib/wordpress';
 
 import styles from './page.module.scss';
 
-const CAT_BEAUTY = 2;
-const CAT_FOOD = 3;
-const CAT_HEALTH = 4;
-
 const Home = async () => {
-  const [posts, beauty, food, health, popular] = await Promise.all([
-    getPosts(),
-    getPostsByCategory(CAT_BEAUTY, 6),
-    getPostsByCategory(CAT_FOOD, 2),
-    getPostsByCategory(CAT_HEALTH, 6),
+  const [beauty, Housing, lifestyle, technology, popular] = await Promise.all([
+    getPostsFromCategorySlug('beauty', 1, 6),
+    getPostsFromCategorySlug('housing', 1, 2),
+    getPostsFromCategorySlug('lifestyle', 1, 6),
+    getPostsFromCategorySlug('technology', 1, 6),
     getPopularPosts(4),
   ]);
 
@@ -28,23 +24,19 @@ const Home = async () => {
         <HomeBanner posts={popular} grid />
 
         <Section title="Beauty">
-          <Grid posts={beauty} />
+          <Grid posts={beauty.posts} />
         </Section>
 
-        <Section title="Food">
-          <Grid posts={food} />
+        <Section title="Technology">
+          <GridPhoto posts={technology.posts} />
         </Section>
 
-        <Section title="Health">
-          <GridPhoto posts={health} />
+        <Section title="Housing">
+          <Grid posts={Housing.posts} />
         </Section>
 
-        <Section title="Health">
-          <Grid posts={posts.slice(0, 2)} />
-        </Section>
-
-        <Section title="Beauty">
-          <Grid posts={beauty} />
+        <Section title="Lifestyle">
+          <Grid posts={lifestyle.posts} />
         </Section>
 
         <div className={styles['see-all']}>

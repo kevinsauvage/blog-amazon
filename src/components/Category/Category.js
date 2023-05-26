@@ -1,9 +1,15 @@
+import Link from 'next/link';
+
 import styles from './Category.module.scss';
 
 const Category = ({ category }) => (
-  <div className={styles.category} style={{ backgroundColor: category.acf?.background_color }}>
+  <Link
+    href={`/category/${category.slug}`}
+    className={styles.category}
+    style={{ backgroundColor: category.acf?.background_color }}
+  >
     {category.name}
-  </div>
+  </Link>
 );
 
 export default Category;

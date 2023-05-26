@@ -24,12 +24,7 @@ const PostBig = ({ post, image }) => {
 
       <div className={styles.content}>
         <div className={styles.categories}>
-          {categories.length > 0 &&
-            categories.slice(0, 2).map((category) => (
-              <Link href={`/category/${category.slug}_${category.id}`} key={category.id}>
-                <Category category={category} />
-              </Link>
-            ))}
+          <Category category={categories[0]} />
         </div>
         <Link href={`/posts/${slug}`}>
           <h2 className={styles.title}>{title}</h2>

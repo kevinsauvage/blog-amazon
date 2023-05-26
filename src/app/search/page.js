@@ -8,7 +8,8 @@ import { getSearch } from '@/lib/wordpress';
 import styles from './page.module.scss';
 
 const search = async (context) => {
-  const { currentPage, posts, totalPosts, query, totalPages } = await getSearch(context);
+  const { q = '', page = 1 } = context?.searchParams || {};
+  const { currentPage, posts, totalPosts, query, totalPages } = await getSearch(q, page);
 
   return (
     <Container>

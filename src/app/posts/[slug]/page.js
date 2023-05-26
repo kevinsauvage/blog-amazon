@@ -1,9 +1,11 @@
 /* eslint-disable react/no-danger */
 import Image from 'next/image';
-import Link from 'next/link';
 
+import Category from '@/components/Category/Category';
 import Container from '@/components/Container/Container';
+import Date from '@/components/Date/Date';
 import RelatedPosts from '@/components/RelatedPosts/RelatedPosts';
+import Views from '@/components/Views/Views';
 import { getPostBySlug } from '@/lib/wordpress';
 
 import styles from './page.module.scss';
@@ -17,6 +19,9 @@ export async function generateMetadata({ params }) {
   const seo = product[0].yoast_head_json;
 
   return {
+    alternates: {
+      canonical: `/posts/${slug}`,
+    },
     description: seo.og_description,
     openGraph: {
       description: seo.og_description,
@@ -40,7 +45,7 @@ export async function generateMetadata({ params }) {
 }
 
 const PostId = async (context) => {
-  const { categories, title, images, content, ID, imageAlt, viewCount } = await getPostBySlug(
+  const { categories, title, images, content, ID, imageAlt, viewCount, date } = await getPostBySlug(
     context
   );
 
@@ -50,23 +55,6 @@ const PostId = async (context) => {
     <Container>
       <main className={styles.main}>
         <article className={styles.article}>
-          <header>
-            <h1>{title}</h1>
-            <div className={styles.categories}>
-              {categories.length > 0 &&
-                categories.slice(0, 2).map((category) => (
-                  <Link
-                    href={`/category/${category.slug}_${category.id}`}
-                    className={styles.category}
-                    key={category.id}
-                    style={{ backgroundColor: category.acf.background_color }}
-                  >
-                    {category.name}
-                  </Link>
-                ))}
-            </div>
-            <span>{viewCount} total view</span>
-          </header>
           <Image
             className={styles.image}
             src={image?.source_url}
@@ -74,7 +62,21 @@ const PostId = async (context) => {
             height={image?.height}
             alt={imageAlt}
           />
-          <div className={styles.content} dangerouslySetInnerHTML={{ __html: content }} />
+          <div className={styles.post}>
+            <h1>{title}</h1>
+            <div className={styles.info}>
+              <div className={styles.categories}>
+                {categories.length > 0 &&
+                  categories
+                    .slice(0, 2)
+                    .map((category) => <Category key={category.id} category={category} />)}
+              </div>
+              <Date date={date} />
+              <Views views={viewCount} />
+            </div>
+
+            <div className={styles.content} dangerouslySetInnerHTML={{ __html: content }} />
+          </div>
         </article>
         <RelatedPosts id={ID} />
       </main>

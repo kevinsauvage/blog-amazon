@@ -40,7 +40,9 @@
     @include text-shorten(2);
   }
 
-  .date {
-    color: var(--on-surface-dark-200);
+  .info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
   }
 }
