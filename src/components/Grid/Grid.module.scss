@@ -6,7 +6,7 @@
 .variant1 {
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 12px;
-  row-gap: 2rem;
+  row-gap: 3rem;
 }
 
 .variant2 {
@@ -87,7 +87,7 @@
     &:nth-child(4) {
       grid-row: span 2;
       grid-column: span 2;
-      max-height: 230px;
+      max-height: 300px;
 
       h2 {
         font-size: 1.3rem;

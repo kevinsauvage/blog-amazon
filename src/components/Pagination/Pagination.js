@@ -4,6 +4,9 @@ import { useCallback } from 'react';
 import Link from 'next/link';
 import { usePathname, useSearchParams } from 'next/navigation';
 
+import IconArrowLeftShort from '@/svg/IconArrowLeftShort';
+import IconArrowRightShort from '@/svg/IconArrowRightShort';
+
 import styles from './Pagination.module.scss';
 
 const Pagination = ({ currentPage, totalPages }) => {
@@ -26,13 +29,15 @@ const Pagination = ({ currentPage, totalPages }) => {
 
   return (
     <nav className={styles.pagination}>
-      {currentPage > 1 ? (
-        <Link href={`${pathname}?${createQueryString('page', Number(currentPage) - 1)}`} passHref>
-          ← Prev
-        </Link>
-      ) : (
-        <span>← Prev</span>
-      )}
+      <div className={`${styles.left} ${styles.item}`}>
+        {currentPage > 1 ? (
+          <Link href={`${pathname}?${createQueryString('page', Number(currentPage) - 1)}`} passHref>
+            <IconArrowLeftShort />
+          </Link>
+        ) : (
+          <IconArrowLeftShort className={styles.disabled} />
+        )}
+      </div>
       {pageArray.map((page) =>
         Number(currentPage) === Number(page) + 1 ? (
           <span key={page} className={`${styles.item} ${styles.active}`}>
@@ -49,13 +54,15 @@ const Pagination = ({ currentPage, totalPages }) => {
           </Link>
         )
       )}
-      {currentPage < totalPages ? (
-        <Link href={`${pathname}?${createQueryString('page', Number(currentPage) + 1)}`} passHref>
-          Next →
-        </Link>
-      ) : (
-        <span>Next →</span>
-      )}
+      <div className={`${styles.right} ${styles.item}`}>
+        {currentPage < totalPages ? (
+          <Link href={`${pathname}?${createQueryString('page', Number(currentPage) + 1)}`} passHref>
+            <IconArrowRightShort />
+          </Link>
+        ) : (
+          <IconArrowRightShort className={styles.disabled} />
+        )}
+      </div>
     </nav>
   );
 };

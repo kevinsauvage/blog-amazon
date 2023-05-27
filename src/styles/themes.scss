@@ -1,9 +1,21 @@
 $surface: #1a2d6b;
-$surface-light: #d9d9d9;
+$surface-light: hsl(0, 0%, 85%);
+$primary-light: #ff1f0b;
+$primary-dark: #c01000;
 
 $colors-dark: (
-  primary: #00f895,
   secondary: #3bfbf5,
+  //primary
+  primary-100: darken($primary-light, 30%),
+  primary-200: darken($primary-light, 15%),
+  primary-300: darken($primary-light, 10%),
+  primary-400: darken($primary-light, 5%),
+  primary-500: $primary-light,
+  primary-600: lighten($primary-light, 5%),
+  primary-700: lighten($primary-light, 10%),
+  primary-800: lighten($primary-light, 15%),
+  primary-900: lighten($primary-light, 30%),
+  // Surface
   surface-100: lighten($surface, 16%),
   surface-200: lighten($surface, 12%),
   surface-300: lighten($surface, 8%),
@@ -13,17 +25,34 @@ $colors-dark: (
   surface-700: darken($surface, 8%),
   surface-800: darken($surface, 12%),
   surface-900: darken($surface, 16%),
+  //On surface
   on-surface-100: lighten($surface, 60%),
   on-surface-200: lighten($surface, 50%),
   on-surface-300: lighten($surface, 40%),
   on-surface-400: lighten($surface, 30%),
   on-surface-500: lighten($surface, 20%),
-  light: white,
+  // Others
+  on-surface-dark-100: #ffffff,
+  on-surface-dark-200: #f7f7f7,
+  on-surface-hight: #111111,
+  on-surface-medium: #373737,
+  on-surface-light: #747474,
+  on-surface-disabled: #6c6c6c,
 );
 
 $colors-light: (
-  primary: #ff1f0b,
   secondary: #42378f,
+  //primary
+  primary-100: darken($primary-light, 30%),
+  primary-200: darken($primary-light, 15%),
+  primary-300: darken($primary-light, 10%),
+  primary-400: darken($primary-light, 5%),
+  primary-500: $primary-light,
+  primary-600: lighten($primary-light, 5%),
+  primary-700: lighten($primary-light, 10%),
+  primary-800: lighten($primary-light, 15%),
+  primary-900: lighten($primary-light, 40%),
+  // surfaces
   surface-100: darken($surface-light, 20%),
   surface-200: darken($surface-light, 15%),
   surface-300: darken($surface-light, 10%),
@@ -33,11 +62,14 @@ $colors-light: (
   surface-700: lighten($surface-light, 6%),
   surface-800: lighten($surface-light, 9%),
   surface-900: lighten($surface-light, 12%),
+  // on surface
   on-surface-100: darken($surface-light, 70%),
   on-surface-200: darken($surface-light, 60%),
   on-surface-300: darken($surface-light, 50%),
   on-surface-400: darken($surface-light, 40%),
   on-surface-500: darken($surface-light, 30%),
+  on-surface-600: darken($surface-light, 20%),
+  // others
   on-surface-dark-100: #ffffff,
   on-surface-dark-200: #f7f7f7,
   on-surface-hight: #111111,

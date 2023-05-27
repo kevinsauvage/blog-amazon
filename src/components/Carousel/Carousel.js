@@ -20,36 +20,40 @@ const Carousel = ({ children, slideClass }) => {
   );
 
   return (
-    <div className={styles.carousel} ref={carouselReference}>
-      <ul
-        className={styles.slides}
-        ref={slidesReference}
-        style={{ transform: `translateX(-${translate}px)` }}
-      >
-        {Children.toArray(
-          children.map((child) => (
-            <li ref={slideReference} className={`${styles.slide} ${slideClass}`}>
-              {child}
-            </li>
-          ))
-        )}
-      </ul>
-      <button
-        type="button"
-        disabled={translate === 0}
-        className={styles['prev-button']}
-        onClick={handlePrevious}
-      >
-        <IconChevronBackOutline />
-      </button>
-      <button
-        type="button"
-        disabled={translate >= maxTranslate}
-        className={styles['next-button']}
-        onClick={handleNext}
-      >
-        <IconChevronForwardOutline />
-      </button>
+    <div className={styles.container}>
+      <div className={styles.carousel} ref={carouselReference}>
+        <ul
+          className={styles.slides}
+          ref={slidesReference}
+          style={{ transform: `translateX(-${translate}px)` }}
+        >
+          {Children.toArray(
+            children.map((child) => (
+              <li ref={slideReference} className={`${styles.slide} ${slideClass}`}>
+                {child}
+              </li>
+            ))
+          )}
+        </ul>
+      </div>
+      <div className={styles.buttons}>
+        <button
+          type="button"
+          disabled={translate === 0}
+          className={styles['prev-button']}
+          onClick={handlePrevious}
+        >
+          <IconChevronBackOutline />
+        </button>
+        <button
+          type="button"
+          disabled={translate >= maxTranslate}
+          className={styles['next-button']}
+          onClick={handleNext}
+        >
+          <IconChevronForwardOutline />
+        </button>
+      </div>
     </div>
   );
 };

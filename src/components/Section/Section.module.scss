@@ -1,8 +1,28 @@
 .section {
-  margin-bottom: 6rem;
+  margin-bottom: 8rem;
+
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+  }
 
   .title {
-    margin-bottom: 1rem;
-    font-size: 1.5rem;
+    position: relative;
+    padding-left: 1rem;
+    font-size: 2rem;
+
+    &::after {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      width: 3px;
+      height: 70%;
+      border-radius: 1rem;
+      background-color: var(--primary-500);
+      transform: translateY(-50%);
+      content: '';
+    }
   }
 }

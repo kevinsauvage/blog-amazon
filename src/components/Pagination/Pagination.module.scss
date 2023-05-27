@@ -8,11 +8,31 @@
   border-radius: var(--radius-1);
   background-color: var(--surface-800);
 
+  .left,
+  .right {
+    display: flex;
+    align-items: center;
+
+    a {
+      display: flex;
+      align-items: center;
+    }
+
+    svg {
+      font-size: 1.7rem;
+    }
+  }
+
   .item {
+    color: var(--on-surface-100);
   }
 
   .active {
     font-weight: 500;
     text-decoration: underline;
+  }
+
+  .disabled {
+    opacity: 0.3;
   }
 }

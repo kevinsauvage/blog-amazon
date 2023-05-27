@@ -10,6 +10,13 @@ export const getPopularPosts = async (count = 10, categorySlug = '') => {
   return formatPosts(data);
 };
 
+export const getStickyPosts = async (perPage = 10, page = 1) => {
+  const URL = `${WORDPRESS_API_URL}/posts?sticky=true&per_page=${perPage}&page=${page}&_embed`;
+  const response = await fetch(URL, { next: { revalidate: REVALIDATE } });
+  const data = await response.json();
+  return formatPosts(data);
+};
+
 export const getSearch = async (query, page, perPage = 9) => {
   const URL = `${WORDPRESS_API_URL}/posts?search=${query}&per_page=${perPage}&page=${page}&_embed`;
   const response = await fetch(URL, { next: { revalidate: REVALIDATE } });

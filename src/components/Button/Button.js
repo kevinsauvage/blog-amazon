@@ -3,17 +3,30 @@ import Link from 'next/link';
 
 import styles from './Button.module.scss';
 
-const Button = ({ href, text, ...rest }) => {
+const Button = ({ href, text, variant = 'primary', ...rest }) => {
+  const getClass = () => {
+    switch (variant) {
+      case 'primary': {
+        return styles.primary;
+      }
+      case 'secondary': {
+        return styles.secondary;
+      }
+      default: {
+        return styles.primary;
+      }
+    }
+  };
   if (href) {
     return (
-      <div className={styles.link}>
-        <Link href={href}>{text}</Link>
-      </div>
+      <Link className={`${styles.link} ${getClass()}`} href={href}>
+        {text}
+      </Link>
     );
   }
 
   return (
-    <button className={styles.button} type="button" {...rest}>
+    <button className={`${styles.button} ${getClass()}`} type="button" {...rest}>
       {text}
     </button>
   );

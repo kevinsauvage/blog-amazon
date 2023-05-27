@@ -1,8 +1,21 @@
 .link,
 .button {
   width: fit-content;
-  margin: 0 auto;
   padding: 0.5rem 1rem;
+  font-weight: 500;
+}
+
+.primary {
+  color: var(--primary-400);
+  background-color: var(--primary-900);
+
+  &:hover {
+    color: white;
+    background-color: var(--primary-300);
+  }
+}
+
+.secondary {
   color: white;
   background-color: black;
 }
