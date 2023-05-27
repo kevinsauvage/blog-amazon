@@ -49,7 +49,7 @@ const PostId = async (context) => {
     context
   );
 
-  const image = images?.large;
+  const image = images?.full;
 
   return (
     <Container>

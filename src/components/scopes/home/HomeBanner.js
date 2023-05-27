@@ -19,7 +19,7 @@ const HomeBanner = ({ posts, grid, slider }) => {
       {slider && (
         <FullWidthSlider>
           {Array.isArray(posts) &&
-            posts.map((post) => <PostBig key={post.ID} post={post} image={post?.images?.large} />)}
+            posts.map((post) => <PostBig key={post.ID} post={post} image={post?.images?.full} />)}
         </FullWidthSlider>
       )}
     </div>

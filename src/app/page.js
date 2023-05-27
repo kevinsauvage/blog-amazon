@@ -1,5 +1,4 @@
-import Link from 'next/link';
-
+import Button from '@/components/Button/Button';
 import Container from '@/components/Container/Container';
 import Grid from '@/components/Grid/Grid';
 import Post from '@/components/Post/Post';
@@ -7,8 +6,6 @@ import PostGrid from '@/components/PostGrid/PostGrid';
 import HomeBanner from '@/components/scopes/home/HomeBanner';
 import Section from '@/components/Section/Section';
 import { getPopularPosts, getPostsFromCategorySlug } from '@/lib/wordpress';
-
-import styles from './page.module.scss';
 
 const Home = async () => {
   const [beauty, housing, lifestyle, technology, popular] = await Promise.all([
@@ -20,9 +17,9 @@ const Home = async () => {
   ]);
 
   return (
-    <main className={styles.main}>
+    <main>
       <Container>
-        <HomeBanner posts={popular} slider />
+        <HomeBanner posts={popular} grid />
 
         <Section title="Out Beauty Articles">
           <Grid>
@@ -37,6 +34,7 @@ const Home = async () => {
                 />
               ))}
           </Grid>
+          <Button href="/category/beauty" text="See more" />
         </Section>
 
         <Section title="Our Technology Articles">
@@ -46,6 +44,7 @@ const Home = async () => {
                 <PostGrid key={post.ID} post={post} image={post.images.large} />
               ))}
           </Grid>
+          <Button href="/category/technology" text="See more" />
         </Section>
 
         <Section title="Our Housing Articles">
@@ -61,6 +60,7 @@ const Home = async () => {
                 />
               ))}
           </Grid>
+          <Button href="/category/housing" text="See more" />
         </Section>
 
         <Section title="Our Lifestyle Articles">
@@ -76,11 +76,8 @@ const Home = async () => {
                 />
               ))}
           </Grid>
+          <Button href="/category/lifestyle" text="See more" />
         </Section>
-
-        <div className={styles['see-all']}>
-          <Link href="/archive">View all posts</Link>
-        </div>
       </Container>
     </main>
   );
