@@ -67,7 +67,18 @@ const categorySlug = async (context) => {
             <h1>{formatString(slug)}</h1>
             <TotalFound total={totalPosts} />
           </header>
-          <Grid posts={posts} fill showCategories={false} />
+          <Grid variant="2">
+            {Array.isArray(posts) &&
+              posts.map((post) => (
+                <Post
+                  key={post.ID}
+                  post={post}
+                  image={post.images.medium_large}
+                  aspect="ratio-5-3"
+                  showCategories={false}
+                />
+              ))}
+          </Grid>
           <Pagination totalPages={totalPages} currentPage={page} />
         </main>
         {Array.isArray(posts) && (

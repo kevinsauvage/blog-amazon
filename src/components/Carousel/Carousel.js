@@ -3,6 +3,8 @@
 import { Children, useRef } from 'react';
 
 import useCarousel from '@/hooks/useCarousel';
+import IconChevronBackOutline from '@/svg/IconChevronBackOutline';
+import IconChevronForwardOutline from '@/svg/IconChevronForwardOutline';
 
 import styles from './Carousel.module.scss';
 
@@ -38,7 +40,7 @@ const Carousel = ({ children, slideClass }) => {
         className={styles['prev-button']}
         onClick={handlePrevious}
       >
-        {'<'}
+        <IconChevronBackOutline />
       </button>
       <button
         type="button"
@@ -46,7 +48,7 @@ const Carousel = ({ children, slideClass }) => {
         className={styles['next-button']}
         onClick={handleNext}
       >
-        {'>'}
+        <IconChevronForwardOutline />
       </button>
     </div>
   );

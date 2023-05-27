@@ -1,6 +1,7 @@
 import Container from '@/components/Container/Container';
 import Grid from '@/components/Grid/Grid';
 import Pagination from '@/components/Pagination/Pagination';
+import Post from '@/components/Post/Post';
 import SearchForm from '@/components/SearchForm/SearchForm';
 import TotalFound from '@/components/TotalFound/TotalFound';
 import { getSearch } from '@/lib/wordpress';
@@ -19,7 +20,18 @@ const search = async (context) => {
           <TotalFound total={totalPosts} />
           <SearchForm query={query} />
         </header>
-        <Grid posts={posts} fill />
+        <Grid variant="2">
+          {Array.isArray(posts) &&
+            posts.map((post) => (
+              <Post
+                key={post.ID}
+                post={post}
+                image={post.images.medium_large}
+                aspect="ratio-5-3"
+                showCategories
+              />
+            ))}
+        </Grid>
         <Pagination totalPages={totalPages} currentPage={currentPage} />
       </main>
     </Container>

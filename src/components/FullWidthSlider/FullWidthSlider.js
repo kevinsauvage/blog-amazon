@@ -2,6 +2,9 @@
 
 import { Children, useCallback, useState } from 'react';
 
+import IconChevronBackOutline from '@/svg/IconChevronBackOutline';
+import IconChevronForwardOutline from '@/svg/IconChevronForwardOutline';
+
 import styles from './FullWidthSlider.module.scss';
 
 const FullWidthSlider = ({ children }) => {
@@ -47,14 +50,14 @@ const FullWidthSlider = ({ children }) => {
         className={`${styles['prev-button']} `}
         onClick={() => updateActive(page - 1)}
       >
-        {'<'}
+        <IconChevronBackOutline />
       </button>
       <button
         type="button"
         className={`${styles['next-button']}`}
         onClick={() => updateActive(page + 1)}
       >
-        {'>'}
+        <IconChevronForwardOutline />
       </button>
     </div>
   );
