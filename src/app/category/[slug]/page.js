@@ -2,6 +2,7 @@ import Breadcrumb from '@/components/Breadcrumb/Breadcrumb';
 import Container from '@/components/Container/Container';
 import Grid from '@/components/Grid/Grid';
 import Pagination from '@/components/Pagination/Pagination';
+import Post from '@/components/Post/Post';
 import PostBanner from '@/components/PostBanner/PostBanner';
 import TotalFound from '@/components/TotalFound/TotalFound';
 import { getCategoryBannerPost, getPopularPosts, getPostsFromCategorySlug } from '@/lib/wordpress';
@@ -69,10 +70,23 @@ const categorySlug = async (context) => {
           <Grid posts={posts} fill showCategories={false} />
           <Pagination totalPages={totalPages} currentPage={page} />
         </main>
-        <aside className={styles.aside}>
-          <h3>Recommended</h3>
-          <Grid posts={popular} showCategories={false} />
-        </aside>
+        {Array.isArray(posts) && (
+          <aside className={styles.aside}>
+            <h3>Recommended</h3>
+            <ul className={`${styles.list}`}>
+              {popular.map((post) => (
+                <li key={post.ID}>
+                  <Post
+                    post={post}
+                    image={post.images.medium_large}
+                    aspect="ratio-5-3"
+                    showCategories={false}
+                  />
+                </li>
+              ))}
+            </ul>
+          </aside>
+        )}
       </div>
     </Container>
   );

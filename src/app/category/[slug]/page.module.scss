@@ -1,18 +1,35 @@
 .wrapper {
   display: grid;
+  margin-top: 2rem;
   gap: 2rem;
   grid-template-columns: 3fr 1fr;
 
   .main {
     header {
-      margin: 3rem 0;
+      padding: 1rem 2rem;
+      margin-bottom: 3rem;
+      background-color: var(--surface-800);
+
+      h1 {
+        font-size: 3rem;
+        line-height: 1;
+      }
     }
   }
 
   .aside {
-    margin-top: 2rem;
+    height: fit-content;
+    padding: 1rem;
+    background-color: var(--surface-800);
+
     h3 {
       margin-bottom: 1rem;
+    }
+
+    .list {
+      display: flex;
+      flex-direction: column;
+      gap: 3rem;
     }
   }
 }

@@ -11,6 +11,10 @@ $cellHeigth: 190px;
     &:nth-child(1) {
       grid-column: span 2;
       grid-row: span 3;
+
+      h2 {
+        font-size: 2rem;
+      }
     }
 
     &:nth-child(2),
@@ -19,6 +23,10 @@ $cellHeigth: 190px;
       max-height: $cellHeigth;
       grid-column: span 1;
       grid-row: span 1;
+
+      h2 {
+        font-size: 1.3rem;
+      }
     }
   }
 }
