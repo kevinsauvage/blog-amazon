@@ -1,11 +1,11 @@
 .post {
   position: relative;
   display: flex;
-  overflow: hidden;
-  width: 100%;
-  height: 100%;
   flex-direction: column;
   align-items: stretch;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
   border-radius: var(--radius-1);
   background-color: var(--surface-900);
 
@@ -38,11 +38,11 @@
 
   .content {
     position: absolute;
-    z-index: 1;
     bottom: 3rem;
     left: 3rem;
-    max-width: 650px;
+    z-index: 1;
     flex-grow: 1;
+    max-width: 650px;
     padding: 0.5rem 1rem 1rem 1rem;
   }
 
@@ -53,13 +53,14 @@
   .title {
     margin-bottom: 0.5rem;
     color: var(--on-surface-dark-100);
-    font-size: 2rem;
     font-weight: 500;
+    font-size: 2rem;
     @include text-shorten(3);
   }
 
   .excerpt {
     @include text-shorten(3);
+
     color: var(--on-surface-dark-200);
     font-size: 1rem;
   }

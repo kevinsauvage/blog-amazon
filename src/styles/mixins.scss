@@ -34,16 +34,16 @@
 
 @mixin text-shorten($numLines: 1) {
   overflow: hidden;
-  text-overflow: ellipsis;
   white-space: nowrap;
+  text-overflow: ellipsis;
 
   @supports (-webkit-line-clamp: $numLines) {
     display: -webkit-box;
     overflow: hidden;
+    white-space: initial;
+    text-overflow: ellipsis;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: $numLines;
-    text-overflow: ellipsis;
-    white-space: initial;
   }
 }
 

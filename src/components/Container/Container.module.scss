@@ -1,8 +1,8 @@
 .container {
   width: 100%;
   max-width: 1440px;
-  padding: 0 5rem;
   margin: 0 auto;
+  padding: 0 5rem;
 
   @include respond(tablet) {
     padding: 0 4rem;

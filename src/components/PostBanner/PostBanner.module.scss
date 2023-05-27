@@ -15,20 +15,20 @@
 
   .content {
     position: absolute;
-    z-index: 3;
     bottom: 3rem;
     left: 3rem;
+    z-index: 3;
     max-width: 500px;
     padding: 1.5rem 2rem;
+    background: rgba(var(--rgb-surface-900), 0.7);
     -webkit-backdrop-filter: blur(5.5px);
     backdrop-filter: blur(5.5px);
-    background: rgba(var(--rgb-surface-900), 0.7);
 
     .title {
       margin-top: 1rem;
       margin-bottom: 1rem;
-      font-size: 1.9rem;
       font-weight: 600;
+      font-size: 1.9rem;
       line-height: 1.1;
     }
   }

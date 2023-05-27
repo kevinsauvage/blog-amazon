@@ -1,8 +1,8 @@
 .header {
   display: flex;
-  height: $headerHeight;
   align-items: center;
   justify-content: space-between;
+  height: $headerHeight;
   border-bottom: 1px solid var(--on-surface-500);
 
   .wrapper {
