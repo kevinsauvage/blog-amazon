@@ -11,6 +11,7 @@ import styles from './PostGrid.module.scss';
 
 const PostGrid = ({ post, image }) => {
   const { slug, categories, title, imageAlt, date, viewCount } = post;
+  const postLink = `/category/${categories[0].slug}/${slug}`;
 
   return (
     <div className={styles.post}>
@@ -26,7 +27,7 @@ const PostGrid = ({ post, image }) => {
         <Category category={categories[0]} />
       </div>
       <div className={styles.content}>
-        <Link href={`/posts/${slug}`}>
+        <Link href={postLink}>
           <h2 className={styles.title}>{title}</h2>
         </Link>
         <div className={styles.info}>

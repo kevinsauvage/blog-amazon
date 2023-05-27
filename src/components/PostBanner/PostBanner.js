@@ -15,6 +15,8 @@ const PostBanner = ({ post }) => {
   const image = images?.full;
   const category = categories?.[0];
 
+  const postLink = `/category/${category.slug}/${slug}`;
+
   return (
     <div className={styles.banner}>
       <Image
@@ -26,7 +28,7 @@ const PostBanner = ({ post }) => {
       />
       <div className={styles.content}>
         <Category category={{ ...category, name: 'Featured' }} />
-        <Link href={`/posts/${slug}`}>
+        <Link href={postLink}>
           <h2 className={styles.title}>{title}</h2>
         </Link>
         <div className={styles.info}>

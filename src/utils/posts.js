@@ -12,4 +12,5 @@ export const formatPost = (post) => ({
   viewCount: post?.acf?.view_count || 0,
 });
 
-export const formatPosts = (posts) => posts.map((post) => formatPost(post));
+export const formatPosts = (posts) =>
+  Array.isArray(posts) ? posts?.map((post) => formatPost(post)) : [];

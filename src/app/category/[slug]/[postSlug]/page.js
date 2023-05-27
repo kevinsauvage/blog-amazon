@@ -13,15 +13,14 @@ import styles from './page.module.scss';
 const { WORDPRESS_API_URL } = process.env;
 
 export async function generateMetadata({ params }) {
-  const { slug } = params;
-  const URL = `${WORDPRESS_API_URL}/posts?slug=${slug}&_embed`;
+  console.log('🚀 ~  file: page.js:17 ~  generateMetadata ~  params:', params);
+
+  const { postSlug } = params;
+  const URL = `${WORDPRESS_API_URL}/posts?slug=${postSlug}&_embed`;
   const product = await fetch(URL).then((response) => response.json());
   const seo = product[0].yoast_head_json;
 
   return {
-    alternates: {
-      canonical: `/posts/${slug}`,
-    },
     description: seo.og_description,
     openGraph: {
       description: seo.og_description,
@@ -45,8 +44,12 @@ export async function generateMetadata({ params }) {
 }
 
 const PostId = async (context) => {
+  const {
+    params: { postSlug },
+  } = context;
+
   const { categories, title, images, content, ID, imageAlt, viewCount, date } = await getPostBySlug(
-    context
+    postSlug
   );
 
   const image = images?.full;

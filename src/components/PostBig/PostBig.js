@@ -9,10 +9,10 @@ import styles from './PostBig.module.scss';
 
 const PostBig = ({ post, image }) => {
   const { slug, categories, excerpt, title, imageAlt } = post;
-
+  const postLink = `/category/${categories[0].slug}/${slug}`;
   return (
     <article className={styles.post}>
-      <Link href={`/posts/${slug}`}>
+      <Link href={postLink}>
         <Image
           className={`${styles.image}`}
           src={image.source_url}
@@ -26,7 +26,7 @@ const PostBig = ({ post, image }) => {
         <div className={styles.categories}>
           <Category category={categories[0]} />
         </div>
-        <Link href={`/posts/${slug}`}>
+        <Link href={postLink}>
           <h2 className={styles.title}>{title}</h2>
         </Link>
         <div className={styles.excerpt} dangerouslySetInnerHTML={{ __html: excerpt }} />

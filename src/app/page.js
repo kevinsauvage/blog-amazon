@@ -5,7 +5,7 @@ import Post from '@/components/Post/Post';
 import PostGrid from '@/components/PostGrid/PostGrid';
 import HomeBanner from '@/components/scopes/home/HomeBanner';
 import Section from '@/components/Section/Section';
-import { getPopularPosts, getPostsFromCategorySlug, getStickyPosts } from '@/lib/wordpress';
+import { getPopularPosts, getPosts, getPostsFromCategorySlug } from '@/lib/wordpress';
 
 const Home = async () => {
   const [beauty, housing, lifestyle, technology, sticky, popular] = await Promise.all([
@@ -13,7 +13,7 @@ const Home = async () => {
     getPostsFromCategorySlug('housing', 1, 3),
     getPostsFromCategorySlug('lifestyle', 1, 8),
     getPostsFromCategorySlug('technology', 1, 6),
-    getStickyPosts(3),
+    getPosts(3, 1, true),
     getPopularPosts(10),
   ]);
 
