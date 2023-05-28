@@ -13,8 +13,6 @@ import styles from './page.module.scss';
 const { WORDPRESS_API_URL } = process.env;
 
 export async function generateMetadata({ params }) {
-  console.log('🚀 ~  file: page.js:17 ~  generateMetadata ~  params:', params);
-
   const { postSlug } = params;
   const URL = `${WORDPRESS_API_URL}/posts?slug=${postSlug}&_embed`;
   const product = await fetch(URL).then((response) => response.json());

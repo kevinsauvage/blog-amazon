@@ -5,17 +5,19 @@ import Pagination from '@/components/Pagination/Pagination';
 import Post from '@/components/Post/Post';
 import PostBanner from '@/components/PostBanner/PostBanner';
 import TotalFound from '@/components/TotalFound/TotalFound';
-import { getCategoryBannerPost, getPopularPosts, getPostsFromCategorySlug } from '@/lib/wordpress';
+import {
+  getCategoryBannerPost,
+  getCategoryBySlug,
+  getPopularPosts,
+  getPosts,
+} from '@/lib/wordpress';
 import { formatString } from '@/utils/strings';
 
 import styles from './page.module.scss';
 
-const { WORDPRESS_API_URL } = process.env;
-
 export async function generateMetadata({ params }) {
   const { slug } = params;
-  const URL = `${WORDPRESS_API_URL}/categories?slug=${slug}&_embed`;
-  const category = await fetch(URL).then((response) => response.json());
+  const category = await getCategoryBySlug(slug);
   const seo = category[0].yoast_head_json;
 
   return {
@@ -44,18 +46,23 @@ export async function generateMetadata({ params }) {
   };
 }
 
+const getData = async (slug, page) => {
+  const category = await getCategoryBySlug(slug);
+  return getPosts({ categories: category[0].id, page, perPage: 8 });
+};
+
 const categorySlug = async (context) => {
   const { params, searchParams } = context;
   const { page = 1 } = searchParams || {};
   const { slug } = params;
 
   const [postsResponse, bannerPost, popular] = await Promise.all([
-    getPostsFromCategorySlug(slug, page, 8),
+    getData(slug, page),
     getCategoryBannerPost(slug),
     getPopularPosts(4, slug),
   ]);
 
-  const { posts, totalPages, totalPosts } = postsResponse;
+  const { posts, totalPages, totalPosts } = postsResponse || {};
 
   return (
     <Container>
@@ -67,9 +74,9 @@ const categorySlug = async (context) => {
             <h1>{formatString(slug)}</h1>
             <TotalFound total={totalPosts} />
           </header>
-          <Grid variant="2">
-            {Array.isArray(posts) &&
-              posts.map((post) => (
+          {Array.isArray(posts) && (
+            <Grid variant="2">
+              {posts.map((post) => (
                 <Post
                   key={post.ID}
                   post={post}
@@ -78,7 +85,8 @@ const categorySlug = async (context) => {
                   showCategories={false}
                 />
               ))}
-          </Grid>
+            </Grid>
+          )}
           <Pagination totalPages={totalPages} currentPage={page} />
         </main>
         {Array.isArray(posts) && (

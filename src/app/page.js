@@ -5,22 +5,27 @@ import Post from '@/components/Post/Post';
 import PostGrid from '@/components/PostGrid/PostGrid';
 import HomeBanner from '@/components/scopes/home/HomeBanner';
 import Section from '@/components/Section/Section';
-import { getPopularPosts, getPosts, getPostsFromCategorySlug } from '@/lib/wordpress';
+import { getPopularPosts, getPosts } from '@/lib/wordpress';
+
+const CAT_BEAUTY = 2;
+const CAT_HOUSING = 5;
+const CAT_LIFESTYLE = 7;
+const CAT_TECHNOLOGY = 1;
 
 const Home = async () => {
   const [beauty, housing, lifestyle, technology, sticky, popular] = await Promise.all([
-    getPostsFromCategorySlug('beauty', 1, 8),
-    getPostsFromCategorySlug('housing', 1, 3),
-    getPostsFromCategorySlug('lifestyle', 1, 8),
-    getPostsFromCategorySlug('technology', 1, 6),
-    getPosts(3, 1, true),
+    getPosts({ categories: CAT_BEAUTY, perPage: 8 }),
+    getPosts({ categories: CAT_HOUSING, perPage: 3 }),
+    getPosts({ categories: CAT_LIFESTYLE, perPage: 8 }),
+    getPosts({ categories: CAT_TECHNOLOGY, perPage: 6 }),
+    getPosts({ perPage: 3, stycky: true }),
     getPopularPosts(10),
   ]);
 
   return (
     <main>
       <Container>
-        <HomeBanner posts={sticky} grid />
+        <HomeBanner posts={sticky?.posts} grid />
 
         <Section title="Most Popular Articles">
           <CarouselPosts posts={popular} aspect="ratio-16-9" />

@@ -1,17 +1,15 @@
 .header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: $headerHeight;
   border-bottom: 1px solid var(--on-surface-500);
 
   .wrapper {
     display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 3rem;
+    height: $headerHeight;
   }
 
   .logo {
-    margin-right: 2rem;
-
     strong {
       @include font-size(1.2rem, 2rem);
     }
