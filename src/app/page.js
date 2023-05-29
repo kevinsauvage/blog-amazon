@@ -43,6 +43,15 @@ const Home = async () => {
           </Grid>
         </Section>
 
+        <Section title="Our Technology Articles" buttonUrl="/category/technology">
+          <Grid variant="3">
+            {Array.isArray(technology.posts) &&
+              technology.posts.map((post) => (
+                <PostGrid key={post.ID} post={post} image={post.images.large} />
+              ))}
+          </Grid>
+        </Section>
+
         <Section title="Our Beauty Articles" buttonUrl="/category/beauty">
           <Grid variant="1">
             {Array.isArray(beauty.posts) &&
@@ -58,26 +67,11 @@ const Home = async () => {
           </Grid>
         </Section>
 
-        <Section title="Our Technology Articles" buttonUrl="/category/technology">
-          <Grid variant="3">
-            {Array.isArray(technology.posts) &&
-              technology.posts.map((post) => (
-                <PostGrid key={post.ID} post={post} image={post.images.large} />
-              ))}
-          </Grid>
-        </Section>
-
         <Section title="Our Housing Articles" buttonUrl="/category/housing">
-          <Grid variant="1">
+          <Grid variant="3">
             {Array.isArray(housing.posts) &&
               housing.posts.map((post) => (
-                <Post
-                  key={post.ID}
-                  post={post}
-                  image={post.images.medium_large}
-                  aspect="ratio-5-3"
-                  showCategories
-                />
+                <PostGrid key={post.ID} post={post} image={post.images.large} />
               ))}
           </Grid>
         </Section>
