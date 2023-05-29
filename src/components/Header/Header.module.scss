@@ -1,17 +1,49 @@
 .header {
-  border-bottom: 1px solid var(--on-surface-500);
+  position: relative;
+  z-index: 100;
+  background-color: var(--surface-900);
 
   .wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    position: relative;
+    z-index: 100;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-content: center;
     gap: 3rem;
     height: $headerHeight;
+    border-bottom: $border-light;
+    background-color: var(--surface-900);
   }
 
   .logo {
     strong {
-      @include font-size(1.2rem, 2rem);
+      @include font-size(2rem, 2.2rem);
     }
+  }
+
+  .menu,
+  .search {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    width: fit-content;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+
+    svg {
+      font-size: 1.6rem;
+    }
+
+    p {
+      font-weight: 500;
+      font-size: 0.9rem;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+    }
+  }
+
+  .search {
+    margin-left: auto;
   }
 }

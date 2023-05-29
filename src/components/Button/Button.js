@@ -1,9 +1,10 @@
+/* eslint-disable react/button-has-type */
 import React from 'react';
 import Link from 'next/link';
 
 import styles from './Button.module.scss';
 
-const Button = ({ href, text, variant = 'primary', ...rest }) => {
+const Button = ({ href, text, type = 'button', variant = 'primary', className = '', ...rest }) => {
   const getClass = () => {
     switch (variant) {
       case 'primary': {
@@ -19,14 +20,14 @@ const Button = ({ href, text, variant = 'primary', ...rest }) => {
   };
   if (href) {
     return (
-      <Link className={`${styles.link} ${getClass()}`} href={href}>
+      <Link className={`${styles.link}  ${getClass()} ${className}`} href={href}>
         {text}
       </Link>
     );
   }
 
   return (
-    <button className={`${styles.button} ${getClass()}`} type="button" {...rest}>
+    <button className={`${styles.button}  ${getClass()} ${className}`} type={type} {...rest}>
       {text}
     </button>
   );

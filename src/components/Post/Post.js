@@ -10,7 +10,7 @@ import Views from '../Views/Views';
 import styles from './Post.module.scss';
 
 const Post = ({ post, aspect = 'ratio-5-3', image, showCategories = true }) => {
-  const { slug, categories, excerpt, title, imageAlt, date, viewCount } = post;
+  const { slug, categories, title, imageAlt, date, viewCount } = post;
 
   const postLink = `/category/${categories[0].slug}/${slug}`;
 
@@ -27,19 +27,14 @@ const Post = ({ post, aspect = 'ratio-5-3', image, showCategories = true }) => {
       </Link>
 
       <div className={styles.content}>
-        {showCategories && (
-          <div className={styles.categories}>
-            <Category category={categories[0]} />
-          </div>
-        )}
+        <div className={styles.header}>
+          {showCategories && <Category category={categories[0]} />}
+          <Date date={date} />
+          <Views views={viewCount} />
+        </div>
         <Link href={postLink}>
           <h2 className={styles.title}>{title}</h2>
         </Link>
-        <div className={styles.excerpt} dangerouslySetInnerHTML={{ __html: excerpt }} />
-        <footer className={styles.footer}>
-          <Date date={date} />
-          <Views views={viewCount} />
-        </footer>
       </div>
     </article>
   );

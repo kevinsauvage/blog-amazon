@@ -6,9 +6,11 @@ import Container from '@/components/Container/Container';
 import Date from '@/components/Date/Date';
 import RelatedPosts from '@/components/RelatedPosts/RelatedPosts';
 import Views from '@/components/Views/Views';
-import { getPostBySlug } from '@/lib/wordpress';
+import wordpressApiCalls from '@/lib/wordpress/index';
 
 import styles from './page.module.scss';
+
+const { getPostBySlug } = wordpressApiCalls;
 
 const { WORDPRESS_API_URL } = process.env;
 

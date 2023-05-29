@@ -1,9 +1,10 @@
 .item {
+  width: fit-content;
   font-weight: 500;
-  font-size: 0.95rem;
+  font-size: 1.1rem;
 }
 
 .active {
-  color: red;
+  color: var(--primary-500);
   text-decoration: underline;
 }

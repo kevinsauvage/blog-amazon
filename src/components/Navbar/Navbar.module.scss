@@ -1,11 +1,16 @@
 .navbar {
   display: flex;
-  align-items: center;
-  width: fit-content;
+  flex-direction: column;
+
+  .title {
+    margin-bottom: 2rem;
+    color: var(--on-surface-500);
+    font-size: 1rem;
+  }
 
   .list {
     display: flex;
-    align-items: center;
-    gap: 2rem;
+    flex-direction: column;
+    gap: 1rem;
   }
 }

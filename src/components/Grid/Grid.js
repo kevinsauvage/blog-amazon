@@ -7,6 +7,7 @@ import styles from './Grid.module.scss';
 // Variant 3 - From 4 items to 8 items
 // Variant 4 - 4 items
 // Variant 5 - 3 items
+// Variant 6 - 5 items
 
 const Grid = ({ children, variant = '1', ...rest }) => {
   const getClass = () => {
@@ -25,6 +26,9 @@ const Grid = ({ children, variant = '1', ...rest }) => {
       }
       case '5': {
         return styles.variant5;
+      }
+      case '6': {
+        return styles.variant6;
       }
       default: {
         return styles.variant1;

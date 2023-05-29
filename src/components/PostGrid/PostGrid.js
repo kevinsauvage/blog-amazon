@@ -23,10 +23,10 @@ const PostGrid = ({ post, image }) => {
         alt={imageAlt}
       />
 
-      <div className={styles.categories}>
-        <Category category={categories[0]} />
-      </div>
       <div className={styles.content}>
+        <div className={styles.categories}>
+          <Category category={categories[0]} />
+        </div>
         <Link href={postLink}>
           <h2 className={styles.title}>{title}</h2>
         </Link>

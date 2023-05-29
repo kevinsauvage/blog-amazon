@@ -4,9 +4,11 @@ import Pagination from '@/components/Pagination/Pagination';
 import Post from '@/components/Post/Post';
 import SearchForm from '@/components/SearchForm/SearchForm';
 import TotalFound from '@/components/TotalFound/TotalFound';
-import { getPosts } from '@/lib/wordpress';
+import wordpressApiCalls from '@/lib/wordpress/index';
 
 import styles from './page.module.scss';
+
+const { getPosts } = wordpressApiCalls;
 
 const search = async (context) => {
   const { q = '', page = 1 } = context?.searchParams || {};

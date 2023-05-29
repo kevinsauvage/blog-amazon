@@ -1,13 +1,27 @@
 .link,
 .button {
-  width: fit-content;
-  padding: 0.5rem 1rem;
+  display: block;
+  width: 100%;
+  padding: 1rem;
+  border-radius: $radius1;
   font-weight: 500;
+  font-size: 1.1rem;
+}
+
+.button {
+  border: none;
+  cursor: pointer;
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .primary {
-  color: var(--primary-400);
-  background-color: var(--primary-900);
+  color: white;
+  background-color: black;
 
   &:hover {
     color: white;

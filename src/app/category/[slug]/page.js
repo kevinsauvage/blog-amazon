@@ -5,15 +5,12 @@ import Pagination from '@/components/Pagination/Pagination';
 import Post from '@/components/Post/Post';
 import PostBanner from '@/components/PostBanner/PostBanner';
 import TotalFound from '@/components/TotalFound/TotalFound';
-import {
-  getCategoryBannerPost,
-  getCategoryBySlug,
-  getPopularPosts,
-  getPosts,
-} from '@/lib/wordpress';
+import wordpressApiCalls from '@/lib/wordpress/index';
 import { formatString } from '@/utils/strings';
 
 import styles from './page.module.scss';
+
+const { getCategoryBannerPost, getCategoryBySlug, getPopularPosts, getPosts } = wordpressApiCalls;
 
 export async function generateMetadata({ params }) {
   const { slug } = params;

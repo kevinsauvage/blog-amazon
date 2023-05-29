@@ -8,6 +8,7 @@
     header {
       margin-bottom: 3rem;
       padding: 1rem 2rem;
+      border-radius: $radius1;
       background-color: var(--surface-800);
 
       h1 {
@@ -20,6 +21,7 @@
   .aside {
     height: fit-content;
     padding: 1rem;
+    border-radius: $radius1;
     background-color: var(--surface-800);
 
     h3 {

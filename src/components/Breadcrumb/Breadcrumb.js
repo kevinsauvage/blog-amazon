@@ -9,9 +9,13 @@ import styles from './Breadcrumb.module.scss';
 
 const Breadcrumb = () => {
   const pathname = usePathname();
+  const blacklist = new Set(['category']);
 
   // Split the current URL path into segments
-  const segments = pathname.split('/').filter(Boolean);
+  const segments = pathname
+    .split('/')
+    .filter(Boolean)
+    .filter((item) => !blacklist.has(item));
 
   return (
     <nav>

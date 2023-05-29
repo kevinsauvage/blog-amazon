@@ -1,7 +1,3 @@
-'use client';
-
-import { useEffect, useState } from 'react';
-
 import { formatPosts } from '@/utils/posts';
 
 import CarouselPosts from '../CarouselPosts/CarouselPosts';
@@ -10,15 +6,20 @@ import styles from './RelatedPosts.module.scss';
 
 const endpoint = process.env.NEXT_PUBLIC_YARP_ENDPOINT;
 
-const RelatedPosts = ({ id }) => {
-  const [posts, setPosts] = useState([]);
-
-  useEffect(() => {
+const getRelatedPosts = async (id) => {
+  try {
     if (!id) return;
-    fetch(`${endpoint}/${id}?_embed&limit=20`)
-      .then((response) => response.json())
-      .then((dataJson) => setPosts(formatPosts(dataJson)));
-  }, [id]);
+    const url = `${endpoint}/${id}?_embed&limit=20`;
+    const response = await fetch(url);
+    const data = await response.json();
+    return formatPosts(data);
+  } catch (error) {
+    console.error(error.stack);
+  }
+};
+
+const RelatedPosts = async ({ id }) => {
+  const posts = await getRelatedPosts(id);
 
   if (posts.length === 0) return;
 
