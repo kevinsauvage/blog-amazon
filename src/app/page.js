@@ -32,13 +32,7 @@ const Home = async () => {
           <Grid variant="1">
             {Array.isArray(popular) &&
               popular.map((post) => (
-                <Post
-                  key={post.ID}
-                  post={post}
-                  image={post.images.medium_large}
-                  aspect="ratio-5-3"
-                  showCategories
-                />
+                <Post key={post.ID} post={post} image={post.images.medium_large} showCategories />
               ))}
           </Grid>
         </Section>
@@ -56,13 +50,7 @@ const Home = async () => {
           <Grid variant="1">
             {Array.isArray(beauty.posts) &&
               beauty.posts.map((post) => (
-                <Post
-                  key={post.ID}
-                  post={post}
-                  image={post.images.medium_large}
-                  aspect="ratio-5-3"
-                  showCategories
-                />
+                <Post key={post.ID} post={post} image={post.images.medium_large} showCategories />
               ))}
           </Grid>
         </Section>
@@ -80,13 +68,7 @@ const Home = async () => {
           <Grid variant="1">
             {Array.isArray(lifestyle.posts) &&
               lifestyle.posts.map((post) => (
-                <Post
-                  key={post.ID}
-                  post={post}
-                  image={post.images.medium_large}
-                  aspect="ratio-5-3"
-                  showCategories
-                />
+                <Post key={post.ID} post={post} image={post.images.medium_large} showCategories />
               ))}
           </Grid>
         </Section>
