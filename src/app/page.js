@@ -27,6 +27,7 @@ const Home = async () => {
     <main>
       <Container>
         <HomeBanner posts={sticky?.posts} grid />
+
         <Section title="Most Popular Articles">
           <Grid variant="1">
             {Array.isArray(popular) &&
@@ -42,7 +43,7 @@ const Home = async () => {
           </Grid>
         </Section>
 
-        <Section title="Out Beauty Articles" buttonUrl="/category/beauty">
+        <Section title="Our Beauty Articles" buttonUrl="/category/beauty">
           <Grid variant="1">
             {Array.isArray(beauty.posts) &&
               beauty.posts.map((post) => (
