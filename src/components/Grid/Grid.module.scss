@@ -11,7 +11,7 @@
 
 .variant2 {
   grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
-  row-gap: 2rem;
+  row-gap: 3rem;
 }
 
 .variant3 {
@@ -25,6 +25,10 @@
     &:nth-child(5),
     &:nth-child(8) {
       grid-column: span 2;
+
+      h2 {
+        max-width: 500px;
+      }
     }
 
     &:nth-child(2),
@@ -46,6 +50,7 @@
       grid-column: span 2;
 
       h2 {
+        max-width: 500px;
         font-size: 2rem;
       }
     }
@@ -58,7 +63,7 @@
       max-height: 190px;
 
       h2 {
-        font-size: 1.3rem;
+        font-size: 1.5rem;
       }
     }
   }
@@ -69,13 +74,13 @@
   grid-template-columns: repeat(4, 1fr);
 
   li {
+    h2 {
+      max-width: 500px;
+    }
+
     &:nth-child(1) {
       grid-row: span 4;
       grid-column: span 2;
-
-      h2 {
-        font-size: 2rem;
-      }
     }
 
     &:nth-child(2),
@@ -84,10 +89,6 @@
       grid-row: span 2;
       grid-column: span 2;
       max-height: 300px;
-
-      h2 {
-        font-size: 1.3rem;
-      }
     }
   }
 }
@@ -96,10 +97,6 @@
   grid-template-columns: repeat(6, 1fr);
 
   li {
-    h2 {
-      font-size: 2rem;
-    }
-
     &:nth-child(1),
     &:nth-child(2),
     &:nth-child(3) {

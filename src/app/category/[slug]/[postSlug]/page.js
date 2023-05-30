@@ -66,7 +66,6 @@ const PostId = async (context) => {
             alt={imageAlt}
           />
           <div className={styles.post}>
-            <h1>{title}</h1>
             <div className={styles.info}>
               <div className={styles.categories}>
                 {categories.length > 0 &&
@@ -77,6 +76,7 @@ const PostId = async (context) => {
               <Date date={date} />
               <Views views={viewCount} />
             </div>
+            <h1>{title}</h1>
 
             <div className={styles.content} dangerouslySetInnerHTML={{ __html: content }} />
           </div>

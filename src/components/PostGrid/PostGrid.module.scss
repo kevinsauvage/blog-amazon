@@ -30,11 +30,11 @@
   }
 
   .title {
-    max-width: 400px;
     margin-bottom: 0.5rem;
     color: var(--on-surface-dark-100);
     font-weight: 500;
     font-size: 1.5rem;
+    line-height: 1.1;
 
     @include text-shorten(2);
   }
