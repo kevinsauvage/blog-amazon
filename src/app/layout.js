@@ -12,14 +12,14 @@ export const sourceSansPro = SourceSansPro({
   display: 'swap',
   subsets: ['latin'],
   variable: '--source-sans-pro-font',
-  weight: ['400'],
+  weight: ['400', '300', '600'],
 });
 
 export const poppins = Poppins({
   display: 'swap',
   subsets: ['latin'],
   variable: '--poppins-font',
-  weight: ['700', '800', '900'],
+  weight: ['700', '800'],
 });
 
 export const metadata = {
