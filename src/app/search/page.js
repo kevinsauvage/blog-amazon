@@ -1,3 +1,4 @@
+import Breadcrumb from '@/components/Breadcrumb/Breadcrumb';
 import Container from '@/components/Container/Container';
 import Grid from '@/components/Grid/Grid';
 import Pagination from '@/components/Pagination/Pagination';
@@ -20,6 +21,7 @@ const search = async (context) => {
 
   return (
     <Container>
+      <Breadcrumb />
       <main className={styles.main}>
         <header>
           <h1>Search Results</h1>

@@ -8,6 +8,10 @@
   height: 100%;
   overflow: hidden;
 
+  &:hover {
+    transform: scale(1.01);
+  }
+
   .image {
     position: relative;
     display: block;

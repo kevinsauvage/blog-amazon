@@ -1,6 +1,7 @@
 /* eslint-disable react/no-danger */
 import Image from 'next/image';
 
+import Breadcrumb from '@/components/Breadcrumb/Breadcrumb';
 import Category from '@/components/Category/Category';
 import Container from '@/components/Container/Container';
 import Date from '@/components/Date/Date';
@@ -56,6 +57,7 @@ const PostId = async (context) => {
 
   return (
     <Container>
+      <Breadcrumb last={title} />
       <main className={styles.main}>
         <article className={styles.article}>
           <Image

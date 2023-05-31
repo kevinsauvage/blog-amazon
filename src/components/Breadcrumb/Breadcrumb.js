@@ -7,15 +7,12 @@ import IconChevronForwardOutline from '@/svg/IconChevronForwardOutline';
 
 import styles from './Breadcrumb.module.scss';
 
-const Breadcrumb = () => {
+const Breadcrumb = ({ last }) => {
   const pathname = usePathname();
   const blacklist = new Set(['category']);
 
   // Split the current URL path into segments
-  const segments = pathname
-    .split('/')
-    .filter(Boolean)
-    .filter((item) => !blacklist.has(item));
+  const segments = pathname.split('/').filter(Boolean);
 
   return (
     <nav>
@@ -33,15 +30,17 @@ const Breadcrumb = () => {
           const isLastSegment = index === segments.length - 1;
 
           return (
-            <li key={segment} className={styles.item}>
-              {isLastSegment ? (
-                <span>{segment}</span>
-              ) : (
-                <Link href={path}>
-                  {segment} <IconChevronForwardOutline />
-                </Link>
-              )}
-            </li>
+            !blacklist.has(segment) && (
+              <li key={segment} className={styles.item}>
+                {isLastSegment ? (
+                  <span>{last || segment}</span>
+                ) : (
+                  <Link href={path}>
+                    {segment} <IconChevronForwardOutline />
+                  </Link>
+                )}
+              </li>
+            )
           );
         })}
       </ul>

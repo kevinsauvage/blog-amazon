@@ -5,6 +5,10 @@
   overflow: hidden;
   border-radius: $radius1;
 
+  &:hover {
+    transform: scale(1.01);
+  }
+
   @include gradient-overlay;
 
   .image {

@@ -88,7 +88,7 @@ const categorySlug = async (context) => {
         </main>
         {Array.isArray(posts) && (
           <aside className={styles.aside}>
-            <h3>Recommended</h3>
+            <h3>Top posts</h3>
             <ul className={`${styles.list}`}>
               {popular.map((post) => (
                 <li key={post.ID}>
