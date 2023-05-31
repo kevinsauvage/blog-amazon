@@ -24,9 +24,7 @@ const PostGrid = ({ post, image }) => {
       />
 
       <div className={styles.content}>
-        <div className={styles.categories}>
-          <Category category={categories[0]} />
-        </div>
+        <Category category={categories[0]} />
         <Link href={postLink}>
           <h2 className={styles.title}>{title}</h2>
         </Link>

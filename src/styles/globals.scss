@@ -11,8 +11,8 @@ body {
   overflow-x: hidden;
   color: var(--on-surface-100);
   font-weight: 400;
+  font-family: var(--source-sans-pro-font);
   line-height: 1.5;
-  letter-spacing: -0.5px;
   background-color: var(--surface-900);
 }
 
@@ -27,4 +27,14 @@ li {
 
 :root {
   --radius-1: 10px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 700;
+  font-family: var(--poppins-font);
 }

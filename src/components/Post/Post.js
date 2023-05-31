@@ -24,14 +24,14 @@ const Post = ({ post, image, showCategories = true }) => {
         />
       </Link>
       <div className={styles.content}>
+        <Link href={postLink}>
+          <h2 className={styles.title}>{title}</h2>
+        </Link>
         <div className={styles.header}>
           {showCategories && <Category category={categories[0]} />}
           <Date date={date} />
           <Views views={viewCount} />
         </div>
-        <Link href={postLink}>
-          <h2 className={styles.title}>{title}</h2>
-        </Link>
       </div>
     </article>
   );

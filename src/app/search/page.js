@@ -22,7 +22,7 @@ const search = async (context) => {
     <Container>
       <main className={styles.main}>
         <header>
-          <h1>Search Results {q && `for ${q}`}</h1>
+          <h1>Search Results</h1>
           <TotalFound total={totalPosts} />
           <SearchForm query={q} />
         </header>

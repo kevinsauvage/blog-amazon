@@ -27,7 +27,7 @@
       grid-column: span 2;
 
       h2 {
-        max-width: 500px;
+        max-width: 400px;
       }
     }
 
@@ -36,6 +36,10 @@
     &:nth-child(6),
     &:nth-child(7) {
       grid-column: span 1;
+
+      h2 {
+        max-width: 500px;
+      }
     }
   }
 }

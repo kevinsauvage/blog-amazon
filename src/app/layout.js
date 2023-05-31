@@ -1,4 +1,4 @@
-import { Roboto } from 'next/font/google';
+import { Poppins, Source_Sans_Pro as SourceSansPro } from 'next/font/google';
 
 import Footer from '@/components/Footer/Footer';
 import Header from '@/components/Header/Header';
@@ -8,10 +8,18 @@ import styles from './layout.module.scss';
 
 const { WORDPRESS_API_URL } = process.env;
 
-const roboto = Roboto({
+export const sourceSansPro = SourceSansPro({
   display: 'swap',
   subsets: ['latin'],
-  weight: ['300', '400', '500', '700'],
+  variable: '--source-sans-pro-font',
+  weight: ['400'],
+});
+
+export const poppins = Poppins({
+  display: 'swap',
+  subsets: ['latin'],
+  variable: '--poppins-font',
+  weight: ['700', '800', '900'],
 });
 
 export const metadata = {
@@ -30,7 +38,7 @@ const RootLayout = async ({ children }) => {
 
   return (
     <html lang="en" className="theme-light">
-      <body className={roboto.className}>
+      <body className={`${poppins.variable} ${sourceSansPro.variable}`}>
         <Header categories={categories} />
         <div className={styles.children}>{children}</div>
         <Footer />

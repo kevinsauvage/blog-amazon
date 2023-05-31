@@ -25,15 +25,14 @@
   .header {
     display: flex;
     align-items: center;
-    gap: 1rem;
-    margin: 1rem 0 0.6rem 0;
+    gap: 0.5rem;
   }
 
   .title {
+    margin: 0.5rem 0 0.4rem 0;
     color: var(--on-surface-100);
-    font-weight: 500;
-    font-size: 1.5rem;
-    line-height: 1.1;
+    font-size: 1.3rem;
+    line-height: 1.2;
 
     @include text-shorten(2);
   }
