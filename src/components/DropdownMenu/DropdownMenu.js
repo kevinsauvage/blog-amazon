@@ -1,6 +1,7 @@
 import { useRef } from 'react';
 
 import useOnClickOutside from '@/hooks/useClickOutside';
+import IconClose from '@/svg/IconClose';
 
 import Container from '../Container/Container';
 import Navbar from '../Navbar/Navbar';
@@ -14,36 +15,46 @@ const navItems = [
   { href: '/about', id: 4, label: 'About' },
 ];
 
-const DropdownMenu = ({ categories, handleClose }) => {
+const DropdownMenu = ({ categories, handleClose, show }) => {
   const dropdown = useRef();
 
   useOnClickOutside(dropdown, handleClose);
 
   return (
-    <div className={styles.dropdown} ref={dropdown}>
-      <Container>
-        <ul className={styles.inner}>
-          <li>
-            <Navbar title="Page">
-              {navItems.map((item) => (
-                <NavItem key={item.id} href={item.href} label={item.label} />
-              ))}
-            </Navbar>
-          </li>
+    <div className={`${styles.overlay} ${show ? styles.visible : ''}`}>
+      <div className={`${styles.dropdown} ${show ? styles.active : ''}`} ref={dropdown}>
+        <div className={styles.top}>
+          <Container>
+            <button type="button" className={styles.close} onClick={handleClose}>
+              <IconClose />
+              <p>Close</p>
+            </button>
+          </Container>
+        </div>
+        <Container>
+          <ul className={styles.inner}>
+            <li>
+              <Navbar>
+                {navItems.map((item) => (
+                  <NavItem key={item.id} href={item.href} label={item.label} />
+                ))}
+              </Navbar>
+            </li>
 
-          <li>
-            <Navbar title="Category">
-              {categories.map((category) => (
-                <NavItem
-                  key={category.id}
-                  href={`/category/${category.slug}`}
-                  label={category.name}
-                />
-              ))}
-            </Navbar>
-          </li>
-        </ul>
-      </Container>
+            <li>
+              <Navbar title="Categories">
+                {categories.map((category) => (
+                  <NavItem
+                    key={category.id}
+                    href={`/category/${category.slug}`}
+                    label={category.name}
+                  />
+                ))}
+              </Navbar>
+            </li>
+          </ul>
+        </Container>
+      </div>
     </div>
   );
 };

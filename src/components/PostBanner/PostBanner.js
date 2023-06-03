@@ -27,7 +27,7 @@ const PostBanner = ({ post }) => {
         alt={imageAlt}
       />
       <div className={styles.content}>
-        <Category category={{ ...category, name: 'Featured' }} />
+        <Category category={category} />
         <Link href={postLink}>
           <h2 className={styles.title}>{title}</h2>
         </Link>

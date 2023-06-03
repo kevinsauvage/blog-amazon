@@ -25,8 +25,14 @@
       font-size: 1.2rem;
     }
 
-    .conclusion {
-      margin-top: 1rem;
+    ul {
+      margin-bottom: 2rem;
+      margin-left: 2rem;
+
+      li {
+        margin-bottom: 0.4rem;
+        list-style: unset;
+      }
     }
   }
 }

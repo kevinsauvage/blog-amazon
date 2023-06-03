@@ -3,12 +3,36 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  background-color: var(--surface-800);
 
-  &__copyright {
+  .top {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    justify-items: center;
+    gap: 3rem;
+    padding: 3rem 0;
+
+    .title {
+      margin-bottom: 1rem;
+      font-size: 1.5rem;
+    }
+
+    ul {
+      display: grid;
+      grid-auto-flow: column; /* Split into columns if necessary */
+      grid-template-rows: repeat(5, 1fr); /* Defines 5 rows */
+      column-gap: 2rem;
+      row-gap: 0.5rem;
+    }
+  }
+
+  .copyright {
     width: fit-content;
-    padding: 1.5rem 0;
+    width: 100%;
+    padding: 1rem 0;
+    border-top: $border-light;
     font-weight: 500;
-
-    @include font-size(0.8rem, 0.8rem);
+    font-size: 0.9rem;
+    text-align: center;
   }
 }

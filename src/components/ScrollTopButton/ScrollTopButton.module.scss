@@ -1,0 +1,18 @@
+.button {
+  position: fixed;
+  right: -2.5rem;
+  bottom: 6rem;
+  border: none;
+  font-size: 2rem;
+  background-color: transparent;
+  transform: translateX(50%);
+  cursor: pointer;
+  opacity: 0;
+  transition: all 0.3s linear;
+
+  &.visible {
+    right: 2.5rem;
+    bottom: 2rem;
+    opacity: 1;
+  }
+}

@@ -6,19 +6,26 @@ import HomeBanner from '@/components/scopes/home/HomeBanner';
 import Section from '@/components/Section/Section';
 import wordpressApiCalls from '@/lib/wordpress/index';
 
-const CAT_BEAUTY = 2;
-const CAT_HOUSING = 5;
-const CAT_LIFESTYLE = 7;
-const CAT_TECHNOLOGY = 1;
+const { getPosts, getPopularPosts, getCategories } = wordpressApiCalls;
 
-const { getPosts, getPopularPosts } = wordpressApiCalls;
+const totalPostsByCategory = 3;
+
+const getHomeData = async () => {
+  const categories = await getCategories();
+  const promises = categories.map((category) =>
+    getPosts({ categories: category.id, perPage: totalPostsByCategory })
+  );
+  const data = await Promise.all(promises);
+
+  return data.map((item, index) => {
+    const { id, name, slug } = categories[index];
+    return { category: { id, name, slug }, ...item };
+  });
+};
 
 const Home = async () => {
-  const [beauty, housing, lifestyle, technology, sticky, popular] = await Promise.all([
-    getPosts({ categories: CAT_BEAUTY, perPage: 6 }),
-    getPosts({ categories: CAT_HOUSING, perPage: 6 }),
-    getPosts({ categories: CAT_LIFESTYLE, perPage: 6 }),
-    getPosts({ categories: CAT_TECHNOLOGY, perPage: 6 }),
+  const [posts, sticky, popular] = await Promise.all([
+    getHomeData(),
     getPosts({ perPage: 3, stycky: true }),
     getPopularPosts(6),
   ]);
@@ -28,50 +35,29 @@ const Home = async () => {
       <Container>
         <HomeBanner posts={sticky?.posts} grid />
 
-        <Section title="Most Popular Articles">
-          <Grid variant="1">
+        <Section title="Popular Posts">
+          <Grid variant="3">
             {Array.isArray(popular) &&
               popular.map((post) => (
-                <Post key={post.ID} post={post} image={post.images.medium_large} showCategories />
+                <PostGrid key={post.ID} post={post} image={post.images.medium_large} />
               ))}
           </Grid>
         </Section>
 
-        <Section title="Our Technology Articles" buttonUrl="/category/technology">
-          <Grid variant="3">
-            {Array.isArray(technology.posts) &&
-              technology.posts.map((post) => (
-                <PostGrid key={post.ID} post={post} image={post.images.large} />
-              ))}
-          </Grid>
-        </Section>
-
-        <Section title="Our Beauty Articles" buttonUrl="/category/beauty">
-          <Grid variant="1">
-            {Array.isArray(beauty.posts) &&
-              beauty.posts.map((post) => (
-                <Post key={post.ID} post={post} image={post.images.medium_large} showCategories />
-              ))}
-          </Grid>
-        </Section>
-
-        <Section title="Our Housing Articles" buttonUrl="/category/housing">
-          <Grid variant="3">
-            {Array.isArray(housing.posts) &&
-              housing.posts.map((post) => (
-                <PostGrid key={post.ID} post={post} image={post.images.large} />
-              ))}
-          </Grid>
-        </Section>
-
-        <Section title="Our Lifestyle Articles" buttonUrl="/category/lifestyle">
-          <Grid variant="1">
-            {Array.isArray(lifestyle.posts) &&
-              lifestyle.posts.map((post) => (
-                <Post key={post.ID} post={post} image={post.images.medium_large} showCategories />
-              ))}
-          </Grid>
-        </Section>
+        {posts.map((postData) => (
+          <Section
+            key={postData.category.id}
+            title={`${postData.category.name} Posts`}
+            buttonUrl={`/category/${postData.category.slug}`}
+          >
+            <Grid variant="1">
+              {Array.isArray(postData.posts) &&
+                postData.posts.map((post) => (
+                  <Post key={post.ID} post={post} image={post.images.medium_large} />
+                ))}
+            </Grid>
+          </Section>
+        ))}
       </Container>
     </main>
   );

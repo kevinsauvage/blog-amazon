@@ -2,11 +2,11 @@ import { Poppins, Source_Sans_Pro as SourceSansPro } from 'next/font/google';
 
 import Footer from '@/components/Footer/Footer';
 import Header from '@/components/Header/Header';
+import ScrollTopButton from '@/components/ScrollTopButton/ScrollTopButton';
+import { getCategories } from '@/lib/wordpress/categories';
 
 import '../styles/globals.scss';
 import styles from './layout.module.scss';
-
-const { WORDPRESS_API_URL } = process.env;
 
 export const sourceSansPro = SourceSansPro({
   display: 'swap',
@@ -27,12 +27,6 @@ export const metadata = {
   title: 'Create Next App',
 };
 
-const getCategories = async () => {
-  const URL = `${WORDPRESS_API_URL}/categories?acf_format=standard`;
-  const response = await fetch(URL, { next: { revalidate: 60 * 60 * 24 } });
-  return response.json();
-};
-
 const RootLayout = async ({ children }) => {
   const categories = await getCategories();
 
@@ -41,7 +35,8 @@ const RootLayout = async ({ children }) => {
       <body className={`${poppins.variable} ${sourceSansPro.variable}`}>
         <Header categories={categories} />
         <div className={styles.children}>{children}</div>
-        <Footer />
+        <Footer categories={categories} />
+        <ScrollTopButton />
       </body>
     </html>
   );

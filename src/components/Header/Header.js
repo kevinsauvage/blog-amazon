@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
-import IconClose from '@/svg/IconClose';
 import IconHamburgerMenu from '@/svg/IconHamburgerMenu';
 import IconSearch from '@/svg/IconSearch';
 
@@ -21,6 +20,10 @@ const Header = ({ categories }) => {
     setShowNav(false);
   }, [pathname]);
 
+  useEffect(() => {
+    document.querySelector('body').style.overflow = showNav ? 'hidden' : 'visible';
+  }, [showNav]);
+
   return (
     <header className={styles.header}>
       <Container>
@@ -30,7 +33,7 @@ const Header = ({ categories }) => {
             className={styles.menu}
             onClick={() => setShowNav((previous) => !previous)}
           >
-            {showNav ? <IconClose /> : <IconHamburgerMenu />}
+            <IconHamburgerMenu />
             <p>Menu</p>
           </button>
           <div className={styles.logo}>
@@ -44,7 +47,7 @@ const Header = ({ categories }) => {
           </Link>
         </div>
       </Container>
-      {showNav && <DropdownMenu categories={categories} handleClose={() => setShowNav(false)} />}
+      <DropdownMenu show={showNav} categories={categories} handleClose={() => setShowNav(false)} />
     </header>
   );
 };

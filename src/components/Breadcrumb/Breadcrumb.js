@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
 import IconChevronForwardOutline from '@/svg/IconChevronForwardOutline';
+import { formatString } from '@/utils/strings';
 
 import styles from './Breadcrumb.module.scss';
 
@@ -33,7 +34,7 @@ const Breadcrumb = ({ last }) => {
             !blacklist.has(segment) && (
               <li key={segment} className={styles.item}>
                 {isLastSegment ? (
-                  <span>{last || segment}</span>
+                  <span>{formatString(last || segment)}</span>
                 ) : (
                   <Link href={path}>
                     {segment} <IconChevronForwardOutline />

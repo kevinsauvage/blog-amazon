@@ -5,7 +5,7 @@
   justify-content: space-between;
   min-height: 100vh;
   margin-bottom: 3rem;
-  border-radius: var(--radius-1);
+  border-radius: $radius1;
 
   .article {
     width: 100%;
@@ -17,7 +17,7 @@
       height: 100%;
       margin-top: 1rem;
       object-fit: cover;
-      border-radius: var(--radius-1);
+      border-radius: $radius1;
       aspect-ratio: 20/9;
     }
 

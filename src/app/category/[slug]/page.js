@@ -95,8 +95,8 @@ const categorySlug = async (context) => {
                   <Post
                     post={post}
                     image={post.images.medium_large}
-                    aspect="ratio-5-3"
                     showCategories={false}
+                    showExcerpt={false}
                   />
                 </li>
               ))}
