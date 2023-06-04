@@ -18,9 +18,10 @@ const Footer = ({ categories }) => (
         <div>
           <h6 className={styles.title}>About</h6>
           <p>
-            Blog Note Pro is a modern WordPress theme that comes with high-quality features and
-            minimal design. It is designed to work for all kinds of blogs: personal blog, business
-            blog, fashion blog, lifestyle blog, travel blog, and so on.
+            Hello there! We&apos;re delighted to have you visit [Your Blog Name]. This blog is a
+            space where we share thoughts, insights, and experiences on a wide range of topics.
+            Whether you&apos;re seeking inspiration, information, or simply a moment of relaxation,
+            you&apos;ve come to the right place.
           </p>
         </div>
         <div>
