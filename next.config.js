@@ -4,7 +4,7 @@
 const path = require('node:path');
 
 const nextConfig = {
-  images: { domains: ['brainbloomr.com', 'localhost'] },
+  images: { domains: ['brainbloomr2.local', 'localhost'] },
   sassOptions: {
     includePaths: [path.join(__dirname, './src/styles/')],
     prependData: `
