@@ -11,6 +11,12 @@ import styles from './page.module.scss';
 
 const { getPosts } = wordpressApiCalls;
 
+export const metadata = {
+  description:
+    'Discover relevant search results. Find the information you need. Explore articles, tips, and resources to deepen your knowledge.',
+  title: 'Search Results | Find What You Need',
+};
+
 const search = async (context) => {
   const { q = '', page = 1 } = context?.searchParams || {};
   const { posts, totalPosts, totalPages } = await getPosts({

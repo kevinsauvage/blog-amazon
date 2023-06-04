@@ -4,6 +4,12 @@ import Container from '@/components/Container/Container';
 
 import styles from './page.module.scss';
 
+export const metadata = {
+  description:
+    "Get in touch with us for inquiries, feedback, or collaborations. We're here to assist you and provide a prompt response. Contact us today!",
+  title: 'Contact Us | Get in Touch',
+};
+
 function page() {
   return (
     <div className={styles.page}>

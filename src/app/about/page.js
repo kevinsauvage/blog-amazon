@@ -3,6 +3,12 @@ import Container from '@/components/Container/Container';
 
 import styles from './page.module.scss';
 
+export const metadata = {
+  description:
+    'Discover our story, mission, and values. Get to know us and our commitment to providing valuable content and experiences.',
+  title: 'About Us | Our Story and Mission',
+};
+
 function page() {
   return (
     <div className={styles.page}>

@@ -3,6 +3,12 @@ import Container from '@/components/Container/Container';
 
 import styles from './page.module.scss';
 
+export const metadata = {
+  description:
+    'We prioritize your privacy and data protection. Read our privacy policy to understand how we handle and safeguard your personal information.',
+  title: 'Privacy Policy | Data Protection & Trust',
+};
+
 function page() {
   return (
     <div className={styles.page}>
