@@ -23,6 +23,13 @@ const getHomeData = async () => {
   });
 };
 
+export const metadata = {
+  description:
+    'Expert insights, valuable tips, and engaging articles. Explore topics, stay informed, and enhance your understanding. Feed your curiosity and learn continuously.',
+  keywords: ['home', 'blog', 'content', 'insights', 'resources', 'trends', 'knowledge'],
+  title: 'Knowledge & Inspiration | Your Source',
+};
+
 const Home = async () => {
   const [posts, sticky, popular] = await Promise.all([
     getHomeData(),

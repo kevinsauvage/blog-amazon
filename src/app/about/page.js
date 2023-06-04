@@ -6,6 +6,7 @@ import styles from './page.module.scss';
 export const metadata = {
   description:
     'Discover our story, mission, and values. Get to know us and our commitment to providing valuable content and experiences.',
+  keywords: ['about us', 'story', 'mission', 'values', 'content', 'experiences'],
   title: 'About Us | Our Story and Mission',
 };
 

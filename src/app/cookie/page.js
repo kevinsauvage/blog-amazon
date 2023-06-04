@@ -6,6 +6,7 @@ import styles from './page.module.scss';
 export const metadata = {
   description:
     'Learn how cookies enhance your browsing. Understand website functionality, traffic analysis, and data privacy. Make informed cookie choices.',
+  keywords: ['cookie policy', 'cookies', 'technologies', 'information', 'data collection'],
   title: 'Cookie Policy | Enhancing Your Experience',
 };
 

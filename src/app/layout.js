@@ -22,12 +22,6 @@ export const poppins = Poppins({
   weight: ['700', '800'],
 });
 
-export const metadata = {
-  description:
-    'Expert insights, valuable tips, and engaging articles. Explore topics, stay informed, and enhance your understanding. Feed your curiosity and learn continuously.',
-  title: 'Knowledge & Inspiration | Your Source',
-};
-
 const RootLayout = async ({ children }) => {
   const categories = await getCategories();
 

@@ -14,6 +14,7 @@ const { getPosts } = wordpressApiCalls;
 export const metadata = {
   description:
     'Discover relevant search results. Find the information you need. Explore articles, tips, and resources to deepen your knowledge.',
+  keywords: ['search', 'results', 'articles', 'tips', 'resources', 'information'],
   title: 'Search Results | Find What You Need',
 };
 
