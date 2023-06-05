@@ -2,9 +2,11 @@
   position: fixed;
   right: -2.5rem;
   bottom: 6rem;
+  display: flex;
   border: none;
+  border-radius: 50%;
   font-size: 2rem;
-  background-color: transparent;
+  background-color: var(--surface-900);
   transform: translateX(50%);
   cursor: pointer;
   opacity: 0;

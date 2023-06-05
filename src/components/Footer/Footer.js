@@ -24,25 +24,27 @@ const Footer = ({ categories }) => (
             you&apos;ve come to the right place.
           </p>
         </div>
-        <div>
-          <h6 className={styles.title}>Usefull links</h6>
-          <ul>
-            {navItems.map((item) => (
-              <NavItem key={item.id} href={item.href} label={item.label} />
-            ))}
-          </ul>
-        </div>
-        <div>
-          <h6 className={styles.title}>Categories</h6>
-          <ul>
-            {categories.map((category) => (
-              <NavItem
-                key={category.id}
-                href={`/category/${category.slug}`}
-                label={category.name}
-              />
-            ))}
-          </ul>
+        <div className={styles.links}>
+          <div>
+            <h6 className={styles.title}>Usefull links</h6>
+            <ul>
+              {navItems.map((item) => (
+                <NavItem key={item.id} href={item.href} label={item.label} />
+              ))}
+            </ul>
+          </div>
+          <div>
+            <h6 className={styles.title}>Categories</h6>
+            <ul>
+              {categories.map((category) => (
+                <NavItem
+                  key={category.id}
+                  href={`/category/${category.slug}`}
+                  label={category.name}
+                />
+              ))}
+            </ul>
+          </div>
         </div>
       </div>
       <p className={styles.copyright}>© {new Date().getFullYear()}. All rights reserved.</p>

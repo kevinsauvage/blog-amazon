@@ -1,28 +1,37 @@
+.banner {
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+  padding: 1rem 2rem;
+  border: $border-light;
+  border-radius: $radius1;
+  background-color: var(--surface-800);
+
+  @include respond(mobile_l) {
+    padding: 1rem;
+  }
+
+  h1 {
+    font-size: 3rem;
+    line-height: 1;
+  }
+}
+
 .wrapper {
-  display: grid;
-  grid-template-columns: 3fr 1fr;
+  display: flex;
   gap: 2rem;
   margin-top: 2rem;
 
-  .main {
-    header {
-      margin-bottom: 3rem;
-      padding: 1rem 2rem;
-      border-radius: $radius1;
-      background-color: var(--surface-800);
-
-      h1 {
-        font-size: 3rem;
-        line-height: 1;
-      }
-    }
-  }
-
   .aside {
+    min-width: 250px;
     height: fit-content;
     padding: 1rem;
+    border: $border-light;
     border-radius: $radius1;
     background-color: var(--surface-800);
+
+    @include respond(tablet) {
+      display: none;
+    }
 
     h3 {
       margin-bottom: 1rem;

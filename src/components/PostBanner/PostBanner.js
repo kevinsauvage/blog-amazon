@@ -19,13 +19,9 @@ const PostBanner = ({ post }) => {
 
   return (
     <div className={styles.banner}>
-      <Image
-        className={`${styles.image}`}
-        src={image.source_url}
-        width={image.width}
-        height={image.height}
-        alt={imageAlt}
-      />
+      <div className={`${styles.image}`}>
+        <Image src={image.source_url} width={image.width} height={image.height} alt={imageAlt} />
+      </div>
       <div className={styles.content}>
         <Category category={category} />
         <Link href={postLink}>
