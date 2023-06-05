@@ -12,27 +12,18 @@
     background-color: var(--surface-800);
 
     @include respond(mobile_l) {
+      margin-top: 2rem;
       padding: 2rem 1rem;
     }
 
     h1 {
       margin-bottom: 1rem;
-      font-size: 3.3rem;
+      font-size: 3rem;
       text-align: center;
-    }
 
-    .subtitle {
-      margin-bottom: 4rem;
-      text-align: center;
-    }
-
-    h2 {
-      margin-top: 2rem;
-      font-size: 1.2rem;
-    }
-
-    .conclusion {
-      margin-top: 1rem;
+      @include respond(mobile_l) {
+        font-size: 2rem;
+      }
     }
   }
 }

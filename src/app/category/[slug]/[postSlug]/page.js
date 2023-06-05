@@ -15,35 +15,6 @@ const { getPostBySlug } = wordpressApiCalls;
 
 const { WORDPRESS_API_URL } = process.env;
 
-export async function generateMetadata({ params }) {
-  const { postSlug } = params;
-  const URL = `${WORDPRESS_API_URL}/posts?slug=${postSlug}&_embed`;
-  const product = await fetch(URL).then((response) => response.json());
-  const seo = product[0].yoast_head_json;
-
-  return {
-    description: seo.og_description,
-    openGraph: {
-      description: seo.og_description,
-      images: seo.og_image,
-      locale: seo.og_locale,
-      publishedTime: seo.article_published_time,
-      siteName: seo.og_site_name,
-      title: seo.og_title,
-      type: seo.og_type,
-      url: seo.og_url,
-    },
-    robots: seo.robots,
-    title: seo.title,
-    twitter: {
-      card: seo.twitter_card,
-      description: seo.og_description,
-      images: seo.og_image,
-      title: seo.title,
-    },
-  };
-}
-
 const PostId = async (context) => {
   const {
     params: { postSlug },
@@ -90,3 +61,32 @@ const PostId = async (context) => {
 };
 
 export default PostId;
+
+export async function generateMetadata({ params }) {
+  const { postSlug } = params;
+  const URL = `${WORDPRESS_API_URL}/posts?slug=${postSlug}&_embed`;
+  const product = await fetch(URL).then((response) => response.json());
+  const seo = product[0].yoast_head_json;
+
+  return {
+    description: seo.og_description,
+    openGraph: {
+      description: seo.og_description,
+      images: seo.og_image,
+      locale: seo.og_locale,
+      publishedTime: seo.article_published_time,
+      siteName: seo.og_site_name,
+      title: seo.og_title,
+      type: seo.og_type,
+      url: seo.og_url,
+    },
+    robots: seo.robots,
+    title: seo.title,
+    twitter: {
+      card: seo.twitter_card,
+      description: seo.og_description,
+      images: seo.og_image,
+      title: seo.title,
+    },
+  };
+}

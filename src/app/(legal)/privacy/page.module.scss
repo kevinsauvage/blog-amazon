@@ -1,0 +1,22 @@
+.content {
+  .subtitle {
+    margin-bottom: 4rem;
+    text-align: center;
+  }
+
+  h2 {
+    font-size: 1.2rem;
+  }
+
+  ul {
+    margin-bottom: 2rem;
+
+    ul {
+      margin-left: 2rem;
+
+      li {
+        list-style: unset;
+      }
+    }
+  }
+}

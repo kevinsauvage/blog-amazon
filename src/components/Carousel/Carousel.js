@@ -13,15 +13,25 @@ const Carousel = ({ children, slideClass }) => {
   const slidesReference = useRef(null);
   const slideReference = useRef(null);
 
-  const { handleNext, handlePrevious, maxTranslate, translate } = useCarousel(
-    carouselReference,
-    slidesReference,
-    slideReference
-  );
+  const {
+    handleNext,
+    handlePrevious,
+    maxTranslate,
+    translate,
+    handleTouchEnd,
+    handleTouchStart,
+    handleTouchMove,
+  } = useCarousel(carouselReference, slidesReference, slideReference);
 
   return (
     <div className={styles.container}>
-      <div className={styles.carousel} ref={carouselReference}>
+      <div
+        className={styles.carousel}
+        ref={carouselReference}
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
+        onTouchMove={handleTouchMove}
+      >
         <ul
           className={styles.slides}
           ref={slidesReference}

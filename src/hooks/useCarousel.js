@@ -4,6 +4,8 @@ const useCarousel = (carouselReference, slidesReference, slideReference) => {
   const [maxTranslate, setMaxTranslate] = useState(0);
   const [translateStep, setTranslateStep] = useState(0);
   const [translate, setTranslate] = useState(0);
+  const [touchStart, setTouchStart] = useState();
+  const [touchEnd, setTouchEnd] = useState();
 
   useEffect(() => {
     const handleResize = () => {
@@ -35,7 +37,25 @@ const useCarousel = (carouselReference, slidesReference, slideReference) => {
     else setTranslate(translateX);
   };
 
-  return { handleNext, handlePrevious, maxTranslate, translate };
+  // SLIDER
+  const handleTouchStart = (event) => setTouchStart(event.targetTouches[0].clientX);
+
+  const handleTouchMove = (event) => setTouchEnd(event.targetTouches[0].clientX);
+
+  const handleTouchEnd = () => {
+    if (touchStart - touchEnd > 100) handleNext();
+    if (touchStart - touchEnd < -100) handlePrevious();
+  };
+
+  return {
+    handleNext,
+    handlePrevious,
+    handleTouchEnd,
+    handleTouchMove,
+    handleTouchStart,
+    maxTranslate,
+    translate,
+  };
 };
 
 export default useCarousel;

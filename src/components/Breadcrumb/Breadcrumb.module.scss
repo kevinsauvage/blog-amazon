@@ -1,12 +1,14 @@
 .list {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.3rem;
   margin: 0.5rem 0;
 
   .item {
     color: var(--on-surface-500);
     font-size: 0.8rem;
+
+    @include text-shorten(1);
 
     a {
       display: flex;
@@ -14,7 +16,7 @@
       color: var(--on-surface-200);
 
       svg {
-        margin-left: 0.5rem;
+        margin-left: 0.3rem;
       }
     }
   }
