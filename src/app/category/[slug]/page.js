@@ -13,7 +13,7 @@ const { getCategoryBySlug, getPopularPosts, getPosts } = wordpressApiCalls;
 
 const getData = async (slug, page) => {
   const category = await getCategoryBySlug(slug);
-  return getPosts({ categories: category[0].id, page, perPage: 9 });
+  return getPosts({ categories: category?.[0]?.id, page, perPage: 9 });
 };
 
 const categorySlug = async (context) => {

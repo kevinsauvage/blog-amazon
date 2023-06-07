@@ -20,9 +20,10 @@
   display: flex;
   gap: 2rem;
   margin-top: 2rem;
+  margin-bottom: 2rem;
 
   .aside {
-    min-width: 250px;
+    min-width: 300px;
     height: fit-content;
     padding: 1rem;
     border: $border-light;
