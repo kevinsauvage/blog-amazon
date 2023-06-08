@@ -9,11 +9,12 @@ import { formatString } from '@/utils/strings';
 
 import styles from './page.module.scss';
 
-const { getCategoryBySlug, getPopularPosts, getPosts } = wordpressApiCalls;
+const { getCategoryBySlug, getPosts } = wordpressApiCalls;
 
 const getData = async (slug, page) => {
   const category = await getCategoryBySlug(slug);
-  return getPosts({ categories: category?.[0]?.id, page, perPage: 9 });
+  const posts = await getPosts({ categories: category?.[0]?.id, page, perPage: 9 });
+  return { category, posts };
 };
 
 const categorySlug = async (context) => {
@@ -21,55 +22,38 @@ const categorySlug = async (context) => {
   const { page = 1 } = searchParams || {};
   const { slug } = params;
 
-  const [postsResponse, popular] = await Promise.all([
-    getData(slug, page),
-    getPopularPosts(4, slug),
-  ]);
+  const postsResponse = await getData(slug, page);
 
-  const { posts, totalPages, totalPosts } = postsResponse || {};
+  const { posts, totalPages, totalPosts } = postsResponse?.posts || {};
+  const { yoast_head_json: yoastHead, name } = postsResponse?.category?.[0] || {};
 
   return (
     <Container>
       <Breadcrumb />
       <div className={styles.banner}>
-        <h1>{formatString(slug)}</h1>
-        <TotalFound total={totalPosts} />
+        <div className={styles.title}>
+          <h1>{formatString(name)}.</h1>
+          <TotalFound total={totalPosts} />
+        </div>
+        <p className={styles.subtitle}>{yoastHead?.og_description}</p>
       </div>
-      <div className={styles.wrapper}>
-        <main>
-          {Array.isArray(posts) && (
-            <Grid variant="2">
-              {posts.map((post) => (
-                <Post
-                  key={post.ID}
-                  post={post}
-                  image={post.images.medium_large}
-                  aspect="ratio-5-3"
-                  showCategories={false}
-                />
-              ))}
-            </Grid>
-          )}
-          <Pagination totalPages={totalPages} currentPage={page} />
-        </main>
+
+      <main>
         {Array.isArray(posts) && (
-          <aside className={styles.aside}>
-            <h3>Top posts</h3>
-            <ul className={`${styles.list}`}>
-              {popular.map((post) => (
-                <li key={post.ID}>
-                  <Post
-                    post={post}
-                    image={post.images.medium_large}
-                    showCategories={false}
-                    showExcerpt={false}
-                  />
-                </li>
-              ))}
-            </ul>
-          </aside>
+          <Grid variant="2">
+            {posts.map((post) => (
+              <Post
+                key={post.ID}
+                post={post}
+                image={post.images.medium_large}
+                aspect="ratio-5-3"
+                showCategories={false}
+              />
+            ))}
+          </Grid>
         )}
-      </div>
+        <Pagination totalPages={totalPages} currentPage={page} />
+      </main>
     </Container>
   );
 };

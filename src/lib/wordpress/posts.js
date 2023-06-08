@@ -11,6 +11,7 @@ export const getPosts = async (properties) => {
   if (sticky) URL += `&sticky=true`;
   if (categories) URL += `&categories=${categories}`;
   if (query) URL += `&search=${query}`;
+  console.log('🚀 ~  file: posts.js:13 ~  getPosts ~  URL:', URL);
 
   const { data, totalResult } = (await handleFetch(URL)) || {};
   const totalPages = Math.ceil(totalResult / perPage);

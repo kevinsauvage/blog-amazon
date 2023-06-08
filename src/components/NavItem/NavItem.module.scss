@@ -1,9 +1,10 @@
 .item {
   width: fit-content;
   font-weight: 500;
-  font-size: 1.1rem;
+  font-size: 1rem;
 }
 
 .active {
-  color: var(--primary-500);
+  border-bottom: 1px solid var(--on-surface-100);
+  font-weight: 600;
 }

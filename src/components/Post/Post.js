@@ -10,7 +10,9 @@ import styles from './Post.module.scss';
 const Post = ({ post, image, showCategories = true, showExcerpt = true }) => {
   const { slug, categories, excerpt, title, imageAlt, date, viewCount } = post;
 
-  const postLink = `/category/${categories[0].slug}/${slug}`;
+  const category = categories.find((c) => c.id !== 29 && c.id !== 28);
+
+  const postLink = `/category/${category.slug}/${slug}`;
 
   return (
     <article className={styles.post}>
@@ -25,7 +27,7 @@ const Post = ({ post, image, showCategories = true, showExcerpt = true }) => {
       </Link>
       <div className={styles.content}>
         <div className={styles.header}>
-          {showCategories && <Category category={categories[0]} />}
+          {showCategories && <Category category={category} />}
           <Date date={date} />
           <Views views={viewCount} />
         </div>

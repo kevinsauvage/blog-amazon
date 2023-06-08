@@ -11,7 +11,9 @@ import styles from './PostGrid.module.scss';
 
 const PostGrid = ({ post, image }) => {
   const { slug, categories, title, imageAlt, date, viewCount } = post;
-  const postLink = `/category/${categories[0].slug}/${slug}`;
+  const category = categories.find((c) => c.id !== 29 && c.id !== 28);
+
+  const postLink = `/category/${category.slug}/${slug}`;
 
   return (
     <div className={styles.post}>
@@ -24,7 +26,7 @@ const PostGrid = ({ post, image }) => {
       />
 
       <div className={styles.content}>
-        <Category category={categories[0]} />
+        <Category category={category} />
         <Link href={postLink}>
           <h2 className={styles.title}>{title}</h2>
         </Link>

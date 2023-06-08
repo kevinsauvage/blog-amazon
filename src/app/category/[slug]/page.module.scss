@@ -1,52 +1,25 @@
 .banner {
-  margin-top: 1rem;
+  margin-top: 3rem;
   margin-bottom: 2rem;
-  padding: 1rem 2rem;
-  border: $border-light;
-  border-radius: $radius1;
-  background-color: var(--surface-800);
 
   @include respond(mobile_l) {
     padding: 1rem;
   }
 
-  h1 {
-    font-size: 3rem;
-    line-height: 1;
+  .title {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+
+    h1 {
+      font-size: 3rem;
+      line-height: 1;
+    }
   }
-}
 
-.wrapper {
-  display: flex;
-  gap: 2rem;
-  margin-top: 2rem;
-  margin-bottom: 2rem;
-
-  .aside {
-    min-width: 300px;
-    height: fit-content;
-    padding: 1rem;
-    border: $border-light;
-    border-radius: $radius1;
-    background-color: var(--surface-800);
-
-    @include respond(tablet) {
-      display: none;
-    }
-
-    h3 {
-      margin-bottom: 1rem;
-      font-size: 1.4rem;
-    }
-
-    h2 {
-      font-size: 1rem;
-    }
-
-    .list {
-      display: flex;
-      flex-direction: column;
-      gap: 3rem;
-    }
+  .subtitle {
+    max-width: 560px;
+    margin-bottom: 1rem;
   }
 }

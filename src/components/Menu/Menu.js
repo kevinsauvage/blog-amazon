@@ -5,9 +5,10 @@ import IconClose from '@/svg/IconClose';
 
 import Container from '../Container/Container';
 import Navbar from '../Navbar/Navbar';
+import NavCategories from '../NavCategories/NavCategories';
 import NavItem from '../NavItem/NavItem';
 
-import styles from './DropdownMenu.module.scss';
+import styles from './Menu.module.scss';
 
 const navItems = [
   { href: '/', id: 1, label: 'Home' },
@@ -16,13 +17,13 @@ const navItems = [
 ];
 
 const DropdownMenu = ({ categories, handleClose, show }) => {
-  const dropdown = useRef();
+  const menu = useRef();
 
-  useOnClickOutside(dropdown, handleClose);
+  useOnClickOutside(menu, handleClose);
 
   return (
     <div className={`${styles.overlay} ${show ? styles.visible : ''}`}>
-      <div className={`${styles.dropdown} ${show ? styles.active : ''}`} ref={dropdown}>
+      <div className={`${styles.menu} ${show ? styles.active : ''}`} ref={menu}>
         <div className={styles.top}>
           <Container>
             <button type="button" className={styles.close} onClick={handleClose}>
@@ -42,15 +43,7 @@ const DropdownMenu = ({ categories, handleClose, show }) => {
             </li>
 
             <li>
-              <Navbar title="Categories">
-                {categories.map((category) => (
-                  <NavItem
-                    key={category.id}
-                    href={`/category/${category.slug}`}
-                    label={category.name}
-                  />
-                ))}
-              </Navbar>
+              <NavCategories title="Categories" variant="column" categories={categories} />
             </li>
           </ul>
         </Container>

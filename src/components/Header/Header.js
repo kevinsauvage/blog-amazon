@@ -8,7 +8,8 @@ import IconHamburgerMenu from '@/svg/IconHamburgerMenu';
 import IconSearch from '@/svg/IconSearch';
 
 import Container from '../Container/Container';
-import DropdownMenu from '../DropdownMenu/DropdownMenu';
+import Menu from '../Menu/Menu';
+import NavCategories from '../NavCategories/NavCategories';
 
 import styles from './Header.module.scss';
 
@@ -41,13 +42,17 @@ const Header = ({ categories }) => {
               <strong>Bloglytics</strong>
             </Link>
           </div>
+
+          <div className={styles.navigation}>
+            <NavCategories variant="row" categories={categories} />
+          </div>
           <Link href="/search" className={styles.search}>
             <p>Search</p>
             <IconSearch />
           </Link>
         </div>
       </Container>
-      <DropdownMenu show={showNav} categories={categories} handleClose={() => setShowNav(false)} />
+      <Menu show={showNav} categories={categories} handleClose={() => setShowNav(false)} />
     </header>
   );
 };
