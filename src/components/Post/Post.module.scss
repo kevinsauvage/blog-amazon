@@ -7,8 +7,20 @@
   height: 100%;
   overflow: hidden;
 
+  .title {
+    margin-bottom: 0.5rem;
+    color: var(--on-surface-100);
+    font-weight: 700;
+    font-size: 1.1rem;
+    line-height: 1.2;
+
+    @include text-shorten(2);
+  }
+
   &:hover {
-    transform: scale(1.01);
+    .title {
+      text-decoration: underline;
+    }
   }
 
   .image {
@@ -31,16 +43,6 @@
     align-items: center;
     gap: 0.5rem;
     margin-bottom: 0.5rem;
-  }
-
-  .title {
-    margin-bottom: 0.5rem;
-    color: var(--on-surface-100);
-    font-weight: 700;
-    font-size: 1.1rem;
-    line-height: 1.2;
-
-    @include text-shorten(2);
   }
 
   .excerpt {

@@ -5,8 +5,19 @@
   overflow: hidden;
   border-radius: $radius1;
 
+  .title {
+    margin: 0.5rem 0;
+    color: var(--on-surface-dark-100);
+    font-size: 1.4rem;
+    line-height: 1.2;
+
+    @include text-shorten(2);
+  }
+
   &:hover {
-    transform: scale(1.01);
+    .title {
+      text-decoration: underline;
+    }
   }
 
   @include gradient-overlay;
@@ -25,15 +36,6 @@
     left: 1rem;
     z-index: 1;
     flex-grow: 1;
-  }
-
-  .title {
-    margin: 0.5rem 0;
-    color: var(--on-surface-dark-100);
-    font-size: 1.4rem;
-    line-height: 1.2;
-
-    @include text-shorten(2);
   }
 
   .info {

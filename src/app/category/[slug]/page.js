@@ -29,7 +29,7 @@ const categorySlug = async (context) => {
 
   return (
     <Container>
-      <Breadcrumb />
+      <Breadcrumb last={name} />
       <div className={styles.banner}>
         <div className={styles.title}>
           <h1>{formatString(name)}.</h1>
