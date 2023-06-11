@@ -2,7 +2,7 @@ import Breadcrumb from '@/components/Breadcrumb/Breadcrumb';
 import Container from '@/components/Container/Container';
 import Grid from '@/components/Grid/Grid';
 import Pagination from '@/components/Pagination/Pagination';
-import Post from '@/components/Post/Post';
+import PostGrid from '@/components/PostGrid/PostGrid';
 import SearchForm from '@/components/SearchForm/SearchForm';
 import TotalFound from '@/components/TotalFound/TotalFound';
 import wordpressApiCalls from '@/lib/wordpress/index';
@@ -30,21 +30,17 @@ const search = async (context) => {
     <Container>
       <Breadcrumb />
       <main className={styles.main}>
-        <header>
-          <h1>Search Results</h1>
-          <TotalFound total={totalPosts} />
+        <div className={styles.banner}>
+          <div className={styles.title}>
+            <h1>Search Results</h1>
+            <TotalFound total={totalPosts} />
+          </div>
           <SearchForm query={q} />
-        </header>
+        </div>
         <Grid variant="2">
           {Array.isArray(posts) &&
             posts.map((post) => (
-              <Post
-                key={post.ID}
-                post={post}
-                image={post.images.medium_large}
-                aspect="ratio-5-3"
-                showCategories
-              />
+              <PostGrid key={post.ID} post={post} image={post.images.medium_large} />
             ))}
         </Grid>
         <Pagination totalPages={totalPages} currentPage={page} />

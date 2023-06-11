@@ -2,7 +2,7 @@ import Breadcrumb from '@/components/Breadcrumb/Breadcrumb';
 import Container from '@/components/Container/Container';
 import Grid from '@/components/Grid/Grid';
 import Pagination from '@/components/Pagination/Pagination';
-import Post from '@/components/Post/Post';
+import PostGrid from '@/components/PostGrid/PostGrid';
 import TotalFound from '@/components/TotalFound/TotalFound';
 import wordpressApiCalls from '@/lib/wordpress/index';
 import { formatString } from '@/utils/strings';
@@ -13,7 +13,7 @@ const { getCategoryBySlug, getPosts } = wordpressApiCalls;
 
 const getData = async (slug, page) => {
   const category = await getCategoryBySlug(slug);
-  const posts = await getPosts({ categories: category?.[0]?.id, page, perPage: 9 });
+  const posts = await getPosts({ categories: category?.[0]?.id, page, perPage: 12 });
   return { category, posts };
 };
 
@@ -42,13 +42,7 @@ const categorySlug = async (context) => {
         {Array.isArray(posts) && (
           <Grid variant="2">
             {posts.map((post) => (
-              <Post
-                key={post.ID}
-                post={post}
-                image={post.images.medium_large}
-                aspect="ratio-5-3"
-                showCategories={false}
-              />
+              <PostGrid key={post.ID} post={post} image={post.images.medium_large} />
             ))}
           </Grid>
         )}

@@ -10,7 +10,7 @@ import Views from '../Views/Views';
 import styles from './PostGrid.module.scss';
 
 const PostGrid = ({ post, image }) => {
-  const { slug, categories, title, imageAlt, date, viewCount } = post;
+  const { slug, categories, title, imageAlt, date, viewCount, excerpt } = post;
   const category = categories.find((c) => c.id !== 29 && c.id !== 28);
 
   const postLink = `/category/${category.slug}/${slug}`;
@@ -30,6 +30,8 @@ const PostGrid = ({ post, image }) => {
         <Link href={postLink}>
           <h2 className={styles.title}>{title}</h2>
         </Link>
+        <div className={styles.excerpt} dangerouslySetInnerHTML={{ __html: excerpt }} />
+
         <div className={styles.info}>
           <Date date={date} />
           <Views views={viewCount} />

@@ -1,4 +1,4 @@
-import Button from '../Button/Button';
+import Link from 'next/link';
 
 import styles from './Section.module.scss';
 
@@ -7,7 +7,11 @@ const Section = ({ children, title, buttonUrl, buttonText = 'View all' }) => (
     <h3 className={styles.title}>{title}</h3>
     {children}
 
-    {buttonUrl && <Button href={buttonUrl} text={buttonText} className={styles.button} />}
+    {buttonUrl && (
+      <Link href={buttonUrl} className={styles.button}>
+        {buttonText}
+      </Link>
+    )}
   </section>
 );
 

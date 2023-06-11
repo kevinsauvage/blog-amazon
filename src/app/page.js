@@ -1,12 +1,11 @@
 import Container from '@/components/Container/Container';
 import Grid from '@/components/Grid/Grid';
 import Post from '@/components/Post/Post';
-import PostGrid from '@/components/PostGrid/PostGrid';
 import HomeBanner from '@/components/scopes/home/HomeBanner';
 import Section from '@/components/Section/Section';
 import wordpressApiCalls from '@/lib/wordpress/index';
 
-const { getPosts, getPopularPosts, getCategories } = wordpressApiCalls;
+const { getPosts, getCategories } = wordpressApiCalls;
 
 const totalPostsByCategory = 3;
 
@@ -31,25 +30,15 @@ export const metadata = {
 };
 
 const Home = async () => {
-  const [posts, sticky, popular] = await Promise.all([
+  const [posts, sticky] = await Promise.all([
     getHomeData(),
     getPosts({ perPage: 3, stycky: true }),
-    getPopularPosts(6),
   ]);
 
   return (
     <main>
       <Container>
         <HomeBanner posts={sticky?.posts} grid />
-
-        <Section title="Popular Posts">
-          <Grid variant="3">
-            {Array.isArray(popular) &&
-              popular.map((post) => (
-                <PostGrid key={post.ID} post={post} image={post.images.medium_large} />
-              ))}
-          </Grid>
-        </Section>
 
         {posts.map((postData) => (
           <Section
