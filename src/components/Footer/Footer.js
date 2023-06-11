@@ -16,7 +16,7 @@ const Footer = ({ categories }) => (
     <Container>
       <div className={styles.top}>
         <div className={styles.about}>
-          <p className={styles.title}>About</p>
+          <h6 className={styles.title}>About</h6>
           <p>
             Hello there! We&apos;re delighted to have you visit [Your Blog Name]. This blog is a
             space where we share thoughts, insights, and experiences on a wide range of topics.
@@ -26,7 +26,7 @@ const Footer = ({ categories }) => (
         </div>
         <div className={styles.links}>
           <div>
-            <p className={styles.title}>Usefull links</p>
+            <h6 className={styles.title}>Usefull links</h6>
             <ul>
               {navItems.map((item) => (
                 <NavItem key={item.id} href={item.href} label={item.label} />
@@ -34,7 +34,7 @@ const Footer = ({ categories }) => (
             </ul>
           </div>
           <div>
-            <p className={styles.title}>Categories</p>
+            <h6 className={styles.title}>Categories</h6>
             <ul>
               {categories.map((category) => (
                 <NavItem

@@ -61,6 +61,7 @@ const Carousel = ({ children, slideClass, itemToShow }) => {
           disabled={page === 0}
           className={styles['prev-button']}
           onClick={() => updateActive(page - 1)}
+          aria-label="Previous"
         >
           <IconChevronBackOutline />
         </button>
@@ -69,6 +70,7 @@ const Carousel = ({ children, slideClass, itemToShow }) => {
           disabled={page + 1 >= childrensCount / itemToShow}
           className={styles['next-button']}
           onClick={() => updateActive(page + 1)}
+          aria-label="Next"
         >
           <IconChevronForwardOutline />
         </button>

@@ -20,8 +20,14 @@ const SearchForm = ({ query }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className={styles.form}>
-      <input placeholder="Search..." type="text" value={input} onChange={handleChange} />
+    <form onSubmit={handleSubmit} className={styles.form} title="Search a post">
+      <input
+        title="Enter what you're looking for here"
+        placeholder="Search..."
+        type="text"
+        value={input}
+        onChange={handleChange}
+      />
     </form>
   );
 };

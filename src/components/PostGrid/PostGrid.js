@@ -34,8 +34,8 @@ const PostGrid = ({ post, image, imagePriority }) => {
         <div className={styles.excerpt} dangerouslySetInnerHTML={{ __html: excerpt }} />
 
         <div className={styles.info}>
-          <Date date={date} />
-          <Views views={viewCount} />
+          <Date date={date} variant="light" />
+          <Views views={viewCount} variant="light" />
         </div>
       </div>
     </div>

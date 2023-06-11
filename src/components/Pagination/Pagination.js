@@ -34,7 +34,7 @@ const Pagination = ({ currentPage, totalPages }) => {
           <Link
             href={`${pathname}?${createQueryString('page', Number(currentPage) - 1)}`}
             passHref
-            aria-label="link to previous page"
+            aria-label="Previous page"
           >
             <IconArrowLeftShort />
           </Link>
@@ -63,7 +63,7 @@ const Pagination = ({ currentPage, totalPages }) => {
           <Link
             href={`${pathname}?${createQueryString('page', Number(currentPage) + 1)}`}
             passHref
-            aria-label="link to next page"
+            aria-label="Next page"
           >
             <IconArrowRightShort />
           </Link>

@@ -1,8 +1,12 @@
 .views {
   display: flex;
   align-items: center;
-  color: var(--on-surface-400);
+  color: var(--on-surface-500);
   font-size: 0.8rem;
+
+  .light {
+    color: var(--on-surface-200);
+  }
 
   svg {
     margin-right: 2px;
