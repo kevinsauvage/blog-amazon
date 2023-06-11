@@ -15,7 +15,7 @@ const Footer = ({ categories }) => (
   <footer className={styles.Footer}>
     <Container>
       <div className={styles.top}>
-        <div>
+        <div className={styles.about}>
           <h6 className={styles.title}>About</h6>
           <p>
             Hello there! We&apos;re delighted to have you visit [Your Blog Name]. This blog is a

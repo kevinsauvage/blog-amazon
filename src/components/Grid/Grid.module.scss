@@ -97,7 +97,7 @@
   grid-template-rows: repeat(4, 1fr);
   grid-template-columns: repeat(4, 1fr);
 
-  @include respond(mobile_l) {
+  @include respond(tablet) {
     grid-template-rows: 1fr 1fr 1fr;
     grid-template-columns: 1fr;
   }
@@ -111,7 +111,7 @@
       grid-row: span 4;
       grid-column: span 2;
 
-      @include respond(mobile_l) {
+      @include respond(tablet) {
         grid-row: unset;
         grid-column: unset;
       }
@@ -124,7 +124,7 @@
       grid-column: span 2;
       max-height: 300px;
 
-      @include respond(mobile_l) {
+      @include respond(tablet) {
         grid-row: unset;
         grid-column: unset;
         max-height: unset;

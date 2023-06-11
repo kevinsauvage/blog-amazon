@@ -1,60 +1,57 @@
-import { useEffect, useState } from 'react';
+import { Children, useCallback, useEffect, useState } from 'react';
 
-const useCarousel = (carouselReference, slidesReference, slideReference) => {
+const useCarousel = (children, itemToShow, slideReference) => {
   const [maxTranslate, setMaxTranslate] = useState(0);
-  const [translateStep, setTranslateStep] = useState(0);
   const [translate, setTranslate] = useState(0);
+  const [itemWidth, setItemWidth] = useState(0);
+  const [page, setPage] = useState(0);
   const [touchStart, setTouchStart] = useState();
   const [touchEnd, setTouchEnd] = useState();
+  const childrensCount = Children.count(children);
 
   useEffect(() => {
     const handleResize = () => {
-      const initialSlidesWidth = slidesReference.current.offsetWidth;
       const initialSlideWidth = slideReference.current.offsetWidth;
-      const initialContainerWidth = carouselReference.current.offsetWidth;
-      const totalVisibleItems = Math.floor(initialContainerWidth / initialSlideWidth);
-      setTranslateStep(totalVisibleItems * initialSlideWidth);
-
-      if (initialSlidesWidth > initialContainerWidth) {
-        setMaxTranslate(initialSlidesWidth - initialContainerWidth);
-      }
+      setItemWidth(initialSlideWidth);
+      setMaxTranslate(initialSlideWidth * (childrensCount - itemToShow));
     };
 
     handleResize();
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
-  }, [carouselReference, slideReference, slidesReference]);
+  }, [slideReference, itemToShow, childrensCount]);
 
-  const handleNext = () => {
-    const translateX = translate + translateStep;
-    if (translateX > maxTranslate) setTranslate(maxTranslate);
-    else setTranslate(translateX);
-  };
+  const updateActive = useCallback(
+    (newIndex) => {
+      setTouchEnd();
+      setTouchStart();
+      if (newIndex < 0) return;
+      if (newIndex > childrensCount / itemToShow) return;
+      if (newIndex * (itemToShow * itemWidth) > maxTranslate) setTranslate(maxTranslate);
+      else setTranslate(newIndex * (itemToShow * itemWidth));
+      setPage(newIndex);
+    },
+    [childrensCount, itemToShow, itemWidth, maxTranslate]
+  );
 
-  const handlePrevious = () => {
-    const translateX = translate - translateStep;
-    if (translateX < 0) setTranslate(0);
-    else setTranslate(translateX);
-  };
-
-  // SLIDER
   const handleTouchStart = (event) => setTouchStart(event.targetTouches[0].clientX);
 
   const handleTouchMove = (event) => setTouchEnd(event.targetTouches[0].clientX);
 
   const handleTouchEnd = () => {
-    if (touchStart - touchEnd > 100) handleNext();
-    if (touchStart - touchEnd < -100) handlePrevious();
+    if (touchStart - touchEnd > 100) updateActive(page + 1);
+    if (touchStart - touchEnd < -100) updateActive(page - 1);
   };
 
   return {
-    handleNext,
-    handlePrevious,
+    childrensCount,
     handleTouchEnd,
     handleTouchMove,
     handleTouchStart,
     maxTranslate,
+    page,
     translate,
+    updateActive,
   };
 };
 

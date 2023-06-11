@@ -8,38 +8,47 @@ import IconChevronForwardOutline from '@/svg/IconChevronForwardOutline';
 
 import styles from './Carousel.module.scss';
 
-const Carousel = ({ children, slideClass }) => {
-  const carouselReference = useRef(null);
-  const slidesReference = useRef(null);
+const Carousel = ({ children, slideClass, itemToShow }) => {
   const slideReference = useRef(null);
 
   const {
-    handleNext,
-    handlePrevious,
-    maxTranslate,
-    translate,
     handleTouchEnd,
-    handleTouchStart,
     handleTouchMove,
-  } = useCarousel(carouselReference, slidesReference, slideReference);
+    handleTouchStart,
+    page,
+    updateActive,
+    childrensCount,
+    translate,
+    maxTranslate,
+  } = useCarousel(children, itemToShow, slideReference);
 
   return (
     <div className={styles.container}>
       <div
         className={styles.carousel}
-        ref={carouselReference}
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
         onTouchMove={handleTouchMove}
       >
         <ul
           className={styles.slides}
-          ref={slidesReference}
-          style={{ transform: `translateX(-${translate}px)` }}
+          style={{
+            transform:
+              translate === maxTranslate
+                ? `translateX(-${translate}px)`
+                : `translateX(-${page * 100}%)`,
+          }}
         >
           {Children.toArray(
             children.map((child) => (
-              <li ref={slideReference} className={`${styles.slide} ${slideClass}`}>
+              <li
+                id="slide"
+                ref={slideReference}
+                style={{
+                  width: `${100 / itemToShow}%`,
+                }}
+                className={`${styles.slide} ${slideClass}`}
+              >
                 {child}
               </li>
             ))
@@ -49,17 +58,17 @@ const Carousel = ({ children, slideClass }) => {
       <div className={styles.buttons}>
         <button
           type="button"
-          disabled={translate === 0}
+          disabled={page === 0}
           className={styles['prev-button']}
-          onClick={handlePrevious}
+          onClick={() => updateActive(page - 1)}
         >
           <IconChevronBackOutline />
         </button>
         <button
           type="button"
-          disabled={translate >= maxTranslate}
+          disabled={page + 1 >= childrensCount / itemToShow}
           className={styles['next-button']}
-          onClick={handleNext}
+          onClick={() => updateActive(page + 1)}
         >
           <IconChevronForwardOutline />
         </button>

@@ -8,14 +8,17 @@
 
   .top {
     display: grid;
-    grid-template-columns: 1fr 2fr;
-    justify-items: center;
+    grid-template-columns: 1fr 1fr;
     gap: 3rem;
     padding: 3rem 0;
 
     @include respond(tablet) {
       grid-template-columns: 1fr;
       justify-items: unset;
+    }
+
+    .about {
+      max-width: 400px;
     }
 
     .links {

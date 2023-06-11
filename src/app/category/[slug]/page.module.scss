@@ -2,10 +2,6 @@
   margin-top: 3rem;
   margin-bottom: 2rem;
 
-  @include respond(mobile_l) {
-    padding: 1rem;
-  }
-
   .title {
     display: flex;
     align-items: baseline;

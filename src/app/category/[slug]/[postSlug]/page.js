@@ -43,6 +43,7 @@ const PostId = async (context) => {
               <div className={styles.categories}>
                 {categories.length > 0 &&
                   categories
+                    .filter((c) => c.id !== 29 && c.id !== 28)
                     .slice(0, 2)
                     .map((category) => <Category key={category.id} category={category} />)}
               </div>
