@@ -1,11 +1,6 @@
-import styles from './page.module.scss';
+import pageMetadatas from '@/metadatas/pages';
 
-export const metadata = {
-  description:
-    'Review our terms and conditions. Learn about guidelines and agreements for website or service usage. Stay informed and ensure compliance.',
-  keywords: ['cookie policy', 'cookies', 'technologies', 'information', 'data collection'],
-  title: 'Terms & Conditions | Guidelines for Usage',
-};
+import styles from './page.module.scss';
 
 function page() {
   return (
@@ -132,3 +127,5 @@ function page() {
 }
 
 export default page;
+
+export const metadata = pageMetadatas.terms;

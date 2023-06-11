@@ -1,11 +1,6 @@
-import styles from './page.module.scss';
+import pageMetadatas from '@/metadatas/pages';
 
-export const metadata = {
-  description:
-    'Learn how cookies enhance your browsing. Understand website functionality, traffic analysis, and data privacy. Make informed cookie choices.',
-  keywords: ['cookie policy', 'cookies', 'technologies', 'information', 'data collection'],
-  title: 'Cookie Policy | Enhancing Your Experience',
-};
+import styles from './page.module.scss';
 
 function page() {
   return (
@@ -77,3 +72,5 @@ function page() {
 }
 
 export default page;
+
+export const metadata = pageMetadatas.cookie;

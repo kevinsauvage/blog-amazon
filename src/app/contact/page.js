@@ -1,15 +1,9 @@
 import Breadcrumb from '@/components/Breadcrumb/Breadcrumb';
 import ContactForm from '@/components/ContactForm/ContactForm';
 import Container from '@/components/Container/Container';
+import pageMetadatas from '@/metadatas/pages';
 
 import styles from './page.module.scss';
-
-export const metadata = {
-  description:
-    "Get in touch with us for inquiries, feedback, or collaborations. We're here to assist you and provide a prompt response. Contact us today!",
-  keywords: ['contact', 'get in touch', 'inquiries', 'feedback', 'collaborations', 'contact us'],
-  title: 'Contact Us | Get in Touch',
-};
 
 function page() {
   return (
@@ -28,3 +22,5 @@ function page() {
 }
 
 export default page;
+
+export const metadata = pageMetadatas.contact;

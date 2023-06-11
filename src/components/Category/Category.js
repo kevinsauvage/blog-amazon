@@ -8,7 +8,7 @@ const Category = ({ category }) => (
     className={styles.category}
     style={{ backgroundColor: category.acf?.background_color }}
   >
-    <span>{category.name}</span>
+    {category.name}
   </Link>
 );
 

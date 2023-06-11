@@ -1,14 +1,8 @@
 import Breadcrumb from '@/components/Breadcrumb/Breadcrumb';
 import Container from '@/components/Container/Container';
+import pageMetadatas from '@/metadatas/pages';
 
 import styles from './page.module.scss';
-
-export const metadata = {
-  description:
-    'Discover our story, mission, and values. Get to know us and our commitment to providing valuable content and experiences.',
-  keywords: ['about us', 'story', 'mission', 'values', 'content', 'experiences'],
-  title: 'About Us | Our Story and Mission',
-};
 
 function page() {
   return (
@@ -73,3 +67,5 @@ function page() {
 }
 
 export default page;
+
+export const metadata = pageMetadatas.about;

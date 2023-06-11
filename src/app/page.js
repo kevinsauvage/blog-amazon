@@ -4,6 +4,7 @@ import Post from '@/components/Post/Post';
 import HomeBanner from '@/components/scopes/home/HomeBanner';
 import Section from '@/components/Section/Section';
 import wordpressApiCalls from '@/lib/wordpress/index';
+import pageMetadatas from '@/metadatas/pages';
 
 const { getPosts, getCategories } = wordpressApiCalls;
 
@@ -20,13 +21,6 @@ const getHomeData = async () => {
     const { id, name, slug } = categories[index];
     return { category: { id, name, slug }, ...item };
   });
-};
-
-export const metadata = {
-  description:
-    'Expert insights, valuable tips, and engaging articles. Explore topics, stay informed, and enhance your understanding. Feed your curiosity and learn continuously.',
-  keywords: ['home', 'blog', 'content', 'insights', 'resources', 'trends', 'knowledge'],
-  title: 'Knowledge & Inspiration | Your Source',
 };
 
 const Home = async () => {
@@ -60,3 +54,5 @@ const Home = async () => {
 };
 
 export default Home;
+
+export const metadata = pageMetadatas.home;

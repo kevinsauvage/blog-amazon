@@ -1,11 +1,6 @@
-import styles from './page.module.scss';
+import pageMetadatas from '@/metadatas/pages';
 
-export const metadata = {
-  description:
-    'We prioritize your privacy and data protection. Read our privacy policy to understand how we handle and safeguard your personal information.',
-  keywords: ['privacy policy', 'data protection', 'personal information', 'privacy', 'protection'],
-  title: 'Privacy Policy | Data Protection & Trust',
-};
+import styles from './page.module.scss';
 
 function page() {
   return (
@@ -157,3 +152,5 @@ function page() {
 }
 
 export default page;
+
+export const metadata = pageMetadatas.privacy;

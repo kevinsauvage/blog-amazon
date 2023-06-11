@@ -4,6 +4,31 @@
 const path = require('node:path');
 
 const nextConfig = {
+  async headers() {
+    return [
+      {
+        headers: [
+          {
+            key: 'X-Content-Type-Options',
+            value: 'nosniff',
+          },
+          {
+            key: 'X-Frame-Options',
+            value: 'SAMEORIGIN',
+          },
+          {
+            key: 'Strict-Transport-Security',
+            value: 'max-age=63072000; includeSubDomains; preload',
+          },
+          {
+            key: 'X-XSS-Protection',
+            value: '1; mode=block',
+          },
+        ],
+        source: '/(.*)',
+      },
+    ];
+  },
   images: { domains: ['brainbloomr2.local', 'localhost'] },
   sassOptions: {
     includePaths: [path.join(__dirname, './src/styles/')],
@@ -12,6 +37,7 @@ const nextConfig = {
         @import "responsive.scss";
         @import "themes.scss";
         @import "variables.scss";
+        @import "fontFaces.scss";
         `,
   },
 };
