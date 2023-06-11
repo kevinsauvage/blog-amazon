@@ -20,9 +20,24 @@ const ContactForm = () => {
 
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
-      <input type="text" placeholder="Name" name="name" onChange={handleChange} />
-      <input type="email" placeholder="Email" name="email" onChange={handleChange} />
-      <textarea placeholder="Message" name="message" onChange={handleChange} />
+      <label>
+        Name
+        <input type="text" placeholder="Name" name="name" onChange={handleChange} title="Name" />
+      </label>
+      <label>
+        Email
+        <input
+          type="email"
+          placeholder="Email"
+          name="email"
+          onChange={handleChange}
+          title="Email"
+        />
+      </label>
+      <label>
+        Message
+        <textarea placeholder="Message" name="message" onChange={handleChange} title="message" />
+      </label>
       <Button type="submit" text="Submit" />
     </form>
   );

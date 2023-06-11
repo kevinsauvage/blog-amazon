@@ -6,8 +6,15 @@
   margin: 0 auto;
   margin-top: 2rem;
 
+  label {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
   input,
   textarea {
+    width: 100%;
     border: 1px solid var(--surface-600);
     border-radius: $radius1;
     font-size: 1.1rem;
