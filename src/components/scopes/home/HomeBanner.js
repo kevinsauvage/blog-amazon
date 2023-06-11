@@ -13,13 +13,22 @@ const HomeBanner = ({ posts, grid, slider }) => {
       {grid && (
         <Grid variant="5">
           {Array.isArray(posts) &&
-            posts.map((post) => <PostGrid key={post.ID} post={post} image={post.images.large} />)}
+            posts.map((post) => (
+              <PostGrid key={post.ID} post={post} image={post.images.large} imagePriority />
+            ))}
         </Grid>
       )}
       {slider && (
         <FullWidthSlider>
           {Array.isArray(posts) &&
-            posts.map((post) => <PostBig key={post.ID} post={post} image={post?.images?.full} />)}
+            posts.map((post, index) => (
+              <PostBig
+                key={post.ID}
+                post={post}
+                image={post?.images?.full}
+                imagePriority={index < 2}
+              />
+            ))}
         </FullWidthSlider>
       )}
     </div>

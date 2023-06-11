@@ -39,8 +39,13 @@ const search = async (context) => {
         </div>
         <Grid variant="2">
           {Array.isArray(posts) &&
-            posts.map((post) => (
-              <PostGrid key={post.ID} post={post} image={post.images.medium_large} />
+            posts.map((post, index) => (
+              <PostGrid
+                key={post.ID}
+                post={post}
+                image={post.images.medium_large}
+                imagePriority={index < 3}
+              />
             ))}
         </Grid>
         <Pagination totalPages={totalPages} currentPage={page} />

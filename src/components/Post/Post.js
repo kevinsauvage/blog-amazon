@@ -16,7 +16,7 @@ const Post = ({ post, image, showCategories = true, showExcerpt = true }) => {
 
   return (
     <article className={styles.post}>
-      <Link href={postLink}>
+      <Link href={postLink} aria-label="link to the post">
         <Image
           className={styles.image}
           src={image.source_url}

@@ -9,7 +9,7 @@ import Views from '../Views/Views';
 // eslint-disable-next-line css-modules/no-unused-class
 import styles from './PostGrid.module.scss';
 
-const PostGrid = ({ post, image }) => {
+const PostGrid = ({ post, image, imagePriority }) => {
   const { slug, categories, title, imageAlt, date, viewCount, excerpt } = post;
   const category = categories.find((c) => c.id !== 29 && c.id !== 28);
 
@@ -23,6 +23,7 @@ const PostGrid = ({ post, image }) => {
         width={image.width}
         height={image.height}
         alt={imageAlt}
+        priority={imagePriority}
       />
 
       <div className={styles.content}>

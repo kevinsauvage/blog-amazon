@@ -41,8 +41,13 @@ const categorySlug = async (context) => {
       <main>
         {Array.isArray(posts) && (
           <Grid variant="2">
-            {posts.map((post) => (
-              <PostGrid key={post.ID} post={post} image={post.images.medium_large} />
+            {posts.map((post, index) => (
+              <PostGrid
+                key={post.ID}
+                post={post}
+                image={post.images.medium_large}
+                imagePriority={index < 3}
+              />
             ))}
           </Grid>
         )}
@@ -60,9 +65,6 @@ export async function generateMetadata({ params }) {
   const seo = category[0].yoast_head_json;
 
   return {
-    alternates: {
-      canonical: `/category/${slug}`,
-    },
     description: seo.og_description,
     openGraph: {
       description: seo.og_description,

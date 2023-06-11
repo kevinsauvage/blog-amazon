@@ -22,6 +22,7 @@ const ScrollTopButton = () => {
   return (
     <button
       type="button"
+      aria-label="scroll to the top of the page"
       className={`${styles.button} ${show ? styles.visible : ''}`}
       onClick={handleClick}
     >

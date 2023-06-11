@@ -31,7 +31,11 @@ const Pagination = ({ currentPage, totalPages }) => {
     <nav className={styles.pagination}>
       <div className={`${styles.left} ${styles.item}`}>
         {currentPage > 1 ? (
-          <Link href={`${pathname}?${createQueryString('page', Number(currentPage) - 1)}`} passHref>
+          <Link
+            href={`${pathname}?${createQueryString('page', Number(currentPage) - 1)}`}
+            passHref
+            aria-label="link to previous page"
+          >
             <IconArrowLeftShort />
           </Link>
         ) : (
@@ -56,7 +60,11 @@ const Pagination = ({ currentPage, totalPages }) => {
       )}
       <div className={`${styles.right} ${styles.item}`}>
         {currentPage < totalPages ? (
-          <Link href={`${pathname}?${createQueryString('page', Number(currentPage) + 1)}`} passHref>
+          <Link
+            href={`${pathname}?${createQueryString('page', Number(currentPage) + 1)}`}
+            passHref
+            aria-label="link to next page"
+          >
             <IconArrowRightShort />
           </Link>
         ) : (
