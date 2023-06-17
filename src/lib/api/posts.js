@@ -9,7 +9,7 @@ const getPosts = async (properties) => {
 
   if (category) URL += `&filters[categories][slug][$eqi]=${category}`;
   if (slug) URL += `&filters[slug][$eqi]=${slug}`;
-  if (query) URL += `&filters[title][$$containsi]=${query}`;
+  if (query) URL += `&filters[title][$containsi]=${query}`;
   if (sort) URL += `&sort=${sort}`;
 
   const { data, meta } = (await fetchStrapiEndpoint(URL)) || {};
