@@ -26,12 +26,13 @@
       text-align: center;
     }
 
-    h2 {
+    h3 {
       margin-top: 2rem;
+      margin-bottom: 0.5rem;
       font-size: 1.2rem;
     }
 
-    .conclusion {
+    &.conclusion {
       margin-top: 1rem;
     }
   }

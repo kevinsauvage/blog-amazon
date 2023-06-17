@@ -5,17 +5,17 @@ import apiCalls from '@/lib/api';
 
 import '../styles/globals.scss';
 
-const { getCategories } = apiCalls;
+const { getMenu } = apiCalls;
 
 const RootLayout = async ({ children }) => {
-  const categories = await getCategories();
+  const mainMenu = await getMenu({ slug: 'main-navigation' });
 
   return (
     <html lang="en" className="theme-light">
       <body>
-        <Header categories={categories} />
-        <div>{children}</div>
-        <Footer categories={categories} />
+        <Header menu={mainMenu} />
+        {children}
+        <Footer />
         <ScrollTopButton />
       </body>
     </html>

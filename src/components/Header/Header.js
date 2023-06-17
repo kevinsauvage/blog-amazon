@@ -9,11 +9,11 @@ import IconSearch from '@/svg/IconSearch';
 
 import Container from '../Container/Container';
 import Menu from '../Menu/Menu';
-import NavCategories from '../NavCategories/NavCategories';
+import Nav from '../Nav/Nav';
 
 import styles from './Header.module.scss';
 
-const Header = ({ categories }) => {
+const Header = ({ menu }) => {
   const [showNav, setShowNav] = useState(false);
   const pathname = usePathname();
 
@@ -44,7 +44,7 @@ const Header = ({ categories }) => {
           </div>
 
           <div className={styles.navigation}>
-            <NavCategories variant="row" categories={categories} />
+            <Nav variant="row" menu={menu} />
           </div>
           <Link href="/search" className={styles.search}>
             <p>Search</p>
@@ -52,7 +52,7 @@ const Header = ({ categories }) => {
           </Link>
         </div>
       </Container>
-      <Menu show={showNav} categories={categories} handleClose={() => setShowNav(false)} />
+      <Menu show={showNav} menu={menu} handleClose={() => setShowNav(false)} />
     </header>
   );
 };

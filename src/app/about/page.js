@@ -19,7 +19,7 @@ function page() {
             you&apos;ve come to the right place.
           </p>
 
-          <h2>What You&apos;ll Find on [Your Blog Name]</h2>
+          <h3>What You&apos;ll Find on [Your Blog Name]</h3>
 
           <p>
             [Your Blog Name] covers a diverse array of subjects, ranging from personal growth and
@@ -28,7 +28,7 @@ function page() {
             valuable content that entertains, educates, and sparks curiosity.
           </p>
 
-          <h2>Why I Started [Your Blog Name]</h2>
+          <h3>Why I Started [Your Blog Name]</h3>
 
           <p>
             I started [Your Blog Name] out of my deep passion for sharing knowledge and connecting
@@ -37,7 +37,7 @@ function page() {
             contribute. Together, we can embark on a journey of discovery and growth.
           </p>
 
-          <h2>Join the [Your Blog Name] Community</h2>
+          <h3>Join the [Your Blog Name] Community</h3>
 
           <p>
             [Your Blog Name] is not just a blog; it&apos;s a community of curious minds, learners,
@@ -46,7 +46,7 @@ function page() {
             create a supportive environment where we can inspire and learn from one another.
           </p>
 
-          <h2>Contact Me</h2>
+          <h3>Contact Me</h3>
 
           <p>
             If you have any questions, suggestions, or simply want to connect, please feel free to

@@ -4,8 +4,8 @@ import useOnClickOutside from '@/hooks/useClickOutside';
 import IconClose from '@/svg/IconClose';
 
 import Container from '../Container/Container';
+import NavCategories from '../Nav/Nav';
 import Navbar from '../Navbar/Navbar';
-import NavCategories from '../NavCategories/NavCategories';
 import NavItem from '../NavItem/NavItem';
 
 import styles from './Menu.module.scss';
