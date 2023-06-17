@@ -44,7 +44,7 @@ const categorySlug = async (context) => {
                 key={post.ID}
                 post={post}
                 image={post.images.medium}
-                imagePriority={index < 3}
+                imagePriority={index < 6}
               />
             ))}
           </Grid>

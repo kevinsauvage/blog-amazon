@@ -37,8 +37,8 @@ const search = async (context) => {
               <PostGrid
                 key={post.ID}
                 post={post}
-                image={post.images.medium_large}
-                imagePriority={index < 3}
+                image={post.images.medium}
+                imagePriority={index < 6}
               />
             ))}
         </Grid>
