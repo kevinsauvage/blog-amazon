@@ -29,7 +29,7 @@ const nextConfig = {
       },
     ];
   },
-  images: { domains: ['brainbloomr3.local', 'localhost'] },
+  images: { domains: ['strapi-blog-news-production.up.railway', 'localhost'] },
   sassOptions: {
     includePaths: [path.join(__dirname, './src/styles/')],
     prependData: `
