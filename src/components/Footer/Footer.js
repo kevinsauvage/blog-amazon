@@ -40,7 +40,7 @@ const Footer = ({ categories }) => (
                 <NavItem
                   key={category.id}
                   href={`/category/${category.slug}`}
-                  label={category.name}
+                  label={category.label}
                 />
               ))}
             </ul>
