@@ -4,16 +4,16 @@ import Grid from '@/components/Grid/Grid';
 import Pagination from '@/components/Pagination/Pagination';
 import PostGrid from '@/components/PostGrid/PostGrid';
 import TotalFound from '@/components/TotalFound/TotalFound';
-import wordpressApiCalls from '@/lib/wordpress/index';
+import apiCalls from '@/lib/api/index';
 import { formatString } from '@/utils/strings';
 
 import styles from './page.module.scss';
 
-const { getCategoryBySlug, getPosts } = wordpressApiCalls;
+const { getCategories, getPosts } = apiCalls;
 
 const getData = async (slug, page) => {
-  const category = await getCategoryBySlug(slug);
-  const posts = await getPosts({ categories: category?.[0]?.id, page, perPage: 12 });
+  const category = await getCategories({ slug });
+  const posts = await getPosts({ category: category?.[0]?.slug, page, perPage: 12 });
   return { category, posts };
 };
 
@@ -21,21 +21,19 @@ const categorySlug = async (context) => {
   const { params, searchParams } = context;
   const { page = 1 } = searchParams || {};
   const { slug } = params;
-
   const postsResponse = await getData(slug, page);
-
   const { posts, totalPages, totalPosts } = postsResponse?.posts || {};
-  const { yoast_head_json: yoastHead, name } = postsResponse?.category?.[0] || {};
+  const { label, description } = postsResponse?.category?.[0] || {};
 
   return (
     <Container>
-      <Breadcrumb last={name} />
+      <Breadcrumb last={label} />
       <div className={styles.banner}>
         <div className={styles.title}>
-          <h1>{formatString(name)}.</h1>
+          <h1>{formatString(label)}.</h1>
           <TotalFound total={totalPosts} />
         </div>
-        <p className={styles.subtitle}>{yoastHead?.og_description}</p>
+        <p className={styles.subtitle}>{description}</p>
       </div>
 
       <main>
@@ -45,7 +43,7 @@ const categorySlug = async (context) => {
               <PostGrid
                 key={post.ID}
                 post={post}
-                image={post.images.medium_large}
+                image={post.images.medium}
                 imagePriority={index < 3}
               />
             ))}
@@ -59,9 +57,9 @@ const categorySlug = async (context) => {
 
 export default categorySlug;
 
-export async function generateMetadata({ params }) {
+/* export async function generateMetadata({ params }) {
   const { slug } = params;
-  const category = await getCategoryBySlug(slug);
+  const category = await getCategories(slug);
   const seo = category[0].yoast_head_json;
 
   return {
@@ -85,4 +83,4 @@ export async function generateMetadata({ params }) {
       title: seo.title,
     },
   };
-}
+} */

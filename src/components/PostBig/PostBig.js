@@ -29,7 +29,9 @@ const PostBig = ({ post, image }) => {
         <Link href={postLink}>
           <h2 className={styles.title}>{title}</h2>
         </Link>
-        <div className={styles.excerpt} dangerouslySetInnerHTML={{ __html: excerpt }} />
+        {excerpt && (
+          <div className={styles.excerpt} dangerouslySetInnerHTML={{ __html: excerpt }} />
+        )}
       </div>
     </article>
   );

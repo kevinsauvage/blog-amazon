@@ -3,23 +3,23 @@ import Grid from '@/components/Grid/Grid';
 import Post from '@/components/Post/Post';
 import HomeBanner from '@/components/scopes/home/HomeBanner';
 import Section from '@/components/Section/Section';
-import wordpressApiCalls from '@/lib/wordpress/index';
+import apiCalls from '@/lib/api/index';
 import pageMetadatas from '@/metadatas/pages';
 
-const { getPosts, getCategories } = wordpressApiCalls;
+const { getPosts, getCategories } = apiCalls;
 
 const totalPostsByCategory = 3;
 
 const getHomeData = async () => {
   const categories = await getCategories();
   const promises = categories.map((category) =>
-    getPosts({ categories: category.id, perPage: totalPostsByCategory })
+    getPosts({ category: category.slug, perPage: totalPostsByCategory })
   );
   const data = await Promise.all(promises);
 
   return data.map((item, index) => {
-    const { id, name, slug } = categories[index];
-    return { category: { id, name, slug }, ...item };
+    const { id, label, slug } = categories[index];
+    return { category: { id, label, slug }, ...item };
   });
 };
 
@@ -37,13 +37,13 @@ const Home = async () => {
         {posts.map((postData) => (
           <Section
             key={postData.category.id}
-            title={`${postData.category.name} Posts`}
+            title={`${postData.category.label} Posts`}
             buttonUrl={`/category/${postData.category.slug}`}
           >
             <Grid variant="1">
               {Array.isArray(postData.posts) &&
                 postData.posts.map((post) => (
-                  <Post key={post.ID} post={post} image={post.images.medium_large} />
+                  <Post key={post.ID} post={post} image={post.images?.medium} />
                 ))}
             </Grid>
           </Section>

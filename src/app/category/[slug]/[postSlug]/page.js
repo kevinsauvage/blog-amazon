@@ -5,45 +5,48 @@ import Breadcrumb from '@/components/Breadcrumb/Breadcrumb';
 import Category from '@/components/Category/Category';
 import Container from '@/components/Container/Container';
 import Date from '@/components/Date/Date';
-import RelatedPosts from '@/components/RelatedPosts/RelatedPosts';
 import Views from '@/components/Views/Views';
-import wordpressApiCalls from '@/lib/wordpress/index';
+import apiCalls from '@/lib/api/index';
+import { getBaseUrl } from '@/lib/api/utils';
 
 import styles from './page.module.scss';
 
-const { getPostBySlug } = wordpressApiCalls;
-
-const { WORDPRESS_API_URL } = process.env;
+const { getPosts } = apiCalls;
 
 const PostId = async (context) => {
   const {
     params: { postSlug },
   } = context;
 
-  const { categories, title, images, content, ID, imageAlt, viewCount, date } = await getPostBySlug(
-    postSlug
-  );
+  const response = await getPosts({ slug: postSlug });
 
-  const image = images?.full;
+  const { categories, title, images, content, imageAlt, viewCount, date } =
+    response?.posts?.[0] || {};
+
+  const image = images?.large;
+
+  const baseUrl = getBaseUrl();
 
   return (
     <Container>
       <Breadcrumb last={title} />
       <main className={styles.main}>
         <article className={styles.article}>
-          <Image
-            className={styles.image}
-            src={image?.source_url}
-            width={image?.width}
-            height={image?.height}
-            alt={imageAlt}
-          />
+          {image?.url && (
+            <Image
+              className={styles.image}
+              src={baseUrl + image.url}
+              width={image?.width}
+              height={image?.height}
+              alt={imageAlt}
+              priority
+            />
+          )}
           <div className={styles.post}>
             <div className={styles.info}>
               <div className={styles.categories}>
-                {categories.length > 0 &&
+                {categories?.length > 0 &&
                   categories
-                    .filter((c) => c.id !== 29 && c.id !== 28)
                     .slice(0, 2)
                     .map((category) => <Category key={category.id} category={category} />)}
               </div>
@@ -52,10 +55,12 @@ const PostId = async (context) => {
             </div>
             <h1>{title}</h1>
 
-            <div className={styles.content} dangerouslySetInnerHTML={{ __html: content }} />
+            {content && (
+              <div className={styles.content} dangerouslySetInnerHTML={{ __html: content }} />
+            )}
           </div>
         </article>
-        <RelatedPosts id={ID} />
+        {/*     <RelatedPosts id={ID} /> */}
       </main>
     </Container>
   );
@@ -63,9 +68,9 @@ const PostId = async (context) => {
 
 export default PostId;
 
-export async function generateMetadata({ params }) {
+/* export async function generateMetadata({ params }) {
   const { postSlug } = params;
-  const URL = `${WORDPRESS_API_URL}/posts?slug=${postSlug}&_embed`;
+  const URL = `${WORDPRESS_API_BASE}${WORDPRESS_API_URL}/posts?slug=${postSlug}&_embed`;
   const product = await fetch(URL).then((response) => response.json());
   const seo = product[0].yoast_head_json;
 
@@ -90,4 +95,4 @@ export async function generateMetadata({ params }) {
       title: seo.title,
     },
   };
-}
+} */

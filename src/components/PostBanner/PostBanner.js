@@ -20,7 +20,13 @@ const PostBanner = ({ post }) => {
   return (
     <div className={styles.banner}>
       <div className={`${styles.image}`}>
-        <Image src={image.source_url} width={image.width} height={image.height} alt={imageAlt} />
+        <Image
+          src={image.source_url}
+          width={image.width}
+          height={image.height}
+          alt={imageAlt}
+          priority
+        />
       </div>
       <div className={styles.content}>
         <Category category={category} />

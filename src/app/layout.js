@@ -1,9 +1,11 @@
 import Footer from '@/components/Footer/Footer';
 import Header from '@/components/Header/Header';
 import ScrollTopButton from '@/components/ScrollTopButton/ScrollTopButton';
-import { getCategories } from '@/lib/wordpress/categories';
+import apiCalls from '@/lib/api';
 
 import '../styles/globals.scss';
+
+const { getCategories } = apiCalls;
 
 const RootLayout = async ({ children }) => {
   const categories = await getCategories();

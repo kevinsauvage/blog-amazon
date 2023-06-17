@@ -4,11 +4,11 @@ import styles from './Category.module.scss';
 
 const Category = ({ category }) => (
   <Link
-    href={`/category/${category.slug}`}
+    href={`/category/${category?.slug}`}
     className={styles.category}
-    style={{ backgroundColor: category.acf?.background_color }}
+    style={{ backgroundColor: category?.color }}
   >
-    {category.name}
+    {category?.label}
   </Link>
 );
 

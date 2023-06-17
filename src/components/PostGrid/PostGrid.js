@@ -2,6 +2,8 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
+import { getBaseUrl } from '@/lib/api/utils';
+
 import Category from '../Category/Category';
 import Date from '../Date/Date';
 import Views from '../Views/Views';
@@ -11,28 +13,30 @@ import styles from './PostGrid.module.scss';
 
 const PostGrid = ({ post, image, imagePriority }) => {
   const { slug, categories, title, imageAlt, date, viewCount, excerpt } = post;
-  const category = categories.find((c) => c.id !== 29 && c.id !== 28);
 
-  const postLink = `/category/${category.slug}/${slug}`;
+  const category = categories[0];
+
+  const postLink = `/category/${category?.slug}/${slug}`;
 
   return (
     <div className={styles.post}>
-      <Image
-        className={`${styles.image}`}
-        src={image.source_url}
-        width={image.width}
-        height={image.height}
-        alt={imageAlt}
-        priority={imagePriority}
-      />
+      {image && (
+        <Image
+          className={`${styles.image}`}
+          src={getBaseUrl() + image.url}
+          width={image.width}
+          height={image.height}
+          alt={imageAlt}
+          priority={imagePriority}
+        />
+      )}
 
       <div className={styles.content}>
         <Category category={category} />
         <Link href={postLink}>
           <h2 className={styles.title}>{title}</h2>
         </Link>
-        <div className={styles.excerpt} dangerouslySetInnerHTML={{ __html: excerpt }} />
-
+        <p className={styles.excerpt}>{excerpt}</p>
         <div className={styles.info}>
           <Date date={date} variant="light" />
           <Views views={viewCount} variant="light" />

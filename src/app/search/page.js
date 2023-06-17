@@ -5,12 +5,12 @@ import Pagination from '@/components/Pagination/Pagination';
 import PostGrid from '@/components/PostGrid/PostGrid';
 import SearchForm from '@/components/SearchForm/SearchForm';
 import TotalFound from '@/components/TotalFound/TotalFound';
-import wordpressApiCalls from '@/lib/wordpress/index';
+import apiCalls from '@/lib/api/index';
 import pageMetadatas from '@/metadatas/pages';
 
 import styles from './page.module.scss';
 
-const { getPosts } = wordpressApiCalls;
+const { getPosts } = apiCalls;
 
 const search = async (context) => {
   const { q = '', page = 1 } = context?.searchParams || {};

@@ -1,6 +1,6 @@
-import wordpressApiCalls from '@/lib/wordpress/index';
+import apiCalls from '@/lib/api/index';
 
-const { getPosts } = wordpressApiCalls;
+const { getPosts } = apiCalls;
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 

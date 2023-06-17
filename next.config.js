@@ -29,7 +29,7 @@ const nextConfig = {
       },
     ];
   },
-  images: { domains: ['brainbloomr2.local', 'localhost'] },
+  images: { domains: ['brainbloomr3.local', 'localhost'] },
   sassOptions: {
     includePaths: [path.join(__dirname, './src/styles/')],
     prependData: `
