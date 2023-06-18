@@ -1,4 +1,4 @@
-const REVALIDATE = 0; // 1/2 day
+const REVALIDATE = 60 * 60 * 12; // 1/2 day
 
 export const getBaseUrl = () =>
   process.env.NODE_ENV === 'production'
