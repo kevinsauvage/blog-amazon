@@ -1,0 +1,28 @@
+.comment {
+  width: auto;
+  margin-bottom: 0.5rem;
+  padding: 1.5rem 2rem;
+  border: $border-light;
+  border-radius: $radius1;
+
+  &.child {
+    margin-left: 2rem;
+    background-color: rgba(var(--rgb-on-surface-500), 0.1);
+  }
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.name {
+  font-weight: 600;
+  font-size: 1.2rem;
+}
+
+.content {
+  color: var(--on-surface-300);
+}

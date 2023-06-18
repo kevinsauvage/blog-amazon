@@ -5,13 +5,14 @@ import Breadcrumb from '@/components/Breadcrumb/Breadcrumb';
 import Category from '@/components/Category/Category';
 import Container from '@/components/Container/Container';
 import Date from '@/components/Date/Date';
+import CommentsPresentation from '@/components/scopes/comments/CommentsPresentation/CommentsPresentation';
 import Views from '@/components/Views/Views';
 import apiCalls from '@/lib/api/index';
 import { getBaseUrl } from '@/lib/api/utils';
 
 import styles from './page.module.scss';
 
-const { getPosts } = apiCalls;
+const { getPosts, updatePost } = apiCalls;
 
 const PostId = async (context) => {
   const {
@@ -20,8 +21,10 @@ const PostId = async (context) => {
 
   const response = await getPosts({ slug: postSlug });
 
-  const { categories, title, images, content, imageAlt, viewCount, date } =
+  const { categories, title, images, content, imageAlt, viewCount, date, id } =
     response?.posts?.[0] || {};
+
+  updatePost({ body: { data: { viewCount: Number.parseInt(viewCount, 10) + 1 } }, id });
 
   const image = images?.large;
 
@@ -60,7 +63,7 @@ const PostId = async (context) => {
             )}
           </div>
         </article>
-        {/*     <RelatedPosts id={ID} /> */}
+        <CommentsPresentation postId={id} />
       </main>
     </Container>
   );

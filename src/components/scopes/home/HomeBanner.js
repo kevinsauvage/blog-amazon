@@ -14,7 +14,7 @@ const HomeBanner = ({ posts, grid, slider }) => {
         <Grid variant="5">
           {Array.isArray(posts) &&
             posts.map((post) => (
-              <PostGrid key={post.ID} post={post} image={post.images?.large} imagePriority />
+              <PostGrid key={post.id} post={post} image={post.images?.large} imagePriority />
             ))}
         </Grid>
       )}
@@ -23,7 +23,7 @@ const HomeBanner = ({ posts, grid, slider }) => {
           {Array.isArray(posts) &&
             posts.map((post, index) => (
               <PostBig
-                key={post.ID}
+                key={post.id}
                 post={post}
                 image={post?.images?.full}
                 imagePriority={index < 2}

@@ -1,0 +1,21 @@
+.textArea {
+  width: 100%;
+  min-height: 300px;
+  margin-bottom: 1rem;
+  padding: 8px;
+  border: 1px solid var(--surface-600);
+  border-radius: $radius1;
+  font-size: 1.1rem;
+  background-color: var(--surface-800);
+  resize: vertical;
+
+  &:focus {
+    border-color: blue;
+    outline: none;
+    box-shadow: 0 0 5px blue;
+  }
+
+  &::placeholder {
+    font-weight: 300;
+  }
+}

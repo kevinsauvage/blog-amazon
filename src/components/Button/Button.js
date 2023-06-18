@@ -4,7 +4,15 @@ import Link from 'next/link';
 
 import styles from './Button.module.scss';
 
-const Button = ({ href, text, type = 'button', variant = 'primary', className = '', ...rest }) => {
+const Button = ({
+  href,
+  text,
+  type = 'button',
+  variant = 'primary',
+  className = '',
+  loading,
+  ...rest
+}) => {
   const getClass = () => {
     switch (variant) {
       case 'primary': {
@@ -21,14 +29,14 @@ const Button = ({ href, text, type = 'button', variant = 'primary', className = 
   if (href) {
     return (
       <Link className={`${styles.link}  ${getClass()} ${className}`} href={href}>
-        {text}
+        {loading ? 'loading' : text}
       </Link>
     );
   }
 
   return (
     <button className={`${styles.button}  ${getClass()} ${className}`} type={type} {...rest}>
-      {text}
+      {loading ? 'loading' : text}
     </button>
   );
 };

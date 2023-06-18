@@ -43,7 +43,7 @@ const Home = async () => {
             <Grid variant="1">
               {Array.isArray(postData.posts) &&
                 postData.posts.map((post) => (
-                  <Post key={post.ID} post={post} image={post.images?.medium} />
+                  <Post key={post.id} post={post} image={post?.images?.medium} />
                 ))}
             </Grid>
           </Section>

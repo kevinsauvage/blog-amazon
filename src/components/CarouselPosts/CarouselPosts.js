@@ -42,7 +42,7 @@ const CarouselPosts = ({ posts, title }) => {
       <Carousel itemToShow={itemToShow}>
         {Array.isArray(posts) &&
           posts.map((post) => (
-            <Post key={post.ID} post={post} image={post?.images?.medium_large} />
+            <Post key={post.id} post={post} image={post?.images?.medium_large} />
           ))}
       </Carousel>
     </div>

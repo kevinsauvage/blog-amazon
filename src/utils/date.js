@@ -1,5 +1,5 @@
 // eslint-disable-next-line import/prefer-default-export
-export const formatTimestamp = (timestamp) => {
+export const formatTimestamp = (timestamp, includeTime = false) => {
   const months = [
     'January',
     'February',
@@ -21,5 +21,16 @@ export const formatTimestamp = (timestamp) => {
   const day = date.getDate();
   const year = date.getFullYear();
 
-  return `${month} ${day}, ${year}`;
+  let formattedDate = `${month} ${day}, ${year}`;
+
+  if (includeTime) {
+    const hours = date.getHours();
+    const minutes = date.getMinutes();
+
+    formattedDate += ` - ${hours.toString().padStart(2, '0')}:${minutes
+      .toString()
+      .padStart(2, '0')}`;
+  }
+
+  return formattedDate;
 };

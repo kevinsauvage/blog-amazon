@@ -10,9 +10,7 @@ const fetchStrapiEndpoint = async (endpoint, config = {}) => {
     const apiUrl = getBaseUrl();
 
     const defaultConfig = {
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      headers: { 'Content-Type': 'application/json' },
       method: 'GET',
       next: { revalidate: REVALIDATE },
       ...config,
@@ -20,7 +18,7 @@ const fetchStrapiEndpoint = async (endpoint, config = {}) => {
 
     const fullUrl = `${apiUrl}/api/${endpoint}`;
 
-    console.log('🚀 ~  file: utils.js:25 ~  fetchStrapiEndpoint ~  fullUrl:', fullUrl);
+    console.log('🚀 ~  file: utils.js:22 ~  fetchStrapiEndpoint ~  fullUrl:', fullUrl);
 
     const response = await fetch(fullUrl, defaultConfig);
     return await response.json();
@@ -46,24 +44,25 @@ export const formatPost = (post) => {
     publishedAt,
     locale,
     slug,
-    featured_image: featuredImage,
+    image,
     categories,
     author,
+    viewCount = 0,
   } = post.attributes || {};
 
   return {
-    ID: post.id,
     author,
     categories: formatCategories(categories?.data),
     content,
     date: publishedAt,
     excerpt: description,
-    imageAlt: featuredImage?.data?.attributes?.alternativeText,
-    images: featuredImage?.data?.attributes?.formats,
+    id: post.id,
+    imageAlt: image?.data?.attributes?.alternativeText,
+    images: image?.data?.attributes?.formats,
     locale,
     slug,
     title,
-    viewCount: 0,
+    viewCount,
   };
 };
 

@@ -35,9 +35,9 @@ const search = async (context) => {
           {Array.isArray(posts) &&
             posts.map((post, index) => (
               <PostGrid
-                key={post.ID}
+                key={post.id}
                 post={post}
-                image={post.images.medium}
+                image={post.images?.medium}
                 imagePriority={index < 6}
               />
             ))}

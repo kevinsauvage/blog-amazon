@@ -1,44 +1,60 @@
 'use client';
 
-import { useState } from 'react';
+import useForm from '@/hooks/useForm';
 
 import Button from '../Button/Button';
+import Input from '../Input/Input';
+import Label from '../Label/Label';
+import TextArea from '../TextArea/TextArea';
 
 import styles from './ContactForm.module.scss';
 
+const handleSubmitCallback = (formData) => {
+  console.log(formData);
+};
+
 const ContactForm = () => {
-  const [formData, setFormData] = useState({ email: '', message: '', name: '' });
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    console.log(formData);
-  };
-
-  const handleChange = (event) => {
-    setFormData((previous) => ({ ...previous, [event.target.name]: event.target.value }));
-  };
+  const { formData, handleInputChange, handleSubmit, loading } = useForm(handleSubmitCallback, {
+    email: '',
+    message: '',
+    name: '',
+  });
 
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
-      <label>
+      <Label>
         Name
-        <input type="text" placeholder="Name" name="name" onChange={handleChange} title="Name" />
-      </label>
-      <label>
-        Email
-        <input
-          type="email"
-          placeholder="Email"
-          name="email"
-          onChange={handleChange}
-          title="Email"
+        <Input
+          type="text"
+          name="name"
+          title="Name"
+          placeholder="Enter you name..."
+          value={formData.name}
+          onChange={handleInputChange}
         />
-      </label>
-      <label>
+      </Label>
+      <Label>
+        Email
+        <Input
+          type="email"
+          name="email"
+          title="Email"
+          placeholder="Enter your email..."
+          value={formData.email}
+          onChange={handleInputChange}
+        />
+      </Label>
+      <Label>
         Message
-        <textarea placeholder="Message" name="message" onChange={handleChange} title="message" />
-      </label>
-      <Button type="submit" text="Submit" />
+        <TextArea
+          name="message"
+          title="message"
+          placeholder="Enter your message..."
+          value={formData.message}
+          onChange={handleInputChange}
+        />
+      </Label>
+      <Button type="submit" text="Send message" loading={loading} />
     </form>
   );
 };
