@@ -29,11 +29,6 @@ const CommentForm = ({ postId }) => {
     const responseJson = await response.json();
     const { error } = responseJson || {};
 
-    console.log(
-      '🚀 ~  file: CommentForm.js:31 ~  handleSubmitCallback ~  responseJson:',
-      responseJson
-    );
-
     if (response?.status === 200) {
       alert('Success, the comment has been posted successfully');
       return true;

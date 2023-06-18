@@ -3,8 +3,6 @@ import IconEyeOutline from '@/svg/IconEyeOutline';
 import styles from './Views.module.scss';
 
 const Views = ({ views = '0', className, variant }) => {
-  console.log('🚀 ~  file: Views.js:7 ~  Views ~  views:', views);
-
   const getStyles = () => {
     if (variant === 'light') return styles.light;
   };

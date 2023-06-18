@@ -25,5 +25,5 @@ export const postComment = async (properties) => {
 export const getComments = async (properties) => {
   const { postId } = properties;
   const URL = `${COMMENT_PATH}/api::article.article:${postId}`;
-  return fetchStrapiEndpoint(URL);
+  return fetchStrapiEndpoint(URL, { next: { revalidate: 60 * 60 } });
 };
