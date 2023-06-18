@@ -16,14 +16,14 @@ const navItems = [
   { href: '/about', id: 4, label: 'About' },
 ];
 
-const DropdownMenu = ({ categories, handleClose, show }) => {
-  const menu = useRef();
+const DropdownMenu = ({ menu, handleClose, show }) => {
+  const menuReference = useRef();
 
-  useOnClickOutside(menu, handleClose);
+  useOnClickOutside(menuReference, handleClose);
 
   return (
     <div className={`${styles.overlay} ${show ? styles.visible : ''}`}>
-      <div className={`${styles.menu} ${show ? styles.active : ''}`} ref={menu}>
+      <div className={`${styles.menu} ${show ? styles.active : ''}`} ref={menuReference}>
         <div className={styles.top}>
           <Container>
             <button type="button" className={styles.close} onClick={handleClose}>
@@ -43,7 +43,7 @@ const DropdownMenu = ({ categories, handleClose, show }) => {
             </li>
 
             <li>
-              <NavCategories title="Categories" variant="column" categories={categories} />
+              <NavCategories title="Categories" variant="column" menu={menu} />
             </li>
           </ul>
         </Container>
