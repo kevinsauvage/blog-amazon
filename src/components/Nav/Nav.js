@@ -6,11 +6,7 @@ const Nav = ({ menu, variant = 'column', title }) => {
   return (
     <Navbar variant={variant} title={title}>
       {menu.map((menuItem) => (
-        <NavItem
-          key={menuItem.id}
-          href={menuItem?.attributes?.path}
-          label={menuItem?.attributes?.label}
-        />
+        <NavItem key={menuItem.id} href={menuItem?.path} label={menuItem?.label} />
       ))}
     </Navbar>
   );

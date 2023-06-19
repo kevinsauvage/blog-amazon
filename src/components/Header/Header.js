@@ -44,7 +44,7 @@ const Header = ({ menu, usefullLinks }) => {
           </div>
 
           <div className={styles.navigation}>
-            <Nav variant="row" menu={menu?.menuItemsFirstLevels?.data} />
+            <Nav variant="row" menu={menu?.items} />
           </div>
           <Link href="/search" className={styles.search}>
             <p>Search</p>

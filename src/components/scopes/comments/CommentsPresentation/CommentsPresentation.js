@@ -18,9 +18,6 @@ const CommentsPresentation = ({ postId }) => {
 
   const fetchComments = useCallback(async () => {
     const response = await getComments({ page, postId });
-
-    console.log('🚀 ~  file: CommentsPresentation.js:22 ~  fetchComments ~  response:', response);
-
     setComments(response.data);
     setPagination(response.meta.pagination);
   }, [postId, page]);

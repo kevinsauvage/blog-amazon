@@ -17,16 +17,8 @@ const Footer = async ({ usefullLinks, categories }) => (
           </p>
         </div>
         <div className={styles.links}>
-          <Nav
-            title={usefullLinks?.displayedTitle}
-            variant="column"
-            menu={usefullLinks?.menuItemsFirstLevels?.data}
-          />
-          <Nav
-            title={categories?.displayedTitle}
-            variant="column"
-            menu={categories?.menuItemsFirstLevels?.data}
-          />
+          <Nav title={usefullLinks?.displayedTitle} variant="column" menu={usefullLinks?.items} />
+          <Nav title={categories?.displayedTitle} variant="column" menu={categories?.items} />
         </div>
       </div>
       <p className={styles.copyright}>© {new Date().getFullYear()}. All rights reserved.</p>

@@ -18,8 +18,6 @@ const fetchStrapiEndpoint = async (endpoint, config = {}) => {
 
     const fullUrl = `${apiUrl}/api/${endpoint}`;
 
-    console.log('🚀 ~  file: utils.js:22 ~  fetchStrapiEndpoint ~  fullUrl:', fullUrl);
-
     const response = await fetch(fullUrl, defaultConfig);
     return await response.json();
   } catch (error) {
@@ -50,6 +48,10 @@ export const formatPost = (post) => {
     viewCount = 0,
   } = post.attributes || {};
 
+  const formattedImage = image?.data?.attributes;
+  const imageAlt = formattedImage?.alternativeText;
+  const images = formattedImage?.formats;
+
   return {
     author,
     categories: formatCategories(categories?.data),
@@ -57,8 +59,8 @@ export const formatPost = (post) => {
     date: publishedAt,
     excerpt: description,
     id: post.id,
-    imageAlt: image?.data?.attributes?.alternativeText,
-    images: image?.data?.attributes?.formats,
+    imageAlt,
+    images,
     locale,
     slug,
     title,
@@ -68,3 +70,23 @@ export const formatPost = (post) => {
 
 export const formatPosts = (posts) =>
   Array.isArray(posts) ? posts?.map((post) => formatPost(post)) : [];
+
+export const normalizeMenuData = (data) =>
+  data.map((menu) => {
+    const { id, attributes } = menu || {};
+    const { title, displayedTitle, items, path, label } = attributes || {};
+
+    const normalizedMenu = {
+      displayedTitle,
+      id,
+      label,
+      path,
+      title,
+    };
+
+    if (items?.data) {
+      normalizedMenu.items = normalizeMenuData(items.data);
+    }
+
+    return normalizedMenu;
+  });
