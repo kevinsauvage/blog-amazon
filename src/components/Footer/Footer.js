@@ -18,12 +18,12 @@ const Footer = async ({ usefullLinks, categories }) => (
         </div>
         <div className={styles.links}>
           <Nav
-            title={usefullLinks.displayedTitle}
+            title={usefullLinks?.displayedTitle}
             variant="column"
             menu={usefullLinks?.menuItemsFirstLevels?.data}
           />
           <Nav
-            title={categories.displayedTitle}
+            title={categories?.displayedTitle}
             variant="column"
             menu={categories?.menuItemsFirstLevels?.data}
           />

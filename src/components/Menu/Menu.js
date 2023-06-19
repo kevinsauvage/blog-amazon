@@ -27,14 +27,14 @@ const DropdownMenu = ({ menu, usefullLinks, handleClose, show }) => {
         <Container>
           <div className={styles.mainMenu}>
             <Nav
-              title={menu.displayedTitle || 'Menu'}
+              title={menu?.displayedTitle || 'Menu'}
               variant="column"
               menu={menu?.menuItemsFirstLevels?.data}
             />
           </div>
           <div className={styles.mainMenu}>
             <Nav
-              title={usefullLinks.displayedTitle || 'Menu'}
+              title={usefullLinks?.displayedTitle || 'Menu'}
               variant="column"
               menu={usefullLinks?.menuItemsFirstLevels?.data}
             />
