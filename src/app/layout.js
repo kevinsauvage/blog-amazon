@@ -5,17 +5,21 @@ import apiCalls from '@/lib/api';
 
 import '../styles/globals.scss';
 
-const { getMenu } = apiCalls;
+const { fetchMenu } = apiCalls;
 
 const RootLayout = async ({ children }) => {
-  const mainMenu = await getMenu({ slug: 'main-navigation' });
+  const [mainMenu, usefullLinks, categoriesMenu] = await Promise.all([
+    fetchMenu({ slug: 'main' }),
+    fetchMenu({ slug: 'usefullLinks' }),
+    fetchMenu({ slug: 'categories' }),
+  ]);
 
   return (
     <html lang="en" className="theme-light">
       <body>
-        <Header menu={mainMenu} />
+        <Header menu={mainMenu} usefullLinks={usefullLinks} />
         {children}
-        <Footer />
+        <Footer usefullLinks={usefullLinks} categories={categoriesMenu} />
         <ScrollTopButton />
       </body>
     </html>

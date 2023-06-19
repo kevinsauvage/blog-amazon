@@ -9,7 +9,7 @@ import TextArea from '../../../TextArea/TextArea';
 
 import styles from './CommentForm.module.scss';
 
-const CommentForm = ({ postId }) => {
+const CommentForm = ({ postId, threadOf, callback }) => {
   const handleSubmitCallback = async (formData) => {
     const { email, name, comment } = formData;
 
@@ -23,6 +23,7 @@ const CommentForm = ({ postId }) => {
         email,
         name,
         postId,
+        threadOf,
       }),
       method: 'POST',
     });
@@ -30,12 +31,15 @@ const CommentForm = ({ postId }) => {
     const { error } = responseJson || {};
 
     if (response?.status === 200) {
-      alert('Success, the comment has been posted successfully');
+      alert(
+        'Great job! Your comment has been successfully submitted. Our team will carefully review it, and once approved, it will be proudly displayed right here for everyone to see. Thank you for your contribution!'
+      );
+      callback();
       return true;
     }
 
     if (error?.message) {
-      window.alert(JSON.parse(error.message).message);
+      alert(JSON.parse(error.message).message);
     }
   };
 

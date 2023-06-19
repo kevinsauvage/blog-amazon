@@ -1,5 +1,6 @@
 .input {
   width: 100%;
+  min-width: 280px;
   min-height: 3rem;
   margin-bottom: 1rem;
   padding: 8px;
@@ -9,9 +10,9 @@
   background-color: var(--surface-800);
 
   &:focus {
-    border-color: blue;
+    border-color: var(--primary-400);
     outline: none;
-    box-shadow: 0 0 5px blue;
+    box-shadow: 0 0 5px var(--primary-400);
   }
 
   &::placeholder {

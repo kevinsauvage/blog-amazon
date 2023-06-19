@@ -5,37 +5,35 @@
   margin: 2rem 0;
   border-radius: $radius1;
 
-  .left,
-  .right {
-    display: flex;
-    align-items: center;
-
-    a {
-      display: flex;
-      align-items: center;
-    }
-
-    svg {
-      font-size: 1.7rem;
-    }
-  }
-
   .item {
     display: flex;
     align-items: center;
     justify-content: center;
     min-width: 35px;
     min-height: 35px;
+    border: 1px solid var(--on-surface-400);
     color: var(--on-surface-100);
     font-weight: 600;
     background-color: var(--surface-700);
-  }
+    cursor: pointer;
 
-  .active {
-    border: 1px solid var(--surface-100);
-  }
+    svg {
+      font-size: 1.5rem;
+    }
 
-  .disabled {
-    opacity: 0.1;
+    &:disabled {
+      border: 0.1px solid var(--on-surface-600);
+      cursor: auto;
+
+      svg {
+        color: var(--on-surface-600);
+      }
+    }
+
+    &.active {
+      border: 1px solid var(--primary-400);
+      color: var(--primary-400);
+      background-color: var(--primary-900);
+    }
   }
 }

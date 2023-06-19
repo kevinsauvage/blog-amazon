@@ -10,9 +10,9 @@
   resize: vertical;
 
   &:focus {
-    border-color: blue;
+    border-color: var(--primary-400);
     outline: none;
-    box-shadow: 0 0 5px blue;
+    box-shadow: 0 0 5px var(--primary-400);
   }
 
   &::placeholder {

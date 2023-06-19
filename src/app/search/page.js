@@ -42,7 +42,7 @@ const search = async (context) => {
               />
             ))}
         </Grid>
-        <Pagination totalPages={totalPages} currentPage={page} />
+        <Pagination totalPages={totalPages} currentPage={page} navigate />
       </main>
     </Container>
   );

@@ -23,7 +23,7 @@ export const postComment = async (properties) => {
 };
 
 export const getComments = async (properties) => {
-  const { postId } = properties;
-  const URL = `${COMMENT_PATH}/api::article.article:${postId}`;
-  return fetchStrapiEndpoint(URL, { next: { revalidate: 60 * 60 } });
+  const { postId, page = 1, pageSize = 5 } = properties;
+  const URL = `${COMMENT_PATH}/api::article.article:${postId}/flat?pagination[page]=${page}&pagination[pageSize]=${pageSize}&pagination[withCount]=true&sort[0]=createdAt:desc&filters[blocked][$eq]=false&filters[blockedThread][$eq]=false`;
+  return fetchStrapiEndpoint(URL, { next: { revalidate: 0 } });
 };

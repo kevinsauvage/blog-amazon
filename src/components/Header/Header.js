@@ -13,7 +13,7 @@ import Nav from '../Nav/Nav';
 
 import styles from './Header.module.scss';
 
-const Header = ({ menu }) => {
+const Header = ({ menu, usefullLinks }) => {
   const [showNav, setShowNav] = useState(false);
   const pathname = usePathname();
 
@@ -44,7 +44,7 @@ const Header = ({ menu }) => {
           </div>
 
           <div className={styles.navigation}>
-            <Nav variant="row" menu={menu} />
+            <Nav variant="row" menu={menu?.menuItemsFirstLevels?.data} />
           </div>
           <Link href="/search" className={styles.search}>
             <p>Search</p>
@@ -52,7 +52,12 @@ const Header = ({ menu }) => {
           </Link>
         </div>
       </Container>
-      <Menu show={showNav} menu={menu} handleClose={() => setShowNav(false)} />
+      <Menu
+        show={showNav}
+        menu={menu}
+        usefullLinks={usefullLinks}
+        handleClose={() => setShowNav(false)}
+      />
     </header>
   );
 };

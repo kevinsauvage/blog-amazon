@@ -1,17 +1,17 @@
 'use client';
 
 import { useCallback } from 'react';
-import Link from 'next/link';
-import { usePathname, useSearchParams } from 'next/navigation';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
 import IconArrowLeftShort from '@/svg/IconArrowLeftShort';
 import IconArrowRightShort from '@/svg/IconArrowRightShort';
 
 import styles from './Pagination.module.scss';
 
-const Pagination = ({ currentPage, totalPages }) => {
+const Pagination = ({ currentPage, totalPages, navigate, handleUpdate }) => {
   const pathname = usePathname();
   const searchParameters = useSearchParams();
+  const router = useRouter();
 
   const pageArray = [...new Array(totalPages).keys()];
 
@@ -25,52 +25,47 @@ const Pagination = ({ currentPage, totalPages }) => {
     [searchParameters]
   );
 
+  const handleChange = (page) => {
+    if (navigate) {
+      const path = `${pathname}?${createQueryString('page', page)}`;
+      router.push(path);
+    }
+    handleUpdate?.(page);
+  };
+
   if (pageArray.length < 2) return;
 
   return (
     <nav className={styles.pagination}>
-      <div className={`${styles.left} ${styles.item}`}>
-        {currentPage > 1 ? (
-          <Link
-            href={`${pathname}?${createQueryString('page', Number(currentPage) - 1)}`}
-            passHref
-            aria-label="Previous page"
-          >
-            <IconArrowLeftShort />
-          </Link>
-        ) : (
-          <IconArrowLeftShort className={styles.disabled} />
-        )}
-      </div>
-      {pageArray.map((page) =>
-        Number(currentPage) === Number(page) + 1 ? (
-          <span key={page} className={`${styles.item} ${styles.active}`}>
-            {page + 1}
-          </span>
-        ) : (
-          <Link
-            className={styles.item}
-            href={`${pathname}?${createQueryString('page', page + 1)}`}
-            passHref
-            key={page}
-          >
-            {page + 1}
-          </Link>
-        )
-      )}
-      <div className={`${styles.right} ${styles.item}`}>
-        {currentPage < totalPages ? (
-          <Link
-            href={`${pathname}?${createQueryString('page', Number(currentPage) + 1)}`}
-            passHref
-            aria-label="Next page"
-          >
-            <IconArrowRightShort />
-          </Link>
-        ) : (
-          <IconArrowRightShort className={styles.disabled} />
-        )}
-      </div>
+      <button
+        className={styles.item}
+        disabled={currentPage <= 1}
+        type="button"
+        onClick={() => handleChange(Number(currentPage) - 1)}
+        aria-label="Previous page"
+      >
+        <IconArrowLeftShort />
+      </button>
+      {pageArray.map((page) => (
+        <button
+          disabled={Number(currentPage) === Number(page) + 1}
+          className={`${styles.item} ${Number(currentPage) === Number(page) + 1 && styles.active}`}
+          type="button"
+          key={page}
+          onClick={() => handleChange(page + 1)}
+        >
+          {page + 1}
+        </button>
+      ))}
+      <button
+        className={styles.item}
+        type="button"
+        disabled={currentPage >= totalPages}
+        aria-label="Next page"
+        onClick={() => handleChange(Number(currentPage) + 1)}
+      >
+        <IconArrowRightShort />
+      </button>
     </nav>
   );
 };

@@ -5,9 +5,12 @@
   border: $border-light;
   border-radius: $radius1;
 
-  &.child {
-    margin-left: 2rem;
-    background-color: rgba(var(--rgb-on-surface-500), 0.1);
+  @include respond(tablet) {
+    padding: 1rem 1.5rem;
+  }
+
+  @include respond(mobile_l) {
+    padding: 1rem;
   }
 }
 
@@ -16,11 +19,26 @@
   align-items: center;
   justify-content: space-between;
   margin-bottom: 1rem;
-}
+  padding-bottom: 0.5rem;
+  border-bottom: $border-light;
 
-.name {
-  font-weight: 600;
-  font-size: 1.2rem;
+  .meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+
+    @include respond(mobile_l) {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+
+  .name {
+    margin-right: 0.5rem;
+    font-weight: 600;
+    font-size: 1.2rem;
+    white-space: nowrap;
+  }
 }
 
 .content {
