@@ -4,22 +4,30 @@ import Grid from '@/components/Grid/Grid';
 import Pagination from '@/components/Pagination/Pagination';
 import PostGrid from '@/components/PostGrid/PostGrid';
 import SearchForm from '@/components/SearchForm/SearchForm';
+import Sorting from '@/components/Sorting/Sorting';
 import TotalFound from '@/components/TotalFound/TotalFound';
 import apiCalls from '@/lib/api/index';
 import pageMetadatas from '@/metadatas/pages';
+import { decodeURL } from '@/utils/url';
 
 import styles from './page.module.scss';
 
-const { getPosts } = apiCalls;
+const { getPosts, fetchSorts } = apiCalls;
 
 const search = async (context) => {
-  const { q = '', page = 1 } = context?.searchParams || {};
-  const { posts, totalPosts, totalPages } = await getPosts({
-    page,
-    perPage: 12,
-    query: q,
-  });
+  const { q = '', page = 1, sorting } = context?.searchParams || {};
 
+  const [results, sorts] = await Promise.all([
+    getPosts({
+      extraParams: sorting ? decodeURL(sorting) : '',
+      page,
+      perPage: 12,
+      query: q,
+    }),
+    fetchSorts({ slug: 'search' }),
+  ]);
+
+  const { posts, totalPosts, totalPages } = results || {};
   return (
     <Container>
       <Breadcrumb />
@@ -30,6 +38,7 @@ const search = async (context) => {
             <TotalFound total={totalPosts} />
           </div>
           <SearchForm query={q} />
+          <Sorting sorts={sorts} />
         </div>
         <Grid variant="2">
           {Array.isArray(posts) &&

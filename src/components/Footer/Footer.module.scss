@@ -20,6 +20,10 @@
     .about {
       max-width: 400px;
       font-size: 1rem;
+
+      .title {
+        color: var(--on-surface-500);
+      }
     }
 
     .aboutContent {

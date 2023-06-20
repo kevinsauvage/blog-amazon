@@ -90,3 +90,22 @@ export const normalizeMenuData = (data) =>
 
     return normalizedMenu;
   });
+
+export const formatSortItems = (sortItems) => {
+  const items = sortItems?.[0]?.attributes?.sortItems?.data;
+
+  return items.map((item) => {
+    const { id, attributes } = item;
+    const { query, active, createdAt, updatedAt, publishedAt, label } = attributes;
+
+    return {
+      active,
+      createdAt,
+      id,
+      label,
+      publishedAt,
+      query,
+      updatedAt,
+    };
+  });
+};

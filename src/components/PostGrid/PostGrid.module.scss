@@ -6,17 +6,20 @@
   border-radius: $radius1;
 
   .title {
-    margin: 0.5rem 0 0 0;
+    margin: 0.5rem 0;
     color: var(--on-surface-dark-100);
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     line-height: 1.2;
     transition: all 0.4s ease-in-out;
+
+    @include respond(mobile_l) {
+      font-size: 1.1rem;
+    }
   }
 
   .excerpt {
     max-width: 460px;
     max-height: 0px;
-    margin-bottom: 0.5rem;
     overflow: hidden;
     color: var(--on-surface-dark-100);
     transition: max-height 0.4s ease-in-out;
@@ -46,6 +49,7 @@
     display: flex;
     align-items: center;
     gap: 1rem;
+    transition: all 0.4s ease-in-out;
   }
 
   &:hover {
@@ -65,6 +69,10 @@
       @include respond(tablet) {
         max-height: 0px;
       }
+    }
+
+    .info {
+      margin-top: 0.5rem;
     }
   }
 }

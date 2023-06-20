@@ -8,7 +8,7 @@ const Footer = async ({ usefullLinks, categories }) => (
     <Container>
       <div className={styles.top}>
         <div className={styles.about}>
-          <p>About</p>
+          <p className={styles.title}>About</p>
           <p className={styles.aboutContent}>
             Hello there! We&apos;re delighted to have you visit [Your Blog Name]. This blog is a
             space where we share thoughts, insights, and experiences on a wide range of topics.

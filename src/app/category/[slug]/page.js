@@ -3,27 +3,38 @@ import Container from '@/components/Container/Container';
 import Grid from '@/components/Grid/Grid';
 import Pagination from '@/components/Pagination/Pagination';
 import PostGrid from '@/components/PostGrid/PostGrid';
+import Sorting from '@/components/Sorting/Sorting';
 import TotalFound from '@/components/TotalFound/TotalFound';
 import apiCalls from '@/lib/api/index';
 import { formatString } from '@/utils/strings';
+import { decodeURL } from '@/utils/url';
 
 import styles from './page.module.scss';
 
-const { getCategories, getPosts } = apiCalls;
+const { getCategories, getPosts, fetchSorts } = apiCalls;
 
-const getData = async (slug, page) => {
+const getData = async (slug, page, sort) => {
   const category = await getCategories({ slug });
-  const posts = await getPosts({ category: category?.[0]?.slug, page, perPage: 12 });
+  const posts = await getPosts({
+    category: category?.[0]?.slug,
+    extraParams: sort,
+    page,
+    perPage: 12,
+  });
   return { category, posts };
 };
 
 const categorySlug = async (context) => {
   const { params, searchParams } = context;
-  const { page = 1 } = searchParams || {};
+  const { page = 1, sorting } = searchParams || {};
   const { slug } = params;
-  const postsResponse = await getData(slug, page);
-  const { posts, totalPages, totalPosts } = postsResponse?.posts || {};
-  const { label, description } = postsResponse?.category?.[0] || {};
+
+  const [results, sorts] = await Promise.all([
+    getData(slug, page, sorting ? decodeURL(sorting) : ''),
+    fetchSorts({ slug: 'search' }),
+  ]);
+  const { posts, totalPages, totalPosts } = results?.posts || {};
+  const { label, description } = results?.category?.[0] || {};
 
   return (
     <Container>
@@ -35,7 +46,7 @@ const categorySlug = async (context) => {
         </div>
         <p className={styles.subtitle}>{description}</p>
       </div>
-
+      <Sorting sorts={sorts} />
       <main>
         {Array.isArray(posts) && (
           <Grid variant="2">
