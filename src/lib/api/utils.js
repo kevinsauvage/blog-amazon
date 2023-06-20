@@ -93,6 +93,7 @@ export const normalizeMenuData = (data) =>
 
 export const formatSortItems = (sortItems) => {
   const items = sortItems?.[0]?.attributes?.sortItems?.data;
+  if (!items) return [];
 
   return items.map((item) => {
     const { id, attributes } = item;
