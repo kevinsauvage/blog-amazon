@@ -21,7 +21,7 @@ const PostId = async (context) => {
 
   const response = await getPosts({ slug: postSlug });
 
-  const { categories, title, images, content, imageAlt, viewCount, date, id } =
+  const { categories, title, images, content, imageAlt, viewCount, publishedAt, id } =
     response?.posts?.[0] || {};
 
   updatePost({ body: { data: { viewCount: Number.parseInt(viewCount, 10) + 1 } }, id });
@@ -53,7 +53,7 @@ const PostId = async (context) => {
                     .slice(0, 2)
                     .map((category) => <Category key={category.id} category={category} />)}
               </div>
-              <Date date={date} />
+              <Date date={publishedAt} />
               <Views views={viewCount} />
             </div>
             <h1>{title}</h1>
@@ -76,7 +76,7 @@ export async function generateMetadata(context) {
   const { postSlug, slug } = params;
   const response = await getPosts({ slug: postSlug });
 
-  const { images = [], date, seo = {} } = response?.posts?.[0] || {};
+  const { images = [], publishedAt, seo = {} } = response?.posts?.[0] || {};
 
   return {
     category: slug,
@@ -91,7 +91,7 @@ export async function generateMetadata(context) {
         width: images[key].width,
       })),
       locale: 'en_US',
-      publishedTime: date,
+      publishedTime: publishedAt,
       siteName: 'site name',
       title: seo?.metaTitle,
       type: 'article',
