@@ -4,7 +4,6 @@ import Post from '@/components/Post/Post';
 import HomeBanner from '@/components/scopes/home/HomeBanner';
 import Section from '@/components/Section/Section';
 import apiCalls from '@/lib/api/index';
-import pageMetadatas from '@/metadatas/pages';
 
 const { getPosts, getCategories } = apiCalls;
 
@@ -24,10 +23,7 @@ const getHomeData = async () => {
 };
 
 const Home = async () => {
-  const [posts, sticky] = await Promise.all([
-    getHomeData(),
-    getPosts({ perPage: 3, stycky: true }),
-  ]);
+  const [posts, sticky] = await Promise.all([getHomeData(), getPosts({ perPage: 3 })]);
 
   return (
     <main>
@@ -54,5 +50,3 @@ const Home = async () => {
 };
 
 export default Home;
-
-export const metadata = pageMetadatas.home;

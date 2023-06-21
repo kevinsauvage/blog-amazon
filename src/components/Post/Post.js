@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { getBaseUrl } from '@/lib/api/utils';
+import { getStrapiBaseUrl } from '@/lib/api/utils';
 
 import Category from '../Category/Category';
 import Date from '../Date/Date';
@@ -10,7 +10,7 @@ import Views from '../Views/Views';
 import styles from './Post.module.scss';
 
 const Post = ({ post, image, showCategories = true, showExcerpt = true }) => {
-  const { slug, categories, excerpt, title, imageAlt, date, viewCount } = post;
+  const { slug, categories, excerpt, title, imageAlt, publishedAt, viewCount } = post;
 
   const category = categories[0];
 
@@ -22,7 +22,7 @@ const Post = ({ post, image, showCategories = true, showExcerpt = true }) => {
         <Link href={postLink} aria-label="link to the post">
           <Image
             className={styles.image}
-            src={getBaseUrl() + image.url}
+            src={getStrapiBaseUrl() + image.url}
             width={image.width}
             height={image.height}
             alt={imageAlt}
@@ -32,7 +32,7 @@ const Post = ({ post, image, showCategories = true, showExcerpt = true }) => {
       <div className={styles.content}>
         <div className={styles.header}>
           {showCategories && <Category category={category} />}
-          <Date date={date} />
+          <Date date={publishedAt} />
           <Views views={viewCount} />
         </div>
         <Link href={postLink}>

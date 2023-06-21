@@ -2,7 +2,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { getBaseUrl } from '@/lib/api/utils';
+import { getStrapiBaseUrl } from '@/lib/api/utils';
 
 import Category from '../Category/Category';
 import Date from '../Date/Date';
@@ -12,7 +12,7 @@ import Views from '../Views/Views';
 import styles from './PostGrid.module.scss';
 
 const PostGrid = ({ post, image, imagePriority }) => {
-  const { slug, categories, title, imageAlt, date, viewCount, excerpt } = post;
+  const { slug, categories, title, imageAlt, publishedAt, viewCount, excerpt } = post;
 
   const category = categories[0];
 
@@ -23,7 +23,7 @@ const PostGrid = ({ post, image, imagePriority }) => {
       {image && (
         <Image
           className={`${styles.image}`}
-          src={getBaseUrl() + image.url}
+          src={getStrapiBaseUrl() + image.url}
           width={image.width}
           height={image.height}
           alt={imageAlt}
@@ -38,7 +38,7 @@ const PostGrid = ({ post, image, imagePriority }) => {
         </Link>
         <p className={styles.excerpt}>{excerpt}</p>
         <div className={styles.info}>
-          <Date date={date} variant="light" />
+          <Date date={publishedAt} variant="light" />
           <Views views={viewCount} variant="light" />
         </div>
       </div>

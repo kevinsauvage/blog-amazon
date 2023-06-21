@@ -1,13 +1,18 @@
 const REVALIDATE = 60 * 60 * 12; // 1/2 day
 
-export const getBaseUrl = () =>
+export const getStrapiBaseUrl = () =>
   process.env.NODE_ENV === 'production'
     ? 'https://strapi-blog-news-production.up.railway.app'
     : 'http://localhost:1337';
 
+export const getFrontBaseUrl = () =>
+  process.env.NODE_ENV === 'production'
+    ? 'https://brainbloomr.vercel.app'
+    : 'http://localhost:3000';
+
 const fetchStrapiEndpoint = async (endpoint, config = {}) => {
   try {
-    const apiUrl = getBaseUrl();
+    const apiUrl = getStrapiBaseUrl();
 
     const defaultConfig = {
       headers: { 'Content-Type': 'application/json' },
@@ -30,8 +35,8 @@ export default fetchStrapiEndpoint;
 
 export const formatCategories = (data) =>
   data.map((category) => {
-    const { label, color, locale, slug, description } = category.attributes;
-    return { color, description, id: category.id, label, locale, slug };
+    const { label, color, locale, slug, description, publishedAt, seo } = category.attributes;
+    return { color, description, id: category.id, label, locale, publishedAt, seo, slug };
   });
 
 export const formatPost = (post) => {
@@ -45,6 +50,7 @@ export const formatPost = (post) => {
     image,
     categories,
     author,
+    seo,
     viewCount = 0,
   } = post.attributes || {};
 
@@ -56,12 +62,13 @@ export const formatPost = (post) => {
     author,
     categories: formatCategories(categories?.data),
     content,
-    date: publishedAt,
     excerpt: description,
     id: post.id,
     imageAlt,
     images,
     locale,
+    publishedAt,
+    seo,
     slug,
     title,
     viewCount,
@@ -71,25 +78,27 @@ export const formatPost = (post) => {
 export const formatPosts = (posts) =>
   Array.isArray(posts) ? posts?.map((post) => formatPost(post)) : [];
 
-export const normalizeMenuData = (data) =>
-  data.map((menu) => {
-    const { id, attributes } = menu || {};
-    const { title, displayedTitle, items, path, label } = attributes || {};
+export const normalizeMenuData = (data) => {
+  if (Array.isArray(data))
+    return data.map((menu) => {
+      const { id, attributes } = menu || {};
+      const { title, displayedTitle, items, path, label } = attributes || {};
 
-    const normalizedMenu = {
-      displayedTitle,
-      id,
-      label,
-      path,
-      title,
-    };
+      const normalizedMenu = {
+        displayedTitle,
+        id,
+        label,
+        path,
+        title,
+      };
 
-    if (items?.data) {
-      normalizedMenu.items = normalizeMenuData(items.data);
-    }
+      if (items?.data) {
+        normalizedMenu.items = normalizeMenuData(items.data);
+      }
 
-    return normalizedMenu;
-  });
+      return normalizedMenu;
+    });
+};
 
 export const formatSortItems = (sortItems) => {
   const items = sortItems?.[0]?.attributes?.sortItems?.data;

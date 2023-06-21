@@ -10,7 +10,7 @@ import styles from './PostBanner.module.scss';
 
 const PostBanner = ({ post }) => {
   if (!post) return;
-  const { title, imageAlt, images, categories, date, viewCount, slug } = post;
+  const { title, imageAlt, images, categories, publishedAt, viewCount, slug } = post;
 
   const image = images?.full;
   const category = categories?.[0];
@@ -34,7 +34,7 @@ const PostBanner = ({ post }) => {
           <h2 className={styles.title}>{title}</h2>
         </Link>
         <div className={styles.info}>
-          <Date className={styles.date} date={date} />
+          <Date className={styles.date} date={publishedAt} />
           <Views className={styles.views} views={viewCount} />
         </div>
       </div>

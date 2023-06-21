@@ -2,6 +2,7 @@ import getCategories from './categories';
 import { getComments, postComment } from './comments';
 import { fetchMenu } from './menus';
 import { getPosts, updatePost } from './posts';
+import { getSingleType } from './singleType';
 import { fetchSorts } from './sorts';
 
 const apiCalls = {
@@ -10,6 +11,7 @@ const apiCalls = {
   getCategories,
   getComments,
   getPosts,
+  getSingleType,
   postComment,
   updatePost,
 };

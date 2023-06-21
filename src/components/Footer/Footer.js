@@ -3,18 +3,13 @@ import Nav from '../Nav/Nav';
 
 import styles from './Footer.module.scss';
 
-const Footer = async ({ usefullLinks, categories }) => (
+const Footer = async ({ usefullLinks, categories, about }) => (
   <footer className={styles.Footer}>
     <Container>
       <div className={styles.top}>
         <div className={styles.about}>
           <p className={styles.title}>About</p>
-          <p className={styles.aboutContent}>
-            Hello there! We&apos;re delighted to have you visit [Your Blog Name]. This blog is a
-            space where we share thoughts, insights, and experiences on a wide range of topics.
-            Whether you&apos;re seeking inspiration, information, or simply a moment of relaxation,
-            you&apos;ve come to the right place.
-          </p>
+          <p className={styles.aboutContent}>{about}</p>
         </div>
         <div className={styles.links}>
           <Nav title={usefullLinks?.displayedTitle} variant="column" menu={usefullLinks?.items} />

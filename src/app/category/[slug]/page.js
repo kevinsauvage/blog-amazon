@@ -33,6 +33,7 @@ const categorySlug = async (context) => {
     getData(slug, page, sorting ? decodeURL(sorting) : ''),
     fetchSorts({ slug: 'search' }),
   ]);
+
   const { posts, totalPages, totalPosts } = results?.posts || {};
   const { label, description } = results?.category?.[0] || {};
 
@@ -68,30 +69,28 @@ const categorySlug = async (context) => {
 
 export default categorySlug;
 
-/* export async function generateMetadata({ params }) {
+export async function generateMetadata({ params }) {
   const { slug } = params;
-  const category = await getCategories(slug);
-  const seo = category[0].yoast_head_json;
+  const category = await getCategories({ slug });
+  const { label, description, seo = {} } = category?.[0] || {};
 
   return {
-    description: seo.og_description,
-    openGraph: {
-      description: seo.og_description,
-      images: seo.og_image,
-      locale: seo.og_locale,
-      publishedTime: seo.article_published_time,
-      siteName: seo.og_site_name,
-      title: seo.og_title,
-      type: seo.og_type,
-      url: seo.og_url,
+    category: seo?.metaTitle || label,
+    description: seo?.metaDescription || description,
+    keywords: seo?.keywords?.split(','),
+    robots: {
+      follow: true,
+      googleBot: {
+        follow: false,
+        index: true,
+        'max-image-preview': 'large',
+        'max-snippet': -1,
+        'max-video-preview': -1,
+        noimageindex: true,
+      },
+      index: false,
+      nocache: true,
     },
-    robots: seo.robots,
-    title: seo.title,
-    twitter: {
-      card: seo.twitter_card,
-      description: seo.og_description,
-      images: seo.og_image,
-      title: seo.title,
-    },
+    title: seo?.metaTitle,
   };
-} */
+}

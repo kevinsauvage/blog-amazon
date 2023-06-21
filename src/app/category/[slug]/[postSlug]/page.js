@@ -8,7 +8,7 @@ import Date from '@/components/Date/Date';
 import CommentsPresentation from '@/components/scopes/comments/CommentsPresentation/CommentsPresentation';
 import Views from '@/components/Views/Views';
 import apiCalls from '@/lib/api/index';
-import { getBaseUrl } from '@/lib/api/utils';
+import { getFrontBaseUrl, getStrapiBaseUrl } from '@/lib/api/utils';
 
 import styles from './page.module.scss';
 
@@ -28,7 +28,7 @@ const PostId = async (context) => {
 
   const image = images?.large;
 
-  const baseUrl = getBaseUrl();
+  const baseUrl = getStrapiBaseUrl();
 
   return (
     <Container>
@@ -71,31 +71,59 @@ const PostId = async (context) => {
 
 export default PostId;
 
-/* export async function generateMetadata({ params }) {
-  const { postSlug } = params;
-  const URL = `${WORDPRESS_API_BASE}${WORDPRESS_API_URL}/posts?slug=${postSlug}&_embed`;
-  const product = await fetch(URL).then((response) => response.json());
-  const seo = product[0].yoast_head_json;
+export async function generateMetadata(context) {
+  const { params } = context;
+  const { postSlug, slug } = params;
+  const response = await getPosts({ slug: postSlug });
+
+  const { images = [], date, seo = {} } = response?.posts?.[0] || {};
 
   return {
-    description: seo.og_description,
+    category: slug,
+    description: seo?.metaDescription,
+    keywords: seo?.keywords?.split(','),
     openGraph: {
-      description: seo.og_description,
-      images: seo.og_image,
-      locale: seo.og_locale,
-      publishedTime: seo.article_published_time,
-      siteName: seo.og_site_name,
-      title: seo.og_title,
-      type: seo.og_type,
-      url: seo.og_url,
+      description: seo?.metaDescription,
+      images: Object.keys(images).map((key) => ({
+        alt: images[key].alt,
+        height: images[key].height,
+        url: getStrapiBaseUrl() + images[key].url,
+        width: images[key].width,
+      })),
+      locale: 'en_US',
+      publishedTime: date,
+      siteName: 'site name',
+      title: seo?.metaTitle,
+      type: 'article',
+      url: `${getFrontBaseUrl()}/${slug}/${postSlug}`,
     },
-    robots: seo.robots,
-    title: seo.title,
+    robots: {
+      follow: true,
+      googleBot: {
+        follow: false,
+        index: true,
+        'max-image-preview': 'large',
+        'max-snippet': -1,
+        'max-video-preview': -1,
+        noimageindex: true,
+      },
+      index: false,
+      nocache: true,
+    },
+    title: seo?.metaTitle,
     twitter: {
-      card: seo.twitter_card,
-      description: seo.og_description,
-      images: seo.og_image,
-      title: seo.title,
+      card: 'summary_large_image',
+      creator: '', // Add your Twitter username here if applicable
+      creatorId: '', // Add your Twitter user ID here if applicable
+      description: seo?.metaDescription,
+      images: Object.keys(images)?.map((key) => ({
+        alt: images[key].alt,
+        height: images[key].height,
+        url: getStrapiBaseUrl() + images[key].url,
+        width: images[key].width,
+      })),
+      siteId: '', // Add your Twitter site ID here if applicable
+      title: seo?.metaTitle,
     },
   };
-} */
+}

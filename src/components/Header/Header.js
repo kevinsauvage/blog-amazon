@@ -13,7 +13,7 @@ import Nav from '../Nav/Nav';
 
 import styles from './Header.module.scss';
 
-const Header = ({ menu, usefullLinks }) => {
+const Header = ({ menu, usefullLinks, siteName }) => {
   const [showNav, setShowNav] = useState(false);
   const pathname = usePathname();
 
@@ -39,7 +39,7 @@ const Header = ({ menu, usefullLinks }) => {
           </button>
           <div className={styles.logo}>
             <Link href="/">
-              <strong>Bloglytics</strong>
+              <strong>{siteName}</strong>
             </Link>
           </div>
 
