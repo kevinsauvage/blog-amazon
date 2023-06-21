@@ -72,6 +72,9 @@ export default categorySlug;
 export async function generateMetadata({ params }) {
   const { slug } = params;
   const category = await getCategories({ slug });
+
+  console.log('🚀 ~  file: page.js:76 ~  generateMetadata ~  category:', category);
+
   const { label, description, seo = {} } = category?.[0] || {};
 
   return {
@@ -81,16 +84,17 @@ export async function generateMetadata({ params }) {
     robots: {
       follow: true,
       googleBot: {
-        follow: false,
+        follow: true,
         index: true,
         'max-image-preview': 'large',
         'max-snippet': -1,
         'max-video-preview': -1,
+        noarchive: true,
         noimageindex: true,
       },
-      index: false,
+      index: true,
       nocache: true,
     },
-    title: seo?.metaTitle,
+    title: seo?.metaTitle || label,
   };
 }

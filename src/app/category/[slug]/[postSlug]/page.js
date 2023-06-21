@@ -100,14 +100,14 @@ export async function generateMetadata(context) {
     robots: {
       follow: true,
       googleBot: {
-        follow: false,
+        follow: true,
         index: true,
         'max-image-preview': 'large',
         'max-snippet': -1,
         'max-video-preview': -1,
         noimageindex: true,
       },
-      index: false,
+      index: true,
       nocache: true,
     },
     title: seo?.metaTitle,
