@@ -17,7 +17,7 @@ const Pagination = ({ currentPage, totalPages, navigate, handleUpdate }) => {
 
   const handleChange = (page) => {
     if (navigate) {
-      const path = `${pathname}?${createQueryString('page', page, searchParameters)}`;
+      const path = `${pathname}?${createQueryString({ page }, searchParameters)}`;
       router.push(path);
     }
     handleUpdate?.(page);

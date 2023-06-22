@@ -1,8 +1,10 @@
 /* eslint-disable import/prefer-default-export */
-export const createQueryString = (name, value, searchParameters) => {
+export const createQueryString = (parameters_, searchParameters) => {
   const parameters = new URLSearchParams(searchParameters);
 
-  parameters.set(name, value);
+  Object.entries(parameters_).forEach(([name, value]) => {
+    parameters.set(name, value);
+  });
 
   return parameters.toString();
 };

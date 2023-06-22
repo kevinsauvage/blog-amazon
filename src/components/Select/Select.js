@@ -11,6 +11,7 @@ const Select = ({ label, options, queryKey }) => {
   const router = useRouter();
   const pathname = usePathname();
   const searchParameters = useSearchParams();
+
   const [selectedOption, setSelectedOption] = useState(() => {
     const querySelected = options.find((option) => searchParameters.get(queryKey) === option.slug);
     if (querySelected?.slug) return querySelected.slug;
@@ -23,7 +24,10 @@ const Select = ({ label, options, queryKey }) => {
   const handleOptionClick = (value) => {
     setSelectedOption(value);
     setIsOpen(false);
-    const path = `${pathname}?${createQueryString(queryKey, value, searchParameters)}`;
+    const path = `${pathname}?${createQueryString(
+      { page: 1, [queryKey]: value },
+      searchParameters
+    )}`;
     router.push(path);
   };
 
