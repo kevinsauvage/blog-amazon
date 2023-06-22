@@ -47,7 +47,9 @@ const categorySlug = async (context) => {
         </div>
         <p className={styles.subtitle}>{description}</p>
       </div>
-      <Sorting sorts={sorts} />
+      <div className={styles.config}>
+        <Sorting sorts={sorts} />
+      </div>
       <main>
         {Array.isArray(posts) && (
           <Grid variant="2">
@@ -72,8 +74,6 @@ export default categorySlug;
 export async function generateMetadata({ params }) {
   const { slug } = params;
   const category = await getCategories({ slug });
-
-  console.log('🚀 ~  file: page.js:76 ~  generateMetadata ~  category:', category);
 
   const { label, description, seo = {} } = category?.[0] || {};
 
