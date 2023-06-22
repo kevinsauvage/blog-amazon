@@ -1,39 +1,15 @@
-'use client';
-
-import { useState } from 'react';
-import Link from 'next/link';
-import { usePathname, useSearchParams } from 'next/navigation';
-
-import { createQueryString } from '@/utils/url';
+import Select from '../Select/Select';
 
 import styles from './sorting.module.scss';
 
-const Sorting = ({ sorts }) => {
-  const [active, setActive] = useState(sorts?.[0]);
-
-  const pathname = usePathname();
-  const searchParameters = useSearchParams();
-
-  const isActive = (query) => query === active.query;
-
-  return (
-    <ul className={styles.sorting}>
-      {Array.isArray(sorts) &&
-        sorts.length > 0 &&
-        sorts.map((sort, index) => (
-          <li key={sort.id} className={`${styles.item} ${isActive(sort.query) && styles.active}`}>
-            <Link
-              onClick={() => setActive(sorts?.[index])}
-              href={`${pathname}?${createQueryString('sorting', sort.query, searchParameters)}`}
-              passHref
-              aria-label={`Sort by${sort.label}`}
-            >
-              {sort.label}
-            </Link>
-          </li>
-        ))}
-    </ul>
-  );
-};
+const Sorting = ({ sorts }) => (
+  <div className={styles.sorting}>
+    <Select
+      label="Sort by"
+      queryKey="sorting"
+      options={sorts.map(({ label, query, id }) => ({ id, label, slug: query }))}
+    />
+  </div>
+);
 
 export default Sorting;

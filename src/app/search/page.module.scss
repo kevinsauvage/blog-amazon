@@ -28,4 +28,12 @@
       }
     }
   }
+
+  .config {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin: 1rem 0;
+  }
 }

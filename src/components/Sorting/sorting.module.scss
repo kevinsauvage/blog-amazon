@@ -1,20 +1,2 @@
 .sorting {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  margin: 1rem 0;
-}
-
-.item {
-  a {
-    padding: 6px 10px;
-    border: $border-light;
-    background-color: var(--surface-400);
-  }
-
-  &.active {
-    a {
-      background-color: var(--surface-200);
-    }
-  }
 }

@@ -13,7 +13,7 @@ const RootLayout = async ({ children }) => {
   const { shortAbout, siteName, menus } = globalContext || {};
 
   const usefullLinksMenu = menus?.find((menu) => menu.title === 'UsefullLinks');
-  const categoriessMenu = menus?.find((menu) => menu.title === 'Categories');
+  const categoriesMenu = menus?.find((menu) => menu.title === 'Categories');
   const mainMenu = menus?.find((menu) => menu.title === 'Main');
 
   return (
@@ -21,7 +21,7 @@ const RootLayout = async ({ children }) => {
       <body>
         <Header menu={mainMenu} usefullLinks={usefullLinksMenu} siteName={siteName} />
         {children}
-        <Footer usefullLinks={usefullLinksMenu} categories={categoriessMenu} about={shortAbout} />
+        <Footer usefullLinks={usefullLinksMenu} categories={categoriesMenu} about={shortAbout} />
         <ScrollTopButton />
       </body>
     </html>
