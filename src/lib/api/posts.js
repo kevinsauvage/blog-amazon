@@ -28,9 +28,9 @@ export const getPosts = async (properties) => {
 
   const url = `${ARTICLES_PATH}?${parameters.toString()}${extraParams || ''}`;
 
-  console.log('🚀 ~  file: posts.js:32 ~  getPosts ~  url:', url);
+  console.log('🚀 ~  file: posts.js:32 ~  getPosts ~  url:', decodeURI(url));
 
-  const response = await fetchStrapiEndpoint(url);
+  const response = await fetchStrapiEndpoint(decodeURI(url));
   const { data, meta } = response || {};
   const { pagination } = meta || {};
 
