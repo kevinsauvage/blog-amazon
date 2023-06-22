@@ -11,15 +11,14 @@ const Select = ({ label, options, queryKey }) => {
   const router = useRouter();
   const pathname = usePathname();
   const searchParameters = useSearchParams();
-  const [selectedOption, setSelectedOption] = useState(options[0]);
+  const [selectedOption, setSelectedOption] = useState(() => {
+    const querySelected = options.find((option) => searchParameters.get(queryKey) === option.slug);
+    if (querySelected?.slug) return querySelected.slug;
+    return options[0]?.slug;
+  });
   const [isOpen, setIsOpen] = useState(false);
   const containerReference = useRef(null);
   const optionsListReference = useRef(null);
-
-  useEffect(() => {
-    const querySelected = options.find((option) => searchParameters.get(queryKey) === option.slug);
-    if (querySelected) setSelectedOption(querySelected.slug);
-  }, [options, queryKey, searchParameters]);
 
   const handleOptionClick = (value) => {
     setSelectedOption(value);
