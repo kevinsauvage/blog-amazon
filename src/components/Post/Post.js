@@ -2,6 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import { getStrapiBaseUrl } from '@/lib/api/utils';
+import routes from '@/utils/routes';
 
 import Category from '../Category/Category';
 import Date from '../Date/Date';
@@ -14,7 +15,7 @@ const Post = ({ post, image, showCategories = true, showExcerpt = true }) => {
 
   const category = categories[0];
 
-  const postLink = `/category/${category?.slug}/${slug}`;
+  const postLink = `${routes.posts}/${category?.slug}/${slug}`;
 
   return (
     <article className={styles.post}>
