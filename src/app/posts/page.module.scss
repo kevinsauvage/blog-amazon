@@ -2,7 +2,13 @@
   .config {
     display: flex;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: space-between;
     gap: 1rem;
+
+    div {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
   }
 }

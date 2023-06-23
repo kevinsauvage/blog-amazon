@@ -3,7 +3,9 @@ import Grid from '@/components/Grid/Grid';
 import PageBannerWrapper from '@/components/PageBannerWrapper/PageBannerWrapper';
 import Pagination from '@/components/Pagination/Pagination';
 import PostGrid from '@/components/PostGrid/PostGrid';
+import SearchForm from '@/components/SearchForm/SearchForm';
 import Sorting from '@/components/Sorting/Sorting';
+import TotalFound from '@/components/TotalFound/TotalFound';
 import apiCalls from '@/lib/api/index';
 import { formatString } from '@/utils/strings';
 import { decodeURL } from '@/utils/url';
@@ -12,24 +14,25 @@ import styles from './page.module.scss';
 
 const { getCategories, getPosts, fetchSorts } = apiCalls;
 
-const getData = async (slug, page, sort) => {
+const getData = async (slug, page, sort, q) => {
   const category = await getCategories({ slug });
   const posts = await getPosts({
     categories: [category?.[0]?.slug],
     extraParams: sort,
     page,
     perPage: 12,
+    query: q,
   });
   return { category, posts };
 };
 
 const CategoryPage = async (context) => {
   const { params, searchParams } = context;
-  const { page = 1, sorting } = searchParams || {};
+  const { page = 1, sorting, q } = searchParams || {};
   const { categorySlug } = params;
 
   const [results, sorts] = await Promise.all([
-    getData(categorySlug, page, sorting ? decodeURL(sorting) : ''),
+    getData(categorySlug, page, sorting ? decodeURL(sorting) : '', q),
     fetchSorts({ slug: 'search' }),
   ]);
 
@@ -38,11 +41,15 @@ const CategoryPage = async (context) => {
 
   return (
     <div>
-      <PageBannerWrapper title={formatString(label)} totalPosts={totalPosts}>
+      <PageBannerWrapper title={formatString(label)}>
         <p className={styles.subtitle}>{description}</p>
       </PageBannerWrapper>
       <Container>
         <div className={styles.config}>
+          <div>
+            <SearchForm query={q} />
+            <TotalFound total={totalPosts} />
+          </div>
           <Sorting sorts={sorts} />
         </div>
         <main>

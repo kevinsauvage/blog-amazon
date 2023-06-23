@@ -6,6 +6,7 @@ import Pagination from '@/components/Pagination/Pagination';
 import PostGrid from '@/components/PostGrid/PostGrid';
 import SearchForm from '@/components/SearchForm/SearchForm';
 import Sorting from '@/components/Sorting/Sorting';
+import TotalFound from '@/components/TotalFound/TotalFound';
 import apiCalls from '@/lib/api/index';
 import pageMetadatas from '@/metadatas/pages';
 import { decodeURL } from '@/utils/url';
@@ -32,14 +33,18 @@ const search = async (context) => {
   const { posts, totalPosts, totalPages } = results || {};
   return (
     <div>
-      <PageBannerWrapper title="All Posts" totalPosts={totalPosts}>
-        <SearchForm query={q} />
-      </PageBannerWrapper>
+      <PageBannerWrapper title="All Posts" totalPosts={totalPosts} />
       <Container>
         <main className={styles.main}>
           <div className={styles.config}>
-            <Sorting sorts={sorts} />
-            <FiltersCategories categories={categoriesResponse} />
+            <div>
+              <SearchForm query={q} />
+              <TotalFound total={totalPosts} />
+            </div>
+            <div>
+              <Sorting sorts={sorts} />
+              <FiltersCategories categories={categoriesResponse} />
+            </div>
           </div>
           <Grid variant="2">
             {Array.isArray(posts) &&

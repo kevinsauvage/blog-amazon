@@ -17,7 +17,7 @@ const SearchForm = ({ query }) => {
   };
 
   const { formData, handleInputChange, handleSubmit } = useForm(handleSubmitCallback, {
-    input: '',
+    input: query,
   });
 
   return (
