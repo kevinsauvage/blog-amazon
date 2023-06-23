@@ -2,6 +2,8 @@ import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
+import routes from '@/utils/routes';
+
 import Category from '../Category/Category';
 import Date from '../Date/Date';
 import Views from '../Views/Views';
@@ -15,7 +17,7 @@ const PostBanner = ({ post }) => {
   const image = images?.full;
   const category = categories?.[0];
 
-  const postLink = `/category/${category.slug}/${slug}`;
+  const postLink = `${routes.posts}/${category?.slug}/${slug}`;
 
   return (
     <div className={styles.banner}>

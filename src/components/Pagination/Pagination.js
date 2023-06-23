@@ -4,7 +4,6 @@ import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
 import IconArrowLeftShort from '@/svg/IconArrowLeftShort';
 import IconArrowRightShort from '@/svg/IconArrowRightShort';
-import { createQueryString } from '@/utils/url';
 
 import styles from './Pagination.module.scss';
 
@@ -17,7 +16,9 @@ const Pagination = ({ currentPage, totalPages, navigate, handleUpdate }) => {
 
   const handleChange = (page) => {
     if (navigate) {
-      const path = `${pathname}?${createQueryString({ page }, searchParameters)}`;
+      const parameters = new URLSearchParams(searchParameters);
+      parameters.set('page', page);
+      const path = `${pathname}?${parameters.toString()}`;
       router.push(path);
     }
     handleUpdate?.(page);

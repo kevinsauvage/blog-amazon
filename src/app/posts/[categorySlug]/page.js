@@ -1,10 +1,9 @@
-import Breadcrumb from '@/components/Breadcrumb/Breadcrumb';
 import Container from '@/components/Container/Container';
 import Grid from '@/components/Grid/Grid';
+import PageBannerWrapper from '@/components/PageBannerWrapper/PageBannerWrapper';
 import Pagination from '@/components/Pagination/Pagination';
 import PostGrid from '@/components/PostGrid/PostGrid';
 import Sorting from '@/components/Sorting/Sorting';
-import TotalFound from '@/components/TotalFound/TotalFound';
 import apiCalls from '@/lib/api/index';
 import { formatString } from '@/utils/strings';
 import { decodeURL } from '@/utils/url';
@@ -16,7 +15,7 @@ const { getCategories, getPosts, fetchSorts } = apiCalls;
 const getData = async (slug, page, sort) => {
   const category = await getCategories({ slug });
   const posts = await getPosts({
-    category: category?.[0]?.slug,
+    categories: [category?.[0]?.slug],
     extraParams: sort,
     page,
     perPage: 12,
@@ -24,13 +23,13 @@ const getData = async (slug, page, sort) => {
   return { category, posts };
 };
 
-const categorySlug = async (context) => {
+const CategoryPage = async (context) => {
   const { params, searchParams } = context;
   const { page = 1, sorting } = searchParams || {};
-  const { slug } = params;
+  const { categorySlug } = params;
 
   const [results, sorts] = await Promise.all([
-    getData(slug, page, sorting ? decodeURL(sorting) : ''),
+    getData(categorySlug, page, sorting ? decodeURL(sorting) : ''),
     fetchSorts({ slug: 'search' }),
   ]);
 
@@ -38,38 +37,35 @@ const categorySlug = async (context) => {
   const { label, description } = results?.category?.[0] || {};
 
   return (
-    <Container>
-      <Breadcrumb last={label} />
-      <div className={styles.banner}>
-        <div className={styles.title}>
-          <h1>{formatString(label)}.</h1>
-          <TotalFound total={totalPosts} />
-        </div>
+    <div>
+      <PageBannerWrapper title={formatString(label)} totalPosts={totalPosts}>
         <p className={styles.subtitle}>{description}</p>
-      </div>
-      <div className={styles.config}>
-        <Sorting sorts={sorts} />
-      </div>
-      <main>
-        {Array.isArray(posts) && (
-          <Grid variant="2">
-            {posts.map((post, index) => (
-              <PostGrid
-                key={post.id}
-                post={post}
-                image={post.images?.medium}
-                imagePriority={index < 6}
-              />
-            ))}
-          </Grid>
-        )}
-        <Pagination totalPages={totalPages} currentPage={page} navigate />
-      </main>
-    </Container>
+      </PageBannerWrapper>
+      <Container>
+        <div className={styles.config}>
+          <Sorting sorts={sorts} />
+        </div>
+        <main>
+          {Array.isArray(posts) && (
+            <Grid variant="2">
+              {posts.map((post, index) => (
+                <PostGrid
+                  key={post.id}
+                  post={post}
+                  image={post.images?.medium}
+                  imagePriority={index < 6}
+                />
+              ))}
+            </Grid>
+          )}
+          <Pagination totalPages={totalPages} currentPage={page} navigate />
+        </main>
+      </Container>
+    </div>
   );
 };
 
-export default categorySlug;
+export default CategoryPage;
 
 export async function generateMetadata({ params }) {
   const { slug } = params;

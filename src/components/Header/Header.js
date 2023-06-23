@@ -5,7 +5,6 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
 import IconHamburgerMenu from '@/svg/IconHamburgerMenu';
-import IconSearch from '@/svg/IconSearch';
 
 import Container from '../Container/Container';
 import Menu from '../Menu/Menu';
@@ -46,10 +45,6 @@ const Header = ({ menu, usefullLinks, siteName }) => {
           <div className={styles.navigation}>
             <Nav variant="row" menu={menu?.items} />
           </div>
-          <Link href="/search" className={styles.search}>
-            <p>Search</p>
-            <IconSearch />
-          </Link>
         </div>
       </Container>
       <Menu

@@ -8,7 +8,7 @@ export const getPosts = async (properties) => {
   const {
     perPage = 10,
     page = 1,
-    category,
+    categories,
     query,
     populate = true,
     slug,
@@ -21,10 +21,12 @@ export const getPosts = async (properties) => {
   parameters.set('pagination[page]', page);
 
   if (populate) parameters.set('populate', '*');
-  if (category) parameters.set('filters[categories][slug][$eqi]', category);
-  if (slug) parameters.set('filters[slug][$eqi]', slug);
-  if (query) parameters.set('filters[title][$containsi]', query);
-  if (sort) parameters.set('sort', sort);
+  if (Array.isArray(categories)) {
+    categories.forEach((cat) => parameters.append('filters[categories][slug][$eqi]', cat));
+  }
+  if (slug) parameters.append('filters[slug][$eqi]', slug);
+  if (query) parameters.append('filters[title][$containsi]', query);
+  if (sort) parameters.append('sort', sort);
 
   const url = `${ARTICLES_PATH}?${parameters.toString()}${extraParams || ''}`;
 

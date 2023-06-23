@@ -2,6 +2,8 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
+import routes from '@/utils/routes';
+
 import Category from '../Category/Category';
 
 // eslint-disable-next-line css-modules/no-unused-class
@@ -9,7 +11,9 @@ import styles from './PostBig.module.scss';
 
 const PostBig = ({ post, image }) => {
   const { slug, categories, excerpt, title, imageAlt } = post;
-  const postLink = `/category/${categories[0].slug}/${slug}`;
+  const category = categories?.[0];
+  const postLink = `${routes.posts}/${category?.slug}/${slug}`;
+
   return (
     <article className={styles.post}>
       <Link href={postLink}>

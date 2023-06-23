@@ -1,6 +1,7 @@
 .banner {
-  margin-top: 3rem;
-  margin-bottom: 1rem;
+  width: 100%;
+  min-height: 280px;
+  background-color: var(--surface-700);
 
   .title {
     display: flex;
@@ -12,7 +13,6 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      text-align: center;
     }
 
     h1 {
@@ -29,17 +29,7 @@
     }
   }
 
-  .subtitle {
-    max-width: 560px;
-    margin-bottom: 1rem;
-
-    @include respond(mobile_l) {
-      text-align: center;
-    }
+  .inner {
+    padding: 3rem 0;
   }
-}
-
-.config {
-  display: flex;
-  justify-content: flex-end;
 }

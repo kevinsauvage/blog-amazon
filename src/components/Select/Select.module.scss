@@ -53,5 +53,6 @@
 
 .option:hover,
 .option.selected {
-  background-color: var(--surface-800);
+  font-weight: 400;
+  background-color: var(--surface-700);
 }

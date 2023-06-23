@@ -4,6 +4,7 @@ import Post from '@/components/Post/Post';
 import HomeBanner from '@/components/scopes/home/HomeBanner';
 import Section from '@/components/Section/Section';
 import apiCalls from '@/lib/api/index';
+import routes from '@/utils/routes';
 
 const { getPosts, getCategories } = apiCalls;
 
@@ -12,7 +13,7 @@ const totalPostsByCategory = 3;
 const getHomeData = async () => {
   const categories = await getCategories();
   const promises = categories.map((category) =>
-    getPosts({ category: category.slug, perPage: totalPostsByCategory })
+    getPosts({ categories: [category.slug], perPage: totalPostsByCategory })
   );
   const data = await Promise.all(promises);
 
@@ -34,7 +35,7 @@ const Home = async () => {
           <Section
             key={postData.category.id}
             title={`${postData.category.label} Posts`}
-            buttonUrl={`/category/${postData.category.slug}`}
+            buttonUrl={`${routes.posts}/${postData.category.slug}`}
           >
             <Grid variant="1">
               {Array.isArray(postData.posts) &&

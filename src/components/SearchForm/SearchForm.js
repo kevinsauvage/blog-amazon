@@ -1,32 +1,35 @@
 'use client';
 
-import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+
+import useForm from '@/hooks/useForm';
+
+import Input from '../Input/Input';
 
 import styles from './SearchForm.module.scss';
 
 const SearchForm = ({ query }) => {
-  const [input, setInput] = useState('');
   const { push } = useRouter();
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  const handleSubmitCallback = ({ input }) => {
     if (input === query) return;
-    push(`/search?q=${input}`);
+    push(`/posts?q=${input}`);
   };
 
-  const handleChange = (event) => {
-    setInput(event.target.value);
-  };
+  const { formData, handleInputChange, handleSubmit } = useForm(handleSubmitCallback, {
+    input: '',
+  });
 
   return (
     <form onSubmit={handleSubmit} className={styles.form} title="Search a post">
-      <input
-        title="Enter what you're looking for here"
-        placeholder="Search..."
+      <Input
+        id="searchInput"
         type="text"
-        value={input}
-        onChange={handleChange}
+        name="input"
+        title="input"
+        placeholder="Searh a post..."
+        value={formData.input}
+        onChange={handleInputChange}
       />
     </form>
   );

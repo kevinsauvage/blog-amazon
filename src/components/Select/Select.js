@@ -3,32 +3,44 @@
 import { useEffect, useRef, useState } from 'react';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
-import { createQueryString } from '@/utils/url';
-
 import styles from './Select.module.scss';
 
-const Select = ({ label, options, queryKey }) => {
+const Select = ({ label, options, queryKey, unique = true, resetPage }) => {
   const router = useRouter();
   const pathname = usePathname();
   const searchParameters = useSearchParams();
 
   const [selectedOption, setSelectedOption] = useState(() => {
-    const querySelected = options.find((option) => searchParameters.get(queryKey) === option.slug);
-    if (querySelected?.slug) return querySelected.slug;
-    return options[0]?.slug;
+    const actualParameters = searchParameters.getAll(queryKey);
+    if (actualParameters?.length > 0) return actualParameters;
+    return unique ? [options[0]?.slug] : [];
   });
+
   const [isOpen, setIsOpen] = useState(false);
   const containerReference = useRef(null);
   const optionsListReference = useRef(null);
 
   const handleOptionClick = (value) => {
-    setSelectedOption(value);
-    setIsOpen(false);
-    const path = `${pathname}?${createQueryString(
-      { page: 1, [queryKey]: value },
-      searchParameters
-    )}`;
-    router.push(path);
+    const parameters = new URLSearchParams(searchParameters);
+    const currentValues = parameters.getAll(queryKey);
+    const isValueIncluded = currentValues.includes(value);
+    if (resetPage) parameters.set('page', 1);
+
+    if (unique) {
+      setIsOpen(false);
+      parameters.set(queryKey, value);
+      setSelectedOption([value]);
+      return router.push(`${pathname}?${parameters.toString()}`);
+    }
+
+    const updatedValues = isValueIncluded
+      ? currentValues.filter((value_) => value_ !== value)
+      : [...currentValues, value];
+
+    parameters.delete(queryKey);
+    updatedValues.forEach((value_) => parameters.append(queryKey, value_));
+    setSelectedOption(updatedValues);
+    router.push(`${pathname}?${parameters.toString()}`);
   };
 
   const handleKeyDown = (event) => {
@@ -98,14 +110,10 @@ const Select = ({ label, options, queryKey }) => {
         onClick={() => setIsOpen(!isOpen)}
         tabIndex="0"
       >
-        <div
-          className={styles.selectedOption}
-          aria-label={selectedOption ? 'Selected option' : 'Select an option'}
-          role="button"
-        >
-          {selectedOption
-            ? options.find((option) => option.slug === selectedOption)?.label
-            : options[0]?.label}
+        <div className={styles.selectedOption} aria-label="Select an option" role="button">
+          {!unique && selectedOption.length > 0
+            ? `${selectedOption.length} selected`
+            : options.find((option) => selectedOption.includes(option.slug))?.label || label}
         </div>
         {isOpen && (
           <ul
@@ -114,24 +122,22 @@ const Select = ({ label, options, queryKey }) => {
             ref={optionsListReference}
             role="listbox"
           >
-            {options
-              .filter((item) => item.slug !== selectedOption)
-              .map((option) => (
-                <li
-                  key={option.id}
-                  value={option.slug}
-                  onKeyDown={handleKeyDown}
-                  onClick={() => handleOptionClick(option.slug)}
-                  className={`${styles.option} ${
-                    option.slug === selectedOption ? styles.selected : ''
-                  }`}
-                  role="option"
-                  tabIndex="0"
-                  aria-selected={false}
-                >
-                  {option.label}
-                </li>
-              ))}
+            {options.map((option) => (
+              <li
+                key={option.id}
+                value={option.slug}
+                onKeyDown={handleKeyDown}
+                onClick={() => handleOptionClick(option.slug)}
+                className={`${styles.option} ${
+                  selectedOption.includes(option.slug) ? styles.selected : ''
+                }`}
+                role="option"
+                tabIndex="0"
+                aria-selected={false}
+              >
+                {option.label}
+              </li>
+            ))}
           </ul>
         )}
       </div>

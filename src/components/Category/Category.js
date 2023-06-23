@@ -1,10 +1,12 @@
 import Link from 'next/link';
 
+import routes from '@/utils/routes';
+
 import styles from './Category.module.scss';
 
 const Category = ({ category }) => (
   <Link
-    href={`/category/${category?.slug}`}
+    href={`${routes.posts}/${category?.slug}`}
     className={styles.category}
     style={{ backgroundColor: category?.color }}
   >

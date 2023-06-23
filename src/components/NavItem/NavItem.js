@@ -11,7 +11,7 @@ const NavItem = ({ href, label }) => {
   const url = `/${href || ''}`;
 
   return (
-    <li className={`${styles.item} ${pathname === url?.split('?')?.[0] ? styles.active : ''}`}>
+    <li className={`${styles.item} ${pathname === url ? styles.active : ''}`}>
       <Link href={url}>{label}</Link>
     </li>
   );
