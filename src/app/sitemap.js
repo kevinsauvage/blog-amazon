@@ -9,7 +9,7 @@ export default async function sitemap() {
 
   const posts = postsResponse?.posts?.map(({ slug, date, categories }) => ({
     lastModified: date,
-    url: `${BASE_URL}/posts/${slug}`,
+    url: `${BASE_URL}/posts/${categories?.[0]?.slug}${slug}`,
   }));
 
   const routes = ['', '/about', '/contact', '/search', '/terms', '/privacy', '/cookie'].map(
