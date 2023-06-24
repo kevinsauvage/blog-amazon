@@ -3,6 +3,9 @@
 import { useEffect, useRef, useState } from 'react';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
+import IconChevronDown from '@/svg/IconChevronDown';
+import IconChevronUp from '@/svg/IconChevronUp';
+
 import styles from './Select.module.scss';
 
 const Select = ({ label, options, queryKey, unique = true, resetPage }) => {
@@ -99,7 +102,7 @@ const Select = ({ label, options, queryKey, unique = true, resetPage }) => {
 
   return (
     <div className={styles.select} ref={containerReference}>
-      <label htmlFor={label}>{label}</label>
+      {label && <label htmlFor={label}>{label}</label>}
       <div
         className={`${styles.dropDown} ${isOpen ? styles.open : ''}`}
         role="combobox"
@@ -114,6 +117,8 @@ const Select = ({ label, options, queryKey, unique = true, resetPage }) => {
           {!unique && selectedOption.length > 0
             ? `${selectedOption.length} selected`
             : options.find((option) => selectedOption.includes(option.slug))?.label || label}
+
+          {isOpen ? <IconChevronUp /> : <IconChevronDown />}
         </div>
         {isOpen && (
           <ul

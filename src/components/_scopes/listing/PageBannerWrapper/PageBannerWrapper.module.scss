@@ -1,0 +1,35 @@
+.banner {
+  width: 100%;
+  background-color: var(--surface-700);
+
+  .inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 0 4rem 0;
+
+    .title {
+      max-width: 600px;
+      margin-bottom: 2rem;
+      text-align: center;
+
+      @include respond(mobile_m) {
+        font-size: 1.6rem;
+      }
+    }
+
+    .subtitle {
+      max-width: 600px;
+      margin: 0 auto;
+      margin-bottom: 2rem;
+      font-weight: 300;
+      font-size: 1.1rem;
+      text-align: center;
+
+      @include respond(mobile_l) {
+        text-align: center;
+      }
+    }
+  }
+}

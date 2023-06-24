@@ -15,15 +15,5 @@
       margin-top: 2rem;
       padding: 2rem 1rem;
     }
-
-    h1 {
-      margin-bottom: 1rem;
-      font-size: 3rem;
-      text-align: center;
-
-      @include respond(mobile_l) {
-        font-size: 2rem;
-      }
-    }
   }
 }

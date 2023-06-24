@@ -1,17 +1,7 @@
-import Container from '@/components/Container/Container';
-import FiltersCategories from '@/components/FiltersCategories/FiltersCategories';
-import Grid from '@/components/Grid/Grid';
-import PageBannerWrapper from '@/components/PageBannerWrapper/PageBannerWrapper';
-import Pagination from '@/components/Pagination/Pagination';
-import PostGrid from '@/components/PostGrid/PostGrid';
-import SearchForm from '@/components/SearchForm/SearchForm';
-import Sorting from '@/components/Sorting/Sorting';
-import TotalFound from '@/components/TotalFound/TotalFound';
+import Listing from '@/components/_scopes/listing/Listing/Listing';
 import apiCalls from '@/lib/api/index';
 import pageMetadatas from '@/metadatas/pages';
 import { decodeURL } from '@/utils/url';
-
-import styles from './page.module.scss';
 
 const { getPosts, fetchSorts, getCategories } = apiCalls;
 
@@ -31,36 +21,19 @@ const search = async (context) => {
   ]);
 
   const { posts, totalPosts, totalPages } = results || {};
+
   return (
-    <div>
-      <PageBannerWrapper title="All Posts" totalPosts={totalPosts} />
-      <Container>
-        <main className={styles.main}>
-          <div className={styles.config}>
-            <div>
-              <SearchForm query={q} />
-              <TotalFound total={totalPosts} />
-            </div>
-            <div>
-              <Sorting sorts={sorts} />
-              <FiltersCategories categories={categoriesResponse} />
-            </div>
-          </div>
-          <Grid variant="2">
-            {Array.isArray(posts) &&
-              posts.map((post, index) => (
-                <PostGrid
-                  key={post.id}
-                  post={post}
-                  image={post.images?.medium}
-                  imagePriority={index < 6}
-                />
-              ))}
-          </Grid>
-          <Pagination totalPages={totalPages} currentPage={page} navigate />
-        </main>
-      </Container>
-    </div>
+    <Listing
+      title="Unleashing the Power of Knowledge: Your Ultimate Blog Hub"
+      subtitle="Dive into a vast collection of blog posts curated by experts and enthusiasts from various domains, offering you a rich tapestry of ideas, insights, and perspectives to explore, filter, search, and sort according to your interests and preferences"
+      totalPosts={totalPosts}
+      query={q}
+      posts={posts}
+      totalPages={totalPages}
+      page={page}
+      sorts={sorts}
+      categories={categoriesResponse}
+    />
   );
 };
 

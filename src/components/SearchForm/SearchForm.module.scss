@@ -1,6 +1,22 @@
 .form {
-  display: flex;
+  position: relative;
+  display: inline-flex;
   align-items: center;
   width: 100%;
   max-width: 500px;
+
+  input {
+    padding: 1.5rem;
+    padding-left: 3rem;
+    border-radius: $radius2;
+  }
+}
+
+.iconSearch {
+  position: absolute;
+  top: 50%;
+  left: 1rem;
+  color: var(--on-surface-500);
+  font-size: 1.3rem;
+  transform: translateY(-50%);
 }

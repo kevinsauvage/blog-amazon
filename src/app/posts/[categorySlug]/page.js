@@ -1,16 +1,7 @@
-import Container from '@/components/Container/Container';
-import Grid from '@/components/Grid/Grid';
-import PageBannerWrapper from '@/components/PageBannerWrapper/PageBannerWrapper';
-import Pagination from '@/components/Pagination/Pagination';
-import PostGrid from '@/components/PostGrid/PostGrid';
-import SearchForm from '@/components/SearchForm/SearchForm';
-import Sorting from '@/components/Sorting/Sorting';
-import TotalFound from '@/components/TotalFound/TotalFound';
+import Listing from '@/components/_scopes/listing/Listing/Listing';
 import apiCalls from '@/lib/api/index';
 import { formatString } from '@/utils/strings';
 import { decodeURL } from '@/utils/url';
-
-import styles from './page.module.scss';
 
 const { getCategories, getPosts, fetchSorts } = apiCalls;
 
@@ -40,35 +31,18 @@ const CategoryPage = async (context) => {
   const { label, description } = results?.category?.[0] || {};
 
   return (
-    <div>
-      <PageBannerWrapper title={formatString(label)}>
-        <p className={styles.subtitle}>{description}</p>
-      </PageBannerWrapper>
-      <Container>
-        <div className={styles.config}>
-          <div>
-            <SearchForm query={q} />
-            <TotalFound total={totalPosts} />
-          </div>
-          <Sorting sorts={sorts} />
-        </div>
-        <main>
-          {Array.isArray(posts) && (
-            <Grid variant="2">
-              {posts.map((post, index) => (
-                <PostGrid
-                  key={post.id}
-                  post={post}
-                  image={post.images?.medium}
-                  imagePriority={index < 6}
-                />
-              ))}
-            </Grid>
-          )}
-          <Pagination totalPages={totalPages} currentPage={page} navigate />
-        </main>
-      </Container>
-    </div>
+    <Listing
+      title={`Explore ${formatString(label)}: A Deep Dive into ${formatString(
+        label
+      )} Topics and Insights`}
+      query={q}
+      subtitle={description}
+      posts={posts}
+      totalPosts={totalPosts}
+      totalPages={totalPages}
+      page={page}
+      sorts={sorts}
+    />
   );
 };
 

@@ -11,7 +11,6 @@
     margin-bottom: 0.5rem;
     color: var(--on-surface-100);
     font-size: 1.2rem;
-    line-height: 1.2;
 
     @include respond(mobile_l) {
       font-size: 1.1rem;

@@ -3,6 +3,7 @@
 import { useRouter } from 'next/navigation';
 
 import useForm from '@/hooks/useForm';
+import IconIconSearch from '@/svg/IconIconSearch';
 
 import Input from '../Input/Input';
 
@@ -22,6 +23,7 @@ const SearchForm = ({ query }) => {
 
   return (
     <form onSubmit={handleSubmit} className={styles.form} title="Search a post">
+      <IconIconSearch className={styles.iconSearch} />
       <Input
         id="searchInput"
         type="text"

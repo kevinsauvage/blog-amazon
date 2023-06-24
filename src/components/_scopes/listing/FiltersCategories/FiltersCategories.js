@@ -1,4 +1,4 @@
-import Select from '../Select/Select';
+import Select from '../../../Select/Select';
 
 import styles from './FiltersCategories.module.scss';
 

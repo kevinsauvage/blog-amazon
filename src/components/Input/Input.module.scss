@@ -1,11 +1,13 @@
 .input {
   width: 100%;
   min-width: 280px;
-  min-height: 3rem;
-  padding: 8px;
+  padding: 1rem;
   border: 1px solid var(--surface-600);
   border-radius: $radius1;
-  font-size: 1.1rem;
+  color: var(--on-surface-300);
+  font-weight: 300;
+  font-size: 1rem;
+  line-height: 1;
   background-color: var(--surface-800);
 
   &:focus {

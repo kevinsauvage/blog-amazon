@@ -1,11 +1,11 @@
 /* eslint-disable react/no-danger */
 import Image from 'next/image';
 
+import CommentsPresentation from '@/components/_scopes/comments/CommentsPresentation/CommentsPresentation';
 import Breadcrumb from '@/components/Breadcrumb/Breadcrumb';
 import Category from '@/components/Category/Category';
 import Container from '@/components/Container/Container';
 import Date from '@/components/Date/Date';
-import CommentsPresentation from '@/components/scopes/comments/CommentsPresentation/CommentsPresentation';
 import Views from '@/components/Views/Views';
 import apiCalls from '@/lib/api/index';
 import { getFrontBaseUrl, getStrapiBaseUrl } from '@/lib/api/utils';
