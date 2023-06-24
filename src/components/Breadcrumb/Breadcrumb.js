@@ -8,7 +8,7 @@ import { formatString } from '@/utils/strings';
 
 import styles from './Breadcrumb.module.scss';
 
-const Breadcrumb = ({ last }) => {
+const Breadcrumb = ({ last, className = '', ...rest }) => {
   const pathname = usePathname();
   const blacklist = new Set(['posts']);
 
@@ -17,7 +17,7 @@ const Breadcrumb = ({ last }) => {
 
   return (
     <nav>
-      <ul className={styles.list}>
+      <ul className={`${styles.list} ${className}`} {...rest}>
         {segments.length > 0 && (
           <>
             <li className={styles.item}>
