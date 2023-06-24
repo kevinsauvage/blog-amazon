@@ -1,8 +1,9 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
+import { useState } from 'react';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
-import useForm from '@/hooks/useForm';
+import useDebounceFunction from '@/hooks/useDebounceFunction';
 import IconIconSearch from '@/svg/IconIconSearch';
 
 import Input from '../Input/Input';
@@ -11,18 +12,32 @@ import styles from './SearchForm.module.scss';
 
 const SearchForm = ({ query }) => {
   const { push } = useRouter();
+  const pathname = usePathname();
+  const searchParameters = useSearchParams();
+  const [searchTerm, setSearchTerm] = useState(query);
 
-  const handleSubmitCallback = ({ input }) => {
-    if (input === query) return;
-    push(`/?q=${input}`);
+  const handleSearch = (input) => {
+    if (input?.trim() === query) return;
+    const newParameters = new URLSearchParams([...searchParameters.entries()]);
+    newParameters.set('q', input);
+    push(`${pathname}?${newParameters}`);
+  };
+  const debouncedSearch = useDebounceFunction(handleSearch, 500);
+
+  const handleInputChange = ({ value }) => {
+    setSearchTerm(value);
+    if (value && value.length > 3) debouncedSearch(value);
   };
 
-  const { formData, handleInputChange, handleSubmit } = useForm(handleSubmitCallback, {
-    input: query,
-  });
-
   return (
-    <form onSubmit={handleSubmit} className={styles.form} title="Search a post">
+    <form
+      className={styles.form}
+      title="Search a post"
+      onSubmit={(event) => {
+        event.preventDefault();
+        handleSearch(searchTerm);
+      }}
+    >
       <IconIconSearch className={styles.iconSearch} />
       <Input
         id="searchInput"
@@ -30,7 +45,7 @@ const SearchForm = ({ query }) => {
         name="input"
         title="input"
         placeholder="Searh a post..."
-        value={formData.input}
+        value={searchTerm}
         onChange={handleInputChange}
       />
     </form>
