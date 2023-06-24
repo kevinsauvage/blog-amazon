@@ -1,52 +1,26 @@
-import HomeBanner from '@/components/_scopes/home/HomeBanner';
-import Container from '@/components/Container/Container';
-import Grid from '@/components/Grid/Grid';
-import Post from '@/components/Post/Post';
-import Section from '@/components/Section/Section';
-import apiCalls from '@/lib/api/index';
-import routes from '@/utils/routes';
+import Listing from '@/components/_scopes/listing/Listing/Listing';
+import useQueries from '@/hooks/useQueries';
 
-const { getPosts, getCategories } = apiCalls;
-
-const totalPostsByCategory = 3;
-
-const getHomeData = async () => {
-  const categories = await getCategories();
-  const promises = categories.map((category) =>
-    getPosts({ categories: [category.slug], perPage: totalPostsByCategory })
-  );
-  const data = await Promise.all(promises);
-
-  return data.map((item, index) => {
-    const { id, label, slug } = categories[index];
-    return { category: { id, label, slug }, ...item };
-  });
-};
-
-const Home = async () => {
-  const [posts, sticky] = await Promise.all([getHomeData(), getPosts({ perPage: 3 })]);
+const Home = async (context) => {
+  const { categoriesResponse, page, posts, q, sortsResponse, totalPages, totalPosts } =
+    await useQueries(context);
 
   return (
-    <main>
-      <Container>
-        <HomeBanner posts={sticky?.posts} grid />
-
-        {posts.map((postData) => (
-          <Section
-            key={postData.category.id}
-            title={`${postData.category.label} Posts`}
-            buttonUrl={`${routes.posts}/${postData.category.slug}`}
-          >
-            <Grid variant="1">
-              {Array.isArray(postData.posts) &&
-                postData.posts.map((post) => (
-                  <Post key={post.id} post={post} image={post?.images?.medium} />
-                ))}
-            </Grid>
-          </Section>
-        ))}
-      </Container>
-    </main>
+    <Listing
+      title={
+        <>
+          Unleashing the Power of Knowledge: Your Ultimate <strong>Blog Hub</strong>
+        </>
+      }
+      subtitle="Dive into a vast collection of blog posts curated by experts and enthusiasts from various domains, offering you a rich tapestry of ideas, insights, and perspectives to explore, filter, search, and sort according to your interests and preferences"
+      totalPosts={totalPosts}
+      query={q}
+      posts={posts}
+      totalPages={totalPages}
+      page={page}
+      sorts={sortsResponse}
+      categories={categoriesResponse}
+    />
   );
 };
 

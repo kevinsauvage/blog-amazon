@@ -22,7 +22,6 @@ const Listing = ({
     <Container>
       <main>
         <ListingHeader totalPosts={totalPosts} sorts={sorts} categories={categories} />
-
         {Array.isArray(posts) && (
           <Grid variant="2">
             {posts.map((post, index) => (

@@ -7,8 +7,8 @@ import styles from './PageBannerWrapper.module.scss';
 const PageBannerWrapper = ({ children, title, subtitle, query }) => (
   <div className={styles.banner}>
     <Container>
-      <Breadcrumb />
       <div className={styles.inner}>
+        <Breadcrumb />
         {title && <h1 className={styles.title}>{title}</h1>}
         {subtitle && <p className={styles.subtitle}>{subtitle}</p>}
         {children}

@@ -3,16 +3,22 @@
   background-color: var(--surface-700);
 
   .inner {
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 2rem 0 4rem 0;
+    padding: 4rem 0 4rem 0;
 
     .title {
-      max-width: 600px;
+      max-width: 640px;
       margin-bottom: 2rem;
       text-align: center;
+
+      strong {
+        color: var(--primary-400);
+        font-family: var(--font-heading);
+      }
 
       @include respond(mobile_m) {
         font-size: 1.6rem;
@@ -24,7 +30,7 @@
       margin: 0 auto;
       margin-bottom: 2rem;
       font-weight: 300;
-      font-size: 1.1rem;
+      font-size: 1.2rem;
       text-align: center;
 
       @include respond(mobile_l) {

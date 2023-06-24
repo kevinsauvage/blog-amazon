@@ -1,47 +1,31 @@
 import Listing from '@/components/_scopes/listing/Listing/Listing';
+import useQueries from '@/hooks/useQueries';
 import apiCalls from '@/lib/api/index';
 import { formatString } from '@/utils/strings';
-import { decodeURL } from '@/utils/url';
 
-const { getCategories, getPosts, fetchSorts } = apiCalls;
-
-const getData = async (slug, page, sort, q) => {
-  const category = await getCategories({ slug });
-  const posts = await getPosts({
-    categories: [category?.[0]?.slug],
-    extraParams: sort,
-    page,
-    perPage: 12,
-    query: q,
-  });
-  return { category, posts };
-};
+const { getCategories } = apiCalls;
 
 const CategoryPage = async (context) => {
-  const { params, searchParams } = context;
-  const { page = 1, sorting, q } = searchParams || {};
-  const { categorySlug } = params;
+  const { page, posts, q, sortsResponse, totalPages, totalPosts, categoriesResponse } =
+    await useQueries(context);
 
-  const [results, sorts] = await Promise.all([
-    getData(categorySlug, page, sorting ? decodeURL(sorting) : '', q),
-    fetchSorts({ slug: 'search' }),
-  ]);
-
-  const { posts, totalPages, totalPosts } = results?.posts || {};
-  const { label, description } = results?.category?.[0] || {};
+  const { label, description } = categoriesResponse?.[0] || {};
 
   return (
     <Listing
-      title={`Explore ${formatString(label)}: A Deep Dive into ${formatString(
-        label
-      )} Topics and Insights`}
+      title={
+        <>
+          Journey Through the <strong>{formatString(label)}</strong> Realm: Exploring Topics, Tips,
+          and Inspiration
+        </>
+      }
       query={q}
       subtitle={description}
       posts={posts}
       totalPosts={totalPosts}
       totalPages={totalPages}
       page={page}
-      sorts={sorts}
+      sorts={sortsResponse}
     />
   );
 };

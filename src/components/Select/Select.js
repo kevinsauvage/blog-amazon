@@ -114,7 +114,7 @@ const Select = ({ label, options, queryKey, unique = true, resetPage }) => {
         tabIndex="0"
       >
         <div className={styles.selectedOption} aria-label="Select an option" role="button">
-          {!unique && selectedOption.length > 0
+          {!unique && selectedOption.length > 1
             ? `${selectedOption.length} selected`
             : options.find((option) => selectedOption.includes(option.slug))?.label || label}
 
@@ -127,22 +127,26 @@ const Select = ({ label, options, queryKey, unique = true, resetPage }) => {
             ref={optionsListReference}
             role="listbox"
           >
-            {options.map((option) => (
-              <li
-                key={option.id}
-                value={option.slug}
-                onKeyDown={handleKeyDown}
-                onClick={() => handleOptionClick(option.slug)}
-                className={`${styles.option} ${
-                  selectedOption.includes(option.slug) ? styles.selected : ''
-                }`}
-                role="option"
-                tabIndex="0"
-                aria-selected={false}
-              >
-                {option.label}
-              </li>
-            ))}
+            {Array.isArray(options) &&
+              options.map((option) => {
+                const { id, slug: optionSlug, label: optionLabel } = option;
+                return (
+                  <li
+                    key={id}
+                    value={optionSlug}
+                    onKeyDown={handleKeyDown}
+                    onClick={() => handleOptionClick(optionSlug)}
+                    className={`${styles.option} ${
+                      selectedOption.includes(optionSlug) ? styles.selected : ''
+                    }`}
+                    role="option"
+                    tabIndex="0"
+                    aria-selected={false}
+                  >
+                    {optionLabel}
+                  </li>
+                );
+              })}
           </ul>
         )}
       </div>

@@ -1,6 +1,11 @@
 .totalFound {
   display: flex;
   align-items: center;
+  gap: 5px;
   color: var(--on-surface-300);
   white-space: nowrap;
+}
+
+.label {
+  font-weight: 400;
 }

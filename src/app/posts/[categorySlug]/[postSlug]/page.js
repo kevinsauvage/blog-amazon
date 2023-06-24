@@ -32,8 +32,8 @@ const PostId = async (context) => {
 
   return (
     <Container>
-      <Breadcrumb last={title} />
       <main className={styles.main}>
+        <Breadcrumb last={title} />
         <article className={styles.article}>
           {image?.url && (
             <Image

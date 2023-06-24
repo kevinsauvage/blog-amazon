@@ -18,32 +18,36 @@ const Breadcrumb = ({ last }) => {
   return (
     <nav>
       <ul className={styles.list}>
-        <li className={styles.item}>
-          <Link href="/">
-            Home <IconChevronForwardOutline />
-          </Link>
-        </li>
-        {segments.map((segment, index) => {
-          // Build the breadcrumb path for each segment
-          const path = `/${segments.slice(0, index + 1).join('/')}`;
+        {segments.length > 0 && (
+          <>
+            <li className={styles.item}>
+              <Link href="/">
+                Home <IconChevronForwardOutline />
+              </Link>
+            </li>
+            {segments.map((segment, index) => {
+              // Build the breadcrumb path for each segment
+              const path = `/${segments.slice(0, index + 1).join('/')}`;
 
-          // Determine if the segment is the last one
-          const isLastSegment = index === segments.length - 1;
+              // Determine if the segment is the last one
+              const isLastSegment = index === segments.length - 1;
 
-          return (
-            !blacklist.has(segment) && (
-              <li key={segment} className={styles.item}>
-                {isLastSegment ? (
-                  <span>{formatString(last || segment)}</span>
-                ) : (
-                  <Link href={path}>
-                    {segment} <IconChevronForwardOutline />
-                  </Link>
-                )}
-              </li>
-            )
-          );
-        })}
+              return (
+                !blacklist.has(segment) && (
+                  <li key={segment} className={styles.item}>
+                    {isLastSegment ? (
+                      <span>{formatString(last || segment)}</span>
+                    ) : (
+                      <Link href={path}>
+                        {segment} <IconChevronForwardOutline />
+                      </Link>
+                    )}
+                  </li>
+                )
+              );
+            })}
+          </>
+        )}
       </ul>
     </nav>
   );

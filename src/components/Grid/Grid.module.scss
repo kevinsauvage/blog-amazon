@@ -1,6 +1,6 @@
 .grid {
   display: grid;
-  gap: $gap;
+  gap: $gap-s;
   margin-bottom: 2rem;
 }
 
@@ -19,7 +19,7 @@
 
 .variant2 {
   grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-  gap: 0.5rem;
+  gap: $gap-l;
 
   @include respond(laptop_s) {
     grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));

@@ -1,6 +1,19 @@
 $headerHeight: 80px;
-$gap: 0.5rem;
-$radius1: 0.5rem;
-$radius2: 1.5rem;
+
+$gap-s: 0.5rem;
+$gap-m: 1rem;
+$gap-l: 1.5rem;
+$gap-xl: 1.5rem;
+
+$radius-s: 0.5rem;
+$radius-m: 1rem;
+$radius-l: 1.5rem;
+
+$padding-s: 0.5rem;
+$padding-m: 1rem;
+$padding-l: 1.5rem;
+$padding-xl: 2rem;
+
 $border-light: 0.1px solid rgba(var(--rgb-on-surface-500), 0.5);
+
 $overlay: rgba(black, 0.5);
