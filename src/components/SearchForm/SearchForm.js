@@ -14,7 +14,7 @@ const SearchForm = ({ query }) => {
 
   const handleSubmitCallback = ({ input }) => {
     if (input === query) return;
-    push(`/posts?q=${input}`);
+    push(`/?q=${input}`);
   };
 
   const { formData, handleInputChange, handleSubmit } = useForm(handleSubmitCallback, {
