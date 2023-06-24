@@ -22,7 +22,7 @@ const SearchForm = ({ query }) => {
     newParameters.set('q', input);
     push(`${pathname}?${newParameters}`);
   };
-  const debouncedSearch = useDebounceFunction(handleSearch, 200);
+  const debouncedSearch = useDebounceFunction(handleSearch, 300);
 
   const handleInputChange = ({ value }) => {
     setSearchTerm(value);
