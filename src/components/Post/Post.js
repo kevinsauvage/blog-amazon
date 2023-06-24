@@ -37,7 +37,7 @@ const Post = ({ post, image, showCategories = true, showExcerpt = true }) => {
           <Views views={viewCount} />
         </div>
         <Link href={postLink}>
-          <h2 className={styles.title}>{title}</h2>
+          <b className={styles.title}>{title}</b>
         </Link>
         {showExcerpt && excerpt && <p className={styles.excerpt}> {excerpt} </p>}
       </div>

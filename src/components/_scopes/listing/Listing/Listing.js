@@ -16,9 +16,10 @@ const Listing = ({
   page,
   sorts,
   categories,
+  description,
 }) => (
   <div>
-    <PageBannerWrapper title={title} query={query} subtitle={subtitle} />
+    <PageBannerWrapper title={title} query={query} subtitle={subtitle} description={description} />
     <Container>
       <main>
         <ListingHeader totalPosts={totalPosts} sorts={sorts} categories={categories} />

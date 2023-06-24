@@ -1,18 +1,18 @@
 import Listing from '@/components/_scopes/listing/Listing/Listing';
 import useQueries from '@/hooks/useQueries';
+import { getSingleType } from '@/lib/api/singleType';
 
 const Home = async (context) => {
+  const globalContext = await getSingleType({ slug: 'global' });
+
   const { categoriesResponse, page, posts, q, sortsResponse, totalPages, totalPosts } =
     await useQueries(context);
 
   return (
     <Listing
-      title={
-        <>
-          Unleashing the Power of Knowledge: Your Ultimate <strong>Blog Hub</strong>
-        </>
-      }
-      subtitle="Dive into a vast collection of blog posts curated by experts and enthusiasts from various domains, offering you a rich tapestry of ideas, insights, and perspectives to explore, filter, search, and sort according to your interests and preferences"
+      title={globalContext?.mainTitle}
+      description={globalContext?.mainDescription}
+      subtitle={globalContext?.mainSubtitle}
       totalPosts={totalPosts}
       query={q}
       posts={posts}

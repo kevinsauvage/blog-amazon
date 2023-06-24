@@ -7,12 +7,10 @@ import Category from '@/components/Category/Category';
 import Container from '@/components/Container/Container';
 import Date from '@/components/Date/Date';
 import Views from '@/components/Views/Views';
-import apiCalls from '@/lib/api/index';
+import { getPosts, updatePost } from '@/lib/api/posts';
 import { getFrontBaseUrl, getStrapiBaseUrl } from '@/lib/api/utils';
 
 import styles from './page.module.scss';
-
-const { getPosts, updatePost } = apiCalls;
 
 const PostId = async (context) => {
   const {

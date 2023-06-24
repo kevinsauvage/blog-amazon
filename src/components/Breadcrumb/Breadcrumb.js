@@ -10,7 +10,7 @@ import styles from './Breadcrumb.module.scss';
 
 const Breadcrumb = ({ last }) => {
   const pathname = usePathname();
-  const blacklist = new Set(['categories']);
+  const blacklist = new Set(['posts']);
 
   // Split the current URL path into segments
   const segments = pathname.split('/').filter(Boolean);

@@ -1,9 +1,7 @@
 import Listing from '@/components/_scopes/listing/Listing/Listing';
 import useQueries from '@/hooks/useQueries';
-import apiCalls from '@/lib/api/index';
+import getCategories from '@/lib/api/categories';
 import { formatString } from '@/utils/strings';
-
-const { getCategories } = apiCalls;
 
 const CategoryPage = async (context) => {
   const { page, posts, q, sortsResponse, totalPages, totalPosts, categoriesResponse } =
@@ -11,14 +9,14 @@ const CategoryPage = async (context) => {
 
   const { label, description } = categoriesResponse?.[0] || {};
 
+  const title = `Journey Through the <strong>${formatString(
+    label
+  )}</strong> Realm: Exploring Topics, Tips,
+  and Inspiration`;
+
   return (
     <Listing
-      title={
-        <>
-          Journey Through the <strong>{formatString(label)}</strong> Realm: Exploring Topics, Tips,
-          and Inspiration
-        </>
-      }
+      title={title}
       query={q}
       subtitle={description}
       posts={posts}

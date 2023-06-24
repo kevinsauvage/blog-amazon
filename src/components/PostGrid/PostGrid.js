@@ -35,7 +35,7 @@ const PostGrid = ({ post, image, imagePriority }) => {
       <div className={styles.content}>
         <Category category={category} />
         <Link href={postLink}>
-          <h2 className={styles.title}>{title}</h2>
+          <strong className={styles.title}>{title}</strong>
         </Link>
         <p className={styles.excerpt}>{excerpt}</p>
         <div className={styles.info}>

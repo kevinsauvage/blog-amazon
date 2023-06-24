@@ -6,6 +6,7 @@
   border-radius: $radius-s;
 
   .title {
+    display: block;
     margin: 0.5rem 0;
     color: var(--on-surface-dark-100);
     font-size: 1.2rem;
