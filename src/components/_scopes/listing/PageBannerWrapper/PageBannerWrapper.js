@@ -1,11 +1,10 @@
 /* eslint-disable react/no-danger */
 import Breadcrumb from '../../../Breadcrumb/Breadcrumb';
 import Container from '../../../Container/Container';
-import SearchForm from '../../../SearchForm/SearchForm';
 
 import styles from './PageBannerWrapper.module.scss';
 
-const PageBannerWrapper = ({ children, title, subtitle, description, query }) => (
+const PageBannerWrapper = ({ children, title, subtitle, description }) => (
   <div className={styles.banner}>
     <Container>
       <div className={styles.inner}>
@@ -18,7 +17,6 @@ const PageBannerWrapper = ({ children, title, subtitle, description, query }) =>
           <p className={styles.description} dangerouslySetInnerHTML={{ __html: description }} />
         )}
         {children}
-        <SearchForm query={query} />
       </div>
     </Container>
   </div>

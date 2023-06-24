@@ -2,6 +2,7 @@ import Container from '@/components/Container/Container';
 import Grid from '@/components/Grid/Grid';
 import Pagination from '@/components/Pagination/Pagination';
 import PostGrid from '@/components/PostGrid/PostGrid';
+import SearchForm from '@/components/SearchForm/SearchForm';
 
 import ListingHeader from '../ListingHeader/ListingHeader';
 import PageBannerWrapper from '../PageBannerWrapper/PageBannerWrapper';
@@ -19,7 +20,9 @@ const Listing = ({
   description,
 }) => (
   <div>
-    <PageBannerWrapper title={title} query={query} subtitle={subtitle} description={description} />
+    <PageBannerWrapper title={title} query={query} subtitle={subtitle} description={description}>
+      <SearchForm query={query} />
+    </PageBannerWrapper>
     <Container>
       <main>
         <ListingHeader totalPosts={totalPosts} sorts={sorts} categories={categories} />

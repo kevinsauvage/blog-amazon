@@ -1,4 +1,4 @@
-import Breadcrumb from '@/components/Breadcrumb/Breadcrumb';
+import PageBannerWrapper from '@/components/_scopes/listing/PageBannerWrapper/PageBannerWrapper';
 import Container from '@/components/Container/Container';
 import pageMetadatas from '@/metadatas/pages';
 
@@ -7,18 +7,15 @@ import styles from './page.module.scss';
 function page() {
   return (
     <div className={styles.page}>
-      <Container>
-        <Breadcrumb />
-        <div className={styles.content}>
-          <h1>About Us</h1>
-
-          <p className={styles.subtitle}>
-            Hello there! I&apos;m delighted to have you visit [Your Blog Name]. This blog is a space
+      <PageBannerWrapper
+        title="About Us"
+        subtitle="Hello there! I'm delighted to have you visit [Your Blog Name]. This blog is a space
             where I share my thoughts, insights, and experiences on a wide range of topics. Whether
-            you&apos;re seeking inspiration, information, or simply a moment of relaxation,
-            you&apos;ve come to the right place.
-          </p>
-
+            you're seeking inspiration, information, or simply a moment of relaxation,
+            you've come to the right place."
+      />
+      <Container>
+        <div className={styles.content}>
           <h3>What You&apos;ll Find on [Your Blog Name]</h3>
 
           <p>
