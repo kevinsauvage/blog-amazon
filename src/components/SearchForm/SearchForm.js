@@ -16,17 +16,17 @@ const SearchForm = ({ query }) => {
   const searchParameters = useSearchParams();
   const [searchTerm, setSearchTerm] = useState(query);
 
-  const handleSearch = (input) => {
+  const handleSearch = (input = '') => {
     if (input?.trim() === query) return;
     const newParameters = new URLSearchParams([...searchParameters.entries()]);
     newParameters.set('q', input);
     push(`${pathname}?${newParameters}`);
   };
-  const debouncedSearch = useDebounceFunction(handleSearch, 500);
+  const debouncedSearch = useDebounceFunction(handleSearch, 200);
 
   const handleInputChange = ({ value }) => {
     setSearchTerm(value);
-    if (value && value.length > 3) debouncedSearch(value);
+    debouncedSearch(value);
   };
 
   return (
