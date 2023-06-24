@@ -1,0 +1,19 @@
+.page {
+  width: 100%;
+
+  main {
+    max-width: 760px;
+    margin: 5rem auto;
+  }
+
+  .content {
+    padding: 3rem;
+    border: $border-light;
+    border-radius: $radius-s;
+    background-color: var(--surface-800);
+
+    @include respond(mobile_l) {
+      padding: 2rem 1rem;
+    }
+  }
+}

@@ -35,8 +35,9 @@ export default fetchStrapiEndpoint;
 
 export const formatCategories = (data) =>
   data.map((category) => {
-    const { label, color, locale, slug, description, publishedAt, seo } = category.attributes;
-    return { color, description, id: category.id, label, locale, publishedAt, seo, slug };
+    const { label, color, locale, slug, description, publishedAt, seo, title } =
+      category.attributes || {};
+    return { color, description, id: category.id, label, locale, publishedAt, seo, slug, title };
   });
 
 export const formatPost = (post) => {
@@ -97,6 +98,21 @@ export const normalizeMenuData = (data) => {
       }
 
       return normalizedMenu;
+    });
+};
+
+export const normalizePageData = (data) => {
+  if (Array.isArray(data))
+    return data.map((menu) => {
+      const { attributes } = menu || {};
+      const { title, description, subtitle, contentHtml } = attributes || {};
+
+      return {
+        contentHtml,
+        description,
+        subtitle,
+        title,
+      };
     });
 };
 

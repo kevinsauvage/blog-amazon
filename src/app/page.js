@@ -1,18 +1,20 @@
 import Listing from '@/components/_scopes/listing/Listing/Listing';
 import useQueries from '@/hooks/useQueries';
-import { getSingleType } from '@/lib/api/singleType';
+import { fetchPage } from '@/lib/api/pages';
+
+const pageDataSlug = 'home';
 
 const Home = async (context) => {
-  const globalContext = await getSingleType({ slug: 'global' });
-
+  const pageData = await fetchPage({ slug: pageDataSlug });
+  const { title, description, subtitle } = pageData || {};
   const { categoriesResponse, page, posts, q, sortsResponse, totalPages, totalPosts } =
     await useQueries(context);
 
   return (
     <Listing
-      title={globalContext?.mainTitle}
-      description={globalContext?.mainDescription}
-      subtitle={globalContext?.mainSubtitle}
+      title={title}
+      description={description}
+      subtitle={subtitle}
       totalPosts={totalPosts}
       query={q}
       posts={posts}

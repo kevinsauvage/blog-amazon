@@ -5,8 +5,8 @@ import styles from './ListingConfig.module.scss';
 
 const ListingConfig = ({ sorts, categories }) => (
   <div className={styles.config}>
-    {sorts && <Sorting sorts={sorts} />}
     {categories && <FiltersCategories categories={categories} />}
+    {sorts && <Sorting sorts={sorts} />}
   </div>
 );
 
