@@ -32,6 +32,7 @@ const nextConfig = {
 
   images: {
     domains: ['strapi-blog-news-production.up.railway.app', 'localhost'],
+
     minimumCacheTTL: 60 * 60,
   },
   sassOptions: {

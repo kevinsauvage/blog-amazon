@@ -18,10 +18,10 @@ const middleware = (request) => {
       { headers: { 'WWW-Authenticate': 'Basic realm="Secure Area"' }, status: 401 }
     );
   }
-  /*  return NextResponse.json(
+  return NextResponse.json(
     { error: 'Please enter credentials' },
     { headers: { 'WWW-Authenticate': 'Basic realm="Secure Area"' }, status: 401 }
-  ); */
+  );
 };
 
 export default middleware;
