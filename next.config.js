@@ -29,7 +29,11 @@ const nextConfig = {
       },
     ];
   },
-  images: { domains: ['strapi-blog-news-production.up.railway.app', 'localhost'] },
+
+  images: {
+    domains: ['strapi-blog-news-production.up.railway.app', 'localhost'],
+    minimumCacheTTL: 60 * 60,
+  },
   sassOptions: {
     includePaths: [path.join(__dirname, './src/styles/')],
     prependData: `
