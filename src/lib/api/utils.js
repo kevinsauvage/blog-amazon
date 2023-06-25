@@ -143,6 +143,19 @@ export const generateSeoData = (seo) => ({
   },
   description: seo?.metaDescription,
   keywords: seo?.keywords?.split(','),
-  robots: seo?.metaRobots,
+  robots: seo?.metaRobots || {
+    follow: true,
+    googleBot: {
+      follow: true,
+      index: true,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+      'max-video-preview': -1,
+      noimageindex: true,
+    },
+    index: true,
+    nocache: true,
+  },
+
   title: seo?.metaTitle,
 });
