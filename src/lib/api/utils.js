@@ -105,11 +105,12 @@ export const normalizePageData = (data) => {
   if (Array.isArray(data))
     return data.map((menu) => {
       const { attributes } = menu || {};
-      const { title, description, subtitle, contentHtml } = attributes || {};
+      const { title, description, subtitle, contentHtml, seo } = attributes || {};
 
       return {
         contentHtml,
         description,
+        seo,
         subtitle,
         title,
       };
@@ -135,3 +136,14 @@ export const formatSortItems = (sortItems) => {
     };
   });
 };
+
+export const generateSeoData = (seo) => ({
+  alternates: {
+    canonical: seo?.canonicalURL,
+  },
+  category: seo?.metaTitle,
+  description: seo?.metaDescription,
+  keywords: seo?.structuredData?.keywords,
+  robots: seo?.metaRobots,
+  title: seo?.metaTitle,
+});

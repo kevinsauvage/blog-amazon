@@ -10,7 +10,7 @@ import Input from '../Input/Input';
 
 import styles from './SearchForm.module.scss';
 
-const SearchForm = ({ query }) => {
+const SearchForm = ({ query, className }) => {
   const { push } = useRouter();
   const pathname = usePathname();
   const searchParameters = useSearchParams();
@@ -30,25 +30,27 @@ const SearchForm = ({ query }) => {
   };
 
   return (
-    <form
-      className={styles.form}
-      title="Search a post"
-      onSubmit={(event) => {
-        event.preventDefault();
-        handleSearch(searchTerm);
-      }}
-    >
-      <IconIconSearch className={styles.iconSearch} />
-      <Input
-        id="searchInput"
-        type="text"
-        name="input"
-        title="input"
-        placeholder="Searh a post..."
-        value={searchTerm}
-        onChange={handleInputChange}
-      />
-    </form>
+    <div className={`${styles.search} ${className || ''}`}>
+      <form
+        className={styles.form}
+        title="Search a post"
+        onSubmit={(event) => {
+          event.preventDefault();
+          handleSearch(searchTerm);
+        }}
+      >
+        <IconIconSearch className={styles.iconSearch} />
+        <Input
+          id="searchInput"
+          type="text"
+          name="input"
+          title="input"
+          placeholder="Searh a post..."
+          value={searchTerm}
+          onChange={handleInputChange}
+        />
+      </form>
+    </div>
   );
 };
 

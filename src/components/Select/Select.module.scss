@@ -14,11 +14,14 @@
   border-radius: $radius-s;
   background-color: var(--surface-800);
   cursor: pointer;
+
+  svg {
+    color: var(--primary-400);
+  }
 }
 
 .open {
-  border-color: var(--primary-400);
-  background-color: var(--surface-600);
+  box-shadow: $box-shadow-1;
 }
 
 .selectedOption {
@@ -32,22 +35,25 @@
 .optionsList {
   position: absolute;
   top: 100%;
-  right: 0;
+  left: 0;
   z-index: 100;
   margin: 4px 0;
-  padding: 0;
   overflow: hidden;
   border: $border-light;
   border-radius: $radius-s;
   list-style: none;
   background-color: var(--surface-900);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: $box-shadow-1;
 }
 
 .option {
-  padding: 0.5rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0.6rem 1rem;
   border-bottom: $border-light;
   font-weight: 400;
+  font-size: 1.2rem;
   text-align: right;
   cursor: pointer;
 
@@ -58,6 +64,5 @@
 
 .option:hover,
 .option.selected {
-  color: var(--primary-400);
   background-color: var(--surface-800);
 }

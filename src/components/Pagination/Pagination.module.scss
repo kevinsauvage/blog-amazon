@@ -1,6 +1,7 @@
 .pagination {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 0.5rem;
   margin: 2rem 0;
   border-radius: $radius-s;
@@ -11,14 +12,28 @@
     justify-content: center;
     min-width: 35px;
     min-height: 35px;
-    border: 1px solid var(--on-surface-400);
-    color: var(--on-surface-100);
+    border: 1px solid var(--primary-400);
     font-weight: 600;
-    background-color: var(--surface-700);
+    font-size: 1.1rem;
     cursor: pointer;
 
     svg {
       font-size: 1.5rem;
+    }
+  }
+
+  .number {
+    color: var(--primary-400);
+
+    &.active {
+      color: var(--on-surface-dark-100);
+      background-color: var(--primary-400);
+    }
+  }
+
+  .arrow {
+    svg {
+      color: var(--primary-400);
     }
 
     &:disabled {
@@ -28,12 +43,6 @@
       svg {
         color: var(--on-surface-600);
       }
-    }
-
-    &.active {
-      border: 1px solid var(--primary-400);
-      color: var(--primary-400);
-      background-color: var(--primary-900);
     }
   }
 }

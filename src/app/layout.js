@@ -1,17 +1,17 @@
 import Footer from '@/components/Footer/Footer';
 import Header from '@/components/Header/Header';
 import ScrollTopButton from '@/components/ScrollTopButton/ScrollTopButton';
-import globalConfig from '@/config/global';
 import apiCalls from '@/lib/api';
-import pageMetadatas from '@/metadatas/pages';
 
 import '../styles/globals.scss';
 
 const { getSingleType } = apiCalls;
-const {
-  GLOBAL_CONTEXT_NAME,
-  menus: { USEFULL_LINKS_NAME, CATEGORIES_NAME, MAIN_NAME },
-} = globalConfig;
+
+const CATEGORIES_NAME = 'Categories';
+const MAIN_NAME = 'Main';
+const USEFULL_LINKS_NAME = 'UsefullLinks';
+
+const GLOBAL_CONTEXT_NAME = 'global';
 
 const RootLayout = async ({ children }) => {
   const globalContext = await getSingleType({ slug: GLOBAL_CONTEXT_NAME });
@@ -34,5 +34,3 @@ const RootLayout = async ({ children }) => {
 };
 
 export default RootLayout;
-
-export const metadata = pageMetadatas.home;

@@ -29,7 +29,7 @@ const Pagination = ({ currentPage, totalPages, navigate, handleUpdate }) => {
   return (
     <nav className={styles.pagination}>
       <button
-        className={styles.item}
+        className={`${styles.item} ${styles.arrow}`}
         disabled={currentPage <= 1}
         type="button"
         onClick={() => handleChange(Number(currentPage) - 1)}
@@ -40,7 +40,9 @@ const Pagination = ({ currentPage, totalPages, navigate, handleUpdate }) => {
       {pageArray.map((page) => (
         <button
           disabled={Number(currentPage) === Number(page) + 1}
-          className={`${styles.item} ${Number(currentPage) === Number(page) + 1 && styles.active}`}
+          className={`${styles.item} ${styles.number} ${
+            Number(currentPage) === Number(page) + 1 && styles.active
+          }`}
           type="button"
           key={page}
           onClick={() => handleChange(page + 1)}
@@ -49,7 +51,7 @@ const Pagination = ({ currentPage, totalPages, navigate, handleUpdate }) => {
         </button>
       ))}
       <button
-        className={styles.item}
+        className={`${styles.item} ${styles.arrow}`}
         type="button"
         disabled={currentPage >= totalPages}
         aria-label="Next page"

@@ -8,7 +8,7 @@ import Container from '@/components/Container/Container';
 import Date from '@/components/Date/Date';
 import Views from '@/components/Views/Views';
 import { getPosts, updatePost } from '@/lib/api/posts';
-import { getFrontBaseUrl, getStrapiBaseUrl } from '@/lib/api/utils';
+import { generateSeoData, getFrontBaseUrl, getStrapiBaseUrl } from '@/lib/api/utils';
 
 import styles from './page.module.scss';
 
@@ -77,9 +77,10 @@ export async function generateMetadata(context) {
   const { images = [], publishedAt, seo = {} } = response?.posts?.[0] || {};
 
   return {
+    ...generateSeoData(seo),
+
     category: slug,
-    description: seo?.metaDescription,
-    keywords: seo?.keywords?.split(','),
+
     openGraph: {
       description: seo?.metaDescription,
       images: Object.keys(images).map((key) => ({
@@ -95,20 +96,7 @@ export async function generateMetadata(context) {
       type: 'article',
       url: `${getFrontBaseUrl()}/${slug}/${postSlug}`,
     },
-    robots: {
-      follow: true,
-      googleBot: {
-        follow: true,
-        index: true,
-        'max-image-preview': 'large',
-        'max-snippet': -1,
-        'max-video-preview': -1,
-        noimageindex: true,
-      },
-      index: true,
-      nocache: true,
-    },
-    title: seo?.metaTitle,
+
     twitter: {
       card: 'summary_large_image',
       creator: '', // Add your Twitter username here if applicable

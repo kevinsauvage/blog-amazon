@@ -1,8 +1,18 @@
 import DynamicPage from '@/components/DynamicPage/DynamicPage';
-import pageMetadatas from '@/metadatas/pages';
+import { fetchPage } from '@/lib/api/pages';
+import { generateSeoData } from '@/lib/api/utils';
 
-const page = async () => <DynamicPage slug="cookie" />;
+const PAGE_SLUG = 'cookie';
+
+const page = async () => <DynamicPage slug={PAGE_SLUG} />;
 
 export default page;
 
-export const metadata = pageMetadatas.cookie;
+export async function generateMetadata() {
+  const pageData = await fetchPage({ slug: PAGE_SLUG });
+  const { seo } = pageData || {};
+
+  return {
+    ...generateSeoData(seo),
+  };
+}

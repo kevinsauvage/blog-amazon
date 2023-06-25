@@ -3,6 +3,8 @@
 import { useEffect, useRef, useState } from 'react';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
+import IconCheckbox from '@/svg/IconCheckbox';
+import IconCheckboxBlankOutline from '@/svg/IconCheckboxBlankOutline';
 import IconChevronDown from '@/svg/IconChevronDown';
 import IconChevronUp from '@/svg/IconChevronUp';
 
@@ -143,6 +145,11 @@ const Select = ({ label, options, queryKey, unique = true, resetPage }) => {
                     tabIndex="0"
                     aria-selected={false}
                   >
+                    {selectedOption.includes(optionSlug) ? (
+                      <IconCheckbox />
+                    ) : (
+                      <IconCheckboxBlankOutline />
+                    )}{' '}
                     {optionLabel}
                   </li>
                 );

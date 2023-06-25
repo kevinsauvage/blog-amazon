@@ -1,9 +1,0 @@
-.banner {
-  position: relative;
-  margin-top: 2rem;
-  margin-bottom: 4rem;
-
-  @include respond(mobile_l) {
-    margin-top: 1rem;
-  }
-}

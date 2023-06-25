@@ -1,9 +1,9 @@
 .date {
   display: flex;
   align-items: center;
-  color: var(--on-surface-300);
-  font-weight: 400;
+  color: var(--on-surface-dark-200);
   font-size: 0.8rem;
+  opacity: 0.9;
 
   .light {
     color: var(--on-surface-200);
