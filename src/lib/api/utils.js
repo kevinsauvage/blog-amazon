@@ -137,25 +137,29 @@ export const normalizeSortItemsData = (sortItems) => {
   });
 };
 
-export const generateSeoData = (seo) => ({
-  alternates: {
-    canonical: seo?.canonicalURL,
-  },
-  description: seo?.metaDescription,
-  keywords: seo?.keywords?.split(','),
-  robots: seo?.metaRobots || {
-    follow: true,
-    googleBot: {
-      follow: true,
-      index: true,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
-      'max-video-preview': -1,
-      noimageindex: true,
-    },
-    index: true,
-    nocache: true,
-  },
+export const generateSeoData = (properties) => {
+  const { canonicalURL = '', metaDescription, metaTitle, metaRobots, keywords } = properties || {};
 
-  title: seo?.metaTitle,
-});
+  return {
+    alternates: {
+      canonical: canonicalURL ? getFrontBaseUrl() + canonicalURL : '',
+    },
+    description: metaDescription,
+    keywords: keywords?.split(','),
+    robots: metaRobots || {
+      follow: true,
+      googleBot: {
+        follow: true,
+        index: true,
+        'max-image-preview': 'large',
+        'max-snippet': -1,
+        'max-video-preview': -1,
+        noimageindex: true,
+      },
+      index: true,
+      nocache: true,
+    },
+
+    title: metaTitle,
+  };
+};

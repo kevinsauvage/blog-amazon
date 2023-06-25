@@ -71,7 +71,7 @@ export default PostId;
 
 export async function generateMetadata(context) {
   const { params } = context;
-  const { postSlug, slug } = params;
+  const { postSlug, categorySlug } = params;
   const response = await getPosts({ slug: postSlug });
 
   const { images = [], publishedAt, seo = {} } = response?.posts?.[0] || {};
@@ -79,7 +79,10 @@ export async function generateMetadata(context) {
   return {
     ...generateSeoData(seo),
 
-    category: slug,
+    alternates: {
+      canonical: `${getFrontBaseUrl()}/posts/${categorySlug}/${postSlug}`,
+    },
+    category: categorySlug,
 
     openGraph: {
       description: seo?.metaDescription,
@@ -94,7 +97,7 @@ export async function generateMetadata(context) {
       siteName: 'site name',
       title: seo?.metaTitle,
       type: 'article',
-      url: `${getFrontBaseUrl()}/${slug}/${postSlug}`,
+      url: `${getFrontBaseUrl()}/${categorySlug}/${postSlug}`,
     },
 
     twitter: {
