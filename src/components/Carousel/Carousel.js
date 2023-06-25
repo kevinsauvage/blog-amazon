@@ -2,7 +2,7 @@
 
 import { Children, useRef } from 'react';
 
-import useCarousel from '@/hooks/useOnClickOutside';
+import useCarousel from '@/hooks/useCarousel';
 import IconChevronBackOutline from '@/svg/IconChevronBackOutline';
 import IconChevronForwardOutline from '@/svg/IconChevronForwardOutline';
 
