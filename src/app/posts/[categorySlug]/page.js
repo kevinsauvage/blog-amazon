@@ -30,8 +30,9 @@ const CategoryPage = async (context) => {
 export default CategoryPage;
 
 export async function generateMetadata({ params }) {
-  const { slug } = params;
-  const category = await getCategories({ slug });
+  const { categorySlug } = params;
+
+  const category = await getCategories({ slug: categorySlug });
 
   const { seo = {} } = category?.[0] || {};
 

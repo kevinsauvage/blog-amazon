@@ -1,4 +1,4 @@
-import { formatPosts } from '@/lib/api/utils';
+import { normalizePostsData } from '@/lib/api/utils';
 
 import CarouselPosts from '../CarouselPosts/CarouselPosts';
 
@@ -13,7 +13,7 @@ const getRelatedPosts = async (id) => {
     const url = `${baseUrl}${endpoint}/${id}?_embed&limit=20`;
     const response = await fetch(url);
     const data = await response.json();
-    return formatPosts(data);
+    return normalizePostsData(data);
   } catch (error) {
     console.error(error.stack);
   }

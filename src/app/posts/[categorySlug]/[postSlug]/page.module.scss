@@ -61,57 +61,6 @@
         margin: 0 auto;
         margin-bottom: 3rem;
         line-height: 1.7;
-
-        h3 {
-          font-size: 1.1rem;
-        }
-
-        ol {
-          display: flex;
-          flex-wrap: wrap;
-          margin: 0;
-          padding: 0;
-          list-style: none;
-          counter-reset: my-awesome-counter;
-
-          li {
-            margin-bottom: 2rem;
-
-            p {
-              margin-bottom: 1rem;
-            }
-          }
-
-          ol,
-          ul > li {
-            margin-bottom: 0.5rem;
-            margin-left: 3rem;
-            list-style: disc;
-          }
-        }
-
-        ol h2 {
-          display: flex;
-          align-items: center;
-          margin-bottom: 0.5rem;
-          font-size: 1.3rem;
-          counter-increment: my-awesome-counter;
-        }
-
-        ol h2::before {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          min-width: 3rem;
-          min-height: 3rem;
-          margin-right: 0.5rem;
-          border-radius: 50%;
-          color: white;
-          font-size: 2rem;
-          line-height: 1;
-          background-color: black;
-          content: counter(my-awesome-counter);
-        }
       }
     }
   }

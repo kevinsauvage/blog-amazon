@@ -33,14 +33,14 @@ const fetchStrapiEndpoint = async (endpoint, config = {}) => {
 
 export default fetchStrapiEndpoint;
 
-export const formatCategories = (data) =>
+export const normalizeCategoryData = (data) =>
   data.map((category) => {
     const { label, color, locale, slug, description, publishedAt, seo, title } =
       category.attributes || {};
     return { color, description, id: category.id, label, locale, publishedAt, seo, slug, title };
   });
 
-export const formatPost = (post) => {
+export const normalizePostData = (post) => {
   const {
     title,
     description,
@@ -61,7 +61,7 @@ export const formatPost = (post) => {
 
   return {
     author,
-    categories: formatCategories(categories?.data),
+    categories: normalizeCategoryData(categories?.data),
     content,
     excerpt: description,
     id: post.id,
@@ -76,8 +76,8 @@ export const formatPost = (post) => {
   };
 };
 
-export const formatPosts = (posts) =>
-  Array.isArray(posts) ? posts?.map((post) => formatPost(post)) : [];
+export const normalizePostsData = (posts) =>
+  Array.isArray(posts) ? posts?.map((post) => normalizePostData(post)) : [];
 
 export const normalizeMenuData = (data) => {
   if (Array.isArray(data))
@@ -117,7 +117,7 @@ export const normalizePageData = (data) => {
     });
 };
 
-export const formatSortItems = (sortItems) => {
+export const normalizeSortItemsData = (sortItems) => {
   const items = sortItems?.[0]?.attributes?.sortItems?.data;
   if (!items) return [];
 
@@ -141,9 +141,8 @@ export const generateSeoData = (seo) => ({
   alternates: {
     canonical: seo?.canonicalURL,
   },
-  category: seo?.metaTitle,
   description: seo?.metaDescription,
-  keywords: seo?.structuredData?.keywords,
+  keywords: seo?.keywords?.split(','),
   robots: seo?.metaRobots,
   title: seo?.metaTitle,
 });

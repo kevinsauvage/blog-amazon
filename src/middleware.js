@@ -2,6 +2,7 @@
 import { NextResponse } from 'next/server';
 
 const middleware = (request) => {
+  return;
   const basicAuth = request.headers.get('Authorization');
 
   if (basicAuth) {

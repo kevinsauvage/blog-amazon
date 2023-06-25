@@ -1,4 +1,4 @@
-import fetchStrapiEndpoint, { formatPosts } from './utils';
+import fetchStrapiEndpoint, { normalizePostsData } from './utils';
 
 const ARTICLES_PATH = 'articles';
 const TOKEN = process.env.STRAPI_TOKEN;
@@ -37,7 +37,7 @@ export const getPosts = async (properties) => {
   const { pagination } = meta || {};
 
   return {
-    posts: formatPosts(data),
+    posts: normalizePostsData(data),
     totalPages: pagination?.pageCount || 0,
     totalPosts: pagination?.total || 0,
   };
