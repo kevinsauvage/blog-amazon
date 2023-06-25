@@ -1,8 +1,8 @@
 /* eslint-disable unicorn/no-null */
+/* 
 import { NextResponse } from 'next/server';
 
 const middleware = (request) => {
-  return;
   const basicAuth = request.headers.get('Authorization');
 
   if (basicAuth) {
@@ -26,3 +26,8 @@ const middleware = (request) => {
 };
 
 export default middleware;
+*/
+
+const test = 'test';
+
+console.log('🚀 ~  file: middleware.js:33 ~  test:', test);
