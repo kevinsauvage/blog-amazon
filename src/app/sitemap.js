@@ -19,19 +19,12 @@ export default async function sitemap() {
     url: `${BASE_URL}/posts/${categories?.[0]?.slug}/${slug}`,
   }));
 
-  const routes = [
-    '',
-    '/about',
-    '/contact',
-    '/search',
-    '/terms',
-    '/privacy',
-    '/cookie',
-    '/posts',
-  ].map((route) => ({
-    lastModified: new Date().toISOString(),
-    url: `${BASE_URL}${route}`,
-  }));
+  const routes = ['', '/about', '/contact', '/terms', '/privacy', '/cookie', '/posts'].map(
+    (route) => ({
+      lastModified: new Date().toISOString(),
+      url: `${BASE_URL}${route}`,
+    })
+  );
 
   return [...routes, ...categoriesPath, ...posts];
 }
