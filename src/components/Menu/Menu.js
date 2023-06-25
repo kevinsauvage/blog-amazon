@@ -1,7 +1,7 @@
 import { useRef } from 'react';
 
-import useOnClickOutside from '@/hooks/useClickOutside';
 import IconClose from '@/svg/IconClose';
+import useOnClickOutside from '@/hooks/useOnClickOutside';
 
 import Container from '../Container/Container';
 import Nav from '../Nav/Nav';
