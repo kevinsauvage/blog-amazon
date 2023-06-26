@@ -19,7 +19,7 @@ const Pagination = ({ currentPage, totalPages, navigate, handleUpdate }) => {
       const parameters = new URLSearchParams(searchParameters);
       parameters.set('page', page);
       const path = `${pathname}?${parameters.toString()}`;
-      router.push(path);
+      router.push(path, undefined, { shallow: true });
     }
     handleUpdate?.(page);
   };

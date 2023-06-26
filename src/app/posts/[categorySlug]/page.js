@@ -1,5 +1,6 @@
 import Listing from '@/components/_scopes/listing/Listing/Listing';
 import PageBannerWrapper from '@/components/_scopes/listing/PageBannerWrapper/PageBannerWrapper';
+import Pagination from '@/components/Pagination/Pagination';
 import SearchForm from '@/components/SearchForm/SearchForm';
 import useQueries from '@/hooks/useQueries';
 import getCategories from '@/lib/api/categories';
@@ -16,13 +17,8 @@ const CategoryPage = async (context) => {
       <PageBannerWrapper title={title} query={q} subtitle={subtitle} description={description}>
         <SearchForm query={q} />
       </PageBannerWrapper>
-      <Listing
-        posts={posts}
-        totalPosts={totalPosts}
-        totalPages={totalPages}
-        page={page}
-        sorts={sortsResponse}
-      />
+      <Listing posts={posts} totalPosts={totalPosts} sorts={sortsResponse} />
+      <Pagination totalPages={totalPages} currentPage={page} navigate />
     </>
   );
 };

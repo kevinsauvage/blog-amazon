@@ -1,5 +1,6 @@
 import Listing from '@/components/_scopes/listing/Listing/Listing';
 import PageBannerWrapper from '@/components/_scopes/listing/PageBannerWrapper/PageBannerWrapper';
+import Pagination from '@/components/Pagination/Pagination';
 import SearchForm from '@/components/SearchForm/SearchForm';
 import useQueries from '@/hooks/useQueries';
 import { fetchPage } from '@/lib/api/pages';
@@ -21,11 +22,10 @@ const Home = async (context) => {
       <Listing
         totalPosts={totalPosts}
         posts={posts}
-        totalPages={totalPages}
-        page={page}
         sorts={sortsResponse}
         categories={categoriesResponse}
       />
+      <Pagination totalPages={totalPages} currentPage={page} navigate />
     </>
   );
 };

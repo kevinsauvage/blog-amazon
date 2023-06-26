@@ -1,14 +1,13 @@
 import Container from '@/components/Container/Container';
 import Grid from '@/components/Grid/Grid';
 import NoResults from '@/components/NoResults/NoResults';
-import Pagination from '@/components/Pagination/Pagination';
 import PostGrid from '@/components/PostGrid/PostGrid';
 
 import ListingHeader from '../ListingHeader/ListingHeader';
 
 import styles from './Listing.module.scss';
 
-const Listing = ({ totalPages, totalPosts, posts, page, sorts, categories }) => (
+const Listing = ({ totalPosts, posts, sorts, categories }) => (
   <div className={styles.listing}>
     <Container>
       <ListingHeader totalPosts={totalPosts} sorts={sorts} categories={categories} />
@@ -30,7 +29,6 @@ const Listing = ({ totalPages, totalPosts, posts, page, sorts, categories }) => 
           description="Please try a different search term."
         />
       )}
-      <Pagination totalPages={totalPages} currentPage={page} navigate />
     </Container>
   </div>
 );
