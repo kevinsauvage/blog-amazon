@@ -47,9 +47,7 @@ const PostId = async (context) => {
             <div className={styles.info}>
               <div className={styles.categories}>
                 {categories?.length > 0 &&
-                  categories
-                    .slice(0, 2)
-                    .map((category) => <Category key={category.id} category={category} />)}
+                  categories.map((category) => <Category key={category.id} category={category} />)}
               </div>
               <Date date={publishedAt} />
               <Views views={viewCount} />
