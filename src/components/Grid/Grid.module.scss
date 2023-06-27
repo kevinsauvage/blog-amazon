@@ -6,28 +6,46 @@
   li {
     margin-bottom: $gap-s;
 
-    &:nth-child(6n + 1) {
-      height: 300px;
+    &:nth-child(3n + 1) {
+      height: 360px;
     }
 
-    &:nth-child(6n + 2) {
+    &:nth-child(3n + 2) {
       height: 500px;
     }
 
-    &:nth-child(6n + 3) {
-      height: 360px;
+    &:nth-child(3n + 3) {
+      height: 450px;
     }
+  }
 
-    &:nth-child(6n + 4) {
-      height: 330px;
+  @include respond(laptop_s) {
+    columns: 2 300px;
+
+    li {
+      &:nth-child(4n + 1) {
+        height: 360px;
+      }
+
+      &:nth-child(4n + 2) {
+        height: 500px;
+      }
+
+      &:nth-child(4n + 3) {
+        height: 450px;
+      }
+
+      &:nth-child(4n + 4) {
+        height: 400px;
+      }
     }
+  }
 
-    &:nth-child(6n + 5) {
-      height: 360px;
-    }
+  @include respond(mobile_l) {
+    columns: unset;
 
-    &:nth-child(6n + 6) {
-      height: 400px;
+    li {
+      height: 360px !important;
     }
   }
 }

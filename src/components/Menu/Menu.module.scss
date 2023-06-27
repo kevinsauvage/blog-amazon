@@ -26,10 +26,14 @@
   transition: all 0.2s linear;
 
   .top {
+    position: absolute;
+    z-index: 99;
     display: flex;
     align-items: center;
+    width: 100%;
     height: $headerHeight;
     border-bottom: $border-light;
+    background-color: var(--surface-900);
 
     .close {
       display: flex;
@@ -59,6 +63,18 @@
   }
 
   .mainMenu {
-    margin-top: 2rem;
+    height: 100vh;
+    padding-top: calc(2rem + $headerHeight);
+    padding-bottom: 2rem;
+    padding-left: 1rem;
+    overflow: auto;
+
+    nav {
+      margin-bottom: 2rem;
+    }
+
+    a {
+      font-size: 1.3rem;
+    }
   }
 }

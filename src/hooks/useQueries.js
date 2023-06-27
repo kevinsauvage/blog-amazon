@@ -1,8 +1,8 @@
 /* eslint-disable unicorn/no-nested-ternary */
-import apiCalls from '@/lib/api/index';
+import getCategories from '@/lib/api/categories';
+import { getPosts } from '@/lib/api/posts';
+import { fetchSorts } from '@/lib/api/sorts';
 import { decodeURL } from '@/utils/url';
-
-const { getPosts, fetchSorts, getCategories } = apiCalls;
 
 const useQueries = async (context) => {
   const { searchParams, params } = context;
@@ -17,7 +17,7 @@ const useQueries = async (context) => {
     : categories?.split(','); // The categoies could be a string, split it to return and array
 
   const extraParameters = sorting ? decodeURL(sorting) : '';
-  const perPage = 12;
+  const perPage = 20;
 
   const promises = [
     getPosts({ categories: categoryIds, extraParams: extraParameters, page, perPage, query: q }),

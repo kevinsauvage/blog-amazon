@@ -24,18 +24,17 @@ const DropdownMenu = ({ menu, usefullLinks, handleClose, show }) => {
             </button>
           </Container>
         </div>
-        <Container>
-          <div className={styles.mainMenu}>
+        <div className={styles.mainMenu}>
+          <Container>
             <Nav title={menu?.displayedTitle || 'Menu'} variant="column" menu={menu?.items} />
-          </div>
-          <div className={styles.mainMenu}>
+
             <Nav
               title={usefullLinks?.displayedTitle || 'Menu'}
               variant="column"
               menu={usefullLinks?.items}
             />
-          </div>
-        </Container>
+          </Container>
+        </div>
       </div>
     </div>
   );

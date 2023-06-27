@@ -39,6 +39,7 @@
 
     @include respond(laptop_s) {
       display: flex;
+      align-items: center;
     }
 
     svg {
