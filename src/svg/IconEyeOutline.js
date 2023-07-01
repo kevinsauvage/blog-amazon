@@ -1,5 +1,3 @@
-import * as React from 'react';
-
 const IconEyeOutline = (properties) => (
   <svg viewBox="0 0 512 512" fill="currentColor" height="1em" width="1em" {...properties}>
     <path

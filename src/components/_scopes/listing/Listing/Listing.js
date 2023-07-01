@@ -1,6 +1,7 @@
 import Container from '@/components/Container/Container';
 import Grid from '@/components/Grid/Grid';
 import NoResults from '@/components/NoResults/NoResults';
+import Post from '@/components/Post/Post';
 import PostGrid from '@/components/PostGrid/PostGrid';
 
 import ListingHeader from '../ListingHeader/ListingHeader';
@@ -13,14 +14,26 @@ const Listing = ({ totalPosts, posts, sorts, categories }) => (
       <ListingHeader totalPosts={totalPosts} sorts={sorts} categories={categories} />
       {Array.isArray(posts) && posts.length > 0 ? (
         <Grid>
-          {posts.map((post, index) => (
-            <PostGrid
-              key={post.id}
-              post={post}
-              image={post.images?.medium}
-              imagePriority={index < 3}
-            />
-          ))}
+          {posts.map((post, index) => {
+            if (index % 2 === 0) {
+              return (
+                <Post
+                  key={post.id}
+                  post={post}
+                  image={post.images?.medium}
+                  imagePriority={index < 3}
+                />
+              );
+            }
+            return (
+              <PostGrid
+                key={post.id}
+                post={post}
+                image={post.images?.medium}
+                imagePriority={index < 3}
+              />
+            );
+          })}
         </Grid>
       ) : (
         <NoResults

@@ -33,8 +33,8 @@ const Post = ({ post, image, showCategories = true, showExcerpt = true }) => {
       <div className={styles.content}>
         <div className={styles.header}>
           {showCategories && <Category category={category} />}
-          <Date date={publishedAt} />
-          <Views views={viewCount} />
+          <Date date={publishedAt} variant="light" />
+          <Views views={viewCount} variant="light" />
         </div>
         <Link href={postLink}>
           <b className={styles.title}>{title}</b>

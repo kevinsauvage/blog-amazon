@@ -6,13 +6,9 @@ import styles from './PageBannerWrapper.module.scss';
 
 const PageBannerWrapper = ({ children, title, subtitle, description }) => (
   <div className={styles.banner}>
-    <video autoPlay loop muted className={styles.video}>
-      <source src="/bg.mp4" type="video/mp4" />
-    </video>
-    <div className={styles.overlay} />
     <div className={styles.content}>
       <Container>
-        <Breadcrumb className={styles.breadcrumb} />
+        <Breadcrumb />
         <div className={styles.inner}>
           {title && <h1 className={styles.title} dangerouslySetInnerHTML={{ __html: title }} />}
           {subtitle && (

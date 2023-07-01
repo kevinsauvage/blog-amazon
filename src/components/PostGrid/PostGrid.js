@@ -39,8 +39,8 @@ const PostGrid = ({ post, image, imagePriority }) => {
         </Link>
         <p className={styles.excerpt}>{excerpt}</p>
         <div className={styles.info}>
-          <Date date={publishedAt} variant="light" />
-          <Views views={viewCount} variant="light" />
+          <Date date={publishedAt} />
+          <Views views={viewCount} />
         </div>
       </div>
     </div>
