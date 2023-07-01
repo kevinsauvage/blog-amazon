@@ -7,6 +7,10 @@
 
   &.light {
     color: var(--on-surface-200);
+
+    path {
+      stroke-width: 1.1rem;
+    }
   }
 
   svg {
