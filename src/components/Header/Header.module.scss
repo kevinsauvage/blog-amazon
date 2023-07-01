@@ -2,7 +2,8 @@
   position: relative;
   z-index: 100;
   border-bottom: $border-light;
-  background-color: var(--surface-900);
+  color: var(--on-surface-dark-100);
+  background-color: var(--surface-dark);
 
   .wrapper {
     position: relative;
@@ -11,7 +12,6 @@
     align-items: center;
     justify-content: space-between;
     height: $headerHeight;
-    background-color: var(--surface-900);
 
     @include respond(mobile_l) {
       grid-template-columns: 1fr 1fr;

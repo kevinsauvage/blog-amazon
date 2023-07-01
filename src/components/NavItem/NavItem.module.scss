@@ -1,10 +1,13 @@
 .item {
   width: fit-content;
+  padding: 0.5rem;
+  border-radius: $radius-s;
   font-weight: 500;
   font-size: 1rem;
 }
 
 .active {
-  border-bottom: 1px solid var(--on-surface-100);
+  color: var(--primary-300);
   font-weight: 600;
+  background-color: var(--primary-900);
 }

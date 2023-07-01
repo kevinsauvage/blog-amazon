@@ -1,6 +1,6 @@
 $surface: #1a2d6b;
 $surface-light: hsl(0, 0%, 85%);
-$primary-light: #ff1f0b;
+$primary-light: #ff8400;
 $primary-dark: #c01000;
 
 $colors-dark: (
@@ -76,6 +76,8 @@ $colors-light: (
   on-surface-medium: #373737,
   on-surface-light: #747474,
   on-surface-disabled: #6c6c6c,
+
+  surface-dark: #181818,
 );
 
 @function hex-to-rgb($hex) {

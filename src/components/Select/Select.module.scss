@@ -4,32 +4,35 @@
   label {
     margin-right: 4px;
   }
-}
 
-.dropDown {
-  position: relative;
-  display: inline-block;
-  padding: 8px;
-  border: 1px solid #cccccc;
-  border-radius: $radius-s;
-  background-color: var(--surface-800);
-  cursor: pointer;
-
-  svg {
-    color: var(--primary-400);
+  .selectedOption {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 4px;
+    font-weight: 400;
   }
-}
 
-.open {
-  box-shadow: $box-shadow-1;
-}
+  .dropDown {
+    position: relative;
+    display: inline-block;
+    padding: 8px;
+    border: 1px solid #cccccc;
+    border-radius: $radius-s;
+    background-color: var(--surface-800);
+    cursor: pointer;
 
-.selectedOption {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 4px;
-  font-weight: 400;
+    svg {
+      color: var(--primary-300);
+    }
+
+    &.open {
+      border: 0.1px solid var(--primary-300);
+      color: var(--primary-300);
+      background-color: var(--primary-900);
+      box-shadow: $box-shadow-1;
+    }
+  }
 }
 
 .optionsList {
