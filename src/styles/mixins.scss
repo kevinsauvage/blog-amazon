@@ -13,12 +13,13 @@
   }
 }
 
-@mixin gradient-overlay {
+@mixin gradient-overlay($radius) {
   &::after {
     position: absolute;
     z-index: 0;
     width: 100%;
     height: 100%;
+    border-radius: $radius;
     background: rgba(black, 0.5);
     background: linear-gradient(
       360deg,
