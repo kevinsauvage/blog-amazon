@@ -3,31 +3,26 @@
 import { useState } from 'react';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
-import useDebounceFunction from '@/hooks/useDebounceFunction';
 import IconIconSearch from '@/svg/IconIconSearch';
 
 import Input from '../Input/Input';
 
 import styles from './SearchForm.module.scss';
 
-const SearchForm = ({ query, className }) => {
+const SearchForm = ({ className }) => {
   const { push } = useRouter();
   const pathname = usePathname();
   const searchParameters = useSearchParams();
-  const [searchTerm, setSearchTerm] = useState(query);
+  const [searchTerm, setSearchTerm] = useState(searchParameters.get('q'));
 
   const handleSearch = (input = '') => {
-    if (input?.trim() === query) return;
+    if (input?.trim() === searchParameters.get('q')) return;
     const newParameters = new URLSearchParams([...searchParameters.entries()]);
     newParameters.set('q', input);
-    push(`${pathname}?${newParameters}`);
+    push(`${pathname}?${newParameters}`, { shallow: true });
   };
-  const debouncedSearch = useDebounceFunction(handleSearch, 300);
 
-  const handleInputChange = ({ value }) => {
-    setSearchTerm(value);
-    debouncedSearch(value);
-  };
+  const handleInputChange = ({ value }) => setSearchTerm(value);
 
   return (
     <div className={`${styles.search} ${className || ''}`}>
