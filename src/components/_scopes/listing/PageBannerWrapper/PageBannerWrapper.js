@@ -14,7 +14,9 @@ const PageBannerWrapper = ({ title, subtitle, description, query }) => (
           {subtitle && (
             <p className={styles.subtitle} dangerouslySetInnerHTML={{ __html: subtitle }} />
           )}
-          <p className={styles.description} dangerouslySetInnerHTML={{ __html: description }} />
+          {description && (
+            <p className={styles.description} dangerouslySetInnerHTML={{ __html: description }} />
+          )}{' '}
           <SearchForm query={query} />
         </div>
       </Container>
