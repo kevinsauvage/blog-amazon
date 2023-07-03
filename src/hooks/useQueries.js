@@ -26,8 +26,6 @@ const useQueries = async (context) => {
 
   if (categorySlug) {
     promises.push(getCategories({ slug: categorySlug })); // If the page is category, only fetch that category
-  } else {
-    promises.push(getCategories()); // Else fetch all categories
   }
 
   const [results, sortsResponse, categoriesResponse] = await Promise.all(promises);

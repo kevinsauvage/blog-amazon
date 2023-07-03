@@ -28,7 +28,7 @@ const SearchForm = ({ className }) => {
     <div className={`${styles.search} ${className || ''}`}>
       <form
         className={styles.form}
-        title="Search a post"
+        title="Search"
         onSubmit={(event) => {
           event.preventDefault();
           handleSearch(searchTerm);
@@ -40,7 +40,7 @@ const SearchForm = ({ className }) => {
           type="text"
           name="input"
           title="input"
-          placeholder="Searh a post..."
+          placeholder="Searh..."
           value={searchTerm}
           onChange={handleInputChange}
         />

@@ -3,10 +3,10 @@ import TotalFound from '../TotalFound/TotalFound';
 
 import styles from './ListingHeader.module.scss';
 
-const ListingHeader = ({ totalPosts, sorts, categories }) => (
+const ListingHeader = ({ totalPosts, sorts }) => (
   <div className={styles.header}>
     <TotalFound total={totalPosts} />
-    <ListingConfig sorts={sorts} categories={categories} />
+    <ListingConfig sorts={sorts} />
   </div>
 );
 

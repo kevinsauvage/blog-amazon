@@ -1,14 +1,19 @@
 .item {
   width: fit-content;
-  padding: 0.5rem;
-  border-radius: $radius-s;
-  font-weight: 500;
-  font-size: 1rem;
-  white-space: nowrap;
+
+  a {
+    padding: 1rem;
+    border-radius: $radius-xl;
+    font-weight: 500;
+    font-size: 1rem;
+    white-space: nowrap;
+  }
 }
 
 .active {
-  color: var(--primary-300);
-  font-weight: 600;
-  background-color: var(--primary-900);
+  a {
+    color: var(--primary-300);
+    font-weight: 600;
+    background-color: var(--primary-900);
+  }
 }
