@@ -13,13 +13,17 @@
 }
 
 .inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   max-width: 660px;
   margin: 0 auto;
-  padding: 6rem 0;
+  padding: 3rem 0 5rem 0;
   text-align: center;
 
   .title {
-    margin-bottom: 1.5rem;
+    margin-bottom: 2rem;
 
     strong {
       color: var(--primary-400);
@@ -29,7 +33,7 @@
 
   .subtitle,
   .description {
-    margin-bottom: 2rem;
+    margin-bottom: 3rem;
     font-weight: 300;
     font-size: 1.2rem;
 
@@ -37,4 +41,8 @@
       text-align: center;
     }
   }
+}
+
+.navigation {
+  margin-bottom: 5rem;
 }

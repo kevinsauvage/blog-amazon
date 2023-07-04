@@ -2,7 +2,6 @@
 import Image from 'next/image';
 
 import CommentsPresentation from '@/components/_scopes/comments/CommentsPresentation/CommentsPresentation';
-import Breadcrumb from '@/components/Breadcrumb/Breadcrumb';
 import Category from '@/components/Category/Category';
 import Container from '@/components/Container/Container';
 import Date from '@/components/Date/Date';
@@ -31,7 +30,6 @@ const PostId = async (context) => {
   return (
     <Container>
       <main className={styles.main}>
-        <Breadcrumb last={title} />
         <article className={styles.article}>
           {image?.url && (
             <Image

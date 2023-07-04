@@ -8,7 +8,6 @@ import IconHamburgerMenu from '@/svg/IconHamburgerMenu';
 
 import Container from '../Container/Container';
 import Menu from '../Menu/Menu';
-import Nav from '../Nav/Nav';
 
 import styles from './Header.module.scss';
 
@@ -40,10 +39,6 @@ const Header = ({ menu, usefullLinks, siteName }) => {
             <Link href="/">
               <strong>{siteName}</strong>
             </Link>
-          </div>
-
-          <div className={styles.navigation}>
-            <Nav variant="row" menu={menu?.items} />
           </div>
         </div>
       </Container>

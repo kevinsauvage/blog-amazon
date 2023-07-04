@@ -7,11 +7,10 @@
   .wrapper {
     position: relative;
     z-index: 100;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 2rem;
-    height: $headerHeight;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    padding: 2rem 0;
+    padding-bottom: 1.5rem;
 
     @include respond(mobile_l) {
       grid-template-columns: 1fr 1fr;
@@ -20,6 +19,7 @@
 
   .logo {
     color: var(--on-surface-100);
+    text-align: center;
 
     strong {
       font-size: 2rem;
@@ -32,17 +32,13 @@
   }
 
   .menu {
-    display: none;
+    display: flex;
+    align-items: center;
     gap: 0.5rem;
     width: fit-content;
     border: none;
     background-color: transparent;
     cursor: pointer;
-
-    @include respond(laptop_s) {
-      display: flex;
-      align-items: center;
-    }
 
     svg {
       font-size: 1.6rem;
@@ -53,15 +49,6 @@
       font-size: 0.9rem;
       letter-spacing: 1.2px;
       text-transform: uppercase;
-    }
-  }
-
-  .navigation {
-    display: flex;
-    align-items: center;
-
-    @include respond(laptop_s) {
-      display: none;
     }
   }
 }

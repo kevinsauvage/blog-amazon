@@ -7,13 +7,14 @@
     font-weight: 500;
     font-size: 1rem;
     white-space: nowrap;
+    background-color: rgba(var(--rgb-surface-900), 0.1);
   }
 }
 
 .active {
   a {
-    color: var(--primary-300);
+    color: var(--on-surface-hight);
     font-weight: 600;
-    background-color: var(--primary-900);
+    background-color: var(--surface-900);
   }
 }

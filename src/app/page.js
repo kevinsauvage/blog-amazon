@@ -2,15 +2,17 @@ import Listing from '@/components/_scopes/listing/Listing/Listing';
 import PageBannerWrapper from '@/components/_scopes/listing/PageBannerWrapper/PageBannerWrapper';
 import Pagination from '@/components/Pagination/Pagination';
 import useQueries from '@/hooks/useQueries';
+import { fetchMenu } from '@/lib/api/menus';
 import { fetchPage } from '@/lib/api/pages';
 import { generateSeoData } from '@/lib/api/utils';
 
 const PAGE_SLUG = 'home';
 
 const Home = async (context) => {
-  const [pageData, searchData] = await Promise.all([
+  const [pageData, searchData, menu] = await Promise.all([
     fetchPage({ slug: PAGE_SLUG }),
     useQueries(context),
+    fetchMenu({ slug: 'main' }),
   ]);
 
   const { title, description, subtitle } = pageData || {};
@@ -18,7 +20,13 @@ const Home = async (context) => {
 
   return (
     <>
-      <PageBannerWrapper title={title} subtitle={subtitle} description={description} query={q} />
+      <PageBannerWrapper
+        title={title}
+        subtitle={subtitle}
+        description={description}
+        query={q}
+        menu={menu}
+      />
 
       <Listing totalPosts={totalPosts} posts={posts} sorts={sortsResponse} />
 

@@ -8,7 +8,7 @@ import ListingHeader from '../ListingHeader/ListingHeader';
 
 import styles from './Listing.module.scss';
 
-const Listing = ({ totalPosts, posts, sorts }) => (
+const Listing = async ({ totalPosts, posts, sorts }) => (
   <div className={styles.listing}>
     <Container>
       <ListingHeader totalPosts={totalPosts} sorts={sorts} />
