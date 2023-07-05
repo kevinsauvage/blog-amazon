@@ -1,4 +1,3 @@
-import PageBannerWrapper from '@/components/_scopes/listing/PageBannerWrapper/PageBannerWrapper';
 import Container from '@/components/Container/Container';
 import { fetchPage } from '@/lib/api/pages';
 
@@ -9,7 +8,10 @@ const DynamicPage = async ({ slug, children }) => {
   const { title, description, contentHtml } = pageData || {};
   return (
     <div className={styles.page}>
-      <PageBannerWrapper title={title} subtitle={description} />
+      <div>
+        <h1>{title}</h1>
+        <p>{description}</p>
+      </div>
       <Container>
         <main>
           {contentHtml && (
