@@ -1,5 +1,13 @@
 .header {
   display: flex;
+  align-items: center;
   justify-content: space-between;
   padding: $padding-xl 0;
+}
+
+.menu {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
 }

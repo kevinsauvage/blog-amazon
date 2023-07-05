@@ -1,14 +1,30 @@
-import Navbar from '../Navbar/Navbar';
 import NavItem from '../NavItem/NavItem';
 
-const Nav = ({ menu, variant = 'column', title }) => {
+import styles from './Nav.module.scss';
+
+const Nav = ({ menu, variant = 'column', title, itemClass, itemActiveClass }) => {
   if (!Array.isArray(menu)) return;
+
+  const getStyles = () => {
+    if (variant === 'row') return styles.row;
+    return styles.column;
+  };
+
   return (
-    <Navbar variant={variant} title={title}>
-      {menu.map((menuItem) => (
-        <NavItem key={menuItem.id} href={menuItem?.path} label={menuItem?.label} />
-      ))}
-    </Navbar>
+    <nav className={`${styles.navbar} ${getStyles()}`}>
+      {title && <p className={styles.title}>{title}</p>}
+      <ul className={styles.list}>
+        {menu.map((menuItem) => (
+          <NavItem
+            key={menuItem.id}
+            href={menuItem?.path}
+            label={menuItem?.label}
+            className={itemClass}
+            activeClass={itemActiveClass}
+          />
+        ))}
+      </ul>
+    </nav>
   );
 };
 

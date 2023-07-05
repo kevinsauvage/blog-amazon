@@ -13,7 +13,12 @@ const PageBannerWrapper = ({ title, subtitle, description, query, menu }) => (
         <div className={styles.inner}>
           {menu && (
             <div className={styles.navigation}>
-              <Nav variant="row" menu={menu?.items} />
+              <Nav
+                variant="row"
+                menu={menu?.items}
+                itemActiveClass={styles.itemActive}
+                itemClass={styles.item}
+              />
             </div>
           )}
           <h1 className={styles.title} dangerouslySetInnerHTML={{ __html: title }} />

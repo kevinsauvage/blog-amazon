@@ -5,14 +5,19 @@ import { usePathname } from 'next/navigation';
 
 import styles from './NavItem.module.scss';
 
-const NavItem = ({ href, label }) => {
+const NavItem = ({ href, label, className = '', activeClass = '' }) => {
   const pathname = usePathname();
 
   const url = `/${href || ''}`;
 
   return (
-    <li className={`${styles.item} ${pathname === url ? styles.active : ''}`}>
-      <Link href={url}>{label}</Link>
+    <li className={styles.item}>
+      <Link
+        className={`${styles.link} ${className} ${pathname === url ? activeClass : ''}`}
+        href={url}
+      >
+        {label}
+      </Link>
     </li>
   );
 };

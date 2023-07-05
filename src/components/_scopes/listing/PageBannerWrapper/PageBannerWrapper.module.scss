@@ -46,3 +46,13 @@
 .navigation {
   margin-bottom: 5rem;
 }
+
+.item {
+  background-color: rgba(var(--rgb-surface-900), 0.03);
+}
+
+.itemActive {
+  color: var(--on-surface-hight);
+  font-weight: 600;
+  background-color: var(--surface-900);
+}
