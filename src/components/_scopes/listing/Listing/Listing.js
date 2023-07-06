@@ -1,3 +1,5 @@
+/* eslint-disable unicorn/no-nested-ternary */
+
 'use client';
 
 import { useCallback, useEffect, useRef, useState } from 'react';
@@ -15,7 +17,7 @@ import styles from './Listing.module.scss';
 const Listing = ({ posts, totalPages }) => {
   const [postData, setPostData] = useState([]);
   const [page, setPage] = useState(1);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const { categorySlug } = useParams();
   const searchParameters = useSearchParams();
   const bottomElementReference = useRef(null);
@@ -23,6 +25,7 @@ const Listing = ({ posts, totalPages }) => {
   useEffect(() => {
     setPostData(posts);
     setPage(1);
+    setLoading(false);
   }, [posts]);
 
   const handleSearch = useCallback(async () => {
@@ -99,6 +102,8 @@ const Listing = ({ posts, totalPages }) => {
           </Grid>
           <div ref={bottomElementReference} />
         </>
+      ) : loading ? (
+        <div>Loading...</div>
       ) : (
         <NoResults
           title="No Results"
@@ -106,7 +111,7 @@ const Listing = ({ posts, totalPages }) => {
           description="Please try a different search term."
         />
       )}
-      {loading && <div>Loading...</div>}
+      {loading && postData.length > 0 && <div>Loading...</div>}
       {totalPages === page && <div>That&apos;s it.</div>}
     </div>
   );
