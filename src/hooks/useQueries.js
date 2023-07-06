@@ -4,11 +4,10 @@ import { getPosts } from '@/lib/api/posts';
 import { fetchSorts } from '@/lib/api/sorts';
 import { decodeURL } from '@/utils/url';
 
-const useQueries = async (context) => {
-  const { searchParams, params } = context;
-  const { q = '', page = 1, sorting, categories = [] } = searchParams || {};
+const PER_PAGE = 12;
 
-  const { categorySlug } = params;
+export const getPostsQueryHelper = (searchParameters, categorySlug) => {
+  const { q = '', page = 1, sorting, categories = [] } = searchParameters || {};
 
   const categoryIds = categorySlug
     ? [categorySlug] // If the page is category, only fetch article for that category
@@ -17,7 +16,22 @@ const useQueries = async (context) => {
     : categories?.split(','); // The categoies could be a string, split it to return and array
 
   const extraParameters = sorting ? decodeURL(sorting) : '';
-  const perPage = 20;
+
+  return { PER_PAGE, categoryIds, extraParameters, page, q, sorting };
+};
+
+const useQueries = async (context) => {
+  const { searchParams, params } = context;
+
+  const { categorySlug } = params;
+
+  const {
+    q = '',
+    categoryIds,
+    extraParameters,
+    page,
+    PER_PAGE: perPage,
+  } = getPostsQueryHelper(searchParams, categorySlug) || {};
 
   const promises = [
     getPosts({ categories: categoryIds, extraParams: extraParameters, page, perPage, query: q }),

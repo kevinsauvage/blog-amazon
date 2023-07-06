@@ -27,9 +27,8 @@
     }
 
     &.open {
-      border: 0.1px solid var(--primary-300);
-      color: var(--primary-300);
-      background-color: var(--primary-900);
+      color: var(--on-surface-hight);
+      background-color: var(--surface-700);
       box-shadow: $box-shadow-1;
     }
   }
