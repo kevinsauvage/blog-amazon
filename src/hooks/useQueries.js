@@ -17,6 +17,11 @@ export const getPostsQueryHelper = (searchParameters, categorySlug) => {
 
   const extraParameters = sorting ? decodeURL(sorting) : '';
 
+  console.log(
+    '🚀 ~  file: useQueries.js:20 ~  getPostsQueryHelper ~  extraParameters:',
+    extraParameters
+  );
+
   return { PER_PAGE, categoryIds, extraParameters, page, q, sorting };
 };
 

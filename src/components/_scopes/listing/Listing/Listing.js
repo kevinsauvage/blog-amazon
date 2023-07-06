@@ -13,40 +13,42 @@ import { getPosts } from '@/lib/api/posts';
 import styles from './Listing.module.scss';
 
 const Listing = ({ posts, totalPages }) => {
-  const [postDate, setPostData] = useState([...posts]);
+  const [postData, setPostData] = useState([]);
   const [page, setPage] = useState(1);
-
   const [loading, setLoading] = useState(false);
   const { categorySlug } = useParams();
   const searchParameters = useSearchParams();
-
   const bottomElementReference = useRef(null);
 
-  const handleSearch = useCallback(
-    async (newPage) => {
-      if (totalPages < newPage) return;
+  useEffect(() => {
+    setPostData(posts);
+    setPage(1);
+  }, [posts]);
 
-      const {
-        q = '',
-        categoryIds,
-        extraParameters,
-        PER_PAGE: perPage,
-      } = getPostsQueryHelper(searchParameters, categorySlug) || {};
+  const handleSearch = useCallback(async () => {
+    const newPage = page + 1;
+    if (totalPages < newPage) return;
 
-      setLoading(true);
-      const newPosts = await getPosts({
-        categories: categoryIds,
-        extraParams: extraParameters,
-        page: newPage,
-        perPage,
-        query: q,
-      });
-      setLoading(false);
-      setPage(newPage);
-      setPostData((previous) => [...previous, ...(newPosts.posts || [])]);
-    },
-    [totalPages, searchParameters, categorySlug]
-  );
+    const {
+      q = '',
+      categoryIds,
+      extraParameters,
+      PER_PAGE: perPage,
+    } = getPostsQueryHelper(searchParameters, categorySlug) || {};
+
+    setLoading(true);
+    const newPostsResponse = await getPosts({
+      categories: categoryIds,
+      extraParams: extraParameters,
+      page: newPage,
+      perPage,
+      query: q,
+    });
+    setLoading(false);
+    setPage(newPage);
+    const newPosts = [...postData, ...(newPostsResponse.posts || [])];
+    setPostData(newPosts);
+  }, [page, totalPages, searchParameters, categorySlug, postData]);
 
   useEffect(() => {
     const options = {
@@ -57,28 +59,24 @@ const Listing = ({ posts, totalPages }) => {
 
     const handleIntersection = (entries) => {
       const [entry] = entries;
-      if (entry.isIntersecting) handleSearch(page + 1);
+      if (entry.isIntersecting) handleSearch();
     };
 
+    const { current } = bottomElementReference;
     const observer = new IntersectionObserver(handleIntersection, options);
-    if (bottomElementReference.current) {
-      observer.observe(bottomElementReference.current);
-    }
+    if (current) observer.observe(current);
 
     return () => {
-      if (bottomElementReference.current) {
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-        observer.unobserve(bottomElementReference.current);
-      }
+      if (current) observer.unobserve(current);
     };
-  }, [handleSearch, page]);
+  }, [handleSearch]);
 
   return (
     <div className={styles.listing}>
-      {Array.isArray(postDate) && postDate.length > 0 ? (
+      {Array.isArray(postData) && postData.length > 0 ? (
         <>
           <Grid>
-            {postDate.map((post, index) => {
+            {postData.map((post, index) => {
               if (index % 2 === 0) {
                 return (
                   <Post
