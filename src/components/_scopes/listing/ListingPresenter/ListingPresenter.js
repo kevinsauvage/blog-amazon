@@ -9,14 +9,20 @@ import ListingHeader from '../ListingHeader/ListingHeader';
 
 import styles from './ListingPresenter.module.scss';
 
-const ListingPresenter = async ({ context, title, subtitle, description }) => {
+const ListingPresenter = async ({ context, title, subtitle, description, showSearch }) => {
   const [searchData, menu] = await Promise.all([useQueries(context), fetchMenu({ slug: 'main' })]);
 
   const { page, posts, q, sortsResponse, totalPages, totalPosts } = searchData || {};
 
   return (
     <div className={styles.presenter}>
-      <ListingBanner title={title} subtitle={subtitle} description={description} query={q} />
+      <ListingBanner
+        title={title}
+        subtitle={subtitle}
+        description={description}
+        query={q}
+        showSearch={showSearch}
+      />
       <Container>
         <ListingHeader totalPosts={totalPosts} sorts={sortsResponse} menu={menu} />
         <Listing posts={posts} />

@@ -5,7 +5,7 @@ import Container from '../../../Container/Container';
 
 import styles from './ListingBanner.module.scss';
 
-const ListingBanner = ({ title, subtitle, description, query }) => (
+const ListingBanner = ({ title, subtitle, description, query, showSearch }) => (
   <div className={`${styles.banner} ${query && styles.active}`}>
     <div className={styles.content}>
       <Container>
@@ -24,9 +24,11 @@ const ListingBanner = ({ title, subtitle, description, query }) => (
               )}
             </>
           )}
-          <div className={styles.SearchForm}>
-            <SearchForm query={query} />
-          </div>
+          {showSearch && (
+            <div className={styles.SearchForm}>
+              <SearchForm query={query} />
+            </div>
+          )}
         </div>
       </Container>
     </div>

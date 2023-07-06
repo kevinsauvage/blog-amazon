@@ -13,6 +13,7 @@ const Search = async (context) => {
       title={title}
       subtitle={subtitle}
       description={description}
+      showSearch
     />
   );
 };
