@@ -11,7 +11,6 @@ import styles from './ListingPresenter.module.scss';
 
 const ListingPresenter = async ({ context, title, subtitle, description, showSearch }) => {
   const [searchData, menu] = await Promise.all([useQueries(context), fetchMenu({ slug: 'main' })]);
-
   const { page, posts, q, sortsResponse, totalPages, totalPosts } = searchData || {};
 
   return (
