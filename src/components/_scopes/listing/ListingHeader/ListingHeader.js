@@ -1,4 +1,6 @@
-import ListingConfig from '../ListingConfig/ListingConfig';
+import Nav from '@/components/Nav/Nav';
+
+import Sorting from '../Sorting/Sorting';
 import TotalFound from '../TotalFound/TotalFound';
 
 import styles from './ListingHeader.module.scss';
@@ -7,13 +9,16 @@ const ListingHeader = ({ totalPosts, sorts, menu = [] }) => (
   <div className={styles.header}>
     <TotalFound total={totalPosts} />
     {Array.isArray(menu?.items) && (
-      <ul className={styles.menu}>
-        {menu.items.map((menuItem) => (
-          <li key={menuItem.id}>{menuItem?.label}</li>
-        ))}
-      </ul>
+      <div>
+        <Nav
+          variant="row"
+          menu={menu?.items}
+          itemActiveClass={styles.itemActive}
+          itemClass={styles.item}
+        />
+      </div>
     )}
-    <ListingConfig sorts={sorts} />
+    <Sorting sorts={sorts} />
   </div>
 );
 

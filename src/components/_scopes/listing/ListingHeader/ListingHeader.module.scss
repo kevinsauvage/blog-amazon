@@ -5,9 +5,14 @@
   padding: $padding-xl 0;
 }
 
-.menu {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 2rem;
+.item {
+  padding: 0.7rem 1rem;
+  border-radius: $radius-s;
+  background-color: rgba(var(--rgb-surface-900), 0.03);
+}
+
+.itemActive {
+  color: var(--on-surface-hight);
+  font-weight: 600;
+  background-color: var(--surface-700);
 }

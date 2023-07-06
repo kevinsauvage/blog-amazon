@@ -1,4 +1,4 @@
-import Listing from '@/components/_scopes/listing/Listing/Listing';
+import ListingPresenter from '@/components/_scopes/listing/ListingPresenter/ListingPresenter';
 import { fetchPage } from '@/lib/api/pages';
 import { generateSeoData } from '@/lib/api/utils';
 
@@ -7,7 +7,14 @@ const PAGE_SLUG = 'search';
 const Search = async (context) => {
   const pageData = await fetchPage({ slug: PAGE_SLUG });
   const { title, description, subtitle } = pageData || {};
-  return <Listing context={context} title={title} subtitle={subtitle} description={description} />;
+  return (
+    <ListingPresenter
+      context={context}
+      title={title}
+      subtitle={subtitle}
+      description={description}
+    />
+  );
 };
 
 export default Search;
