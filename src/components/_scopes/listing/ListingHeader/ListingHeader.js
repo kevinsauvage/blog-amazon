@@ -17,7 +17,7 @@ const ListingHeader = ({ totalPosts, sorts, menu = [] }) => {
   // TODO: Try find a simpler way of doing this
   const getPath = (path = '') => {
     const newParameters = new URLSearchParams([...searchParameters.entries()]);
-    newParameters.set('page', 1);
+    newParameters.delete('page');
     // eslint-disable-next-line unicorn/no-nested-ternary
     let url = pathname.startsWith('/search') ? '/search' : path ? '/posts' : '/';
     if (path) url += `/${path.split('/')[1]}`;
