@@ -48,8 +48,6 @@
 }
 
 .banner.active {
-  margin-bottom: 2rem;
-
   .inner {
     min-height: 6rem;
   }
@@ -68,6 +66,7 @@
     align-items: center;
     justify-content: center;
     padding: 4rem 0 3rem 0;
+    border-bottom: $border-light;
     color: var(--on-surface-100);
     background-color: var(--surface-900);
 
