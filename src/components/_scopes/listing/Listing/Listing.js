@@ -112,7 +112,7 @@ const Listing = ({ posts, totalPages }) => {
         />
       )}
       {loading && postData.length > 0 && <div>Loading...</div>}
-      {totalPages === page && <div>That&apos;s it.</div>}
+      {totalPages === page && !loading && <div>That&apos;s it.</div>}
     </div>
   );
 };
