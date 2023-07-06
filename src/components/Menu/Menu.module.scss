@@ -3,8 +3,13 @@
   z-index: 9999;
   width: 0;
   height: 100vh;
-  background-color: $overlay;
   inset: 0;
+
+  .overlay {
+    width: 100%;
+    height: 100%;
+    background-color: $overlay;
+  }
 
   .content {
     position: fixed;
