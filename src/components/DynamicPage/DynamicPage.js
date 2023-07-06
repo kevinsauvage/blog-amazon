@@ -1,6 +1,8 @@
 import Container from '@/components/Container/Container';
 import { fetchPage } from '@/lib/api/pages';
 
+import ListingBanner from '../_scopes/listing/ListingBanner/ListingBanner';
+
 import styles from './DynamicPage.module.scss';
 
 const DynamicPage = async ({ slug, children }) => {
@@ -8,10 +10,7 @@ const DynamicPage = async ({ slug, children }) => {
   const { title, description, contentHtml } = pageData || {};
   return (
     <div className={styles.page}>
-      <div>
-        <h1>{title}</h1>
-        <p>{description}</p>
-      </div>
+      <ListingBanner title={title} description={description} />
       <Container>
         <main>
           {contentHtml && (
