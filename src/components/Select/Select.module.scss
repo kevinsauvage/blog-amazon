@@ -22,10 +22,6 @@
     background-color: var(--surface-800);
     cursor: pointer;
 
-    svg {
-      color: var(--primary-300);
-    }
-
     &.open {
       color: var(--on-surface-hight);
       background-color: var(--surface-700);

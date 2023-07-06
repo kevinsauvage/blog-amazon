@@ -18,6 +18,7 @@
 }
 
 .itemActive {
+  border: $border-light;
   color: var(--on-surface-hight);
   font-weight: 600;
   background-color: var(--surface-700);
