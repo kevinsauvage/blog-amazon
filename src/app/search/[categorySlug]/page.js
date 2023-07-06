@@ -4,7 +4,7 @@ import { generateSeoData } from '@/lib/api/utils';
 
 const PAGE_SLUG = 'search';
 
-const Search = async (context) => {
+const page = async (context) => {
   const pageData = await fetchPage({ slug: PAGE_SLUG });
   const { title, description, subtitle } = pageData || {};
   return (
@@ -17,7 +17,7 @@ const Search = async (context) => {
   );
 };
 
-export default Search;
+export default page;
 
 export async function generateMetadata() {
   const pageData = await fetchPage({ slug: PAGE_SLUG });

@@ -5,6 +5,12 @@
   padding: $padding-xl 0;
 }
 
+.list {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
 .item {
   padding: 0.7rem 1rem;
   border-radius: $radius-s;

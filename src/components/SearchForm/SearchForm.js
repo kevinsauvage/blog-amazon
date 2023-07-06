@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { useParams, useRouter, useSearchParams } from 'next/navigation';
 
 import IconIconSearch from '@/svg/IconIconSearch';
 
@@ -11,15 +11,19 @@ import styles from './SearchForm.module.scss';
 
 const SearchForm = ({ className }) => {
   const { push } = useRouter();
-  const pathname = usePathname();
   const searchParameters = useSearchParams();
-  const [searchTerm, setSearchTerm] = useState(searchParameters.get('q'));
+  const parameters = useParams();
+  const [searchTerm, setSearchTerm] = useState(searchParameters.get('q') || '');
 
   const handleSearch = (input = '') => {
     if (input?.trim() === searchParameters.get('q')) return;
     const newParameters = new URLSearchParams([...searchParameters.entries()]);
+
+    let path = '/search';
+    if (parameters.categorySlug) path += `/${parameters.categorySlug}`;
+
     newParameters.set('q', input);
-    push(`${pathname}?${newParameters}`, { shallow: true });
+    push(`${path}?${newParameters}`, { shallow: true });
   };
 
   const handleInputChange = ({ value }) => setSearchTerm(value);
