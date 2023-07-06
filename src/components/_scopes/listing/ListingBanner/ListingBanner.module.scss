@@ -50,6 +50,10 @@
 .banner.active {
   margin-bottom: 2rem;
 
+  .inner {
+    min-height: 6rem;
+  }
+
   .SearchForm {
     position: absolute;
     bottom: -3.5rem;
