@@ -14,8 +14,8 @@ const DropdownMenu = ({ menu, usefullLinks, handleClose, show }) => {
   useOnClickOutside(menuReference, handleClose);
 
   return (
-    <div className={`${styles.overlay} ${show ? styles.visible : ''}`}>
-      <div className={`${styles.menu} ${show ? styles.active : ''}`} ref={menuReference}>
+    <div className={`${styles.menu} ${show ? styles.active : ''}`} ref={menuReference}>
+      <div className={styles.content}>
         <div className={styles.top}>
           <Container>
             <button type="button" className={styles.close} onClick={handleClose}>
