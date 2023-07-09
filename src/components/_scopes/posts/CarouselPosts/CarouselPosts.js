@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 
-import Carousel from '../Carousel/Carousel';
+import Carousel from '../../../Carousel/Carousel';
 import Post from '../Post/Post';
 
 import styles from './CarouselPosts.module.scss';

@@ -5,12 +5,13 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useParams, useSearchParams } from 'next/navigation';
 
+import Post from '@/components/_scopes/posts/Post/Post';
 import Grid from '@/components/Grid/Grid';
 import NoResults from '@/components/NoResults/NoResults';
-import Post from '@/components/Post/Post';
-import PostGrid from '@/components/PostGrid/PostGrid';
 import { getPostsQueryHelper } from '@/hooks/useQueries';
 import { getPosts } from '@/lib/api/posts';
+
+import PostsLoader from '../PostsLoader/PostsLoader';
 
 import styles from './Listing.module.scss';
 
@@ -79,31 +80,19 @@ const Listing = ({ posts, totalPages }) => {
       {Array.isArray(postData) && postData.length > 0 ? (
         <>
           <Grid>
-            {postData.map((post, index) => {
-              if (index % 2 === 0) {
-                return (
-                  <Post
-                    key={post.id}
-                    post={post}
-                    image={post.images?.medium}
-                    imagePriority={index < 3}
-                  />
-                );
-              }
-              return (
-                <PostGrid
-                  key={post.id}
-                  post={post}
-                  image={post.images?.medium}
-                  imagePriority={index < 3}
-                />
-              );
-            })}
+            {postData.map((post, index) => (
+              <Post
+                key={post.id}
+                post={post}
+                image={post.images?.medium}
+                imagePriority={index < 3}
+              />
+            ))}
           </Grid>
           <div ref={bottomElementReference} />
         </>
       ) : loading ? (
-        <div>Loading...</div>
+        <PostsLoader />
       ) : (
         <NoResults
           title="No Results"
@@ -111,7 +100,7 @@ const Listing = ({ posts, totalPages }) => {
           description="Please try a different search term."
         />
       )}
-      {loading && postData.length > 0 && <div>Loading...</div>}
+      {loading && postData.length > 0 && <PostsLoader />}
       {totalPages === page && !loading && <div>That&apos;s it.</div>}
     </div>
   );

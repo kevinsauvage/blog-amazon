@@ -3,9 +3,9 @@
 import useForm from '@/hooks/useForm';
 
 import Button from '../../../Button/Button';
-import Input from '../../../Input/Input';
-import Label from '../../../Label/Label';
-import TextArea from '../../../TextArea/TextArea';
+import Input from '../../form/Input/Input';
+import Label from '../../form/Label/Label';
+import TextArea from '../../form/TextArea/TextArea';
 
 import styles from './CommentForm.module.scss';
 

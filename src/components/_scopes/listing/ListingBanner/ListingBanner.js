@@ -1,5 +1,6 @@
 /* eslint-disable react/no-danger */
-import SearchForm from '@/components/SearchForm/SearchForm';
+
+import SearchForm from '@/components/_scopes/form/SearchForm/SearchForm';
 
 import Container from '../../../Container/Container';
 

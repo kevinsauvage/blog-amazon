@@ -1,4 +1,4 @@
-import Select from '../../../Select/Select';
+import Select from '../../form/Select/Select';
 
 const Sorting = ({ sorts }) => (
   <Select

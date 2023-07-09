@@ -1,4 +1,4 @@
-import ContactForm from '@/components/ContactForm/ContactForm';
+import ContactForm from '@/components/_scopes/form/ContactForm/ContactForm';
 import DynamicPage from '@/components/DynamicPage/DynamicPage';
 import { fetchPage } from '@/lib/api/pages';
 import { generateSeoData } from '@/lib/api/utils';

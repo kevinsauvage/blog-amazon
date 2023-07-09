@@ -1,5 +1,7 @@
+/* eslint-disable unicorn/no-empty-file */
 /* eslint-disable unicorn/no-null */
-import { NextResponse } from 'next/server';
+
+/* import { NextResponse } from 'next/server';
 
 const middleware = (request) => {
   const basicAuth = request.headers.get('Authorization');
@@ -24,4 +26,4 @@ const middleware = (request) => {
   );
 };
 
-export default middleware;
+export default middleware; */

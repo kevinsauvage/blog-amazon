@@ -4,6 +4,10 @@
 const path = require('node:path');
 
 const nextConfig = {
+  experimental: {
+    scrollRestoration: true,
+  },
+
   async headers() {
     return [
       {
@@ -29,7 +33,6 @@ const nextConfig = {
       },
     ];
   },
-
   images: {
     domains: ['strapi-blog-news-production.up.railway.app', 'localhost'],
 

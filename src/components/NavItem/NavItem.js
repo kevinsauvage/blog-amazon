@@ -21,6 +21,7 @@ const NavItem = ({ href, label, className = '', activeClass = '', isActive }) =>
           pathname === getUrl() || isActive ? activeClass : ''
         }`}
         href={getUrl()}
+        scroll={false}
       >
         {label}
       </Link>

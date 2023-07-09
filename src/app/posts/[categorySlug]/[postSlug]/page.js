@@ -2,10 +2,10 @@
 import Image from 'next/image';
 
 import CommentsPresentation from '@/components/_scopes/comments/CommentsPresentation/CommentsPresentation';
-import Category from '@/components/Category/Category';
+import Category from '@/components/_scopes/posts/Category/Category';
+import Date from '@/components/_scopes/posts/Date/Date';
+import Views from '@/components/_scopes/posts/Views/Views';
 import Container from '@/components/Container/Container';
-import Date from '@/components/Date/Date';
-import Views from '@/components/Views/Views';
 import { getPosts, updatePost } from '@/lib/api/posts';
 import { generateSeoData, getFrontBaseUrl, getStrapiBaseUrl } from '@/lib/api/utils';
 
