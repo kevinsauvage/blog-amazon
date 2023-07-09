@@ -12,7 +12,6 @@
   height: 0;
   padding-top: 75%; /* 4:3 aspect ratio */
   border-radius: $radius-s;
-  background-color: #e0e0e0; /* Placeholder color */
 }
 
 .content {
@@ -30,33 +29,28 @@
 .skeletonCategory {
   width: 100px;
   height: 16px;
-  background-color: #e0e0e0;
 }
 
 .skeletonDate {
   width: 80px;
   height: 16px;
-  background-color: #e0e0e0;
 }
 
 .skeletonViews {
   width: 60px;
   height: 16px;
-  background-color: #e0e0e0;
 }
 
 .skeletonTitle {
   width: 100%;
   height: 24px;
   margin-bottom: 0.5rem;
-  background-color: #e0e0e0;
 }
 
 .skeletonExcerpt {
   width: 100%;
   height: 14px;
   margin-bottom: 4px;
-  background-color: #e0e0e0;
 }
 
 .skeletonImage,
@@ -65,7 +59,6 @@
 .skeletonViews,
 .skeletonTitle,
 .skeletonExcerpt {
-  background-color: #e0e0e0; /* Placeholder color */
   background-image: linear-gradient(
     90deg,
     rgba(224, 224, 224, 0.6),
@@ -78,10 +71,10 @@
 
 @keyframes loadingAnimation {
   0% {
-    background-position: -200% 0;
+    background-position: 200% 0;
   }
 
   100% {
-    background-position: 200% 0;
+    background-position: -200% 0;
   }
 }
