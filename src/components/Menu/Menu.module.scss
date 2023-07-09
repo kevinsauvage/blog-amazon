@@ -59,17 +59,28 @@
 
   .mainMenu {
     height: 100vh;
-    padding-top: calc(2rem + $headerHeight);
-    padding-bottom: 2rem;
-    padding-left: 1rem;
+    padding-top: $headerHeight;
     overflow: auto;
 
-    nav {
-      margin-bottom: 2rem;
+    .title {
+      padding: 1rem;
+      color: var(--on-surface-dark-200);
+      text-transform: uppercase;
+      background-color: var(--surface-dark);
     }
 
-    a {
-      font-size: 1.3rem;
+    .menuItem {
+      width: 100%;
+      padding: 1rem 2rem;
+      font-size: 1.1rem;
+
+      &:hover {
+        background-color: var(--surface-800);
+      }
+    }
+
+    .menuItemActive {
+      background-color: var(--surface-700);
     }
   }
 }

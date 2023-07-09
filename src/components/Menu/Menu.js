@@ -1,7 +1,7 @@
 import IconClose from '@/svg/IconClose';
 
 import Container from '../Container/Container';
-import Nav from '../Nav/Nav';
+import NavItem from '../NavItem/NavItem';
 
 import styles from './Menu.module.scss';
 
@@ -24,15 +24,35 @@ const Menu = ({ menu, usefullLinks, handleClose, show }) => (
         </Container>
       </div>
       <div className={styles.mainMenu}>
-        <Container>
-          <Nav title={menu?.displayedTitle || 'Menu'} variant="column" menu={menu?.items} />
+        <nav className={styles.navbar}>
+          <p className={styles.title}>{menu?.displayedTitle || 'Menu'}</p>
+          <ul className={styles.list}>
+            {menu?.items?.map((menuItem) => (
+              <NavItem
+                key={menuItem.id}
+                href={menuItem?.path}
+                label={menuItem?.label}
+                className={styles.menuItem}
+                activeClass={styles.menuItemActive}
+              />
+            ))}
+          </ul>
+        </nav>
 
-          <Nav
-            title={usefullLinks?.displayedTitle || 'Menu'}
-            variant="column"
-            menu={usefullLinks?.items}
-          />
-        </Container>
+        <nav className={styles.navbar}>
+          <p className={styles.title}>{usefullLinks?.displayedTitle || 'Menu'}</p>
+          <ul className={styles.list}>
+            {usefullLinks?.items?.map((menuItem) => (
+              <NavItem
+                key={menuItem.id}
+                href={menuItem?.path}
+                label={menuItem?.label}
+                className={styles.menuItem}
+                activeClass={styles.menuItemActive}
+              />
+            ))}
+          </ul>
+        </nav>
       </div>
     </div>
   </div>

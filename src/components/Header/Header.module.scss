@@ -9,8 +9,8 @@
     z-index: 100;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    padding: 2rem 0;
-    padding-bottom: 1.5rem;
+    align-content: center;
+    height: $headerHeight;
 
     @include respond(mobile_l) {
       grid-template-columns: 1fr 1fr;
