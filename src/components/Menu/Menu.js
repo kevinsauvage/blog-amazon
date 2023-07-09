@@ -24,9 +24,9 @@ const Menu = ({ menu, usefullLinks, handleClose, show }) => (
         </Container>
       </div>
       <div className={styles.mainMenu}>
-        <nav className={styles.navbar}>
+        <nav>
           <p className={styles.title}>{menu?.displayedTitle || 'Menu'}</p>
-          <ul className={styles.list}>
+          <ul>
             {menu?.items?.map((menuItem) => (
               <NavItem
                 key={menuItem.id}
@@ -39,9 +39,9 @@ const Menu = ({ menu, usefullLinks, handleClose, show }) => (
           </ul>
         </nav>
 
-        <nav className={styles.navbar}>
+        <nav>
           <p className={styles.title}>{usefullLinks?.displayedTitle || 'Menu'}</p>
-          <ul className={styles.list}>
+          <ul>
             {usefullLinks?.items?.map((menuItem) => (
               <NavItem
                 key={menuItem.id}
