@@ -9,9 +9,14 @@ export default async function sitemap() {
 
   const categoriesResponse = await getCategories();
 
-  const categoriesPath = categoriesResponse.map((category) => ({
+  const postCategoriesPath = categoriesResponse.map((category) => ({
     lastModified: new Date().toISOString(),
     url: `${BASE_URL}/posts/${category?.slug}`,
+  }));
+
+  const searchCategoriesPath = categoriesResponse.map((category) => ({
+    lastModified: new Date().toISOString(),
+    url: `${BASE_URL}/search/${category?.slug}`,
   }));
 
   const posts = postsResponse?.posts?.map(({ slug, updatedAt, categories }) => ({
@@ -19,12 +24,19 @@ export default async function sitemap() {
     url: `${BASE_URL}/posts/${categories?.[0]?.slug}/${slug}`,
   }));
 
-  const routes = ['', '/about', '/contact', '/terms', '/privacy', '/cookie', '/posts'].map(
-    (route) => ({
-      lastModified: new Date().toISOString(),
-      url: `${BASE_URL}${route}`,
-    })
-  );
+  const routes = [
+    '',
+    '/about',
+    '/contact',
+    '/terms',
+    '/privacy',
+    '/cookie',
+    '/posts',
+    '/search',
+  ].map((route) => ({
+    lastModified: new Date().toISOString(),
+    url: `${BASE_URL}${route}`,
+  }));
 
-  return [...routes, ...categoriesPath, ...posts];
+  return [...routes, ...postCategoriesPath, ...searchCategoriesPath, ...posts];
 }

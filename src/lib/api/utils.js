@@ -53,6 +53,7 @@ export const normalizePostData = (post) => {
     author,
     seo,
     viewCount = 0,
+    updatedAt,
   } = post.attributes || {};
 
   const formattedImage = image?.data?.attributes;
@@ -72,6 +73,7 @@ export const normalizePostData = (post) => {
     seo,
     slug,
     title,
+    updatedAt,
     viewCount,
   };
 };
