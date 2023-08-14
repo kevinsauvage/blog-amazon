@@ -23,5 +23,5 @@ export default Search;
 export async function generateMetadata() {
   const pageData = await fetchPage({ slug: PAGE_SLUG });
   const { seo } = pageData || {};
-  return { ...generateSeoData(seo) };
+  return generateSeoData(seo);
 }
