@@ -3,7 +3,7 @@ import Image from 'next/image';
 
 import CommentsPresentation from '@/components/_scopes/comments/CommentsPresentation/CommentsPresentation';
 import Category from '@/components/_scopes/posts/Category/Category';
-import Date from '@/components/_scopes/posts/Date/Date';
+import Date from '@/components/_scopes/posts/CreatedAt/CreatedAt';
 import Views from '@/components/_scopes/posts/Views/Views';
 import Container from '@/components/Container/Container';
 import { getPosts, updatePost } from '@/lib/api/posts';

@@ -1,4 +1,4 @@
-import Date from '@/components/_scopes/posts/Date/Date';
+import Date from '@/components/_scopes/posts/CreatedAt/CreatedAt';
 import { formatString } from '@/utils/strings';
 
 import styles from './Comment.module.scss';

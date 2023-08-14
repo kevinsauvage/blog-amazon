@@ -6,7 +6,7 @@ import { getStrapiBaseUrl } from '@/lib/api/utils';
 import routes from '@/utils/routes';
 
 import Category from '../Category/Category';
-import Date from '../Date/Date';
+import Date from '../CreatedAt/CreatedAt';
 import Views from '../Views/Views';
 
 // eslint-disable-next-line css-modules/no-unused-class

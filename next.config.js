@@ -34,7 +34,7 @@ const nextConfig = {
     ];
   },
   images: {
-    domains: ['strapi-blog-news-production.up.railway.app', 'localhost'],
+    domains: ['strapi-blog-news-production.up.railway.app', 'localhost', '127.0.0.1'],
 
     minimumCacheTTL: 60 * 60,
   },

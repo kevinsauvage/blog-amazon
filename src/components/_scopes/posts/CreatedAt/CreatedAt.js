@@ -1,9 +1,9 @@
 import IconTimeOutline from '@/svg/IconTimeOutline';
 import { formatTimestamp } from '@/utils/date';
 
-import styles from './Date.module.scss';
+import styles from './CreatedAt.module.scss';
 
-const Date = ({ date, className = '', variant, includeTime }) => {
+const CreatedAt = ({ date, className = '', variant, includeTime }) => {
   const getStyles = () => {
     if (variant === 'light') return styles.light;
   };
@@ -15,4 +15,4 @@ const Date = ({ date, className = '', variant, includeTime }) => {
   );
 };
 
-export default Date;
+export default CreatedAt;

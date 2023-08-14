@@ -14,15 +14,23 @@ const ListingHeader = ({ totalPosts, sorts, menu = [] }) => {
   const parameters = useParams();
   const searchParameters = useSearchParams();
 
-  // TODO: Try find a simpler way of doing this
   const getPath = (path = '') => {
-    const newParameters = new URLSearchParams([...searchParameters.entries()]);
-    newParameters.delete('page');
-    // eslint-disable-next-line unicorn/no-nested-ternary
-    let url = pathname.startsWith('/search') ? '/search' : path ? '/posts' : '/';
-    if (path) url += `/${path.split('/')[1]}`;
-    if (newParameters.size > 0) url += `?${newParameters}`;
-    return url;
+    const parameters_ = new URLSearchParams([...searchParameters.entries()]);
+    parameters_.delete('page');
+
+    let base = '/';
+
+    if (pathname.startsWith('/search')) {
+      base = '/search';
+    } else if (path) {
+      base = `/posts/${path.split('/')[1]}`;
+    }
+
+    if (parameters_.size > 0) {
+      base += `?${parameters_}`;
+    }
+
+    return base;
   };
 
   return (

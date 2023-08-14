@@ -3,7 +3,7 @@ const REVALIDATE = 60 * 60 * 12; // 1/2 day
 export const getStrapiBaseUrl = () =>
   process.env.NODE_ENV === 'production'
     ? 'https://strapi-blog-news-production.up.railway.app'
-    : 'http://localhost:1337';
+    : 'http://127.0.0.1:1337';
 
 export const getFrontBaseUrl = () =>
   process.env.NODE_ENV === 'production'
@@ -23,7 +23,10 @@ const fetchStrapiEndpoint = async (endpoint, config = {}) => {
 
     const fullUrl = `${apiUrl}/api/${endpoint}`;
 
+    console.log('🚀 ~  file: utils.js:27 ~  fetchStrapiEndpoint ~  fullUrl:', fullUrl);
+
     const response = await fetch(fullUrl, defaultConfig);
+
     return await response.json();
   } catch (error) {
     console.error('Error fetching data from Strapi:', error);

@@ -1,5 +1,3 @@
-/* eslint-disable unicorn/no-nested-ternary */
-
 'use client';
 
 import { useCallback, useEffect, useRef, useState } from 'react';
@@ -48,6 +46,7 @@ const Listing = ({ posts, totalPages }) => {
       perPage,
       query: q,
     });
+
     setLoading(false);
     setPage(newPage);
     const newPosts = [...postData, ...(newPostsResponse.posts || [])];
@@ -75,9 +74,9 @@ const Listing = ({ posts, totalPages }) => {
     };
   }, [handleSearch]);
 
-  return (
-    <div className={styles.listing}>
-      {Array.isArray(postData) && postData.length > 0 ? (
+  const displayContent = () => {
+    if (Array.isArray(postData) && postData.length > 0) {
+      return (
         <>
           <Grid>
             {postData.map((post, index) => (
@@ -91,15 +90,23 @@ const Listing = ({ posts, totalPages }) => {
           </Grid>
           <div ref={bottomElementReference} />
         </>
-      ) : loading ? (
-        <PostsLoader />
-      ) : (
-        <NoResults
-          title="No Results"
-          subtitle="Sorry, we couldn't find any results."
-          description="Please try a different search term."
-        />
-      )}
+      );
+    }
+    if (loading) {
+      return <PostsLoader />;
+    }
+    return (
+      <NoResults
+        title="No Results"
+        subtitle="Sorry, we couldn't find any results."
+        description="Please try a different search term."
+      />
+    );
+  };
+
+  return (
+    <div className={styles.listing}>
+      {displayContent()}
       {loading && postData.length > 0 && <PostsLoader />}
       {totalPages === page && !loading && <div>That&apos;s it.</div>}
     </div>
