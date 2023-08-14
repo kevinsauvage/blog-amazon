@@ -23,7 +23,11 @@ const ListingHeader = ({ totalPosts, sorts, menu = [] }) => {
     if (pathname.startsWith('/search')) {
       base = '/search';
     } else if (path) {
-      base = `/posts/${path.split('/')[1]}`;
+      base = `/posts`;
+    }
+
+    if (path) {
+      base += `/${path.split('/')[1]}`;
     }
 
     if (parameters_.size > 0) {

@@ -1,4 +1,3 @@
-/* eslint-disable unicorn/no-nested-ternary */
 import getCategories from '@/lib/api/categories';
 import { getPosts } from '@/lib/api/posts';
 import { fetchSorts } from '@/lib/api/sorts';
@@ -9,18 +8,16 @@ const PER_PAGE = 12;
 export const getPostsQueryHelper = (searchParameters, categorySlug) => {
   const { q = '', page = 1, sorting, categories = [] } = searchParameters || {};
 
-  const categoryIds = categorySlug
-    ? [categorySlug] // If the page is category, only fetch article for that category
-    : Array.isArray(categories)
-    ? categories // If there is query params categories, and it is an array, just return
-    : categories?.split(','); // The categoies could be a string, split it to return and array
+  let categoryIds;
 
+  if (categorySlug) {
+    categoryIds = [categorySlug];
+  } else if (Array.isArray(categories)) {
+    categoryIds = categories;
+  } else {
+    categoryIds = categories?.split(',');
+  }
   const extraParameters = sorting ? decodeURL(sorting) : '';
-
-  console.log(
-    '🚀 ~  file: useQueries.js:20 ~  getPostsQueryHelper ~  extraParameters:',
-    extraParameters
-  );
 
   return { PER_PAGE, categoryIds, extraParameters, page, q, sorting };
 };
